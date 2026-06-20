@@ -5,6 +5,7 @@ struct ProfileSetupView: View {
     @Binding var sex: UserProfile.Sex
     @Binding var heightCm: Double
     @Binding var weightKg: Double
+    var onBack: () -> Void
     var onContinue: () -> Void
     
     var body: some View {
@@ -69,8 +70,19 @@ struct ProfileSetupView: View {
             .padding(20)
         }
         .background(FoodiaryDesign.background)
-        .navigationTitle(L10n["nav.about_you"])
+        .navigationTitle("About You")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: onBack) {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(width: 32, height: 32)
+                }
+                .buttonStyle(NBStepperButtonStyle())
+            }
+        }
     }
 }
 

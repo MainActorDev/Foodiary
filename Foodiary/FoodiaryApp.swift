@@ -91,6 +91,7 @@ struct FoodiaryApp: App {
                                     sex: $sex,
                                     heightCm: $heightCm,
                                     weightKg: $weightKg,
+                                    onBack: { onboardingPath.removeLast() },
                                     onContinue: { onboardingPath.append("goal-setup") }
                                 )
                             case "goal-setup":

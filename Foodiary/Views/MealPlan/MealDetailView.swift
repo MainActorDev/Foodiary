@@ -60,9 +60,18 @@ struct MealDetailView: View {
                     .padding(20)
                 }
                 .background(FoodiaryDesign.background)
-                .navigationTitle(meal.type.localizedDisplayName)
+                .navigationTitle(meal.type.displayName)
                 .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackButtonHidden(true)
                 .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: { isPresented = false }) {
+                            Image(systemName: "arrow.left")
+                                .font(.system(size: 16, weight: .bold))
+                                .frame(width: 32, height: 32)
+                        }
+                        .buttonStyle(NBStepperButtonStyle())
+                    }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: { showAddFood = true }) {
                             Image(systemName: "plus")
