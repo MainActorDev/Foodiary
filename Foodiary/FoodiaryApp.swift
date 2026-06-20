@@ -13,7 +13,6 @@ struct FoodiaryApp: App {
     @State private var weightKg: Double = 70
     @State private var activityLevel: UserProfile.ActivityLevel = .sedentary
     @State private var goal: UserProfile.Goal = .maintain
-    @State private var calculatedTarget: CalorieTarget?
     
     init() {
         // Bootstrap localization BEFORE any view renders or String(localized:) is called.
@@ -82,34 +81,29 @@ struct FoodiaryApp: App {
                                     goal: $goal,
                                     onBack: { onboardingPath.removeLast() },
                                     onCalculate: {
+                                        onboardingPath.append("result")
+                                    }
+                                )
+                            case "result":
+                                CalorieResultView(
+                                    target: CalorieCalculator.calculate(for: UserProfile(
+                                        age: age, sex: sex,
+                                        heightCm: heightCm, weightKg: weightKg,
+                                        activityLevel: activityLevel, goal: goal
+                                    )),
+                                    onBack: { onboardingPath.removeLast() },
+                                    onCreateMealPlan: {
                                         let profile = UserProfile(
                                             age: age, sex: sex,
                                             heightCm: heightCm, weightKg: weightKg,
                                             activityLevel: activityLevel, goal: goal
                                         )
-                                        let target = CalorieCalculator.calculate(for: profile)
-                                        calculatedTarget = target
-                                        onboardingPath.append("result")
-                                    }
+                                        state.saveProfile(profile)
+                                        state.calculateAndSaveTarget(for: profile)
+                                        state.createTodayMealPlan()
+                                    },
+                                    onEditProfile: { onboardingPath.removeLast(2) }
                                 )
-                            case "result":
-                                if let target = calculatedTarget {
-                                    CalorieResultView(
-                                        target: target,
-                                        onBack: { onboardingPath.removeLast() },
-                                        onCreateMealPlan: {
-                                            let profile = UserProfile(
-                                                age: age, sex: sex,
-                                                heightCm: heightCm, weightKg: weightKg,
-                                                activityLevel: activityLevel, goal: goal
-                                            )
-                                            state.saveProfile(profile)
-                                            state.calculateAndSaveTarget(for: profile)
-                                            state.createTodayMealPlan()
-                                        },
-                                        onEditProfile: { onboardingPath.removeLast(2) }
-                                    )
-                                }
                             default:
                                 EmptyView()
                             }
