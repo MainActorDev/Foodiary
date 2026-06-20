@@ -19,10 +19,12 @@
 		7A40137A9F39D8D26238F897 /* CalorieResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46419D4F89D74D6CBF3AA4B /* CalorieResultView.swift */; };
 		7DDFFB4EB74065F129D28864 /* FoodiaryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405EA29A3EDEE57F1B12132 /* FoodiaryApp.swift */; };
 		872F89733FF0872A090CD1B9 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815DD9FE4CE1EE9BE4648EE5 /* StorageService.swift */; };
+		945DA90D648BB575AE8CC131 /* SpaceGrotesk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F963E7112B40EDD21B78C5C3 /* SpaceGrotesk.ttf */; };
 		9A9353E798B7AE682E282F07 /* MealPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB0A68DBA3298224D6F621 /* MealPlanView.swift */; };
 		A36668516417CF3B693385A4 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7508C6CFFF9A8E2EE764AC36 /* Meal.swift */; };
 		A744467F82D91A6C91277949 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECAB31DA3AB690D37A173E5 /* FoodItem.swift */; };
 		B0AC29E284D9EA795CE4563C /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6761A91D202CDDFE3A5D9A6 /* UserProfile.swift */; };
+		B81AC57B3B4BC29D9C03A65B /* PlusJakartaSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 541FBD984DF989F3B24A2246 /* PlusJakartaSans.ttf */; };
 		D8941646DC5205DEFC249E4E /* LocaleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504E605B901025024F1BDA0 /* LocaleManager.swift */; };
 		DBAA71F72880B39796C9BBD0 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C5C7A196774531FEDBF4B5 /* L10n.swift */; };
 		DEDDC61F71A676D1135C4F70 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 68E8D0D57D6AA990042EBC8C /* Localizable.xcstrings */; };
@@ -52,6 +54,7 @@
 		3152D915D822EFD2A49D41BB /* AddFoodItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodItemView.swift; sourceTree = "<group>"; };
 		3CFED327265A5E66ABEF9D26 /* CalorieTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieTarget.swift; sourceTree = "<group>"; };
 		479C16726548B9A41310E072 /* Foodiary.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Foodiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		541FBD984DF989F3B24A2246 /* PlusJakartaSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PlusJakartaSans.ttf; sourceTree = "<group>"; };
 		6504E605B901025024F1BDA0 /* LocaleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleManager.swift; sourceTree = "<group>"; };
 		68E8D0D57D6AA990042EBC8C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		71198B62EAF32E193535C664 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -74,6 +77,7 @@
 		E37D5B1FCB62C8FE1416B67E /* IntStepperField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntStepperField.swift; sourceTree = "<group>"; };
 		E6761A91D202CDDFE3A5D9A6 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		EA8F4B08608A6934C2BCB81A /* MealPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlan.swift; sourceTree = "<group>"; };
+		F963E7112B40EDD21B78C5C3 /* SpaceGrotesk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceGrotesk.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -129,6 +133,15 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		2E4FD5690E0D773BE511DC8C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				541FBD984DF989F3B24A2246 /* PlusJakartaSans.ttf */,
+				F963E7112B40EDD21B78C5C3 /* SpaceGrotesk.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		47B1DD8C4762489C69B498FD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +188,7 @@
 				A405EA29A3EDEE57F1B12132 /* FoodiaryApp.swift */,
 				E0770E187831561B62124D21 /* Info.plist */,
 				68E8D0D57D6AA990042EBC8C /* Localizable.xcstrings */,
+				2E4FD5690E0D773BE511DC8C /* Fonts */,
 				C9F760658CE1221D6F0FC0BA /* Models */,
 				669C2950FB6F056D47B4C0C0 /* Services */,
 				0A1B542F6E118E0BEC8D6763 /* Utilities */,
@@ -301,6 +315,8 @@
 			files = (
 				F602777799A454218AFF22A9 /* Assets.xcassets in Resources */,
 				DEDDC61F71A676D1135C4F70 /* Localizable.xcstrings in Resources */,
+				B81AC57B3B4BC29D9C03A65B /* PlusJakartaSans.ttf in Resources */,
+				945DA90D648BB575AE8CC131 /* SpaceGrotesk.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

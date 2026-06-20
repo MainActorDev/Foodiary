@@ -25,11 +25,11 @@ struct FoodiaryApp: App {
         appearance.backgroundColor = UIColor(FoodiaryDesign.background)
         appearance.shadowColor = .clear
         appearance.titleTextAttributes = [
-            .font: UIFont.systemFont(ofSize: 18, weight: .bold),
+            .font: UIFont(name: "Space Grotesk", size: 18) ?? UIFont.systemFont(ofSize: 18, weight: .bold),
             .foregroundColor: UIColor(FoodiaryDesign.black)
         ]
         appearance.largeTitleTextAttributes = [
-            .font: UIFont.systemFont(ofSize: 28, weight: .bold),
+            .font: UIFont(name: "Space Grotesk", size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold),
             .foregroundColor: UIColor(FoodiaryDesign.black)
         ]
         

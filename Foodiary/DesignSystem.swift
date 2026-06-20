@@ -30,16 +30,19 @@ extension Color {
 // MARK: - Typography
 
 enum FoodiaryTypography {
-    static let display: Font = .system(size: 40, weight: .bold, design: .rounded)
-    static let title: Font = .system(size: 22, weight: .bold, design: .rounded)
-    static let body: Font = .system(size: 15, weight: .regular, design: .default)
-    static let bodyBold: Font = .system(size: 15, weight: .semibold, design: .default)
-    static let bodySm: Font = .system(size: 13, weight: .regular, design: .default)
-    static let metric: Font = .system(size: 32, weight: .bold, design: .rounded)
-    static let label: Font = .system(size: 11, weight: .bold, design: .rounded)
-    static let button: Font = .system(size: 15, weight: .bold, design: .rounded)
-    static let badge: Font = .system(size: 11, weight: .bold, design: .rounded)
-    static let segment: Font = .system(size: 12, weight: .bold, design: .rounded)
+    // Space Grotesk variable font — family name "Space Grotesk", uses .bold()/.weight() to select instances
+    // Plus Jakarta Sans variable font — family name "Plus Jakarta Sans", PostScript "PlusJakartaSans-Regular"
+    
+    static let display: Font = Font.custom("Space Grotesk", size: 40).bold()
+    static let title: Font = Font.custom("Space Grotesk", size: 22).bold()
+    static let body: Font = Font.custom("Plus Jakarta Sans", size: 15)
+    static let bodyBold: Font = Font.custom("Plus Jakarta Sans", size: 15).weight(.semibold)
+    static let bodySm: Font = Font.custom("Plus Jakarta Sans", size: 13)
+    static let metric: Font = Font.custom("Space Grotesk", size: 32).bold()
+    static let label: Font = Font.custom("Space Grotesk", size: 11).bold()
+    static let button: Font = Font.custom("Space Grotesk", size: 15).bold()
+    static let badge: Font = Font.custom("Space Grotesk", size: 11).bold()
+    static let segment: Font = Font.custom("Space Grotesk", size: 12).bold()
 }
 
 // MARK: - Hard Shadow Builder (CSS-style box-shadow: 4px 4px 0 #000)
