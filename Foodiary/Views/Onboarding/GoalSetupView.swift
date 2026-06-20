@@ -18,11 +18,11 @@ struct GoalSetupView: View {
                 
                 // Activity Level
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("ACTIVITY LEVEL").sectionLabel()
+                    Text(L10n["label.activity_level"]).sectionLabel()
                     VStack(spacing: 2) {
                         ForEach(UserProfile.ActivityLevel.allCases, id: \.self) { option in
                             Button(action: { activityLevel = option }) {
-                                Text(option.displayName.uppercased())
+                                Text(option.localizedDisplayName.uppercased())
                                     .nbSegment(isActive: activityLevel == option)
                             }
                         }
@@ -35,11 +35,11 @@ struct GoalSetupView: View {
                 
                 // Goal
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("GOAL").sectionLabel()
+                    Text(L10n["label.goal"]).sectionLabel()
                     VStack(spacing: 3) {
                         ForEach(UserProfile.Goal.allCases, id: \.self) { option in
                             Button(action: { goal = option }) {
-                                Text(option.displayName.uppercased())
+                                Text(option.localizedDisplayName.uppercased())
                                     .nbSegment(isActive: goal == option)
                             }
                         }
@@ -49,7 +49,7 @@ struct GoalSetupView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.black, lineWidth: 3))
                     
-                    Text("This adjusts your daily target. Change it anytime.")
+                    Text(L10n["onboarding.goal.note"])
                         .font(.system(size: 12))
                         .foregroundColor(FoodiaryDesign.mutedFg)
                 }
@@ -57,14 +57,14 @@ struct GoalSetupView: View {
                 Spacer(minLength: 24)
                 
                 Button(action: onCalculate) {
-                    Text("CALCULATE MY TARGET")
+                    Text(L10n["action.calculate_target"])
                 }
                 .buttonStyle(NBButtonStyle())
             }
             .padding(20)
         }
         .background(FoodiaryDesign.background)
-        .navigationTitle("Your Goal")
+        .navigationTitle(L10n["nav.your_goal"])
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

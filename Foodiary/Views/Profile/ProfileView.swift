@@ -10,16 +10,16 @@ struct ProfileView: View {
             VStack(spacing: 20) {
                 if let profile = state.userProfile {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text("YOUR DETAILS")
+                        Text(L10n["profile.your_details"])
                             .sectionLabel()
                             .padding(.bottom, 12)
                         
-                        ProfileRow(label: "Age", value: "\(profile.age)")
-                        ProfileRow(label: "Sex", value: profile.sex.displayName)
-                        ProfileRow(label: "Height", value: "\(Int(profile.heightCm)) cm")
-                        ProfileRow(label: "Weight", value: "\(Int(profile.weightKg)) kg")
-                        ProfileRow(label: "Activity", value: profile.activityLevel.displayName)
-                        ProfileRow(label: "Goal", value: profile.goal.displayName)
+                        ProfileRow(label: L10n["label.profile_age"], value: "\(profile.age)")
+                        ProfileRow(label: L10n["label.profile_sex"], value: profile.sex.localizedDisplayName)
+                        ProfileRow(label: L10n["label.profile_height"], value: "\(Int(profile.heightCm)) cm")
+                        ProfileRow(label: L10n["label.profile_weight"], value: "\(Int(profile.weightKg)) kg")
+                        ProfileRow(label: L10n["label.profile_activity"], value: profile.activityLevel.localizedDisplayName)
+                        ProfileRow(label: L10n["label.profile_goal"], value: profile.goal.localizedDisplayName)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .nbCard()
@@ -27,7 +27,7 @@ struct ProfileView: View {
                 
                 if let target = state.calorieTarget {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("CALORIE TARGET")
+                        Text(L10n["profile.calorie_target"])
                             .sectionLabel()
                             .padding(.bottom, 4)
                         
@@ -35,14 +35,14 @@ struct ProfileView: View {
                             Text("\(target.targetCalories)")
                                 .font(.system(size: 40, weight: .bold, design: .rounded))
                                 .foregroundColor(FoodiaryDesign.coral)
-                            Text("kcal/day")
+                            Text(L10n["unit.kcal_per_day_compact"])
                                 .font(FoodiaryTypography.bodySm)
                                 .foregroundColor(FoodiaryDesign.mutedFg)
                         }
                         
                         HStack(spacing: 12) {
-                            (Text("BMR ").foregroundColor(FoodiaryDesign.mutedFg) + Text("\(target.bmr)").bold().foregroundColor(FoodiaryDesign.black))
-                            (Text("Maintenance ").foregroundColor(FoodiaryDesign.mutedFg) + Text("\(target.maintenanceCalories)").bold().foregroundColor(FoodiaryDesign.black))
+                            (Text(L10n["profile.bmr_prefix"]).foregroundColor(FoodiaryDesign.mutedFg) + Text("\(target.bmr)").bold().foregroundColor(FoodiaryDesign.black))
+                            (Text(L10n["profile.maintenance_prefix"]).foregroundColor(FoodiaryDesign.mutedFg) + Text("\(target.maintenanceCalories)").bold().foregroundColor(FoodiaryDesign.black))
                         }
                         .font(.system(size: 12))
                     }
@@ -50,7 +50,7 @@ struct ProfileView: View {
                     .nbCard()
                 }
                 
-                Text("This is an estimate for planning purposes only. For medical conditions, eating disorders, pregnancy, athletic nutrition, or major weight changes, consult a qualified health professional.")
+                Text(L10n["disclaimer.full"])
                     .font(.system(size: 11))
                     .foregroundColor(FoodiaryDesign.mutedFg)
                     .multilineTextAlignment(.center)
@@ -58,17 +58,17 @@ struct ProfileView: View {
                     .padding(.horizontal, 8)
                 
                 Button(action: { showEdit = true }) {
-                    Text("EDIT PROFILE")
+                    Text(L10n["action.edit_profile"])
                 }
                 .buttonStyle(NBSecondaryButtonStyle())
                 
                 Button(action: { state.recalculateTarget() }) {
-                    Text("RECALCULATE TARGET")
+                    Text(L10n["action.recalculate_target"])
                 }
                 .buttonStyle(NBSecondaryButtonStyle())
                 
                 Button(action: { showResetConfirm = true }) {
-                    Text("RESET DATA")
+                    Text(L10n["action.reset_data"])
                 }
                 .buttonStyle(NBButtonStyle(bgColor: FoodiaryDesign.black, fgColor: .white))
             }
@@ -81,11 +81,11 @@ struct ProfileView: View {
                     .modifier(NBNavBarModifier())
             }
         }
-        .alert("Reset All Data?", isPresented: $showResetConfirm) {
-            Button("Cancel", role: .cancel) { }
-            Button("Reset", role: .destructive) { state.resetAll() }
+        .alert(L10n["alert.reset_title"], isPresented: $showResetConfirm) {
+            Button(L10n["alert.cancel"], role: .cancel) { }
+            Button(L10n["alert.reset_confirm"], role: .destructive) { state.resetAll() }
         } message: {
-            Text("This will delete your profile, calorie target, and all meal plans. This cannot be undone.")
+            Text(L10n["alert.reset_message"])
         }
     }
 }
@@ -129,16 +129,16 @@ struct ProfileEditView: View {
         ScrollView {
             VStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("AGE").sectionLabel()
+                    Text(L10n["label.age"]).sectionLabel()
                     IntStepperField(value: $age, range: 1...120)
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("BIOLOGICAL SEX").sectionLabel()
+                    Text(L10n["label.biological_sex"]).sectionLabel()
                     HStack(spacing: 2) {
                         ForEach(UserProfile.Sex.allCases, id: \.self) { option in
                             Button(action: { sex = option }) {
-                                Text(option.displayName.uppercased())
+                                Text(option.localizedDisplayName.uppercased())
                                     .nbSegment(isActive: sex == option)
                             }
                         }
@@ -150,21 +150,21 @@ struct ProfileEditView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("HEIGHT (CM)").sectionLabel()
+                    Text(L10n["label.height_cm"]).sectionLabel()
                     StepperField(value: $heightCm, range: 50...250)
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("WEIGHT (KG)").sectionLabel()
+                    Text(L10n["label.weight_kg"]).sectionLabel()
                     StepperField(value: $weightKg, range: 20...300)
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("ACTIVITY LEVEL").sectionLabel()
+                    Text(L10n["label.activity_level"]).sectionLabel()
                     VStack(spacing: 2) {
                         ForEach(UserProfile.ActivityLevel.allCases, id: \.self) { option in
                             Button(action: { activityLevel = option }) {
-                                Text(option.displayName.uppercased())
+                                Text(option.localizedDisplayName.uppercased())
                                     .nbSegment(isActive: activityLevel == option)
                             }
                         }
@@ -176,11 +176,11 @@ struct ProfileEditView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("GOAL").sectionLabel()
+                    Text(L10n["label.goal"]).sectionLabel()
                     VStack(spacing: 3) {
                         ForEach(UserProfile.Goal.allCases, id: \.self) { option in
                             Button(action: { goal = option }) {
-                                Text(option.displayName.uppercased())
+                                Text(option.localizedDisplayName.uppercased())
                                     .nbSegment(isActive: goal == option)
                             }
                         }
@@ -192,19 +192,19 @@ struct ProfileEditView: View {
                 }
                 
                 Button(action: saveEdits) {
-                    Text("SAVE & RECALCULATE")
+                    Text(L10n["action.save_recalculate"])
                 }
                 .buttonStyle(NBButtonStyle())
                 
                 Button(action: { isPresented = false }) {
-                    Text("CANCEL")
+                    Text(L10n["action.cancel"])
                 }
                 .buttonStyle(NBSecondaryButtonStyle())
             }
             .padding(20)
         }
         .background(FoodiaryDesign.background)
-        .navigationTitle("Edit Profile")
+        .navigationTitle(L10n["nav.edit_profile"])
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

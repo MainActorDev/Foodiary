@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct FoodiaryApp: App {
     @StateObject private var state = AppState()
+    @StateObject private var localeManager = LocaleManager.shared
     @State private var onboardingPath = NavigationPath()
     
     // Onboarding form state
@@ -15,6 +16,9 @@ struct FoodiaryApp: App {
     @State private var calculatedTarget: CalorieTarget?
     
     init() {
+        // Bootstrap localization BEFORE any view renders or String(localized:) is called.
+        LocaleManager.bootstrap()
+        
         // Global nav bar styling
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -49,7 +53,7 @@ struct FoodiaryApp: App {
                     VStack {
                         Text("🥗")
                             .font(.system(size: 64))
-                        Text("Foodiary")
+                        Text(L10n["app.name"])
                             .font(FoodiaryTypography.display)
                             .foregroundColor(FoodiaryDesign.black)
                     }

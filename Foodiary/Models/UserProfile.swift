@@ -14,25 +14,33 @@ struct UserProfile: Codable, Identifiable, Equatable {
     enum Sex: String, Codable, CaseIterable {
         case male, female
         
-        var displayName: String {
+        /// Localized display name from the String Catalog.
+        var localizedDisplayName: String {
             switch self {
-            case .male: return "Male"
-            case .female: return "Female"
+            case .male: return L10n["model.sex.male"]
+            case .female: return L10n["model.sex.female"]
             }
         }
+        
+        /// Display name for backward compatibility — delegates to localized version.
+        var displayName: String { localizedDisplayName }
     }
     
     enum ActivityLevel: String, Codable, CaseIterable {
         case sedentary, lightlyActive, moderatelyActive, veryActive
         
-        var displayName: String {
+        /// Localized display name from the String Catalog.
+        var localizedDisplayName: String {
             switch self {
-            case .sedentary: return "Sedentary"
-            case .lightlyActive: return "Lightly Active"
-            case .moderatelyActive: return "Moderately Active"
-            case .veryActive: return "Very Active"
+            case .sedentary: return L10n["model.activity.sedentary"]
+            case .lightlyActive: return L10n["model.activity.lightly_active"]
+            case .moderatelyActive: return L10n["model.activity.moderately_active"]
+            case .veryActive: return L10n["model.activity.very_active"]
             }
         }
+        
+        /// Display name for backward compatibility — delegates to localized version.
+        var displayName: String { localizedDisplayName }
         
         var multiplier: Double {
             switch self {
@@ -47,13 +55,17 @@ struct UserProfile: Codable, Identifiable, Equatable {
     enum Goal: String, Codable, CaseIterable {
         case maintain, lose, gain
         
-        var displayName: String {
+        /// Localized display name from the String Catalog.
+        var localizedDisplayName: String {
             switch self {
-            case .maintain: return "Maintain weight"
-            case .lose: return "Lose weight slowly"
-            case .gain: return "Gain weight slowly"
+            case .maintain: return L10n["model.goal.maintain"]
+            case .lose: return L10n["model.goal.lose"]
+            case .gain: return L10n["model.goal.gain"]
             }
         }
+        
+        /// Display name for backward compatibility — delegates to localized version.
+        var displayName: String { localizedDisplayName }
         
         var multiplier: Double {
             switch self {

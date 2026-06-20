@@ -17,23 +17,23 @@ struct ProfileSetupView: View {
                     Circle().fill(FoodiaryDesign.muted).frame(width: 10, height: 10).overlay(Circle().stroke(FoodiaryDesign.black, lineWidth: 2))
                 }
                 
-                Text("Help us calculate your estimated daily calorie target.")
+                Text(L10n["onboarding.profile.subtitle"])
                     .font(FoodiaryTypography.bodySm)
                     .foregroundColor(FoodiaryDesign.mutedFg)
                 
                 // Age
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("AGE").sectionLabel()
+                    Text(L10n["label.age"]).sectionLabel()
                     IntStepperField(value: $age, range: 1...120)
                 }
                 
                 // Sex
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("BIOLOGICAL SEX").sectionLabel()
+                    Text(L10n["label.biological_sex"]).sectionLabel()
                     HStack(spacing: 2) {
                         ForEach(UserProfile.Sex.allCases, id: \.self) { option in
                             Button(action: { sex = option }) {
-                                Text(option.displayName.uppercased())
+                                Text(option.localizedDisplayName.uppercased())
                                     .nbSegment(isActive: sex == option)
                             }
                         }
@@ -42,34 +42,34 @@ struct ProfileSetupView: View {
                     .background(FoodiaryDesign.muted)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.black, lineWidth: 3))
-                    Text("Used for the calorie estimation formula.")
+                    Text(L10n["onboarding.profile.sex_note"])
                         .font(.system(size: 12))
                         .foregroundColor(FoodiaryDesign.mutedFg)
                 }
                 
                 // Height
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("HEIGHT (CM)").sectionLabel()
+                    Text(L10n["label.height_cm"]).sectionLabel()
                     StepperField(value: $heightCm, range: 50...250, step: 1)
                 }
                 
                 // Weight
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("WEIGHT (KG)").sectionLabel()
+                    Text(L10n["label.weight_kg"]).sectionLabel()
                     StepperField(value: $weightKg, range: 20...300, step: 1)
                 }
                 
                 Spacer(minLength: 24)
                 
                 Button(action: onContinue) {
-                    Text("CONTINUE")
+                    Text(L10n["action.continue"])
                 }
                 .buttonStyle(NBButtonStyle())
             }
             .padding(20)
         }
         .background(FoodiaryDesign.background)
-        .navigationTitle("About You")
+        .navigationTitle(L10n["nav.about_you"])
         .navigationBarTitleDisplayMode(.inline)
     }
 }

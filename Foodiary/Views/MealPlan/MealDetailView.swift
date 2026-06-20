@@ -17,10 +17,10 @@ struct MealDetailView: View {
                 ScrollView {
                     VStack(spacing: 16) {
                         HStack {
-                            Text("FOOD ITEMS")
+                            Text(L10n["label.food_items"])
                                 .sectionLabel()
                             Spacer()
-                            Text("\(meal.totalCalories) kcal")
+                            Text("\(meal.totalCalories) \(L10n["unit.kcal"])")
                                 .font(FoodiaryTypography.bodySm)
                                 .foregroundColor(FoodiaryDesign.mutedFg)
                         }
@@ -28,10 +28,10 @@ struct MealDetailView: View {
                         VStack(spacing: 0) {
                             if meal.items.isEmpty {
                                 VStack(spacing: 8) {
-                                    Text("No food added yet.")
+                                    Text(L10n["meal_detail.empty.title"])
                                         .font(FoodiaryTypography.bodySm)
                                         .foregroundColor(FoodiaryDesign.mutedFg)
-                                    Text("Add your first item.")
+                                    Text(L10n["meal_detail.empty.subtitle"])
                                         .font(FoodiaryTypography.bodySm)
                                         .foregroundColor(FoodiaryDesign.mutedFg)
                                 }
@@ -53,14 +53,14 @@ struct MealDetailView: View {
                         .nbCard()
                         
                         Button(action: { showAddFood = true }) {
-                            Text("ADD FOOD")
+                            Text(L10n["action.add_food"])
                         }
                         .buttonStyle(NBButtonStyle())
                     }
                     .padding(20)
                 }
                 .background(FoodiaryDesign.background)
-                .navigationTitle(meal.type.displayName)
+                .navigationTitle(meal.type.localizedDisplayName)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -106,7 +106,7 @@ struct FoodItemRowView: View {
             
             Spacer()
             
-            Text("\(item.calories) kcal")
+            Text("\(item.calories) \(L10n["unit.kcal"])")
                 .font(FoodiaryTypography.bodyBold)
                 .foregroundColor(FoodiaryDesign.black)
             

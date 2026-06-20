@@ -17,7 +17,7 @@ struct MainTabView: View {
                         showMealDetail = true
                     }
                 )
-                .navigationTitle("Today")
+                .navigationTitle(L10n["nav.today"])
                 .navigationBarTitleDisplayMode(.large)
                 .navigationDestination(isPresented: $showMealDetail) {
                     MealDetailView(
@@ -30,7 +30,7 @@ struct MainTabView: View {
             }
             .tabItem {
                 Image(systemName: "chart.bar.fill")
-                Text("TODAY")
+                Text(L10n["tab.today"])
             }
             .tag(0)
             
@@ -43,7 +43,7 @@ struct MainTabView: View {
                         showMealDetail = true
                     }
                 )
-                .navigationTitle("Meal Plan")
+                .navigationTitle(L10n["nav.meal_plan"])
                 .navigationBarTitleDisplayMode(.large)
                 .navigationDestination(isPresented: $showMealDetail) {
                     MealDetailView(
@@ -56,19 +56,19 @@ struct MainTabView: View {
             }
             .tabItem {
                 Image(systemName: "fork.knife")
-                Text("MEAL PLAN")
+                Text(L10n["tab.meal_plan"])
             }
             .tag(1)
             
             NavigationStack {
                 ProfileView(state: state)
-                    .navigationTitle("Profile")
+                    .navigationTitle(L10n["nav.profile"])
                     .navigationBarTitleDisplayMode(.large)
                     .modifier(NBNavBarModifier())
             }
             .tabItem {
                 Image(systemName: "person.fill")
-                Text("PROFILE")
+                Text(L10n["tab.profile"])
             }
             .tag(2)
         }

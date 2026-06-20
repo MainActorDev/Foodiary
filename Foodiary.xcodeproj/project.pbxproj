@@ -23,6 +23,9 @@
 		A36668516417CF3B693385A4 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7508C6CFFF9A8E2EE764AC36 /* Meal.swift */; };
 		A744467F82D91A6C91277949 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECAB31DA3AB690D37A173E5 /* FoodItem.swift */; };
 		B0AC29E284D9EA795CE4563C /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6761A91D202CDDFE3A5D9A6 /* UserProfile.swift */; };
+		D8941646DC5205DEFC249E4E /* LocaleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504E605B901025024F1BDA0 /* LocaleManager.swift */; };
+		DBAA71F72880B39796C9BBD0 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C5C7A196774531FEDBF4B5 /* L10n.swift */; };
+		DEDDC61F71A676D1135C4F70 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 68E8D0D57D6AA990042EBC8C /* Localizable.xcstrings */; };
 		ED77721A6FE834A18B03668D /* ProfileSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A284417FB4BD0FF845C2605D /* ProfileSetupView.swift */; };
 		F50EA722BBDF3396E593891C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFE0B1EDD6D7410662958DC /* MainTabView.swift */; };
 		F602777799A454218AFF22A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C259944B10944CCDC399BD /* Assets.xcassets */; };
@@ -49,6 +52,8 @@
 		3152D915D822EFD2A49D41BB /* AddFoodItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodItemView.swift; sourceTree = "<group>"; };
 		3CFED327265A5E66ABEF9D26 /* CalorieTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieTarget.swift; sourceTree = "<group>"; };
 		479C16726548B9A41310E072 /* Foodiary.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Foodiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6504E605B901025024F1BDA0 /* LocaleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleManager.swift; sourceTree = "<group>"; };
+		68E8D0D57D6AA990042EBC8C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		71198B62EAF32E193535C664 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		7508C6CFFF9A8E2EE764AC36 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		7CF988877D3BF9A7ECB1649D /* GoalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSetupView.swift; sourceTree = "<group>"; };
@@ -57,6 +62,7 @@
 		9A07B6E7BB95513C2565B64A /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		9B8DA6C744A6D96CFFE7D814 /* FoodiaryTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = FoodiaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D73AED0083ED6C9660EA4C1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A0C5C7A196774531FEDBF4B5 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		A284417FB4BD0FF845C2605D /* ProfileSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupView.swift; sourceTree = "<group>"; };
 		A405EA29A3EDEE57F1B12132 /* FoodiaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodiaryApp.swift; sourceTree = "<group>"; };
 		AE16D45C5FD1CF0C6764EAFD /* TodayDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayDashboardView.swift; sourceTree = "<group>"; };
@@ -79,6 +85,15 @@
 				0FDB0A68DBA3298224D6F621 /* MealPlanView.swift */,
 			);
 			path = MealPlan;
+			sourceTree = "<group>";
+		};
+		0A1B542F6E118E0BEC8D6763 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A0C5C7A196774531FEDBF4B5 /* L10n.swift */,
+				6504E605B901025024F1BDA0 /* LocaleManager.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		1AABCAD8B054E92BFE55510E /* Views */ = {
@@ -159,8 +174,10 @@
 				CE8699095A53ECADDAB08686 /* DesignSystem.swift */,
 				A405EA29A3EDEE57F1B12132 /* FoodiaryApp.swift */,
 				E0770E187831561B62124D21 /* Info.plist */,
+				68E8D0D57D6AA990042EBC8C /* Localizable.xcstrings */,
 				C9F760658CE1221D6F0FC0BA /* Models */,
 				669C2950FB6F056D47B4C0C0 /* Services */,
+				0A1B542F6E118E0BEC8D6763 /* Utilities */,
 				ECEA093258C67F51490C9D05 /* ViewModels */,
 				1AABCAD8B054E92BFE55510E /* Views */,
 			);
@@ -262,6 +279,7 @@
 			knownRegions = (
 				Base,
 				en,
+				id,
 			);
 			mainGroup = 954348F16D80E1AEC3EFD06B;
 			minimizedProjectReferenceProxies = 1;
@@ -282,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F602777799A454218AFF22A9 /* Assets.xcassets in Resources */,
+				DEDDC61F71A676D1135C4F70 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +350,8 @@
 				7DDFFB4EB74065F129D28864 /* FoodiaryApp.swift in Sources */,
 				084769BCB29D4D3EFFB12D7B /* GoalSetupView.swift in Sources */,
 				F8A6F458837C10897A373870 /* IntStepperField.swift in Sources */,
+				DBAA71F72880B39796C9BBD0 /* L10n.swift in Sources */,
+				D8941646DC5205DEFC249E4E /* LocaleManager.swift in Sources */,
 				F50EA722BBDF3396E593891C /* MainTabView.swift in Sources */,
 				A36668516417CF3B693385A4 /* Meal.swift in Sources */,
 				170D9F648D11D648FCF11906 /* MealDetailView.swift in Sources */,

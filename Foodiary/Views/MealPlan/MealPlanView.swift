@@ -10,10 +10,10 @@ struct MealPlanView: View {
             if state.hasTodayMealPlan, let plan = state.todayMealPlan {
                 VStack(spacing: 12) {
                     HStack {
-                        Text("TODAY'S MEALS")
+                        Text(L10n["meal_plan.header"])
                             .sectionLabel()
                         Spacer()
-                        Text("\(state.plannedCalories) kcal")
+                        Text("\(state.plannedCalories) \(L10n["unit.kcal"])")
                             .font(FoodiaryTypography.bodySm)
                             .foregroundColor(FoodiaryDesign.mutedFg)
                     }
@@ -32,16 +32,16 @@ struct MealPlanView: View {
                     Text("🍽")
                         .font(.system(size: 48))
                         .opacity(0.6)
-                    Text("No meal plan for today")
+                    Text(L10n["today.empty.title"])
                         .font(FoodiaryTypography.title)
                         .foregroundColor(FoodiaryDesign.black)
-                    Text("Create one to start adding food items.")
+                    Text(L10n["meal_plan.empty.subtitle"])
                         .font(FoodiaryTypography.body)
                         .foregroundColor(FoodiaryDesign.mutedFg)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
                     Button(action: onCreateMealPlan) {
-                        Text("CREATE MEAL PLAN")
+                        Text(L10n["action.create_meal_plan"])
                     }
                     .buttonStyle(NBButtonStyle())
                     .frame(width: 220)

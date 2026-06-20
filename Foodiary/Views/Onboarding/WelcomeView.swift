@@ -11,12 +11,12 @@ struct WelcomeView: View {
                 .font(.system(size: 64))
                 .padding(.bottom, 12)
             
-            Text("Foodiary")
+            Text(L10n["app.name"])
                 .font(FoodiaryTypography.display)
                 .foregroundColor(FoodiaryDesign.black)
                 .padding(.bottom, 8)
             
-            Text("Plan your meals around a simple daily calorie target.")
+            Text(L10n["onboarding.welcome.tagline"])
                 .font(FoodiaryTypography.body)
                 .foregroundColor(FoodiaryDesign.mutedFg)
                 .multilineTextAlignment(.center)
@@ -25,13 +25,13 @@ struct WelcomeView: View {
             Spacer()
             
             Button(action: onGetStarted) {
-                Text("GET STARTED")
+                Text(L10n["onboarding.welcome.get_started"])
             }
             .buttonStyle(NBButtonStyle())
             .padding(.horizontal, 60)
             .padding(.bottom, 32)
             
-            Text("This app gives calorie estimates only — not medical or nutrition advice.")
+            Text(L10n["onboarding.welcome.disclaimer"])
                 .font(.system(size: 11))
                 .foregroundColor(FoodiaryDesign.mutedFg)
                 .multilineTextAlignment(.center)

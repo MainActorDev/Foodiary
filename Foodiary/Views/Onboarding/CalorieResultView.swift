@@ -10,7 +10,7 @@ struct CalorieResultView: View {
         VStack(spacing: 0) {
             Spacer()
             
-            Text("Your estimated daily target is")
+            Text(L10n["onboarding.result.title"])
                 .font(FoodiaryTypography.bodySm)
                 .foregroundColor(FoodiaryDesign.mutedFg)
                 .padding(.bottom, 8)
@@ -19,20 +19,20 @@ struct CalorieResultView: View {
                 .font(.system(size: 56, weight: .bold, design: .rounded))
                 .foregroundColor(FoodiaryDesign.coral)
             
-            Text("kcal / day")
+            Text(L10n["unit.kcal_per_day"])
                 .font(FoodiaryTypography.title)
                 .foregroundColor(FoodiaryDesign.black)
                 .padding(.bottom, 24)
             
             // Stat cards
             HStack(spacing: 12) {
-                StatCard(value: "\(target.bmr)", label: "BMR")
-                StatCard(value: "\(target.maintenanceCalories)", label: "MAINTENANCE")
-                StatCard(value: "\(target.targetCalories)", label: "TARGET")
+                StatCard(value: "\(target.bmr)", label: L10n["label.bmr"])
+                StatCard(value: "\(target.maintenanceCalories)", label: L10n["label.maintenance"])
+                StatCard(value: "\(target.targetCalories)", label: L10n["label.target"])
             }
             .padding(.horizontal, 20)
             
-            Text("Use this as a planning guide, not a strict rule.")
+            Text(L10n["onboarding.result.note"])
                 .font(FoodiaryTypography.bodySm)
                 .foregroundColor(FoodiaryDesign.mutedFg)
                 .padding(.top, 16)
@@ -40,20 +40,20 @@ struct CalorieResultView: View {
             Spacer()
             
             Button(action: onCreateMealPlan) {
-                Text("CREATE MEAL PLAN")
+                Text(L10n["action.create_meal_plan"])
             }
             .buttonStyle(NBButtonStyle())
             .padding(.horizontal, 20)
             .padding(.bottom, 12)
             
             Button(action: onEditProfile) {
-                Text("EDIT PROFILE")
+                Text(L10n["action.edit_profile"])
             }
             .buttonStyle(NBSecondaryButtonStyle())
             .padding(.horizontal, 20)
             .padding(.bottom, 24)
             
-            Text("This is an estimate for planning purposes only. For medical conditions, eating disorders, pregnancy, athletic nutrition, or major weight changes, consult a qualified health professional.")
+            Text(L10n["disclaimer.full"])
                 .font(.system(size: 11))
                 .foregroundColor(FoodiaryDesign.mutedFg)
                 .multilineTextAlignment(.center)
@@ -63,7 +63,7 @@ struct CalorieResultView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(FoodiaryDesign.background)
-        .navigationTitle("Your Target")
+        .navigationTitle(L10n["nav.your_target"])
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

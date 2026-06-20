@@ -17,9 +17,18 @@ struct Meal: Codable, Identifiable, Equatable {
     enum MealType: String, Codable, CaseIterable {
         case breakfast, lunch, snack, dinner
         
-        var displayName: String {
-            rawValue.capitalized
+        /// Localized display name from the String Catalog.
+        var localizedDisplayName: String {
+            switch self {
+            case .breakfast: return L10n["model.meal.breakfast"]
+            case .lunch: return L10n["model.meal.lunch"]
+            case .snack: return L10n["model.meal.snack"]
+            case .dinner: return L10n["model.meal.dinner"]
+            }
         }
+        
+        /// Display name for backward compatibility — delegates to localized version.
+        var displayName: String { localizedDisplayName }
         
         var icon: String {
             switch self {

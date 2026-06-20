@@ -147,15 +147,19 @@ final class AppState: ObservableObject {
         return min(1.0, Double(plannedCalories) / Double(targetCalories))
     }
     
-    var statusMessage: String {
+    /// User-facing status message using the String Catalog for localization.
+    var localizedStatusMessage: String {
         if plannedCalories == 0 {
-            return "No food planned yet"
+            return L10n["status.no_food"]
         } else if isExactlyAtTarget {
-            return "You are exactly at your target."
+            return L10n["status.exact_target"]
         } else if isOverTarget {
-            return "\(abs(remainingCalories)) kcal over your estimated target"
+            return L10n["status.over_target", abs(remainingCalories)]
         } else {
-            return "\(remainingCalories) kcal under target"
+            return L10n["status.under_target", remainingCalories]
         }
     }
+    
+    /// Backward-compatible status message (delegates to localized).
+    var statusMessage: String { localizedStatusMessage }
 }

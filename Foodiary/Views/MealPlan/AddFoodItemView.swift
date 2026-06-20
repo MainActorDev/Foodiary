@@ -14,9 +14,9 @@ struct AddFoodItemView: View {
         ScrollView {
             VStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("FOOD NAME")
+                    Text(L10n["label.food_name"])
                         .sectionLabel()
-                    TextField("e.g. Chicken breast", text: $name)
+                    TextField(L10n["add_food.name_placeholder"], text: $name)
                         .nbField()
                         .font(FoodiaryTypography.body)
                         .overlay(
@@ -24,14 +24,14 @@ struct AddFoodItemView: View {
                                 .stroke(nameError ? Color.red : FoodiaryDesign.black, lineWidth: 3)
                         )
                     if nameError {
-                        Text("Please enter a food name.")
+                        Text(L10n["add_food.name_error"])
                             .font(.system(size: 12))
                             .foregroundColor(.red)
                     }
                 }
                 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("CALORIES")
+                    Text(L10n["label.calories"])
                         .sectionLabel()
                     TextField("0", text: $caloriesText)
                         .keyboardType(.numberPad)
@@ -41,20 +41,20 @@ struct AddFoodItemView: View {
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(caloriesError ? Color.red : FoodiaryDesign.black, lineWidth: 3)
                         )
-                    Text("Whole number, 0 or greater.")
+                    Text(L10n["add_food.calories_hint"])
                         .font(.system(size: 12))
                         .foregroundColor(FoodiaryDesign.mutedFg)
                     if caloriesError {
-                        Text("Please enter a valid calorie amount.")
+                        Text(L10n["add_food.calories_error"])
                             .font(.system(size: 12))
                             .foregroundColor(.red)
                     }
                 }
                 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("NOTE (OPTIONAL)")
+                    Text(L10n["label.note_optional"])
                         .sectionLabel()
-                    TextField("e.g. Grilled, no oil", text: $note)
+                    TextField(L10n["add_food.note_placeholder"], text: $note)
                         .nbField()
                         .font(FoodiaryTypography.body)
                 }
@@ -62,19 +62,19 @@ struct AddFoodItemView: View {
                 Spacer(minLength: 16)
                 
                 Button(action: saveItem) {
-                    Text("SAVE FOOD ITEM")
+                    Text(L10n["action.save_food_item"])
                 }
                 .buttonStyle(NBButtonStyle())
                 
                 Button(action: onCancel) {
-                    Text("CANCEL")
+                    Text(L10n["action.cancel"])
                 }
                 .buttonStyle(NBSecondaryButtonStyle())
             }
             .padding(20)
         }
         .background(FoodiaryDesign.background)
-        .navigationTitle("Add Food")
+        .navigationTitle(L10n["nav.add_food"])
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

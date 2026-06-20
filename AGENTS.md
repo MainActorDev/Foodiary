@@ -17,6 +17,7 @@ MVVM with a central AppState ObservableObject
 ├── Models/          — Codable structs (UserProfile, CalorieTarget, MealPlan, Meal, FoodItem)
 ├── Services/        — Stateless pure functions (CalorieCalculator) + persistence (StorageService)
 ├── ViewModels/      — AppState.swift (single source of truth)
+├── Utilities/       — L10n.swift (localization), LocaleManager.swift (language preference)
 └── Views/           — SwiftUI views organized by feature
     ├── Onboarding/  — Welcome → ProfileSetup → GoalSetup → CalorieResult
     ├── Today/       — TodayDashboardView
@@ -31,6 +32,19 @@ MVVM with a central AppState ObservableObject
 - **Single AppState.** `@MainActor class AppState: ObservableObject` owns all data. Views observe it via `@ObservedObject`. No scattered `@State` for shared data.
 - **No external dependencies.** The `project.yml` declares zero package dependencies. Everything is built with Apple frameworks only.
 - **Local-first.** Data persists as JSON files (`profile.json`, `target.json`, `mealplan_YYYY-MM-DD.json`) in `FileManager.default.documentDirectory`.
+
+### Localization
+
+- **String Catalogs (`.xcstrings`).** All user-facing strings live in `Foodiary/Localizable.xcstrings`
+  — Apple's modern format (Xcode 15+/iOS 17+). Single file contains English source + Indonesian translations.
+- **Type-safe access** via `L10n["key"]` and `L10n["key", args...]`. Never hardcode user-facing strings.
+- **Model display names** use `localizedDisplayName` computed properties (`UserProfile.Sex`,
+  `ActivityLevel`, `Goal`, `Meal.MealType`). The older `displayName` delegates to it for backward compat.
+- **Default language: Indonesian.** `CFBundleDevelopmentRegion = id` in Info.plist.
+  `LocaleManager` (in `Utilities/`) sets `AppleLanguages` to `["id"]` on first launch.
+- **Keys follow a dot-notation convention:** `category.subcategory.element` (e.g. `onboarding.welcome.tagline`,
+  `label.age`, `action.continue`, `model.meal.breakfast`, `status.over_target`).
+- **Plurals** use `.xcstrings` plural variations (see `food.item_count`).
 
 ## Design System
 
