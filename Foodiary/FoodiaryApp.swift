@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreText
 
 @main
 struct FoodiaryApp: App {
@@ -23,12 +24,29 @@ struct FoodiaryApp: App {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor(FoodiaryDesign.background)
         appearance.shadowColor = .clear
+        
+        // Use Core Text to get bold weight from variable font
+        let titleFont: UIFont = {
+            let ctFont = CTFontCreateWithName("Space Grotesk" as CFString, 18, nil)
+            if let boldCT = CTFontCreateCopyWithSymbolicTraits(ctFont, 0, nil, .boldTrait, .boldTrait) {
+                return boldCT as UIFont
+            }
+            return UIFont.systemFont(ofSize: 18, weight: .bold)
+        }()
+        let largeTitleFont: UIFont = {
+            let ctFont = CTFontCreateWithName("Space Grotesk" as CFString, 28, nil)
+            if let boldCT = CTFontCreateCopyWithSymbolicTraits(ctFont, 0, nil, .boldTrait, .boldTrait) {
+                return boldCT as UIFont
+            }
+            return UIFont.systemFont(ofSize: 28, weight: .bold)
+        }()
+        
         appearance.titleTextAttributes = [
-            .font: UIFont(name: "Space Grotesk", size: 18) ?? UIFont.systemFont(ofSize: 18, weight: .bold),
+            .font: titleFont,
             .foregroundColor: UIColor(FoodiaryDesign.black)
         ]
         appearance.largeTitleTextAttributes = [
-            .font: UIFont(name: "Space Grotesk", size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold),
+            .font: largeTitleFont,
             .foregroundColor: UIColor(FoodiaryDesign.black)
         ]
         
