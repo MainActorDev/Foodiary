@@ -62,10 +62,6 @@ struct ProfileView: View {
                 }
                 .buttonStyle(NBSecondaryButtonStyle())
                 
-                Button(action: { state.recalculateTarget() }) {
-                    Text(L10n["action.recalculate_target"])
-                }
-                .buttonStyle(NBSecondaryButtonStyle())
                 
                 Button(action: { showResetConfirm = true }) {
                     Text(L10n["action.reset_data"])

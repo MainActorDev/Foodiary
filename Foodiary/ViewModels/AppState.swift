@@ -54,18 +54,6 @@ final class AppState: ObservableObject {
         }
     }
     
-    func recalculateTarget() {
-        guard let profile = userProfile else { return }
-        calculateAndSaveTarget(for: profile)
-        // Update today's meal plan target if it exists
-        if var plan = todayMealPlan, let target = calorieTarget {
-            plan.targetCalories = target.targetCalories
-            plan.updatedAt = Date()
-            todayMealPlan = plan
-            try? StorageService.saveMealPlan(plan)
-        }
-    }
-    
     // MARK: - Meal Plan
     
     func createTodayMealPlan() {
