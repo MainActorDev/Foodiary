@@ -64,8 +64,9 @@ struct GoalSetupView: View {
             .padding(20)
         }
         .background(FoodiaryDesign.background)
-        .navigationTitle(L10n["nav.your_goal"])
+        .navigationTitle("Your Goal")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button(action: onBack) {

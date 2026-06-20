@@ -63,8 +63,9 @@ struct CalorieResultView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(FoodiaryDesign.background)
-        .navigationTitle(L10n["nav.your_target"])
+        .navigationTitle("Your Target")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button(action: onBack) {
