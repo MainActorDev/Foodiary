@@ -1,0 +1,37 @@
+# Xcode
+*.xcuserdata
+*.xcworkspace/xcuserdata
+DerivedData/
+*.xcuserstate
+*.xcscmblueprint
+
+# Build
+Build/
+*.app
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods
+Pods/
+
+# SwiftPM
+.build/
+
+# XcodeGen (project is generated)
+# Keep project.yml but .xcodeproj can be regenerated
+# Foodiary.xcodeproj is tracked since we commit the generated project
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Hermes
+.hermes/
+
+# Design artifacts (keep tracked)
+# design-prototype/ is tracked

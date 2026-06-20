@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foodiary — Neubrutalist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #FF6B4A; --coral-dark: #E55A3A;
+    --mint: #2DD4BF; --mint-dark: #14B8A6;
+    --yellow: #FFD60A;
+    --bg: #FAFAF5; --white: #FFFFFF; --black: #1A1A1A;
+    --muted: #F5F2ED; --muted-fg: #6B6560;
+    --border: 3px solid var(--black);
+    --shadow: 4px 4px 0 var(--black);
+    --shadow-sm: 3px 3px 0 var(--black);
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px; --radius-full: 9999px;
+    --font-display: 'Space Grotesk', -apple-system, sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body); background: #E8E5DF; display: flex;
+    justify-content: center; align-items: center; min-height: 100vh;
+    padding: 20px; -webkit-font-smoothing: antialiased;
+  }
+  .phone {
+    width: 375px; height: 812px; background: var(--bg); border-radius: 40px;
+    overflow: hidden; position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2), 0 0 0 3px var(--black);
+    display: flex; flex-direction: column;
+  }
+  .status-bar {
+    height: 44px; background: var(--bg); display: flex;
+    justify-content: space-between; align-items: center;
+    padding: 0 24px; font-size: 12px; font-weight: 700;
+    font-family: var(--font-display); color: var(--black);
+  }
+  .screen { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+  .screen.active { display: flex; }
+  .screen.scrollable { overflow-y: auto; }
+  .content { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 20px; }
+  .content.center { justify-content: center; align-items: center; text-align: center; }
+
+  /* Typography */
+  .display { font-family: var(--font-display); font-size: 40px; font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--black); }
+  .title { font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1.2; color: var(--black); }
+  .label { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--black); }
+  .body { font-family: var(--font-body); font-size: 15px; line-height: 1.5; color: var(--black); }
+  .body-sm { font-family: var(--font-body); font-size: 13px; color: var(--muted-fg); }
+  .metric { font-family: var(--font-display); font-size: 32px; font-weight: 700; line-height: 1; color: var(--black); }
+
+  /* Buttons */
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 24px; font-family: var(--font-display); font-size: 15px;
+    font-weight: 700; cursor: pointer; border: var(--border);
+    border-radius: var(--radius-md); transition: all 0.1s ease;
+    width: 100%; text-align: center; text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--black); }
+  .btn-primary { background: var(--coral); color: white; box-shadow: var(--shadow); }
+  .btn-secondary { background: var(--white); color: var(--black); box-shadow: var(--shadow); }
+  .btn-black { background: var(--black); color: white; box-shadow: var(--shadow); }
+  .btn-sm { padding: 8px 16px; font-size: 12px; border-radius: var(--radius-sm); }
+  .btn-icon {
+    width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--white);
+    border: var(--border); cursor: pointer; display: flex; align-items: center;
+    justify-content: center; font-family: var(--font-display); font-size: 18px;
+    box-shadow: var(--shadow-sm); transition: all 0.1s ease; color: var(--black);
+  }
+  .btn-icon:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--black); }
+  .btn-icon.danger { background: var(--black); color: white; }
+
+  /* Cards */
+  .card {
+    background: var(--white); border: var(--border); border-radius: var(--radius-xl);
+    padding: 20px; box-shadow: var(--shadow);
+  }
+  .card-meal {
+    background: var(--white); border: var(--border); border-radius: var(--radius-lg);
+    padding: 14px; box-shadow: var(--shadow-sm);
+    display: flex; align-items: center; gap: 12px; cursor: pointer;
+    transition: all 0.1s ease;
+  }
+  .card-meal:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--black); }
+  .meal-icon {
+    width: 44px; height: 44px; border-radius: var(--radius-sm); border: 2px solid var(--black);
+    display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
+  }
+  .meal-icon.breakfast { background: #FFF3E0; }
+  .meal-icon.lunch { background: #E0F7FA; }
+  .meal-icon.snack { background: #FCE4EC; }
+  .meal-icon.dinner { background: #E8EAF6; }
+  .meal-info { flex: 1; min-width: 0; }
+  .meal-name { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--black); }
+  .meal-meta { font-size: 12px; color: var(--muted-fg); font-family: var(--font-body); }
+  .meal-cals { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--black); }
+  .meal-chevron { font-family: var(--font-display); font-size: 20px; color: var(--black); }
+
+  /* Summary */
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .summary-box {
+    background: var(--white); border: var(--border); border-radius: var(--radius-lg);
+    padding: 16px; box-shadow: var(--shadow-sm); text-align: center;
+  }
+  .summary-box.full { grid-column: 1/-1; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+  .summary-val { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--black); }
+  .summary-lbl { font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted-fg); margin-top: 4px; }
+
+  /* Status badge */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px; padding: 5px 14px;
+    border-radius: var(--radius-full); font-family: var(--font-display); font-size: 11px;
+    font-weight: 700; border: 2px solid var(--black); text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .badge.green { background: #D1FAE5; color: #065F46; }
+  .badge.red { background: #FEE2E2; color: #991B1B; }
+  .badge.yellow { background: #FEF9C3; color: #854D0E; }
+
+  /* Forms */
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--black); }
+  .form-input {
+    padding: 12px 14px; border: var(--border); border-radius: var(--radius-md);
+    background: var(--white); font-family: var(--font-body); font-size: 15px;
+    color: var(--black); transition: border-color 0.15s;
+  }
+  .form-input:focus { outline: none; border-color: var(--coral); }
+  .form-input.error { border-color: #DC2626; }
+  .form-hint { font-family: var(--font-body); font-size: 12px; color: var(--muted-fg); }
+
+  /* Segmented */
+  .segmented {
+    display: flex; background: var(--muted); border: var(--border); border-radius: var(--radius-md);
+    padding: 3px; gap: 2px;
+  }
+  .segmented button {
+    flex: 1; padding: 10px 12px; border: 2px solid transparent; border-radius: var(--radius-sm);
+    font-family: var(--font-display); font-size: 12px; font-weight: 700; cursor: pointer;
+    background: transparent; color: var(--muted-fg); transition: all 0.1s ease;
+    text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap;
+  }
+  .segmented button.active { background: var(--white); color: var(--black); border-color: var(--black); box-shadow: 2px 2px 0 var(--black); }
+
+  /* Stepper */
+  .stepper {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    padding: 10px; background: var(--white); border: var(--border); border-radius: var(--radius-md);
+  }
+  .stepper button {
+    width: 36px; height: 36px; border-radius: var(--radius-sm); border: 2px solid var(--black);
+    background: var(--white); font-family: var(--font-display); font-size: 18px; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: var(--black); transition: all 0.1s; box-shadow: 2px 2px 0 var(--black);
+  }
+  .stepper button:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--black); }
+  .stepper .val { font-family: var(--font-display); font-size: 24px; font-weight: 700; min-width: 48px; text-align: center; color: var(--black); }
+
+  /* Food item */
+  .food-row {
+    display: flex; align-items: center; gap: 10px; padding: 12px 0;
+    border-bottom: 2px solid var(--muted);
+  }
+  .food-row:last-child { border-bottom: none; }
+  .food-row .food-info { flex: 1; }
+  .food-row .food-name { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--black); }
+  .food-row .food-note { font-family: var(--font-body); font-size: 12px; color: var(--muted-fg); margin-top: 2px; }
+  .food-row .food-cals { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--black); }
+
+  /* Tab bar */
+  .tab-bar {
+    display: flex; background: var(--white); border-top: var(--border);
+    padding: 0 16px 20px; gap: 4px;
+  }
+  .tab-btn {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 8px 0; border: none; background: none; cursor: pointer;
+    font-family: var(--font-display); font-size: 9px; font-weight: 700;
+    color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .tab-btn.active { color: var(--coral); }
+  .tab-icon { font-size: 20px; }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 12px; background: var(--muted); border: 2px solid var(--black);
+    border-radius: var(--radius-full); overflow: hidden; margin-top: 8px;
+  }
+  .progress-bar .fill {
+    height: 100%; border-radius: var(--radius-full); transition: width 0.3s ease;
+    background: var(--mint);
+  }
+  .progress-bar .fill.over { background: var(--coral); }
+
+  /* Progress dots */
+  .dots { display: flex; gap: 8px; justify-content: center; }
+  .dots .dot {
+    width: 10px; height: 10px; border-radius: 50%; background: var(--muted);
+    border: 2px solid var(--black); transition: all 0.2s;
+  }
+  .dots .dot.active { background: var(--coral); width: 28px; border-radius: 5px; }
+
+  /* Empty state */
+  .empty {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding: 40px 24px; text-align: center;
+  }
+  .empty-icon { font-size: 48px; opacity: 0.6; }
+  .empty-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--black); }
+  .empty-body { font-family: var(--font-body); font-size: 14px; color: var(--muted-fg); max-width: 240px; }
+
+  /* Calorie hero */
+  .cal-hero { text-align: center; padding: 24px 0; }
+  .cal-number { font-family: var(--font-display); font-size: 56px; font-weight: 700; color: var(--coral); line-height: 1; }
+  .cal-unit { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--black); margin-top: 4px; }
+  .cal-stats { display: flex; gap: 12px; justify-content: center; margin-top: 16px; }
+  .cal-stat {
+    text-align: center; padding: 10px 14px; background: var(--white);
+    border: 2px solid var(--black); border-radius: var(--radius-md);
+    box-shadow: 2px 2px 0 var(--black);
+  }
+  .cal-stat .sv { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--black); }
+  .cal-stat .sl { font-family: var(--font-display); font-size: 9px; font-weight: 700; color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.03em; }
+
+  /* Profile */
+  .pf-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0; border-bottom: 2px solid var(--muted);
+  }
+  .pf-row:last-child { border-bottom: none; }
+  .pf-lbl { font-family: var(--font-body); font-size: 14px; color: var(--muted-fg); }
+  .pf-val { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--black); }
+
+  .section-title {
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em; color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    font-family: var(--font-body); font-size: 11px; color: var(--muted-fg);
+    text-align: center; line-height: 1.5; max-width: 280px; font-style: italic;
+  }
+
+  /* Navigation */
+  .nav-header {
+    display: flex; align-items: center; padding: 8px 16px; min-height: 48px; gap: 12px;
+  }
+  .nav-back {
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--black); background: var(--white); cursor: pointer;
+    font-family: var(--font-display); font-size: 16px; border-radius: var(--radius-sm);
+    color: var(--black); box-shadow: 2px 2px 0 var(--black); transition: all 0.1s;
+  }
+  .nav-back:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--black); }
+  .nav-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; flex: 1; color: var(--black); }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="status-bar"><span>9:41</span><span style="display:flex;gap:6px">●●●●○ WiFi 🔋</span></div>
+
+  <!-- === WELCOME === -->
+  <div class="screen active" id="welcome">
+    <div class="content center">
+      <div style="font-size:64px;margin-bottom:8px">🥗</div>
+      <h1 class="display" style="font-size:36px;margin-bottom:4px">Foodiary</h1>
+      <p class="body" style="max-width:260px;color:var(--muted-fg)">Plan your meals around a simple daily calorie target.</p>
+      <div style="height:24px"></div>
+      <button class="btn btn-primary" style="width:auto;padding:16px 48px" onclick="nav('profile-setup')">Get Started</button>
+      <p class="disclaimer" style="margin-top:24px">This app gives calorie estimates only — not medical or nutrition advice.</p>
+    </div>
+  </div>
+
+  <!-- === PROFILE SETUP === -->
+  <div class="screen scrollable" id="profile-setup">
+    <div class="nav-header"><span class="nav-title">About You</span></div>
+    <div class="content">
+      <div class="dots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+      <p class="body-sm">Help us calculate your estimated daily calorie target.</p>
+
+      <div class="form-group"><span class="form-label">Age</span>
+        <div class="stepper"><button onclick="stp('age',-1)">−</button><span class="val" id="va-age">30</span><button onclick="stp('age',1)">+</button></div>
+      </div>
+      <div class="form-group"><span class="form-label">Biological Sex</span>
+        <div class="segmented" id="sg-sex">
+          <button class="active" onclick="sel('sex','female',this)">Female</button>
+          <button onclick="sel('sex','male',this)">Male</button>
+        </div>
+        <span class="form-hint">Used for the calorie estimation formula.</span>
+      </div>
+      <div class="form-group"><span class="form-label">Height (cm)</span>
+        <div class="stepper"><button onclick="stp('height',-1)">−</button><span class="val" id="va-height">170</span><button onclick="stp('height',1)">+</button></div>
+      </div>
+      <div class="form-group"><span class="form-label">Weight (kg)</span>
+        <div class="stepper"><button onclick="stp('weight',-1)">−</button><span class="val" id="va-weight">70</span><button onclick="stp('weight',1)">+</button></div>
+      </div>
+      <div style="flex:1"></div>
+      <button class="btn btn-primary" onclick="nav('goal-setup')">Continue</button>
+    </div>
+  </div>
+
+  <!-- === GOAL SETUP === -->
+  <div class="screen scrollable" id="goal-setup">
+    <div class="nav-header">
+      <button class="nav-back" onclick="nav('profile-setup')">←</button>
+      <span class="nav-title">Your Goal</span>
+    </div>
+    <div class="content">
+      <div class="dots"><div class="dot"></div><div class="dot active"></div><div class="dot"></div></div>
+
+      <div class="form-group"><span class="form-label">Activity Level</span>
+        <div class="segmented" id="sg-activity" style="flex-wrap:wrap">
+          <button class="active" onclick="sel('activity','sedentary',this)">Sedentary</button>
+          <button onclick="sel('activity','lightlyActive',this)">Lightly Active</button>
+          <button onclick="sel('activity','moderatelyActive',this)">Mod. Active</button>
+          <button onclick="sel('activity','veryActive',this)">Very Active</button>
+        </div>
+      </div>
+
+      <div class="form-group"><span class="form-label">Goal</span>
+        <div class="segmented" id="sg-goal" style="flex-direction:column;gap:3px">
+          <button class="active" onclick="sel('goal','maintain',this)">Maintain weight</button>
+          <button onclick="sel('goal','lose',this)">Lose weight slowly</button>
+          <button onclick="sel('goal','gain',this)">Gain weight slowly</button>
+        </div>
+        <span class="form-hint">This adjusts your daily target. Change it anytime.</span>
+      </div>
+
+      <div style="flex:1"></div>
+      <button class="btn btn-primary" onclick="calc()">Calculate My Target</button>
+    </div>
+  </div>
+
+  <!-- === CALORIE RESULT === -->
+  <div class="screen scrollable" id="calorie-result">
+    <div class="nav-header">
+      <button class="nav-back" onclick="nav('goal-setup')">←</button>
+      <span class="nav-title">Your Target</span>
+    </div>
+    <div class="content center">
+      <div class="cal-hero">
+        <p class="body-sm" style="margin-bottom:8px">Your estimated daily target is</p>
+        <div class="cal-number" id="rc">2,100</div>
+        <div class="cal-unit">kcal / day</div>
+      </div>
+      <div class="cal-stats">
+        <div class="cal-stat"><div class="sv" id="rb">1,550</div><div class="sl">BMR</div></div>
+        <div class="cal-stat"><div class="sv" id="rm">2,330</div><div class="sl">Maintenance</div></div>
+        <div class="cal-stat"><div class="sv" id="rt">2,100</div><div class="sl">Target</div></div>
+      </div>
+      <p class="body-sm" style="margin-top:8px">Use this as a planning guide, not a strict rule.</p>
+      <div style="flex:1"></div>
+      <button class="btn btn-primary" onclick="crtPlan()">Create Meal Plan</button>
+      <button class="btn btn-secondary" onclick="nav('goal-setup')">Edit Profile</button>
+      <p class="disclaimer" style="margin-top:12px">This is an estimate for planning purposes only. For medical conditions, eating disorders, pregnancy, athletic nutrition, or major weight changes, consult a qualified health professional.</p>
+    </div>
+  </div>
+
+  <!-- === TODAY === -->
+  <div class="screen scrollable" id="today">
+    <div class="nav-header"><span class="nav-title" style="font-size:24px">Today</span></div>
+    <div class="content" id="today-ct">
+      <div class="empty" id="today-empty"><div class="empty-icon">📋</div><div class="empty-title">No meal plan for today</div><div class="empty-body">Create one to start tracking your planned calories.</div><button class="btn btn-primary" style="width:auto;padding:12px 32px" onclick="crtPlan()">Create Meal Plan</button></div>
+      <div id="today-data" style="display:none;flex-direction:column;gap:16px;width:100%">
+        <div class="card" style="text-align:center">
+          <span class="label" style="display:block;margin-bottom:4px">Daily Target</span>
+          <div class="display" style="font-size:42px;color:var(--coral)" id="tt">2,100</div>
+          <span class="body-sm">kcal</span>
+          <div class="progress-bar"><div class="fill" id="tb" style="width:88%"></div></div>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-box"><div class="summary-val" id="tp" style="color:var(--coral)">1,850</div><div class="summary-lbl">Planned</div></div>
+          <div class="summary-box" id="trb"><div class="summary-val" id="tr" style="color:var(--mint)">250</div><div class="summary-lbl">Remaining</div></div>
+        </div>
+        <span class="badge green" id="ts">250 kcal under target</span>
+        <span class="label">Meals</span>
+        <div id="tm"></div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="tab('today')"><span class="tab-icon">📊</span>Today</button>
+      <button class="tab-btn" onclick="tab('mealplan')"><span class="tab-icon">🍽</span>Meal Plan</button>
+      <button class="tab-btn" onclick="tab('profile')"><span class="tab-icon">👤</span>Profile</button>
+    </div>
+  </div>
+
+  <!-- === MEAL PLAN === -->
+  <div class="screen scrollable" id="mealplan">
+    <div class="nav-header"><span class="nav-title" style="font-size:24px">Meal Plan</span></div>
+    <div class="content" id="mp-ct">
+      <div class="empty" id="mp-empty"><div class="empty-icon">🍽</div><div class="empty-title">No meal plan for today</div><div class="empty-body">Create one to start adding food items.</div><button class="btn btn-primary" style="width:auto;padding:12px 32px" onclick="crtPlan()">Create Meal Plan</button></div>
+      <div id="mp-data" style="display:none;flex-direction:column;gap:12px;width:100%">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span class="label">Today's Meals</span><span class="body-sm" id="mpt">0 kcal</span></div>
+        <div id="mpm"></div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn" onclick="tab('today')"><span class="tab-icon">📊</span>Today</button>
+      <button class="tab-btn active" onclick="tab('mealplan')"><span class="tab-icon">🍽</span>Meal Plan</button>
+      <button class="tab-btn" onclick="tab('profile')"><span class="tab-icon">👤</span>Profile</button>
+    </div>
+  </div>
+
+  <!-- === MEAL DETAIL === -->
+  <div class="screen scrollable" id="meal-detail">
+    <div class="nav-header">
+      <button class="nav-back" onclick="nav('mealplan')">←</button>
+      <span class="nav-title" id="mdt">Breakfast</span>
+      <button class="btn-icon" onclick="openAdd()" style="width:32px;height:32px;font-size:16px">+</button>
+    </div>
+    <div class="content">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="label">Food Items</span><span class="body-sm" id="mdc">450 kcal</span></div>
+      <div class="card" id="mdi"></div>
+      <button class="btn btn-primary" onclick="openAdd()">Add Food</button>
+    </div>
+  </div>
+
+  <!-- === ADD FOOD === -->
+  <div class="screen scrollable" id="add-food">
+    <div class="nav-header">
+      <button class="nav-back" onclick="nav('meal-detail')">←</button>
+      <span class="nav-title" id="aft">Add Food</span>
+    </div>
+    <div class="content">
+      <div class="form-group"><span class="form-label">Food Name</span><input class="form-input" id="afn" type="text" placeholder="e.g. Chicken breast"></div>
+      <div class="form-group"><span class="form-label">Calories</span><input class="form-input" id="afc" type="number" placeholder="0" inputmode="numeric"><span class="form-hint">Whole number, 0 or greater.</span></div>
+      <div class="form-group"><span class="form-label">Note (optional)</span><input class="form-input" id="afo" type="text" placeholder="e.g. Grilled, no oil"></div>
+      <div style="flex:1"></div>
+      <button class="btn btn-primary" onclick="addFood()">Save Food Item</button>
+      <button class="btn btn-secondary" onclick="nav('meal-detail')">Cancel</button>
+    </div>
+  </div>
+
+  <!-- === PROFILE === -->
+  <div class="screen scrollable" id="profile">
+    <div class="nav-header"><span class="nav-title" style="font-size:24px">Profile</span></div>
+    <div class="content">
+      <div class="card">
+        <span class="label" style="display:block;margin-bottom:12px">Your Details</span>
+        <div class="pf-row"><span class="pf-lbl">Age</span><span class="pf-val" id="pa">30</span></div>
+        <div class="pf-row"><span class="pf-lbl">Sex</span><span class="pf-val" id="ps">Female</span></div>
+        <div class="pf-row"><span class="pf-lbl">Height</span><span class="pf-val" id="ph">170 cm</span></div>
+        <div class="pf-row"><span class="pf-lbl">Weight</span><span class="pf-val" id="pw">70 kg</span></div>
+        <div class="pf-row"><span class="pf-lbl">Activity</span><span class="pf-val" id="pac">Sedentary</span></div>
+        <div class="pf-row"><span class="pf-lbl">Goal</span><span class="pf-val" id="pg">Maintain weight</span></div>
+      </div>
+      <div class="card">
+        <span class="label" style="display:block;margin-bottom:12px">Calorie Target</span>
+        <div style="display:flex;align-items:baseline;gap:6px"><span class="display" style="color:var(--coral)" id="pft">2,100</span><span class="body-sm">kcal/day</span></div>
+        <div style="display:flex;gap:12px;margin-top:8px"><span class="body-sm">BMR <b id="pfb">1,550</b></span><span class="body-sm">Maintenance <b id="pfm">2,330</b></span></div>
+      </div>
+      <p class="disclaimer">This is an estimate for planning purposes only. For medical conditions, eating disorders, pregnancy, athletic nutrition, or major weight changes, consult a qualified health professional.</p>
+      <button class="btn btn-secondary" onclick="nav('profile-edit')">Edit Profile</button>
+      <button class="btn btn-secondary" onclick="calc();nav('profile')">Recalculate Target</button>
+      <button class="btn btn-black" onclick="reset()">Reset Data</button>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn" onclick="tab('today')"><span class="tab-icon">📊</span>Today</button>
+      <button class="tab-btn" onclick="tab('mealplan')"><span class="tab-icon">🍽</span>Meal Plan</button>
+      <button class="tab-btn active" onclick="tab('profile')"><span class="tab-icon">👤</span>Profile</button>
+    </div>
+  </div>
+
+  <!-- === PROFILE EDIT === -->
+  <div class="screen scrollable" id="profile-edit">
+    <div class="nav-header"><button class="nav-back" onclick="nav('profile')">←</button><span class="nav-title">Edit Profile</span></div>
+    <div class="content">
+      <div class="form-group"><span class="form-label">Age</span><div class="stepper"><button onclick="stp('age',-1)">−</button><span class="val" id="vae-age">30</span><button onclick="stp('age',1)">+</button></div></div>
+      <div class="form-group"><span class="form-label">Sex</span><div class="segmented" id="sg-sex-e"><button class="active" onclick="sel('sex','female',this)">Female</button><button onclick="sel('sex','male',this)">Male</button></div></div>
+      <div class="form-group"><span class="form-label">Height (cm)</span><div class="stepper"><button onclick="stp('height',-1)">−</button><span class="val" id="vae-height">170</span><button onclick="stp('height',1)">+</button></div></div>
+      <div class="form-group"><span class="form-label">Weight (kg)</span><div class="stepper"><button onclick="stp('weight',-1)">−</button><span class="val" id="vae-weight">70</span><button onclick="stp('weight',1)">+</button></div></div>
+      <div class="form-group"><span class="form-label">Activity Level</span><div class="segmented" id="sg-activity-e" style="flex-wrap:wrap"><button class="active" onclick="sel('activity','sedentary',this)">Sedentary</button><button onclick="sel('activity','lightlyActive',this)">Lightly Active</button><button onclick="sel('activity','moderatelyActive',this)">Mod. Active</button><button onclick="sel('activity','veryActive',this)">Very Active</button></div></div>
+      <div class="form-group"><span class="form-label">Goal</span><div class="segmented" id="sg-goal-e" style="flex-direction:column;gap:3px"><button class="active" onclick="sel('goal','maintain',this)">Maintain weight</button><button onclick="sel('goal','lose',this)">Lose weight slowly</button><button onclick="sel('goal','gain',this)">Gain weight slowly</button></div></div>
+      <div style="flex:1"></div>
+      <button class="btn btn-primary" onclick="saveEdit();nav('profile')">Save & Recalculate</button>
+      <button class="btn btn-secondary" onclick="nav('profile')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let P = { age:30, sex:'female', height:170, weight:70, activity:'sedentary', goal:'maintain' };
+let CT = null, MP = null, mi = 0;
+const MT = ['breakfast','lunch','snack','dinner'];
+const MI = {breakfast:'🌅',lunch:'☀️',snack:'🍪',dinner:'🌙'};
+
+function calc() {
+  let {age,sex,height,weight,activity,goal}=P;
+  let bmr = sex==='male' ? 10*weight+6.25*height-5*age+5 : 10*weight+6.25*height-5*age-161;
+  let m = Math.round(bmr * {sedentary:1.2,lightlyActive:1.375,moderatelyActive:1.55,veryActive:1.725}[activity]);
+  let t = goal==='lose' ? Math.round(m*0.9) : goal==='gain' ? Math.round(m*1.1) : m;
+  t = Math.round(t/10)*10;
+  CT = {bmr:Math.round(bmr),maintenance:m,target:t};
+  document.getElementById('rc').textContent = t.toLocaleString();
+  document.getElementById('rb').textContent = CT.bmr.toLocaleString();
+  document.getElementById('rm').textContent = CT.maintenance.toLocaleString();
+  document.getElementById('rt').textContent = CT.target.toLocaleString();
+  refresh();
+  nav('calorie-result');
+}
+
+function crtPlan() {
+  MP = {meals:MT.map(t=>({type:t,items:[]}))};
+  refresh(); nav('today');
+}
+
+function mc(m) { return m.items.reduce((s,i)=>s+i.calories,0); }
+function tc() { return MP ? MP.meals.reduce((s,m)=>s+mc(m),0) : 0; }
+
+function refresh() {
+  let hm = MP && MP.meals, ttl = tc(), tgt = CT ? CT.target : 2100;
+  // Today
+  document.getElementById('today-empty').style.display = hm?'none':'flex';
+  document.getElementById('today-data').style.display = hm?'flex':'none';
+  if(hm){
+    document.getElementById('tt').textContent = tgt.toLocaleString();
+    document.getElementById('tp').textContent = ttl.toLocaleString();
+    let rem = tgt-ttl;
+    document.getElementById('tr').textContent = Math.abs(rem).toLocaleString();
+    document.getElementById('trb').querySelector('.summary-lbl').textContent = rem<0?'Over':'Remaining';
+    document.getElementById('tr').style.color = rem<0?'var(--coral)':'var(--mint)';
+    let s = document.getElementById('ts');
+    s.className='badge'; s.classList.add(rem>0?'green':rem<0?'red':'yellow');
+    s.textContent = rem>0 ? rem.toLocaleString()+' kcal under target' : rem<0 ? Math.abs(rem).toLocaleString()+' kcal over your estimated target' : 'Exactly at your target';
+    let bar = document.getElementById('tb');
+    bar.style.width = Math.min(100,Math.max(0,(ttl/tgt)*100))+'%';
+    bar.classList.toggle('over',ttl>tgt);
+    document.getElementById('tm').innerHTML = MP.meals.map(m=>{
+      let c = mc(m);
+      return `<div class="card-meal" onclick="openM('${m.type}')">
+        <div class="meal-icon ${m.type}">${MI[m.type]}</div>
+        <div class="meal-info"><div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div><div class="meal-meta">${m.items.length} item${m.items.length!==1?'s':''}</div></div>
+        <div class="meal-cals">${c} kcal</div><div class="meal-chevron">→</div></div>`;
+    }).join('');
+  }
+  // Meal Plan
+  document.getElementById('mp-empty').style.display = hm?'none':'flex';
+  document.getElementById('mp-data').style.display = hm?'flex':'none';
+  if(hm){
+    document.getElementById('mpt').textContent = ttl.toLocaleString()+' kcal';
+    document.getElementById('mpm').innerHTML = MP.meals.map(m=>{
+      let c = mc(m);
+      return `<div class="card-meal" onclick="openM('${m.type}')">
+        <div class="meal-icon ${m.type}">${MI[m.type]}</div>
+        <div class="meal-info"><div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div><div class="meal-meta">${m.items.length} item${m.items.length!==1?'s':''}</div></div>
+        <div class="meal-cals">${c} kcal</div><div class="meal-chevron">→</div></div>`;
+    }).join('');
+  }
+  // Profile
+  if(CT){
+    document.getElementById('pa').textContent = P.age;
+    document.getElementById('ps').textContent = P.sex==='female'?'Female':'Male';
+    document.getElementById('ph').textContent = P.height+' cm';
+    document.getElementById('pw').textContent = P.weight+' kg';
+    document.getElementById('pac').textContent = P.activity==='lightlyActive'?'Lightly Active':P.activity==='moderatelyActive'?'Moderately Active':P.activity==='veryActive'?'Very Active':'Sedentary';
+    document.getElementById('pg').textContent = P.goal==='lose'?'Lose weight slowly':P.goal==='gain'?'Gain weight slowly':'Maintain weight';
+    document.getElementById('pft').textContent = CT.target.toLocaleString();
+    document.getElementById('pfb').textContent = CT.bmr.toLocaleString();
+    document.getElementById('pfm').textContent = CT.maintenance.toLocaleString();
+  }
+}
+
+function openM(type) { mi = MP.meals.findIndex(m=>m.type===type); document.getElementById('mdt').textContent = type.charAt(0).toUpperCase()+type.slice(1); renderMD(); nav('meal-detail'); }
+function renderMD() {
+  if(!MP) return;
+  let m = MP.meals[mi], c = mc(m);
+  document.getElementById('mdc').textContent = c+' kcal';
+  document.getElementById('mdi').innerHTML = m.items.length===0
+    ? '<div class="empty" style="padding:24px"><div class="empty-body">No food added yet. Add your first item.</div></div>'
+    : m.items.map((it,i)=>`<div class="food-row"><div class="food-info"><div class="food-name">${it.name}</div>${it.note?`<div class="food-note">${it.note}</div>`:''}</div><div class="food-cals">${it.calories} kcal</div><button class="btn-icon danger" onclick="del(${i})" style="width:28px;height:28px;font-size:12px">✕</button></div>`).join('');
+}
+function openAdd() { document.getElementById('aft').textContent = 'Add Food'; document.getElementById('afn').value=''; document.getElementById('afc').value=''; document.getElementById('afo').value=''; nav('add-food'); }
+function addFood() {
+  let n = document.getElementById('afn').value.trim(), c = parseInt(document.getElementById('afc').value.trim()), o = document.getElementById('afo').value.trim();
+  if(!n) { document.getElementById('afn').classList.add('error'); return; }
+  if(isNaN(c)||c<0||!Number.isInteger(c)) { document.getElementById('afc').classList.add('error'); return; }
+  MP.meals[mi].items.push({name:n,calories:c,note:o});
+  document.getElementById('afn').classList.remove('error'); document.getElementById('afc').classList.remove('error');
+  refresh(); renderMD(); nav('meal-detail');
+}
+function del(i) { MP.meals[mi].items.splice(i,1); refresh(); renderMD(); }
+
+function stp(f,d) { P[f]=Math.max(1,P[f]+d); document.getElementById('va-'+f).textContent=P[f]; let e=document.getElementById('vae-'+f); if(e)e.textContent=P[f]; }
+function sel(g,v,b) { P[g]=v; document.querySelectorAll('[id^="sg-'+g+'"]').forEach(s=>s.querySelectorAll('button').forEach(btn=>{let bv=btn.textContent.toLowerCase().replace(/\s+/g,'');let m={'maintainweight':'maintain','loseweightslowly':'lose','gainweightslowly':'gain','sedentary':'sedentary','lightlyactive':'lightlyActive','mod.active':'moderatelyActive','moderatelyactive':'moderatelyActive','veryactive':'veryActive','female':'female','male':'male'};btn.classList.toggle('active',(m[bv]||bv)===v);})); }
+function saveEdit() { P.age=parseInt(document.getElementById('vae-age').textContent)||P.age; P.height=parseInt(document.getElementById('vae-height').textContent)||P.height; P.weight=parseInt(document.getElementById('vae-weight').textContent)||P.weight; document.getElementById('va-age').textContent=P.age; document.getElementById('va-height').textContent=P.height; document.getElementById('va-weight').textContent=P.weight; calc(); refresh(); }
+function reset() { if(confirm('Reset all data?')){P={age:30,sex:'female',height:170,weight:70,activity:'sedentary',goal:'maintain'};CT=null;MP=null;refresh();nav('welcome');} }
+function nav(id) { document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); let t=document.getElementById(id); if(t)t.classList.add('active'); if(id==='profile-edit'){document.getElementById('vae-age').textContent=P.age;document.getElementById('vae-height').textContent=P.height;document.getElementById('vae-weight').textContent=P.weight;} if(id==='meal-detail')renderMD(); if(id==='calorie-result'&&!CT)calc(); }
+function tab(id) { nav(id); }
+</script>
+</body>
+</html>

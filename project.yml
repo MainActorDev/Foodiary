@@ -1,0 +1,44 @@
+name: Foodiary
+options:
+  bundleIdPrefix: com.foodiary
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "26.4"
+  generateEmptyDirectories: true
+  developmentLanguage: en
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: "296RF6QMS7"
+    DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+    SWIFT_VERSION: "6.0"
+
+targets:
+  Foodiary:
+    type: application
+    platform: iOS
+    sources:
+      - path: Foodiary
+    settings:
+      base:
+        INFOPLIST_FILE: Foodiary/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.foodiary.app
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+    preBuildScripts:
+      - name: "SwiftLint (disabled)"
+        script: |
+          echo "No SwiftLint configured"
+        basedOnDependencyAnalysis: false
+
+  FoodiaryTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: FoodiaryTests
+    dependencies:
+      - target: Foodiary
+    settings:
+      base:
+        INFOPLIST_FILE: FoodiaryTests/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.foodiary.app.tests
