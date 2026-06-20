@@ -66,7 +66,7 @@ struct ProfileView: View {
                 Button(action: { showResetConfirm = true }) {
                     Text(L10n["action.reset_data"])
                 }
-                .buttonStyle(NBButtonStyle(bgColor: FoodiaryDesign.black, fgColor: .white))
+                .buttonStyle(NBButtonStyle(bgColor: FoodiaryDesign.coral, fgColor: .white))
             }
             .padding(20)
         }
