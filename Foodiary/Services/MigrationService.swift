@@ -68,8 +68,12 @@ enum MigrationService {
             }
         }
         
-        try? context.save()
-        UserDefaults.standard.set(true, forKey: didMigrateKey)
+        do {
+            try context.save()
+            UserDefaults.standard.set(true, forKey: didMigrateKey)
+        } catch {
+            print("[MigrationService] Migration failed: \(error) — will retry on next launch")
+        }
     }
 }
 

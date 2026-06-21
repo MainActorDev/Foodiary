@@ -18,8 +18,11 @@ struct PlanView: View {
         let today = Date()
         let weekday = calendar.component(.weekday, from: today)
         let mondayOffset = weekday == 1 ? -6 : 2 - weekday
-        let thisMonday = calendar.date(byAdding: .day, value: mondayOffset, to: today)!
-        return calendar.date(byAdding: .day, value: offset * 7, to: thisMonday)!
+        guard let thisMonday = calendar.date(byAdding: .day, value: mondayOffset, to: today),
+              let result = calendar.date(byAdding: .day, value: offset * 7, to: thisMonday) else {
+            return today // fallback — should never happen for valid offsets
+        }
+        return result
     }
     
     /// Array of 7 days starting from weekStart
@@ -29,7 +32,9 @@ struct PlanView: View {
     }
     
     private var weekLabel: String {
-        let end = Calendar.current.date(byAdding: .day, value: 6, to: weekStart)!
+        guard let end = Calendar.current.date(byAdding: .day, value: 6, to: weekStart) else {
+            return ""
+        }
         let fmt = DateFormatter()
         fmt.dateFormat = "MMM d"
         let startStr = fmt.string(from: weekStart)
