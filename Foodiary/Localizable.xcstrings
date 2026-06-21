@@ -1690,6 +1690,62 @@
           }
         }
       }
+    },
+    "nav.diary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Diary" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "Diary" } }
+      }
+    },
+    "nav.insights" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Insights" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "Wawasan" } }
+      }
+    },
+    "tab.diary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "DIARY" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "DIARY" } }
+      }
+    },
+    "tab.insights" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "INSIGHTS" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "WAWASAN" } }
+      }
+    },
+    "label.macronutrients" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "MACRONUTRIENTS" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "MAKRONUTRIEN" } }
+      }
+    },
+    "label.today_macros" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "TODAY'S MACROS" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "MAKRO HARI INI" } }
+      }
+    },
+    "label.consumed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "CONSUMED" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "DIKONSUMSI" } }
+      }
+    },
+    "label.target" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "TARGET" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "TARGET" } }
+      }
     }
   },
   "version" : "1.0"

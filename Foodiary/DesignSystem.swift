@@ -1,17 +1,26 @@
 import SwiftUI
 
-// MARK: - Neubrutalist Design System for Foodiary
+// MARK: - Calorie Ring Design System for Foodiary
 
 enum FoodiaryDesign {
-    static let coral = Color(hex: "FF6B4A")
-    static let coralDark = Color(hex: "E55A3A")
-    static let mint = Color(hex: "2DD4BF")
-    static let yellow = Color(hex: "FFD60A")
-    static let background = Color(hex: "FAFAF5")
-    static let black = Color(hex: "1A1A1A")
+    static let accent = Color(hex: "2563EB")       // Blue
+    static let accentLight = Color(hex: "DBEAFE")
+    static let secondary = Color(hex: "059669")     // Green
+    static let secondaryLight = Color(hex: "D1FAE5")
+    static let warning = Color(hex: "D97706")       // Amber
+    static let warningLight = Color(hex: "FEF3C7")
+    static let background = Color(hex: "F8FAFC")
+    static let black = Color(hex: "0F172A")
     static let white = Color.white
-    static let muted = Color(hex: "F5F2ED")
-    static let mutedFg = Color(hex: "6B6560")
+    static let muted = Color(hex: "F1F5F9")
+    static let mutedFg = Color(hex: "64748B")
+    static let border = Color(hex: "CBD5E1")
+    static let divider = Color(hex: "F1F5F9")
+    
+    // Legacy aliases for backward compat during migration
+    static let coral = accent
+    static let mint = secondary
+    static let yellow = warning
 }
 
 extension Color {
@@ -27,55 +36,43 @@ extension Color {
     }
 }
 
-// MARK: - Typography
+// MARK: - Typography (Inter for headings, system for body)
 
 enum FoodiaryTypography {
-    // Space Grotesk variable font — family name "Space Grotesk", uses .bold()/.weight() to select instances
-    // Plus Jakarta Sans variable font — family name "Plus Jakarta Sans", PostScript "PlusJakartaSans-Regular"
-    
-    static let display: Font = Font.custom("Space Grotesk", size: 40).bold()
-    static let title: Font = Font.custom("Space Grotesk", size: 22).bold()
-    static let body: Font = Font.custom("Plus Jakarta Sans", size: 15)
-    static let bodyBold: Font = Font.custom("Plus Jakarta Sans", size: 15).weight(.semibold)
-    static let bodySm: Font = Font.custom("Plus Jakarta Sans", size: 13)
-    static let metric: Font = Font.custom("Space Grotesk", size: 32).bold()
-    static let label: Font = Font.custom("Space Grotesk", size: 11).bold()
-    static let button: Font = Font.custom("Space Grotesk", size: 15).bold()
-    static let badge: Font = Font.custom("Space Grotesk", size: 11).bold()
-    static let segment: Font = Font.custom("Space Grotesk", size: 12).bold()
+    static let display: Font = .system(size: 34, weight: .bold, design: .default)
+    static let title: Font = .system(size: 20, weight: .bold, design: .default)
+    static let body: Font = .system(size: 15, design: .default)
+    static let bodyBold: Font = .system(size: 15, weight: .semibold, design: .default)
+    static let bodySm: Font = .system(size: 13, design: .default)
+    static let metric: Font = .system(size: 28, weight: .bold, design: .default)
+    static let label: Font = .system(size: 11, weight: .bold, design: .default)
+    static let button: Font = .system(size: 15, weight: .bold, design: .default)
+    static let badge: Font = .system(size: 11, weight: .bold, design: .default)
+    static let segment: Font = .system(size: 12, weight: .bold, design: .default)
 }
 
-// MARK: - Hard Shadow Builder (CSS-style box-shadow: 4px 4px 0 #000)
+// MARK: - Soft Shadow Card (replaces HardShadowCard)
 
-/// Renders a shape with a true hard offset shadow — black shape behind, offset by (dx, dy).
-/// Matches CSS `box-shadow: <dx> <dy> 0 #000` with a solid border.
-struct HardShadowCard<Content: View, Background: Shape>: View {
+/// A card with subtle shadow and thin border — Calorie Ring style
+struct SoftCard<Content: View, Background: Shape>: View {
     let bg: Background
-    let shadowOffset: CGSize
-    let borderWidth: CGFloat
+    let cornerRadius: CGFloat
     let content: Content
     
-    init(
-        bg: Background,
-        shadowOffset: CGSize = CGSize(width: 4, height: 4),
-        borderWidth: CGFloat = 3,
-        @ViewBuilder content: () -> Content
-    ) {
+    init(bg: Background = RoundedRectangle(cornerRadius: 16), cornerRadius: CGFloat = 16, @ViewBuilder content: () -> Content) {
         self.bg = bg
-        self.shadowOffset = shadowOffset
-        self.borderWidth = borderWidth
+        self.cornerRadius = cornerRadius
         self.content = content()
     }
     
     var body: some View {
         content
             .background(
-                ZStack {
-                    bg.fill(Color.black)
-                        .offset(shadowOffset)
-                    bg.fill(FoodiaryDesign.white)
-                    bg.stroke(FoodiaryDesign.black, lineWidth: borderWidth)
-                }
+                bg.fill(FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(0.04), radius: 2, y: 1)
+            )
+            .overlay(
+                bg.stroke(FoodiaryDesign.border, lineWidth: 1.5)
             )
     }
 }
@@ -83,132 +80,94 @@ struct HardShadowCard<Content: View, Background: Shape>: View {
 // MARK: - View Modifiers
 
 extension View {
-    /// Applies a neubrutalist card style with hard offset shadow + thick border
-    func nbCard(cornerRadius: CGFloat = 20, shadowOffset: CGSize = CGSize(width: 4, height: 4), borderWidth: CGFloat = 3, padding: CGFloat = 20) -> some View {
+    /// Standard card with soft shadow + thin border
+    func ringCard(cornerRadius: CGFloat = 16) -> some View {
         self
-            .padding(padding)
-            .padding(.trailing, shadowOffset.width)
-            .padding(.bottom, shadowOffset.height)
+            .padding(20)
             .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(FoodiaryDesign.black)
-                        .offset(shadowOffset)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(FoodiaryDesign.white)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(FoodiaryDesign.black, lineWidth: borderWidth)
-                }
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(0.04), radius: 2, y: 1)
             )
-            .padding(.trailing, -shadowOffset.width)
-            .padding(.bottom, -shadowOffset.height)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
     }
     
-    /// Compact card with smaller shadow
-    func nbCardCompact(cornerRadius: CGFloat = 16, shadowOffset: CGSize = CGSize(width: 3, height: 3), borderWidth: CGFloat = 3, padding: CGFloat = 14) -> some View {
+    /// Compact card
+    func ringCardCompact(cornerRadius: CGFloat = 14) -> some View {
         self
-            .padding(padding)
-            .padding(.trailing, shadowOffset.width)
-            .padding(.bottom, shadowOffset.height)
+            .padding(16)
             .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(FoodiaryDesign.black)
-                        .offset(shadowOffset)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(FoodiaryDesign.white)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(FoodiaryDesign.black, lineWidth: borderWidth)
-                }
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(0.03), radius: 1, y: 1)
             )
-            .padding(.trailing, -shadowOffset.width)
-            .padding(.bottom, -shadowOffset.height)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
     }
     
-    /// Card with colored background (for meal icons, badges)
-    func nbCardColored(bg: Color, cornerRadius: CGFloat = 8, shadowOffset: CGSize = CGSize(width: 2, height: 2), borderWidth: CGFloat = 2, padding: CGFloat = 10) -> some View {
+    /// Colored card for meal icons
+    func ringCardColored(bg: Color, cornerRadius: CGFloat = 8) -> some View {
         self
-            .padding(padding)
-            .padding(.trailing, shadowOffset.width)
-            .padding(.bottom, shadowOffset.height)
+            .padding(10)
             .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(FoodiaryDesign.black)
-                        .offset(shadowOffset)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(bg)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(FoodiaryDesign.black, lineWidth: borderWidth)
-                }
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(bg)
             )
-            .padding(.trailing, -shadowOffset.width)
-            .padding(.bottom, -shadowOffset.height)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
     }
     
-    /// Input field style
-    func nbField(cornerRadius: CGFloat = 12) -> some View {
+    /// Input field
+    func ringField(cornerRadius: CGFloat = 10) -> some View {
         self
             .padding(12)
             .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(FoodiaryDesign.white)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(FoodiaryDesign.black, lineWidth: 3)
-                }
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(0.03), radius: 1, y: 1)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
             )
     }
     
     /// Segmented control option
-    func nbSegment(isActive: Bool) -> some View {
+    func ringSegment(isActive: Bool) -> some View {
         self
             .font(FoodiaryTypography.segment)
             .foregroundColor(isActive ? FoodiaryDesign.black : FoodiaryDesign.mutedFg)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 10)
             .background(
-                ZStack {
-                    if isActive {
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(FoodiaryDesign.black)
-                            .offset(x: 2, y: 2)
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(FoodiaryDesign.white)
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(FoodiaryDesign.black, lineWidth: 2)
-                    } else {
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.clear)
-                    }
-                }
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(isActive ? FoodiaryDesign.white : Color.clear)
+                    .shadow(color: isActive ? .black.opacity(0.06) : .clear, radius: 2, y: 1)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(isActive ? FoodiaryDesign.border : Color.clear, lineWidth: 1.5)
             )
     }
     
     /// Pill badge
-    func nbBadge(bg: Color) -> some View {
+    func ringBadge(bg: Color) -> some View {
         self
             .font(FoodiaryTypography.badge)
-            .foregroundColor(bg == Color(hex: "D1FAE5") ? Color(hex: "065F46") :
+            .foregroundColor(bg == FoodiaryDesign.secondaryLight ? Color(hex: "065F46") :
                             bg == Color(hex: "FEE2E2") ? Color(hex: "991B1B") :
-                            bg == Color(hex: "FEF9C3") ? Color(hex: "854D0E") : FoodiaryDesign.mutedFg)
+                            bg == FoodiaryDesign.warningLight ? Color(hex: "92400E") : FoodiaryDesign.mutedFg)
             .padding(.horizontal, 14)
-            .padding(.vertical, 5)
-            .padding(.trailing, 2)
-            .padding(.bottom, 2)
-            .background(
-                ZStack {
-                    Capsule()
-                        .fill(FoodiaryDesign.black)
-                        .offset(x: 2, y: 2)
-                    Capsule()
-                        .fill(bg)
-                    Capsule()
-                        .stroke(FoodiaryDesign.black, lineWidth: 2)
-                }
-            )
-            .padding(.trailing, -2)
-            .padding(.bottom, -2)
+            .padding(.vertical, 6)
+            .background(Capsule().fill(bg))
+            .overlay(Capsule().stroke(FoodiaryDesign.border, lineWidth: 1))
     }
     
     /// Section label (ALL CAPS)
@@ -220,112 +179,99 @@ extension View {
     }
 }
 
-// MARK: - Neubrutalist Button Style (with hard shadow)
+// MARK: - Button Styles
 
-struct NBButtonStyle: ButtonStyle {
-    var bgColor: Color = FoodiaryDesign.coral
+struct RingButtonStyle: ButtonStyle {
+    var bgColor: Color = FoodiaryDesign.accent
     var fgColor: Color = .white
-    var cornerRadius: CGFloat = 12
-    var borderWidth: CGFloat = 3
-    var shadowOffset: CGSize = CGSize(width: 4, height: 4)
+    var cornerRadius: CGFloat = 10
     
     func makeBody(configuration: Configuration) -> some View {
-        let offset = configuration.isPressed ? CGSize(width: 2, height: 2) : shadowOffset
-        
-        return configuration.label
+        configuration.label
             .font(FoodiaryTypography.button)
             .foregroundColor(fgColor)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
             .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(FoodiaryDesign.black)
-                        .offset(offset)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(bgColor)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(FoodiaryDesign.black, lineWidth: borderWidth)
-                }
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(bgColor)
+                    .shadow(color: .black.opacity(configuration.isPressed ? 0.04 : 0.06), radius: 2, y: 1)
             )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
             .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
     }
 }
 
-struct NBSecondaryButtonStyle: ButtonStyle {
-    var cornerRadius: CGFloat = 12
-    var borderWidth: CGFloat = 3
-    var shadowOffset: CGSize = CGSize(width: 4, height: 4)
+struct RingSecondaryButtonStyle: ButtonStyle {
+    var cornerRadius: CGFloat = 10
     
     func makeBody(configuration: Configuration) -> some View {
-        let offset = configuration.isPressed ? CGSize(width: 2, height: 2) : shadowOffset
-        
-        return configuration.label
+        configuration.label
             .font(FoodiaryTypography.button)
             .foregroundColor(FoodiaryDesign.black)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
             .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(FoodiaryDesign.black)
-                        .offset(offset)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(FoodiaryDesign.white)
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(FoodiaryDesign.black, lineWidth: borderWidth)
-                }
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(configuration.isPressed ? 0.03 : 0.04), radius: 2, y: 1)
             )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
             .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
     }
 }
 
-struct NBStepperButtonStyle: ButtonStyle {
+struct RingStepperButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
-        let offset = configuration.isPressed ? CGSize(width: 1, height: 1) : CGSize(width: 2, height: 2)
-        return configuration.label
+        configuration.label
             .foregroundColor(FoodiaryDesign.black)
             .frame(width: 36, height: 36)
             .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(FoodiaryDesign.black)
-                        .offset(offset)
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(FoodiaryDesign.white)
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(FoodiaryDesign.black, lineWidth: 2)
-                }
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(0.04), radius: 1, y: 1)
             )
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
     }
 }
 
-struct NBIconButtonStyle: ButtonStyle {
+struct RingIconButtonStyle: ButtonStyle {
     var isDanger: Bool = false
     
     func makeBody(configuration: Configuration) -> some View {
-        let offset = configuration.isPressed ? CGSize(width: 1, height: 1) : CGSize(width: 2, height: 2)
-        return configuration.label
+        configuration.label
             .foregroundColor(isDanger ? .white : FoodiaryDesign.black)
             .frame(width: isDanger ? 28 : 32, height: isDanger ? 28 : 32)
             .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(FoodiaryDesign.black)
-                        .offset(offset)
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(isDanger ? FoodiaryDesign.black : FoodiaryDesign.white)
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(FoodiaryDesign.black, lineWidth: 2)
-                }
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(isDanger ? FoodiaryDesign.black : FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(0.04), radius: 1, y: 1)
             )
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
+            .scaleEffect(configuration.isPressed ? 0.93 : 1)
             .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
     }
 }
 
-// MARK: - Neubrutalist Tab Bar Modifier
-struct NBTabBarModifier: ViewModifier {
+// MARK: - Tab Bar Modifier
+
+struct RingTabBarModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .toolbarBackground(FoodiaryDesign.white, for: .tabBar)
@@ -334,20 +280,17 @@ struct NBTabBarModifier: ViewModifier {
                 let appearance = UITabBarAppearance()
                 appearance.configureWithOpaqueBackground()
                 appearance.backgroundColor = UIColor(FoodiaryDesign.white)
-                appearance.shadowColor = UIColor(FoodiaryDesign.black)
+                appearance.shadowColor = UIColor(FoodiaryDesign.border)
                 appearance.shadowImage = UIImage()
-                // Add a 3px top border
-                let tabBar = UITabBar.appearance()
-                tabBar.standardAppearance = appearance
-                tabBar.scrollEdgeAppearance = appearance
-                tabBar.layer.borderWidth = 0
-                tabBar.clipsToBounds = true
+                UITabBar.appearance().standardAppearance = appearance
+                UITabBar.appearance().scrollEdgeAppearance = appearance
             }
     }
 }
 
-// MARK: - Neubrutalist Navigation Bar
-struct NBNavBarModifier: ViewModifier {
+// MARK: - Nav Bar Modifier
+
+struct RingNavBarModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear {
@@ -356,14 +299,13 @@ struct NBNavBarModifier: ViewModifier {
                 appearance.backgroundColor = UIColor(FoodiaryDesign.background)
                 appearance.shadowColor = .clear
                 appearance.titleTextAttributes = [
-                    .font: UIFont.systemFont(ofSize: 18, weight: .bold, width: .standard),
+                    .font: UIFont.systemFont(ofSize: 18, weight: .bold),
                     .foregroundColor: UIColor(FoodiaryDesign.black)
                 ]
                 appearance.largeTitleTextAttributes = [
-                    .font: UIFont.systemFont(ofSize: 28, weight: .bold, width: .standard),
+                    .font: UIFont.systemFont(ofSize: 28, weight: .bold),
                     .foregroundColor: UIColor(FoodiaryDesign.black)
                 ]
-                
                 let navBar = UINavigationBar.appearance()
                 navBar.standardAppearance = appearance
                 navBar.scrollEdgeAppearance = appearance
@@ -373,25 +315,121 @@ struct NBNavBarModifier: ViewModifier {
     }
 }
 
-// MARK: - Progress Bar
-struct NBProgressBar: View {
-    var progress: Double // 0...1
+// MARK: - Progress Ring (SVG-style circular progress)
+
+struct RingProgressView: View {
+    var progress: Double   // 0...1
+    var isOver: Bool
+    var size: CGFloat = 172
+    var strokeWidth: CGFloat = 14
+    
+    var body: some View {
+        ZStack {
+            // Background circle
+            Circle()
+                .stroke(FoodiaryDesign.muted, lineWidth: strokeWidth)
+            
+            // Progress fill
+            Circle()
+                .trim(from: 0, to: min(progress, 1.0))
+                .stroke(
+                    isOver ? FoodiaryDesign.accent : FoodiaryDesign.secondary,
+                    style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round)
+                )
+                .rotationEffect(.degrees(-90))
+                .animation(.easeInOut(duration: 0.5), value: progress)
+        }
+        .frame(width: size, height: size)
+    }
+}
+
+// MARK: - Macro Bar
+
+struct MacroBar: View {
+    var label: String
+    var value: Int     // grams
+    var maxValue: Int   // for scaling
+    var color: Color
+    var unit: String = "g"
+    
+    var body: some View {
+        HStack(spacing: 10) {
+            Circle()
+                .fill(color)
+                .frame(width: 10, height: 10)
+            Text(label)
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundColor(FoodiaryDesign.black)
+                .frame(width: 52, alignment: .leading)
+            GeometryReader { geo in
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(FoodiaryDesign.muted)
+                    .frame(height: 8)
+                    .overlay(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(color)
+                            .frame(width: max(0, min(geo.size.width, geo.size.width * CGFloat(value) / CGFloat(max(maxValue, 1)))), height: 8)
+                    }
+            }
+            .frame(height: 8)
+            Text("\(value)\(unit)")
+                .font(.system(size: 13, weight: .bold, design: .default))
+                .foregroundColor(FoodiaryDesign.black)
+                .frame(width: 36, alignment: .trailing)
+        }
+    }
+}
+
+// MARK: - Progress Bar (kept from original but restyled)
+
+struct RingProgressBar: View {
+    var progress: Double
     var isOver: Bool
     
     var body: some View {
         GeometryReader { geo in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 6)
-                    .fill(FoodiaryDesign.muted)
-                    .frame(height: 12)
-                RoundedRectangle(cornerRadius: 6)
-                    .stroke(FoodiaryDesign.black, lineWidth: 2)
-                    .frame(height: 12)
-                RoundedRectangle(cornerRadius: 6)
-                    .fill(isOver ? FoodiaryDesign.coral : FoodiaryDesign.mint)
-                    .frame(width: max(0, min(geo.size.width, geo.size.width * progress)), height: 12)
-            }
+            RoundedRectangle(cornerRadius: 4)
+                .fill(FoodiaryDesign.muted)
+                .frame(height: 8)
+                .overlay(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(isOver ? FoodiaryDesign.accent : FoodiaryDesign.secondary)
+                        .frame(width: max(0, min(geo.size.width, geo.size.width * progress)), height: 8)
+                }
         }
-        .frame(height: 12)
+        .frame(height: 8)
+    }
+}
+
+// MARK: - Legacy compatibility aliases (deprecated, use Ring* variants)
+
+typealias NBButtonStyle = RingButtonStyle
+typealias NBSecondaryButtonStyle = RingSecondaryButtonStyle
+typealias NBStepperButtonStyle = RingStepperButtonStyle
+typealias NBIconButtonStyle = RingIconButtonStyle
+typealias NBProgressBar = RingProgressBar
+typealias NBNavBarModifier = RingNavBarModifier
+typealias NBTabBarModifier = RingTabBarModifier
+typealias HardShadowCard = SoftCard
+
+// Backward-compatible nb modifier wrappers
+extension View {
+    func nbCard(cornerRadius: CGFloat = 20) -> some View {
+        self.ringCard(cornerRadius: cornerRadius)
+    }
+    func nbCardCompact(cornerRadius: CGFloat = 16) -> some View {
+        self.ringCardCompact(cornerRadius: cornerRadius)
+    }
+    func nbCardColored(bg: Color, cornerRadius: CGFloat = 8) -> some View {
+        self.ringCardColored(bg: bg, cornerRadius: cornerRadius)
+    }
+    func nbField(cornerRadius: CGFloat = 12) -> some View {
+        self.ringField(cornerRadius: cornerRadius)
+    }
+    func nbSegment(isActive: Bool) -> some View {
+        self.ringSegment(isActive: isActive)
+    }
+    func nbBadge(bg: Color) -> some View {
+        self.ringBadge(bg: bg)
     }
 }

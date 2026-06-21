@@ -104,7 +104,7 @@ final class AppState: ObservableObject {
         try? StorageService.resetAll()
     }
     
-    // MARK: - Computed
+    // MARK: - Computed: Calories
     
     var plannedCalories: Int {
         todayMealPlan?.totalCalories ?? 0
@@ -118,24 +118,34 @@ final class AppState: ObservableObject {
         targetCalories - plannedCalories
     }
     
-    var isOverTarget: Bool {
-        remainingCalories < 0
-    }
-    
-    var isExactlyAtTarget: Bool {
-        remainingCalories == 0 && plannedCalories > 0
-    }
-    
-    var isUnderTarget: Bool {
-        remainingCalories > 0
-    }
+    var isOverTarget: Bool { remainingCalories < 0 }
+    var isExactlyAtTarget: Bool { remainingCalories == 0 && plannedCalories > 0 }
+    var isUnderTarget: Bool { remainingCalories > 0 }
     
     var calorieProgress: Double {
         guard targetCalories > 0 else { return 0 }
         return min(1.0, Double(plannedCalories) / Double(targetCalories))
     }
     
-    /// User-facing status message using the String Catalog for localization.
+    // MARK: - Computed: Macros
+    
+    var totalProtein: Int {
+        todayMealPlan?.meals.reduce(0) { $0 + $1.items.reduce(0) { $0 + $1.protein } } ?? 0
+    }
+    
+    var totalCarbs: Int {
+        todayMealPlan?.meals.reduce(0) { $0 + $1.items.reduce(0) { $0 + $1.carbs } } ?? 0
+    }
+    
+    var totalFat: Int {
+        todayMealPlan?.meals.reduce(0) { $0 + $1.items.reduce(0) { $0 + $1.fat } } ?? 0
+    }
+    
+    var maxMacro: Int {
+        max(max(totalProtein, totalCarbs), max(totalFat, 1))
+    }
+    
+    /// User-facing status message
     var localizedStatusMessage: String {
         if plannedCalories == 0 {
             return L10n["status.no_food"]
@@ -148,6 +158,5 @@ final class AppState: ObservableObject {
         }
     }
     
-    /// Backward-compatible status message (delegates to localized).
     var statusMessage: String { localizedStatusMessage }
 }

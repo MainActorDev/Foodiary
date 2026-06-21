@@ -6,70 +6,81 @@ struct AddFoodItemView: View {
     
     @State private var name = ""
     @State private var caloriesText = ""
+    @State private var proteinText = ""
+    @State private var carbsText = ""
+    @State private var fatText = ""
     @State private var note = ""
     @State private var nameError = false
     @State private var caloriesError = false
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(L10n["label.food_name"])
-                        .sectionLabel()
+            VStack(spacing: 16) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n["label.food_name"]).sectionLabel()
                     TextField(L10n["add_food.name_placeholder"], text: $name)
-                        .nbField()
+                        .ringField()
                         .font(FoodiaryTypography.body)
                         .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(nameError ? Color.red : FoodiaryDesign.black, lineWidth: 3)
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(nameError ? Color.red : FoodiaryDesign.border, lineWidth: 1.5)
                         )
                     if nameError {
                         Text(L10n["add_food.name_error"])
-                            .font(.system(size: 12))
-                            .foregroundColor(.red)
+                            .font(.system(size: 12)).foregroundColor(.red)
                     }
                 }
                 
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(L10n["label.calories"])
-                        .sectionLabel()
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n["label.calories"]).sectionLabel()
                     TextField("0", text: $caloriesText)
                         .keyboardType(.numberPad)
-                        .nbField()
+                        .ringField()
                         .font(FoodiaryTypography.body)
                         .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(caloriesError ? Color.red : FoodiaryDesign.black, lineWidth: 3)
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(caloriesError ? Color.red : FoodiaryDesign.border, lineWidth: 1.5)
                         )
                     Text(L10n["add_food.calories_hint"])
                         .font(.system(size: 12))
                         .foregroundColor(FoodiaryDesign.mutedFg)
                     if caloriesError {
                         Text(L10n["add_food.calories_error"])
-                            .font(.system(size: 12))
-                            .foregroundColor(.red)
+                            .font(.system(size: 12)).foregroundColor(.red)
                     }
                 }
                 
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(L10n["label.note_optional"])
-                        .sectionLabel()
+                // Macro fields
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n["label.macronutrients"]).sectionLabel()
+                    HStack(spacing: 8) {
+                        macroField(label: "Protein", unit: "g", text: $proteinText)
+                        macroField(label: "Carbs", unit: "g", text: $carbsText)
+                        macroField(label: "Fat", unit: "g", text: $fatText)
+                    }
+                    Text("Optional — enter grams for each macronutrient.")
+                        .font(.system(size: 12))
+                        .foregroundColor(FoodiaryDesign.mutedFg)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n["label.note_optional"]).sectionLabel()
                     TextField(L10n["add_food.note_placeholder"], text: $note)
-                        .nbField()
+                        .ringField()
                         .font(FoodiaryTypography.body)
                 }
                 
-                Spacer(minLength: 16)
+                Spacer(minLength: 12)
                 
                 Button(action: saveItem) {
                     Text(L10n["action.save_food_item"])
                 }
-                .buttonStyle(NBButtonStyle())
+                .buttonStyle(RingButtonStyle())
                 
                 Button(action: onCancel) {
                     Text(L10n["action.cancel"])
                 }
-                .buttonStyle(NBSecondaryButtonStyle())
+                .buttonStyle(RingSecondaryButtonStyle())
             }
             .padding(20)
         }
@@ -83,8 +94,21 @@ struct AddFoodItemView: View {
                         .font(.system(size: 14, weight: .bold))
                         .frame(width: 32, height: 32)
                 }
-                .buttonStyle(NBStepperButtonStyle())
+                .buttonStyle(RingStepperButtonStyle())
             }
+        }
+    }
+    
+    func macroField(label: String, unit: String, text: Binding<String>) -> some View {
+        VStack(spacing: 4) {
+            Text(label)
+                .font(.system(size: 11, weight: .bold))
+                .foregroundColor(FoodiaryDesign.mutedFg)
+            TextField("0", text: text)
+                .keyboardType(.numberPad)
+                .multilineTextAlignment(.center)
+                .ringField()
+                .font(.system(size: 14, weight: .semibold))
         }
     }
     
@@ -99,9 +123,16 @@ struct AddFoodItemView: View {
             return
         }
         
+        let protein = Int(proteinText.trimmingCharacters(in: .whitespaces)) ?? 0
+        let carbs = Int(carbsText.trimmingCharacters(in: .whitespaces)) ?? 0
+        let fat = Int(fatText.trimmingCharacters(in: .whitespaces)) ?? 0
+        
         let item = FoodItem(
             name: name.trimmingCharacters(in: .whitespaces),
             calories: calories,
+            protein: max(0, protein),
+            carbs: max(0, carbs),
+            fat: max(0, fat),
             note: note.trimmingCharacters(in: .whitespaces)
         )
         onSave(item)

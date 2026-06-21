@@ -9,37 +9,30 @@ struct TodayDashboardView: View {
         ScrollView {
             if state.hasTodayMealPlan, let plan = state.todayMealPlan {
                 VStack(spacing: 16) {
-                    // Target card
-                    VStack(spacing: 8) {
-                        Text(L10n["label.daily_target"])
-                            .sectionLabel()
-                        Text("\(state.targetCalories)")
-                            .font(.system(size: 42, weight: .bold, design: .rounded))
-                            .foregroundColor(FoodiaryDesign.coral)
-                        Text(L10n["unit.kcal"])
-                            .font(FoodiaryTypography.bodySm)
-                            .foregroundColor(FoodiaryDesign.mutedFg)
-                        
-                        NBProgressBar(progress: state.calorieProgress, isOver: state.isOverTarget)
-                    }
-                    .nbCard()
+                    // Progress ring
+                    ringSection
                     
-                    // Planned / Remaining
+                    // Planned / Remaining tiles
                     HStack(spacing: 12) {
-                        SummaryBox(
+                        SummaryTile(
                             value: "\(state.plannedCalories)",
                             label: L10n["label.planned"],
-                            color: FoodiaryDesign.coral
+                            color: FoodiaryDesign.accent
                         )
-                        SummaryBox(
+                        SummaryTile(
                             value: "\(abs(state.remainingCalories))",
                             label: state.isOverTarget ? L10n["label.over"] : L10n["label.remaining"],
-                            color: state.isOverTarget ? FoodiaryDesign.coral : FoodiaryDesign.mint
+                            color: state.isOverTarget ? FoodiaryDesign.accent : FoodiaryDesign.secondary
                         )
                     }
                     
                     // Status badge
                     statusBadge
+                    
+                    // Macro bars
+                    if state.plannedCalories > 0 {
+                        macroSection
+                    }
                     
                     // Meals
                     Text(L10n["label.meals"])
@@ -55,67 +48,115 @@ struct TodayDashboardView: View {
                 }
                 .padding(20)
             } else {
-                VStack(spacing: 16) {
-                    Spacer().frame(height: 80)
-                    Text("📋")
-                        .font(.system(size: 48))
-                        .opacity(0.6)
-                    Text(L10n["today.empty.title"])
-                        .font(FoodiaryTypography.title)
-                        .foregroundColor(FoodiaryDesign.black)
-                    Text(L10n["today.empty.subtitle"])
-                        .font(FoodiaryTypography.body)
-                        .foregroundColor(FoodiaryDesign.mutedFg)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
-                    Button(action: onCreateMealPlan) {
-                        Text(L10n["action.create_meal_plan"])
-                    }
-                    .buttonStyle(NBButtonStyle())
-                    .frame(width: 220)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(20)
+                emptyState
             }
         }
         .background(FoodiaryDesign.background)
     }
+    
+    // MARK: - Ring Section
+    
+    var ringSection: some View {
+        VStack(spacing: 12) {
+            ZStack {
+                RingProgressView(
+                    progress: state.calorieProgress,
+                    isOver: state.isOverTarget
+                )
+                VStack(spacing: 4) {
+                    Text("\(state.plannedCalories)")
+                        .font(.system(size: 40, weight: .bold, design: .default))
+                        .foregroundColor(FoodiaryDesign.black)
+                    Text("of \(state.targetCalories) kcal".uppercased())
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundColor(FoodiaryDesign.mutedFg)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+        }
+        .ringCard(cornerRadius: 20)
+    }
+    
+    // MARK: - Macro Section
+    
+    var macroSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(L10n["label.macronutrients"])
+                .sectionLabel()
+            MacroBar(label: "Protein", value: state.totalProtein, maxValue: state.maxMacro, color: Color(hex: "2563EB"))
+            MacroBar(label: "Carbs", value: state.totalCarbs, maxValue: state.maxMacro, color: Color(hex: "D97706"))
+            MacroBar(label: "Fat", value: state.totalFat, maxValue: state.maxMacro, color: Color(hex: "DC2626"))
+        }
+        .ringCardCompact()
+    }
+    
+    // MARK: - Status Badge
     
     var statusBadge: some View {
         let (bg, text): (Color, String) = {
             if state.plannedCalories == 0 {
                 return (FoodiaryDesign.muted, L10n["today.status.no_food"])
             } else if state.isExactlyAtTarget {
-                return (Color(hex: "FEF9C3"), L10n["today.status.exact"])
+                return (FoodiaryDesign.warningLight, L10n["today.status.exact"])
             } else if state.isOverTarget {
                 return (Color(hex: "FEE2E2"), state.localizedStatusMessage.uppercased())
             } else {
-                return (Color(hex: "D1FAE5"), state.localizedStatusMessage.uppercased())
+                return (FoodiaryDesign.secondaryLight, state.localizedStatusMessage.uppercased())
             }
         }()
-        
-        return Text(text).nbBadge(bg: bg)
+        return Text(text).ringBadge(bg: bg)
+    }
+    
+    // MARK: - Empty State
+    
+    var emptyState: some View {
+        VStack(spacing: 16) {
+            Spacer().frame(height: 80)
+            Text("📋")
+                .font(.system(size: 48))
+                .opacity(0.5)
+            Text(L10n["today.empty.title"])
+                .font(FoodiaryTypography.title)
+                .foregroundColor(FoodiaryDesign.black)
+            Text(L10n["today.empty.subtitle"])
+                .font(FoodiaryTypography.body)
+                .foregroundColor(FoodiaryDesign.mutedFg)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
+            Button(action: onCreateMealPlan) {
+                Text(L10n["action.create_meal_plan"])
+            }
+            .buttonStyle(RingButtonStyle())
+            .frame(width: 220)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(20)
     }
 }
 
-struct SummaryBox: View {
+// MARK: - Summary Tile
+
+struct SummaryTile: View {
     let value: String
     let label: String
     var color: Color = FoodiaryDesign.black
     
     var body: some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 6) {
             Text(value)
-                .font(FoodiaryTypography.metric)
+                .font(.system(size: 24, weight: .bold, design: .default))
                 .foregroundColor(color)
             Text(label)
                 .font(FoodiaryTypography.label)
                 .foregroundColor(FoodiaryDesign.mutedFg)
         }
         .frame(maxWidth: .infinity)
-        .nbCardCompact(cornerRadius: 16, shadowOffset: CGSize(width: 3, height: 3))
+        .ringCardCompact()
     }
 }
+
+// MARK: - Meal Card
 
 struct MealCardView: View {
     let meal: Meal
@@ -123,15 +164,9 @@ struct MealCardView: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: meal.type.icon)
-                .font(.system(size: 18))
-                .frame(width: 44, height: 44)
-                .nbCardColored(
-                    bg: iconBg,
-                    cornerRadius: 8,
-                    shadowOffset: CGSize(width: 2, height: 2),
-                    borderWidth: 2,
-                    padding: 0
-                )
+                .font(.system(size: 16))
+                .frame(width: 40, height: 40)
+                .ringCardColored(bg: iconBg, cornerRadius: 8)
                 .frame(width: 44, height: 44)
             
             VStack(alignment: .leading, spacing: 2) {
@@ -150,18 +185,18 @@ struct MealCardView: View {
                 .foregroundColor(FoodiaryDesign.black)
             
             Image(systemName: "chevron.right")
-                .font(.system(size: 14, weight: .bold))
-                .foregroundColor(FoodiaryDesign.black)
+                .font(.system(size: 12, weight: .bold))
+                .foregroundColor(FoodiaryDesign.mutedFg)
         }
-        .nbCardCompact()
+        .ringCardCompact()
     }
     
     var iconBg: Color {
         switch meal.type {
-        case .breakfast: return Color(hex: "FFF3E0")
-        case .lunch: return Color(hex: "E0F7FA")
-        case .snack: return Color(hex: "FCE4EC")
-        case .dinner: return Color(hex: "E8EAF6")
+        case .breakfast: return Color(hex: "EFF6FF")
+        case .lunch: return Color(hex: "ECFDF5")
+        case .snack: return Color(hex: "FDF2F8")
+        case .dinner: return Color(hex: "F5F3FF")
         }
     }
 }

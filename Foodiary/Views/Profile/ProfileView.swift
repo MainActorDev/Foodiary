@@ -142,7 +142,7 @@ struct ProfileEditView: View {
                     .padding(3)
                     .background(FoodiaryDesign.muted)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.black, lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.border, lineWidth: 1.5))
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
@@ -168,7 +168,7 @@ struct ProfileEditView: View {
                     .padding(3)
                     .background(FoodiaryDesign.muted)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.black, lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.border, lineWidth: 1.5))
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
@@ -184,7 +184,7 @@ struct ProfileEditView: View {
                     .padding(3)
                     .background(FoodiaryDesign.muted)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.black, lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.border, lineWidth: 1.5))
                 }
                 
                 Button(action: saveEdits) {
