@@ -1,23 +1,35 @@
 import Foundation
+import SwiftData
 
-struct Meal: Codable, Identifiable, Equatable {
-    var id: UUID
-    var mealPlanId: UUID?
-    var type: MealType
-    var items: [FoodItem]
-    var createdAt: Date
-    var updatedAt: Date
+@Model
+final class Meal {
+    var id: UUID = UUID()
+    var typeRaw: String = MealType.breakfast.rawValue
+    var createdAt: Date = Date()
+    var updatedAt: Date = Date()
     
+    @Relationship(deleteRule: .cascade)
+    var items: [FoodItem] = []
+    
+    var mealPlan: MealPlan?
+    
+    @Transient
+    var type: MealType {
+        get { MealType(rawValue: typeRaw) ?? .breakfast }
+        set { typeRaw = newValue.rawValue }
+    }
+    
+    @Transient
     var totalCalories: Int {
         items.reduce(0) { $0 + $1.calories }
     }
     
+    @Transient
     var itemCount: Int { items.count }
     
     enum MealType: String, Codable, CaseIterable {
         case breakfast, lunch, snack, dinner
         
-        /// Localized display name from the String Catalog.
         var localizedDisplayName: String {
             switch self {
             case .breakfast: return L10n["model.meal.breakfast"]
@@ -27,7 +39,6 @@ struct Meal: Codable, Identifiable, Equatable {
             }
         }
         
-        /// Display name for backward compatibility — delegates to localized version.
         var displayName: String { localizedDisplayName }
         
         var icon: String {
@@ -51,15 +62,13 @@ struct Meal: Codable, Identifiable, Equatable {
     
     init(
         id: UUID = UUID(),
-        mealPlanId: UUID? = nil,
-        type: MealType,
+        type: MealType = .breakfast,
         items: [FoodItem] = [],
         createdAt: Date = Date(),
         updatedAt: Date = Date()
     ) {
         self.id = id
-        self.mealPlanId = mealPlanId
-        self.type = type
+        self.typeRaw = type.rawValue
         self.items = items
         self.createdAt = createdAt
         self.updatedAt = updatedAt

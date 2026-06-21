@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TodayDashboardView: View {
-    @ObservedObject var state: AppState
+    @Bindable var state: AppState
     var onCreateMealPlan: () -> Void
     var onTapMeal: (Int) -> Void
     

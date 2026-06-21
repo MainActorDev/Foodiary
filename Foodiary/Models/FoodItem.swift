@@ -1,20 +1,22 @@
 import Foundation
+import SwiftData
 
-struct FoodItem: Codable, Identifiable, Equatable {
-    var id: UUID
-    var mealId: UUID?
-    var name: String
-    var calories: Int
-    var protein: Int      // grams
-    var carbs: Int        // grams
-    var fat: Int          // grams
-    var note: String
-    var createdAt: Date
-    var updatedAt: Date
+@Model
+final class FoodItem {
+    var id: UUID = UUID()
+    var name: String = ""
+    var calories: Int = 0
+    var protein: Int = 0
+    var carbs: Int = 0
+    var fat: Int = 0
+    var note: String = ""
+    var createdAt: Date = Date()
+    var updatedAt: Date = Date()
+    
+    var meal: Meal?
     
     init(
         id: UUID = UUID(),
-        mealId: UUID? = nil,
         name: String = "",
         calories: Int = 0,
         protein: Int = 0,
@@ -25,7 +27,6 @@ struct FoodItem: Codable, Identifiable, Equatable {
         updatedAt: Date = Date()
     ) {
         self.id = id
-        self.mealId = mealId
         self.name = name
         self.calories = calories
         self.protein = protein

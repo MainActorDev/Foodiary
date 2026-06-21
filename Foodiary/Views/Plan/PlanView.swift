@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: - Plan View (Week Strip + Day Detail)
 
 struct PlanView: View {
-    @ObservedObject var state: AppState
+    @Bindable var state: AppState
     @State private var weekOffset: Int = 0
     @State private var showMealDetail = false
     @State private var selectedMealIndex = 0
@@ -118,9 +118,7 @@ struct PlanView: View {
     func dayPill(for day: Date) -> some View {
         let isSelected = Calendar.current.isDate(day, inSameDayAs: state.selectedPlanDate)
         let isToday = Calendar.current.isDateInToday(day)
-        let plan = state.mealPlansForDay(day)
-        let hasData = plan != nil && plan!.meals.contains { !$0.items.isEmpty }
-        let totalCal = plan?.totalCalories ?? 0
+        let (hasData, totalCal) = state.hasMealData(for: day)
         let isOver = totalCal > state.targetCalories
         
         Button(action: {
@@ -472,11 +470,4 @@ struct PlanMealCardView: View {
     }
 }
 
-// MARK: - AppState Extension (Plan helpers)
-
-extension AppState {
-    /// Get the meal plan for a specific day from the in-memory dictionary
-    func mealPlansForDay(_ date: Date) -> MealPlan? {
-        _mealPlans[MealPlan.dateKey(for: date)]
-    }
-}
+// MARK: - Plan Meal Card (reusable)

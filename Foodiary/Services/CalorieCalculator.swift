@@ -39,7 +39,6 @@ enum CalorieCalculator {
         let t = targetCalories(maintenance: m, goal: profile.goal)
         
         return CalorieTarget(
-            profileId: profile.id,
             bmr: b,
             maintenanceCalories: m,
             targetCalories: t

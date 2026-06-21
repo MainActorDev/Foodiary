@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MealDetailView: View {
-    @ObservedObject var state: AppState
+    @Bindable var state: AppState
     let mealIndex: Int
     var date: Date = Date()  // Default to today for backward compat
     @Binding var isPresented: Bool

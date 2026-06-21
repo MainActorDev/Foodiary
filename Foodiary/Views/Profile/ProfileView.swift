@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @ObservedObject var state: AppState
+    @Bindable var state: AppState
     @State private var showEdit = false
     @State private var showResetConfirm = false
     
@@ -111,7 +111,7 @@ struct ProfileRow: View {
 }
 
 struct ProfileEditView: View {
-    @ObservedObject var state: AppState
+    @Bindable var state: AppState
     @Binding var isPresented: Bool
     
     @State private var age: Int = 30

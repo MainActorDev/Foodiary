@@ -1,35 +1,47 @@
 import Foundation
+import SwiftData
 
-struct UserProfile: Codable, Identifiable, Equatable {
-    var id: UUID
-    var age: Int
-    var sex: Sex
-    var heightCm: Double
-    var weightKg: Double
-    var activityLevel: ActivityLevel
-    var goal: Goal
-    var createdAt: Date
-    var updatedAt: Date
+@Model
+final class UserProfile {
+    var id: UUID = UUID()
+    var age: Int = 30
+    var sexRaw: String = Sex.female.rawValue
+    var heightCm: Double = 170
+    var weightKg: Double = 70
+    var activityLevelRaw: String = ActivityLevel.sedentary.rawValue
+    var goalRaw: String = Goal.maintain.rawValue
+    var createdAt: Date = Date()
+    var updatedAt: Date = Date()
+    
+    @Relationship(deleteRule: .cascade)
+    var calorieTarget: CalorieTarget?
+    
+    @Transient var sex: Sex {
+        get { Sex(rawValue: sexRaw) ?? .female }
+        set { sexRaw = newValue.rawValue }
+    }
+    @Transient var activityLevel: ActivityLevel {
+        get { ActivityLevel(rawValue: activityLevelRaw) ?? .sedentary }
+        set { activityLevelRaw = newValue.rawValue }
+    }
+    @Transient var goal: Goal {
+        get { Goal(rawValue: goalRaw) ?? .maintain }
+        set { goalRaw = newValue.rawValue }
+    }
     
     enum Sex: String, Codable, CaseIterable {
         case male, female
-        
-        /// Localized display name from the String Catalog.
         var localizedDisplayName: String {
             switch self {
             case .male: return L10n["model.sex.male"]
             case .female: return L10n["model.sex.female"]
             }
         }
-        
-        /// Display name for backward compatibility — delegates to localized version.
         var displayName: String { localizedDisplayName }
     }
     
     enum ActivityLevel: String, Codable, CaseIterable {
         case sedentary, lightlyActive, moderatelyActive, veryActive
-        
-        /// Localized display name from the String Catalog.
         var localizedDisplayName: String {
             switch self {
             case .sedentary: return L10n["model.activity.sedentary"]
@@ -38,10 +50,7 @@ struct UserProfile: Codable, Identifiable, Equatable {
             case .veryActive: return L10n["model.activity.very_active"]
             }
         }
-        
-        /// Display name for backward compatibility — delegates to localized version.
         var displayName: String { localizedDisplayName }
-        
         var multiplier: Double {
             switch self {
             case .sedentary: return 1.2
@@ -54,8 +63,6 @@ struct UserProfile: Codable, Identifiable, Equatable {
     
     enum Goal: String, Codable, CaseIterable {
         case maintain, lose, gain
-        
-        /// Localized display name from the String Catalog.
         var localizedDisplayName: String {
             switch self {
             case .maintain: return L10n["model.goal.maintain"]
@@ -63,10 +70,7 @@ struct UserProfile: Codable, Identifiable, Equatable {
             case .gain: return L10n["model.goal.gain"]
             }
         }
-        
-        /// Display name for backward compatibility — delegates to localized version.
         var displayName: String { localizedDisplayName }
-        
         var multiplier: Double {
             switch self {
             case .maintain: return 1.0
@@ -89,11 +93,11 @@ struct UserProfile: Codable, Identifiable, Equatable {
     ) {
         self.id = id
         self.age = age
-        self.sex = sex
+        self.sexRaw = sex.rawValue
         self.heightCm = heightCm
         self.weightKg = weightKg
-        self.activityLevel = activityLevel
-        self.goal = goal
+        self.activityLevelRaw = activityLevel.rawValue
+        self.goalRaw = goal.rawValue
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

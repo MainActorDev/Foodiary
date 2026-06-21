@@ -1,13 +1,18 @@
 import Foundation
+import SwiftData
 
-struct MealPlan: Codable, Identifiable, Equatable {
-    var id: UUID
-    var date: Date
-    var targetCalories: Int
-    var meals: [Meal]
-    var createdAt: Date
-    var updatedAt: Date
+@Model
+final class MealPlan {
+    var id: UUID = UUID()
+    var date: Date = Date()
+    var targetCalories: Int = 2000
+    var createdAt: Date = Date()
+    var updatedAt: Date = Date()
     
+    @Relationship(deleteRule: .cascade)
+    var meals: [Meal] = []
+    
+    @Transient
     var totalCalories: Int {
         meals.reduce(0) { $0 + $1.totalCalories }
     }

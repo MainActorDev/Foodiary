@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @ObservedObject var state: AppState
+    @Bindable var state: AppState
     @State private var selectedTab = 0
     @State private var showMealDetail = false
     @State private var selectedMealIndex = 0
@@ -83,7 +83,7 @@ struct MainTabView: View {
 // MARK: - Insights View (macro breakdown + calorie summary)
 
 struct InsightsView: View {
-    @ObservedObject var state: AppState
+    @Bindable var state: AppState
     
     var body: some View {
         ScrollView {
