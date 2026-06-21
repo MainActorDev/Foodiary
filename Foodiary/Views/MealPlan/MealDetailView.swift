@@ -3,12 +3,25 @@ import SwiftUI
 struct MealDetailView: View {
     @ObservedObject var state: AppState
     let mealIndex: Int
+    var date: Date = Date()  // Default to today for backward compat
     @Binding var isPresented: Bool
     @State private var showAddFood = false
     
+    var mealPlan: MealPlan? {
+        if Calendar.current.isDateInToday(date) {
+            return state.todayMealPlan
+        }
+        return state.planDateMealPlan
+    }
+    
     var meal: Meal? {
-        guard state.hasTodayMealPlan, mealIndex < state.todayMealPlan!.meals.count else { return nil }
-        return state.todayMealPlan!.meals[mealIndex]
+        guard let plan = mealPlan, mealIndex < plan.meals.count else { return nil }
+        return plan.meals[mealIndex]
+    }
+    
+    /// Whether this is a past day (view-only)
+    var isReadOnly: Bool {
+        date < Calendar.current.startOfDay(for: Date())
     }
     
     var body: some View {
@@ -39,9 +52,17 @@ struct MealDetailView: View {
                                 .padding(24)
                             } else {
                                 ForEach(Array(meal.items.enumerated()), id: \.element.id) { itemIndex, item in
-                                    FoodItemRowView(item: item, onDelete: {
-                                        state.deleteFoodItem(mealIndex: mealIndex, itemIndex: itemIndex)
-                                    })
+                                    FoodItemRowView(
+                                        item: item,
+                                        isReadOnly: isReadOnly,
+                                        onDelete: {
+                                            if Calendar.current.isDateInToday(date) {
+                                                state.deleteFoodItem(mealIndex: mealIndex, itemIndex: itemIndex)
+                                            } else {
+                                                state.deleteFoodItem(mealIndex: mealIndex, itemIndex: itemIndex, for: date)
+                                            }
+                                        }
+                                    )
                                     
                                     if itemIndex < meal.items.count - 1 {
                                         Divider()
@@ -52,10 +73,12 @@ struct MealDetailView: View {
                         }
                         .nbCard()
                         
-                        Button(action: { showAddFood = true }) {
-                            Text(L10n["action.add_food"])
+                        if !isReadOnly {
+                            Button(action: { showAddFood = true }) {
+                                Text(L10n["action.add_food"])
+                            }
+                            .buttonStyle(NBButtonStyle())
                         }
-                        .buttonStyle(NBButtonStyle())
                     }
                     .padding(20)
                 }
@@ -72,19 +95,25 @@ struct MealDetailView: View {
                         }
                         .buttonStyle(NBStepperButtonStyle())
                     }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: { showAddFood = true }) {
-                            Image(systemName: "plus")
-                                .font(.system(size: 16, weight: .bold))
+                    if !isReadOnly {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button(action: { showAddFood = true }) {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 16, weight: .bold))
+                            }
+                            .buttonStyle(NBStepperButtonStyle())
                         }
-                        .buttonStyle(NBStepperButtonStyle())
                     }
                 }
                 .sheet(isPresented: $showAddFood) {
                     NavigationStack {
                         AddFoodItemView(
                             onSave: { item in
-                                state.addFoodItem(item, toMealAt: mealIndex)
+                                if Calendar.current.isDateInToday(date) {
+                                    state.addFoodItem(item, toMealAt: mealIndex)
+                                } else {
+                                    state.addFoodItem(item, toMealAt: mealIndex, for: date)
+                                }
                                 showAddFood = false
                             },
                             onCancel: { showAddFood = false }
@@ -98,6 +127,7 @@ struct MealDetailView: View {
 
 struct FoodItemRowView: View {
     let item: FoodItem
+    var isReadOnly: Bool = false
     var onDelete: () -> Void
     
     var body: some View {
@@ -119,11 +149,13 @@ struct FoodItemRowView: View {
                 .font(FoodiaryTypography.bodyBold)
                 .foregroundColor(FoodiaryDesign.black)
             
-            Button(action: onDelete) {
-                Image(systemName: "xmark")
-                    .font(.system(size: 10, weight: .bold))
+            if !isReadOnly {
+                Button(action: onDelete) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 10, weight: .bold))
+                }
+                .buttonStyle(NBIconButtonStyle(isDanger: true))
             }
-            .buttonStyle(NBIconButtonStyle(isDanger: true))
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 4)

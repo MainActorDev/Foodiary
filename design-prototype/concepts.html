@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foodiary — Design Concepts</title>
+<title>Foodiary — Calorie Ring · Plan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fredoka:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    1. PAGE-LEVEL RESET & STRUCTURE
@@ -26,7 +26,7 @@ body {
 }
 
 .page-header { text-align: center; max-width: 600px; padding: 0 clamp(8px, 2vw, 16px); }
-.page-header h1 { font-family: 'Space Grotesk', -apple-system, sans-serif; font-size: clamp(20px, 4vw, 24px); font-weight: 700; color: #1A1A1A; letter-spacing: -0.02em; margin-bottom: 4px; }
+.page-header h1 { font-family: 'Inter', -apple-system, sans-serif; font-size: clamp(20px, 4vw, 24px); font-weight: 700; color: #1A1A1A; letter-spacing: -0.02em; margin-bottom: 4px; }
 .page-header p { font-size: clamp(12px, 2.2vw, 14px); color: #6B6560; line-height: 1.5; }
 
 /* ============================================================
@@ -35,11 +35,7 @@ body {
 .concept-selector { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; background: #FFFFFF; border: 2px solid #E2E0DA; border-radius: clamp(12px, 2vw, 14px); padding: 4px; max-width: 100%; }
 .concept-option { padding: clamp(6px, 1.2vw, 8px) clamp(12px, 2.5vw, 20px); border: none; background: transparent; border-radius: clamp(8px, 1.5vw, 10px); font-family: 'Inter', -apple-system, sans-serif; font-size: clamp(11px, 1.8vw, 13px); font-weight: 600; color: #6B6560; cursor: pointer; transition: all 0.15s ease; white-space: nowrap; }
 .concept-option:hover { color: #1A1A1A; }
-.concept-option.active { background: #1A1A1A; color: #FFFFFF; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
-.concept-option[data-concept="neubrutalist"].active { background: #1A1A1A; color: #FFF; }
-.concept-option[data-concept="ring"].active       { background: #2563EB; }
-.concept-option[data-concept="streak"].active     { background: #EA580C; }
-.concept-option[data-concept="weekly"].active     { background: #0891B2; }
+.concept-option.active { background: #2563EB; color: #FFFFFF; box-shadow: 0 2px 8px rgba(37,99,235,0.25); }
 
 /* ============================================================
    3. MOCKUP CONTAINER + PHONE
@@ -90,6 +86,8 @@ body {
 
 .meal-card { background: var(--card); border: var(--card-border); border-radius: var(--radius-meal, 16px); padding: 16px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 14px; cursor: pointer; transition: all 0.1s ease; }
 .meal-card:active { transform: var(--btn-active-transform, scale(0.98)); box-shadow: var(--btn-active-shadow, var(--shadow-sm)); }
+.meal-card.readonly { cursor: default; opacity: 0.85; }
+.meal-card.readonly:active { transform: none; box-shadow: var(--shadow-sm); }
 .meal-icon-block { width: 48px; height: 48px; border-radius: var(--radius-sm, 8px); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 2px solid var(--border-color); }
 .meal-icon-block.breakfast { background: var(--meal-bf-bg, #FFF3E0); }
 .meal-icon-block.lunch     { background: var(--meal-lu-bg, #E0F7FA); }
@@ -137,38 +135,7 @@ body {
 .btn-icon-del:active { transform: scale(0.93); }
 
 /* ============================================================
-   6. CONCEPT 1 — NEUBRUTALIST
-   ============================================================ */
-.theme-neubrutalist {
-  --font-display: 'Space Grotesk', -apple-system, sans-serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
-  --accent: #FF6B4A; --secondary: #2DD4BF; --warning: #FFD60A;
-  --bg: #FAFAF5; --card: #FFFFFF; --text: #1A1A1A;
-  --muted: #F5F2ED; --muted-fg: #6B6560;
-  --border-color: #1A1A1A; --divider: #F5F2ED;
-  --radius-sm: 8px; --radius-btn: 12px; --radius-card: 20px; --radius-meal: 16px;
-  --shadow: 4px 4px 0 #1A1A1A; --shadow-sm: 3px 3px 0 #1A1A1A;
-  --btn-border: 3px solid #1A1A1A; --btn-active-transform: translate(2px, 2px);
-  --btn-active-shadow: 2px 2px 0 #1A1A1A;
-  --card-border: 3px solid #1A1A1A; --field-border: 3px solid #1A1A1A;
-  --badge-border: 2px solid #1A1A1A; --seg-border: 3px solid #1A1A1A;
-  --seg-active-shadow: 2px 2px 0 #1A1A1A; --progress-h: 12px; --progress-border: 2px solid #1A1A1A;
-  --stepper-active-shadow: 1px 1px 0 #1A1A1A;
-  --btn-primary-text: #FFFFFF; --btn-black-bg: #1A1A1A; --btn-black-text: #FFFFFF;
-  --fs-hero: 40px; --fs-title: 22px;
-  --badge-green-bg: #D1FAE5; --badge-green-text: #065F46;
-  --badge-red-bg: #FEE2E2; --badge-red-text: #991B1B;
-  --badge-yellow-bg: #FEF9C3; --badge-yellow-text: #854D0E;
-  --meal-bf-bg: #FFF3E0; --meal-lu-bg: #E0F7FA;
-  --meal-sn-bg: #FCE4EC; --meal-dn-bg: #E8EAF6;
-}
-.nb-tabs { display: flex; background: var(--card); border-top: 3px solid var(--border-color); padding: 0 16px 24px; gap: 4px; flex-shrink: 0; }
-.nb-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0 0; border: none; background: none; cursor: pointer; font-family: var(--font-display); font-size: 9px; font-weight: 700; color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.05em; }
-.nb-tab.active { color: var(--accent); }
-.nb-tab-icon { font-size: 22px; }
-
-/* ============================================================
-   7. CONCEPT 2 — CALORIE RING
+   6. CALORIE RING THEME
    ============================================================ */
 .theme-ring {
   --font-display: 'Inter', -apple-system, sans-serif;
@@ -194,6 +161,8 @@ body {
   --meal-bf-bg: #EFF6FF; --meal-lu-bg: #ECFDF5;
   --meal-sn-bg: #FDF2F8; --meal-dn-bg: #F5F3FF;
 }
+
+/* Ring components */
 .ring-container { display: flex; justify-content: center; padding: 8px 0 16px; }
 .ring-center-wrap { position: relative; width: 172px; height: 172px; }
 .ring-svg { transform: rotate(-90deg); width: 172px; height: 172px; }
@@ -211,106 +180,47 @@ body {
 .macro-bar-fill.protein { background: #2563EB; } .macro-bar-fill.carbs { background: #D97706; } .macro-bar-fill.fat { background: #DC2626; }
 .macro-val { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--text); min-width: 32px; text-align: right; }
 .ring-meal-icon { font-size: 18px; width: 40px; text-align: center; flex-shrink: 0; }
+
+/* Ring tab bar */
 .ring-tabs { display: flex; background: var(--card); border-top: 1px solid var(--border-color); padding: 8px 16px 24px; gap: 0; flex-shrink: 0; }
 .ring-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; border: none; background: none; cursor: pointer; font-family: var(--font-display); font-size: 10px; font-weight: 600; color: var(--muted-fg); letter-spacing: 0.01em; }
 .ring-tab.active { color: var(--accent); }
 .ring-tab-icon { font-size: 20px; }
 
 /* ============================================================
-   8. CONCEPT 3 — HABIT STREAK (Duolingo / Streaks inspired)
+   7. PLAN PAGE — WEEK STRIP
    ============================================================ */
-.theme-streak {
-  --font-display: 'Fredoka', 'DM Sans', -apple-system, sans-serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
-  --accent: #EA580C; --accent-light: #FFF7ED;
-  --secondary: #16A34A; --warning: #F59E0B;
-  --bg: #FFFBF5; --card: #FFFFFF; --text: #292524;
-  --muted: #FEF3C7; --muted-fg: #A8A29E;
-  --border-color: #E7E5E4; --divider: #F5F0E8;
-  --radius-sm: 10px; --radius-btn: 14px; --radius-card: 20px; --radius-meal: 16px;
-  --shadow: 0 2px 12px rgba(0,0,0,0.05); --shadow-sm: 0 1px 6px rgba(0,0,0,0.04);
-  --btn-border: 2px solid #E7E5E4; --btn-active-transform: scale(0.97);
-  --btn-active-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  --card-border: 2px solid #E7E5E4; --field-border: 2px solid #E7E5E4;
-  --badge-border: 1.5px solid #E7E5E4; --seg-border: 2px solid #E7E5E4;
-  --seg-active-shadow: 0 1px 4px rgba(0,0,0,0.06); --progress-h: 12px; --progress-border: none;
-  --stepper-active-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  --btn-primary-text: #FFFFFF; --btn-black-bg: #292524; --btn-black-text: #FFFFFF;
-  --fs-hero: 38px; --fs-title: 20px;
-  --badge-green-bg: #DCFCE7; --badge-green-text: #166534;
-  --badge-red-bg: #FEE2E2; --badge-red-text: #991B1B;
-  --badge-yellow-bg: #FEF3C7; --badge-yellow-text: #92400E;
-  --meal-bf-bg: #FFF7ED; --meal-lu-bg: #F0FDF4;
-  --meal-sn-bg: #FDF2F8; --meal-dn-bg: #EFF6FF;
-}
-.streak-hero { text-align: center; padding: 16px 0 8px; }
-.streak-flame { font-size: 56px; display: block; margin-bottom: 4px; animation: pulse 2s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-.streak-count { font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--accent); line-height: 1; }
-.streak-sub { font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
-.streak-checkin { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px 0; }
-.streak-check-btn { width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--accent); background: var(--card); color: var(--accent); font-family: var(--font-display); font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(234,88,12,0.2); transition: all 0.15s; }
-.streak-check-btn:active { transform: scale(0.9); background: var(--accent); color: #FFF; }
-.streak-check-btn.checked { background: var(--accent); color: #FFF; }
-.heatmap { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; }
-.heatmap-dot { width: 14px; height: 14px; border-radius: 4px; background: var(--muted); border: 1px solid var(--border-color); transition: all 0.2s; }
-.heatmap-dot.hit { background: var(--accent); border-color: var(--accent); }
-.heatmap-dot.miss { background: #FEE2E2; border-color: #FECACA; }
-.streak-meal { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--card); border: var(--card-border); border-radius: var(--radius-meal); box-shadow: var(--shadow-sm); cursor: pointer; transition: all 0.1s; }
-.streak-meal:active { transform: scale(0.98); }
-.streak-tabs { display: flex; background: var(--card); border-top: 2px solid var(--border-color); padding: 0 16px 24px; gap: 0; flex-shrink: 0; }
-.streak-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0 0; border: none; background: none; cursor: pointer; font-family: var(--font-display); font-size: 10px; font-weight: 600; color: var(--muted-fg); letter-spacing: 0.02em; }
-.streak-tab.active { color: var(--accent); }
+.week-nav-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.week-nav-arrow { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); background: var(--card); cursor: pointer; font-family: var(--font-display); font-size: 14px; color: var(--text); box-shadow: var(--shadow-sm); transition: all 0.1s; flex-shrink: 0; }
+.week-nav-arrow:active { transform: scale(0.94); box-shadow: var(--btn-active-shadow); }
+.week-label-text { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--text); text-align: center; flex: 1; user-select: none; }
+
+.week-strip { display: flex; gap: 6px; justify-content: center; }
+.week-day-pill { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 8px 2px; border-radius: var(--radius-meal); border: 1.5px solid transparent; background: transparent; cursor: pointer; transition: all 0.12s ease; user-select: none; }
+.week-day-pill:hover { background: var(--muted); }
+.week-day-pill:active { transform: scale(0.95); }
+.week-day-pill.today { background: var(--muted); border-color: var(--border-color); }
+.week-day-pill.selected { background: var(--accent); border-color: var(--accent); }
+.week-day-pill.selected .week-dow,
+.week-day-pill.selected .week-date-num { color: #FFFFFF; }
+.week-dow { font-family: var(--font-display); font-size: 10px; font-weight: 600; color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.03em; }
+.week-date-num { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text); }
+.week-day-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--secondary); }
+.week-day-dot.over { background: var(--accent); }
+.week-day-dot.empty { background: transparent; }
+
+.plan-day-header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.plan-day-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text); }
+.plan-day-sub { font-family: var(--font-body); font-size: 13px; color: var(--muted-fg); }
+.plan-day-sub b { color: var(--text); }
+.plan-readonly-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 9999px; font-family: var(--font-display); font-size: 10px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; background: var(--muted); color: var(--muted-fg); border: 1px solid var(--border-color); }
+.plan-empty-state { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 32px 24px; text-align: center; }
+.plan-empty-icon { font-size: 40px; opacity: 0.4; }
+.plan-empty-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text); }
+.plan-empty-body { font-family: var(--font-body); font-size: 13px; color: var(--muted-fg); max-width: 220px; line-height: 1.5; }
 
 /* ============================================================
-   9. CONCEPT 4 — WEEKLY PLANNER (meal-prep / planner inspired)
-   ============================================================ */
-.theme-weekly {
-  --font-display: 'DM Sans', -apple-system, sans-serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
-  --accent: #0891B2; --accent-light: #ECFEFF;
-  --secondary: #059669; --warning: #D97706;
-  --bg: #F0F9FA; --card: #FFFFFF; --text: #164E63;
-  --muted: #E0F2F6; --muted-fg: #5E8A96;
-  --border-color: #C5DFE5; --divider: #E0F2F6;
-  --radius-sm: 8px; --radius-btn: 10px; --radius-card: 16px; --radius-meal: 14px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.05); --shadow-sm: 0 1px 2px rgba(0,0,0,0.03);
-  --btn-border: 1.5px solid #C5DFE5; --btn-active-transform: scale(0.98);
-  --btn-active-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  --card-border: 1.5px solid #C5DFE5; --field-border: 1.5px solid #C5DFE5;
-  --badge-border: 1px solid #C5DFE5; --seg-border: 1.5px solid #C5DFE5;
-  --seg-active-shadow: 0 1px 3px rgba(0,0,0,0.04); --progress-h: 8px; --progress-border: none;
-  --stepper-active-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  --btn-primary-text: #FFFFFF; --btn-black-bg: #164E63; --btn-black-text: #FFFFFF;
-  --fs-hero: 34px; --fs-title: 20px;
-  --badge-green-bg: #D1FAE5; --badge-green-text: #065F46;
-  --badge-red-bg: #FEE2E2; --badge-red-text: #991B1B;
-  --badge-yellow-bg: #FEF3C7; --badge-yellow-text: #92400E;
-  --meal-bf-bg: #ECFEFF; --meal-lu-bg: #F0FDF4;
-  --meal-sn-bg: #FEF3C7; --meal-dn-bg: #F5F3FF;
-}
-.week-header { display: flex; align-items: center; justify-content: space-between; padding: 0 0 8px; }
-.week-nav { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); background: var(--card); cursor: pointer; font-family: var(--font-display); font-size: 14px; color: var(--text); }
-.week-label { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text); }
-.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
-.week-day { text-align: center; padding: 8px 4px; border-radius: var(--radius-sm); background: var(--card); border: 1.5px solid var(--border-color); cursor: pointer; transition: all 0.1s; }
-.week-day:active { transform: scale(0.96); }
-.week-day.today { border-color: var(--accent); border-width: 2px; background: var(--accent-light); }
-.week-day-num { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text); }
-.week-day-dow { font-size: 9px; font-weight: 600; color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
-.week-day-badge { font-size: 8px; font-weight: 700; color: var(--accent); margin-top: 2px; text-transform: uppercase; }
-.week-day-badge.over { color: #DC2626; }
-.week-day-detail { padding: 0; }
-.week-day-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
-.week-meal-slot { background: var(--card); border: var(--card-border); border-radius: var(--radius-meal); padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; cursor: pointer; box-shadow: var(--shadow-sm); }
-.week-meal-slot:active { transform: scale(0.98); }
-.week-meal-slot.empty { border-style: dashed; opacity: 0.6; }
-.week-tabs { display: flex; background: var(--card); border-top: 1px solid var(--border-color); padding: 0; flex-shrink: 0; }
-.week-tab { flex: 1; padding: 14px 0; border: none; background: none; cursor: pointer; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--muted-fg); text-align: center; border-bottom: 2px solid transparent; transition: all 0.15s; }
-.week-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-/* ============================================================
-   10. ONBOARDING (shared)
+   8. ONBOARDING (shared)
    ============================================================ */
 .onboard-dots { display: flex; gap: 8px; justify-content: center; padding: 0 0 4px; }
 .onboard-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); border: 2px solid var(--border-color); transition: all 0.2s; }
@@ -332,7 +242,7 @@ body {
 .empty-body { font-family: var(--font-body); font-size: 14px; color: var(--muted-fg); max-width: 240px; }
 
 /* ============================================================
-   11. RESPONSIVE
+   9. RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) { body { padding: 12px 12px 24px; gap: 16px; } .page-header h1 { font-size: 18px; } .concept-option { padding: 6px 14px; font-size: 12px; } .mockup-container { max-width: 100%; } }
 @media (max-width: 480px) { .concept-selector { gap: 3px; padding: 3px; border-radius: 10px; } .concept-option { padding: 5px 10px; font-size: 11px; border-radius: 7px; } }
@@ -342,20 +252,17 @@ body {
 <body>
 
 <div class="page-header">
-  <h1>Foodiary · Design Concepts</h1>
-  <p>Four distinct UX directions for a simple, local-first calorie tracker. Click a concept to preview.</p>
+  <h1>Foodiary · Calorie Ring · Plan</h1>
+  <p>Week strip calendar with date-based meal planning. Swipe or arrows to change weeks.</p>
 </div>
 
 <div class="concept-selector" id="conceptSelector">
-  <button class="concept-option active" data-concept="neubrutalist" onclick="switchConcept('neubrutalist',this)">Neubrutalist</button>
-  <button class="concept-option" data-concept="ring" onclick="switchConcept('ring',this)">Calorie Ring</button>
-  <button class="concept-option" data-concept="streak" onclick="switchConcept('streak',this)">Habit Streak</button>
-  <button class="concept-option" data-concept="weekly" onclick="switchConcept('weekly',this)">Weekly Planner</button>
+  <button class="concept-option active" data-concept="ring" onclick="switchConcept('ring',this)">Calorie Ring</button>
 </div>
 
 <div class="mockup-container">
   <div class="phone-wrapper">
-    <div class="phone theme-neubrutalist" id="phone"></div>
+    <div class="phone theme-ring" id="phone"></div>
   </div>
 </div>
 
@@ -364,164 +271,341 @@ body {
 // SHARED DATA MODEL
 // ============================================================
 let P = { age:30, sex:'female', height:170, weight:70, activity:'sedentary', goal:'maintain' };
-let CT = null, MP = null, mi = 0;
+let CT = null, mi = 0;
 const MT = ['breakfast','lunch','snack','dinner'];
 const MI = {breakfast:'🌅',lunch:'☀️',snack:'🍪',dinner:'🌙'};
 const C = 2*Math.PI*68;
-let activeConcept = 'neubrutalist', currentScreen = 'today';
-let streakChecked = false, streakCount = 12;
-let weekDays = [
-  {dow:'Mon',num:16,plan:1850,actual:0},{dow:'Tue',num:17,plan:1800,actual:0},
-  {dow:'Wed',num:18,plan:1740,actual:1734},{dow:'Thu',num:19,plan:0,actual:0},
-  {dow:'Fri',num:20,plan:1740,actual:0},{dow:'Sat',num:21,plan:1800,actual:0},
-  {dow:'Sun',num:22,plan:0,actual:0}
-];
+let currentScreen = 'today';
+
+// Multi-date meal plan storage: keyed by "yyyy-MM-dd"
+let mealPlans = {};
+
+// Today's date reference (for determining past/future)
+const TODAY = new Date(2026, 5, 21); // June 21, 2026 (Sunday)
+const TODAY_KEY = dateKey(TODAY);
+
+// Week navigation state
+let weekOffset = 0; // 0 = current week
+
+// Currently selected date in the Plan view
+let selectedDateKey = TODAY_KEY;
+
+function dateKey(d){ const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; }
+function parseDate(k){ const [y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d); }
+function isToday(k){ return k === TODAY_KEY; }
+function isPast(k){ return k < TODAY_KEY; }
+function isFuture(k){ return k > TODAY_KEY; }
+
+// Get the current meal plan (active from the Plan view)
+function activePlan(){ return mealPlans[selectedDateKey] || null; }
+function activePlanOrCreate(){
+  if (!mealPlans[selectedDateKey]) mealPlans[selectedDateKey] = {meals: MT.map(t=>({type:t,items:[]}))};
+  return mealPlans[selectedDateKey];
+}
+
+// Today's meal plan convenience (for Today tab)
+function todayPlan() { return mealPlans[TODAY_KEY] || null; }
+
+function mc(m){ return m.items.reduce((s,i)=>s+(i.calories||0),0); }
+function tcPlan(p){ return p ? p.meals.reduce((s,m)=>s+mc(m),0) : 0; }
+function tgt(){ return CT ? CT.target : 2100; }
+function S(p){
+  let rem = tgt() - tcPlan(p);
+  let pct = Math.min(100, Math.max(0, (tcPlan(p) / tgt()) * 100));
+  return { remaining: rem, pct, badge: rem>0?'green':rem<0?'red':'yellow',
+    label: rem>0 ? rem.toLocaleString()+' kcal under target' :
+           rem<0 ? Math.abs(rem).toLocaleString()+' kcal over target' : 'Exactly at your target' };
+}
 
 function calc(){
   let {age,sex,height,weight,activity,goal}=P;
   let bmr=sex==='male'?10*weight+6.25*height-5*age+5:10*weight+6.25*height-5*age-161;
   let m=Math.round(bmr*{sedentary:1.2,lightlyActive:1.375,moderatelyActive:1.55,veryActive:1.725}[activity]);
-  let t=goal==='lose'?Math.round(m*0.9):goal==='gain'?Math.round(m*1.1):m;
-  t=Math.round(t/10)*10;
-  CT={bmr:Math.round(bmr),maintenance:m,target:t};
+  let tg=goal==='lose'?Math.round(m*0.9):goal==='gain'?Math.round(m*1.1):m;
+  tg=Math.round(tg/10)*10;
+  CT={bmr:Math.round(bmr),maintenance:m,target:tg};
 }
-function crtPlan(){ MP={meals:MT.map(t=>({type:t,items:[]}))}; }
-function mc(m){return m.items.reduce((s,i)=>s+i.calories,0);}
-function tc(){return MP?MP.meals.reduce((s,m)=>s+mc(m),0):0;}
-function tgt(){return CT?CT.target:2100;}
-function S(){let rem=tgt()-tc(),pct=Math.min(100,Math.max(0,(tc()/tgt())*100));return{remaining:rem,pct,badge:rem>0?'green':rem<0?'red':'yellow',label:rem>0?rem.toLocaleString()+' kcal under target':rem<0?Math.abs(rem).toLocaleString()+' kcal over target':'Exactly at your target'};}
-function stp(f,d){P[f]=Math.max(1,P[f]+d);renderCurrent();}
-function sel(g,v,b){P[g]=v;document.querySelectorAll('[id^="sg-'+g+'"]').forEach(s=>s.querySelectorAll('button').forEach(btn=>{let bv=btn.textContent.toLowerCase().replace(/\s+/g,'');let m={'maintainweight':'maintain','loseweightslowly':'lose','gainweightslowly':'gain','sedentary':'sedentary','lightlyactive':'lightlyActive','moderate':'moderatelyActive','moderatelyactive':'moderatelyActive','veryactive':'veryActive','female':'female','male':'male'};btn.classList.toggle('active',(m[bv]||bv)===v);}));}
-function del(i){MP.meals[mi].items.splice(i,1);renderCurrent();}
-function onav(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));let t=document.getElementById(id);if(t)t.classList.add('active');currentScreen=id;}
+
+function crtPlan(){
+  if (!mealPlans[TODAY_KEY]) mealPlans[TODAY_KEY] = {meals: MT.map(t=>({type:t,items:[]}))};
+}
+
+function stp(f,d){ P[f]=Math.max(1,P[f]+d); renderCurrent(); }
+function sel(g,v,b){ P[g]=v; document.querySelectorAll('[id^="sg-'+g+'"]').forEach(s=>s.querySelectorAll('button').forEach(btn=>{let bv=btn.textContent.toLowerCase().replace(/\s+/g,'');let m={'maintainweight':'maintain','loseweightslowly':'lose','gainweightslowly':'gain','sedentary':'sedentary','lightlyactive':'lightlyActive','moderate':'moderatelyActive','moderatelyactive':'moderatelyActive','veryactive':'veryActive','female':'female','male':'male'};btn.classList.toggle('active',(m[bv]||bv)===v);}));}
+function onav(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); let t=document.getElementById(id); if(t)t.classList.add('active'); currentScreen=id; }
+
+// ============================================================
+// WEEK CALENDAR HELPERS
+// ============================================================
+
+// Get Monday of the week containing `date`, offset by `weekOffset` weeks
+function getWeekStart(date, offset){
+  let d = new Date(date);
+  let day = d.getDay(); // 0=Sun, 1=Mon, ...
+  let diff = day === 0 ? -6 : 1 - day; // Monday offset
+  d.setDate(d.getDate() + diff + (offset * 7));
+  d.setHours(0,0,0,0);
+  return d;
+}
+
+function getWeekDays(weekStart){
+  let days = [];
+  for (let i = 0; i < 7; i++){
+    let d = new Date(weekStart);
+    d.setDate(d.getDate() + i);
+    let k = dateKey(d);
+    days.push({
+      key: k,
+      date: d,
+      dayNum: d.getDate(),
+      dow: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i],
+      isToday: isToday(k),
+      plan: mealPlans[k] || null
+    });
+  }
+  return days;
+}
+
+function formatWeekRange(weekStart){
+  let end = new Date(weekStart);
+  end.setDate(end.getDate() + 6);
+  let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let sm = months[weekStart.getMonth()], em = months[end.getMonth()];
+  if (sm === em) return `${sm} ${weekStart.getDate()} – ${end.getDate()}, ${weekStart.getFullYear()}`;
+  return `${sm} ${weekStart.getDate()} – ${em} ${end.getDate()}, ${weekStart.getFullYear()}`;
+}
+
+function navigateWeek(delta){
+  weekOffset += delta;
+  selectedDateKey = dateKey(getWeekStart(TODAY, weekOffset));
+  renderRingPlan();
+  onav('plan');
+}
+
+function selectDay(key){
+  selectedDateKey = key;
+  // Auto-navigate week if selected date is outside current visible week
+  let selDate = parseDate(key);
+  let ws = getWeekStart(TODAY, weekOffset);
+  let we = new Date(ws); we.setDate(we.getDate() + 6);
+  if (selDate < ws || selDate > we){
+    // Calculate which week this date belongs to relative to today
+    let todayWeekStart = getWeekStart(TODAY, 0);
+    let diffDays = Math.floor((selDate - todayWeekStart) / (1000*60*60*24));
+    weekOffset = Math.floor(diffDays / 7);
+  }
+  renderRingPlan();
+}
 
 // ============================================================
 // FOOD ENTRY
 // ============================================================
 function openAdd(type){
-  mi=MP.meals.findIndex(m=>m.type===type);
-  let m=activeConcept==='ring';
-  let mf=m?`<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><div class="form-group"><span class="form-label">Protein g</span><input class="form-input" id="af-p" type="number" placeholder="0"></div><div class="form-group"><span class="form-label">Carbs g</span><input class="form-input" id="af-cb" type="number" placeholder="0"></div><div class="form-group"><span class="form-label">Fat g</span><input class="form-input" id="af-f" type="number" placeholder="0"></div></div>`:'';
+  let plan = activePlanOrCreate();
+  mi = plan.meals.findIndex(m=>m.type===type);
   let el=document.getElementById('add-food'); if(!el)return;
-  el.innerHTML=`<div class="nav-header"><button class="nav-back" onclick="renderToday();onav('today')">←</button><span class="nav-title">Add to ${type.charAt(0).toUpperCase()+type.slice(1)}</span></div><div class="screen-content compact"><div class="form-group"><span class="form-label">Food Name</span><input class="form-input" id="af-name" type="text" placeholder="e.g. Chicken breast"></div><div class="form-group"><span class="form-label">Calories (kcal)</span><input class="form-input" id="af-cals" type="number" placeholder="0"><span class="form-hint">Whole number, 0 or greater.</span></div>${mf}<div class="form-group"><span class="form-label">Note (optional)</span><input class="form-input" id="af-note" type="text" placeholder="e.g. Grilled, no oil"></div><div style="flex:1"></div><button class="btn btn-primary" onclick="addFoodItem()">Save Food Item</button><button class="btn btn-secondary" onclick="renderToday();onav('today')">Cancel</button></div>`;
+  el.innerHTML=`<div class="nav-header"><button class="nav-back" onclick="goBackFromAdd()">←</button><span class="nav-title">Add to ${type.charAt(0).toUpperCase()+type.slice(1)}</span></div><div class="screen-content compact"><div class="form-group"><span class="form-label">Food Name</span><input class="form-input" id="af-name" type="text" placeholder="e.g. Chicken breast"></div><div class="form-group"><span class="form-label">Calories (kcal)</span><input class="form-input" id="af-cals" type="number" placeholder="0"><span class="form-hint">Whole number, 0 or greater.</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><div class="form-group"><span class="form-label">Protein g</span><input class="form-input" id="af-p" type="number" placeholder="0"></div><div class="form-group"><span class="form-label">Carbs g</span><input class="form-input" id="af-cb" type="number" placeholder="0"></div><div class="form-group"><span class="form-label">Fat g</span><input class="form-input" id="af-f" type="number" placeholder="0"></div></div><div class="form-group"><span class="form-label">Note (optional)</span><input class="form-input" id="af-note" type="text" placeholder="e.g. Grilled, no oil"></div><div style="flex:1"></div><button class="btn btn-primary" onclick="addFoodItem()">Save Food Item</button><button class="btn btn-secondary" onclick="goBackFromAdd()">Cancel</button></div>`;
   onav('add-food');
 }
+
+function goBackFromAdd(){
+  if (currentScreen === 'plan' || document.getElementById('plan')?.classList.contains('active')){
+    renderRingPlan(); onav('plan');
+  } else {
+    renderRingToday(); onav('today');
+  }
+}
+
 function addFoodItem(){
-  let n=document.getElementById('af-name').value.trim(),c=parseInt(document.getElementById('af-cals').value.trim()),o=(document.getElementById('af-note')||{}).value||'';
+  let n=document.getElementById('af-name').value.trim(), c=parseInt(document.getElementById('af-cals').value.trim()), o=(document.getElementById('af-note')||{}).value||'';
   if(!n){document.getElementById('af-name').classList.add('error');return;}
   if(isNaN(c)||c<0){document.getElementById('af-cals').classList.add('error');return;}
   let item={name:n,calories:c,note:o.trim()};
   let p=document.getElementById('af-p'); if(p){let pv=parseInt(p.value.trim())||0;if(pv>=0)item.protein=pv;}
   let cb=document.getElementById('af-cb'); if(cb){let cv=parseInt(cb.value.trim())||0;if(cv>=0)item.carbs=cv;}
   let f=document.getElementById('af-f'); if(f){let fv=parseInt(f.value.trim())||0;if(fv>=0)item.fat=fv;}
-  MP.meals[mi].items.push(item);
-  renderToday(); onav('today');
+  mealPlans[selectedDateKey].meals[mi].items.push(item);
+  goBackFromAdd();
 }
 
 // ============================================================
 // DISPATCH
 // ============================================================
-function renderToday(){
-  if(activeConcept==='neubrutalist') renderNbToday();
-  else if(activeConcept==='ring') renderRingToday();
-  else if(activeConcept==='streak') renderStreakToday();
-  else if(activeConcept==='weekly') renderWeeklyToday();
-}
-function renderCurrent(){ renderToday(); if(currentScreen!=='add-food') onav(currentScreen||'today'); }
-
-// ---- NEUBRUTALIST ----
-function renderNbToday(){
-  let el=document.getElementById('today'); if(!el)return;
-  if(!MP){ el.innerHTML=renderEmptyState(); return; }
-  let s=S(), meals=MP.meals.map(m=>{let c=mc(m);return`<div class="meal-card" onclick="openAdd('${m.type}')"><div class="meal-icon-block ${m.type}">${MI[m.type]}</div><div class="meal-body"><div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div><div class="meal-meta">${m.items.length} item${m.items.length!==1?'s':''}</div></div><div class="meal-cal">${c}<small>kcal</small></div></div>`;}).join('');
-  el.innerHTML=`<div class="nav-header"><span class="nav-title">Today</span></div><div class="screen-content compact"><div class="card" style="text-align:center"><span class="t-label" style="display:block;margin-bottom:8px">Daily Target</span><div class="t-hero" style="color:var(--accent);margin-bottom:4px">${tgt().toLocaleString()}</div><span class="t-caption">kcal</span><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill${s.remaining<0?' over':''}" style="width:${s.pct}%"></div></div></div></div><div class="summary-grid"><div class="summary-tile"><div class="summary-val" style="color:var(--accent)">${tc().toLocaleString()}</div><div class="summary-lbl">Planned</div></div><div class="summary-tile"><div class="summary-val" style="color:${s.remaining>=0?'var(--secondary)':'var(--accent)'}">${Math.abs(s.remaining).toLocaleString()}</div><div class="summary-lbl">${s.remaining>=0?'Remaining':'Over'}</div></div></div><span class="badge ${s.badge}">${s.label}</span><span class="t-label">Meals</span>${meals}</div>`;
-  addConceptNav('today');
-}
-function renderNbMeals(){
-  let el=document.getElementById('mealplan'); if(!el||!MP)return;
-  let meals=MP.meals.map(m=>{let c=mc(m);return`<div class="meal-card" onclick="openAdd('${m.type}')"><div class="meal-icon-block ${m.type}">${MI[m.type]}</div><div class="meal-body"><div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div><div class="meal-meta">${m.items.length} item${m.items.length!==1?'s':''}</div></div><div class="meal-cal">${c}<small>kcal</small></div></div>`;}).join('');
-  el.innerHTML=`<div class="nav-header"><span class="nav-title">Meal Plan</span></div><div class="screen-content compact"><div style="display:flex;justify-content:space-between;align-items:center"><span class="t-label">Today's Meals</span><span class="t-caption">${tc().toLocaleString()} kcal</span></div>${meals}</div>`;
-  addConceptNav('mealplan');
+function renderToday(){ renderRingToday(); }
+function renderCurrent(){
+  if (currentScreen === 'plan' || document.getElementById('plan')?.classList.contains('active')){
+    renderRingPlan(); onav('plan');
+  } else if (currentScreen === 'insights') {
+    renderRingInsights(); onav('insights');
+  } else {
+    renderRingToday(); onav('today');
+  }
 }
 
-// ---- CALORIE RING ----
+// ============================================================
+// TODAY VIEW (Calorie Ring dashboard)
+// ============================================================
 function renderRingToday(){
   let el=document.getElementById('today'); if(!el)return;
-  if(!MP){ el.innerHTML=renderEmptyState(); return; }
-  let s=S(), tot=tc(), t=tgt(), ringOff=C*(1-s.pct/100);
-  let prot=MP.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.protein||0),0),0);
-  let carb=MP.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.carbs||0),0),0);
-  let fatv=MP.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.fat||0),0),0);
+  let plan = todayPlan();
+  if(!plan){ el.innerHTML=renderEmptyState(); return; }
+  let tot = tcPlan(plan), t = tgt(), s = S(plan), ringOff = C*(1 - s.pct/100);
+  let prot=plan.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.protein||0),0),0);
+  let carb=plan.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.carbs||0),0),0);
+  let fatv=plan.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.fat||0),0),0);
   let mmax=Math.max(prot,carb,fatv,1);
-  let meals=MP.meals.map(m=>{let c=mc(m);return`<div class="meal-card" style="gap:10px" onclick="openAdd('${m.type}')"><span class="ring-meal-icon">${MI[m.type]}</span><div class="meal-body"><div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div><div class="meal-meta">${m.items.length} items</div></div><div class="meal-cal">${c}<small>kcal</small></div></div>`;}).join('');
+  let meals=plan.meals.map(m=>{let c=mc(m);return`<div class="meal-card" style="gap:10px" onclick="selectedDateKey=TODAY_KEY;openAdd('${m.type}')"><span class="ring-meal-icon">${MI[m.type]}</span><div class="meal-body"><div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div><div class="meal-meta">${m.items.length} items</div></div><div class="meal-cal">${c}<small>kcal</small></div></div>`;}).join('');
   el.innerHTML=`<div class="nav-header"><span class="nav-title">Today</span></div><div class="screen-content compact"><div class="ring-container"><div class="ring-center-wrap"><svg class="ring-svg" viewBox="0 0 172 172"><circle class="ring-bg" cx="86" cy="86" r="68"/><circle class="ring-fill" cx="86" cy="86" r="68" stroke-dasharray="${C}" stroke-dashoffset="${ringOff}"/></svg><div class="ring-center-text"><div class="ring-number">${tot.toLocaleString()}</div><div class="ring-sub">of ${t.toLocaleString()} kcal</div></div></div></div><span class="badge ${s.badge}">${s.label}</span><div class="card-sm" style="display:flex;flex-direction:column;gap:8px"><span class="t-label">Macronutrients</span><div class="macro-row"><div class="macro-dot protein"></div><span class="macro-label">Protein</span><div class="macro-bar-wrap"><div class="macro-bar-fill protein" style="width:${(prot/mmax)*100}%"></div></div><span class="macro-val">${prot}g</span></div><div class="macro-row"><div class="macro-dot carbs"></div><span class="macro-label">Carbs</span><div class="macro-bar-wrap"><div class="macro-bar-fill carbs" style="width:${(carb/mmax)*100}%"></div></div><span class="macro-val">${carb}g</span></div><div class="macro-row"><div class="macro-dot fat"></div><span class="macro-label">Fat</span><div class="macro-bar-wrap"><div class="macro-bar-fill fat" style="width:${(fatv/mmax)*100}%"></div></div><span class="macro-val">${fatv}g</span></div></div><span class="t-label">Meals</span>${meals}</div>`;
   addConceptNav('today');
 }
-function renderRingDiary(){
-  let el=document.getElementById('diary'); if(!el||!MP)return;
-  let meals=MP.meals.map(m=>{let c=mc(m),items=m.items.map(i=>`<div class="food-row"><div class="food-info"><div class="fn">${i.name}</div>${i.note?`<div class="fnote">${i.note}</div>`:''}</div><div class="food-cals">${i.calories} kcal</div></div>`).join('');return`<div class="card-sm"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:18px">${MI[m.type]}</span><span class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</span><span style="margin-left:auto;font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text)">${c}</span><button class="btn-icon-del" onclick="openAdd('${m.type}')">+</button></div>${items||'<span class="t-caption">No items yet</span>'}</div>`;}).join('');
-  el.innerHTML=`<div class="nav-header"><span class="nav-title">Diary</span></div><div class="screen-content compact"><div style="display:flex;justify-content:space-between;align-items:center"><span class="t-label">Today's Food</span><span class="t-caption">${tc().toLocaleString()} / ${tgt().toLocaleString()} kcal</span></div>${meals}</div>`;
-  addConceptNav('diary');
+
+// ============================================================
+// PLAN VIEW (Week strip + date-based meal planning)
+// ============================================================
+function renderRingPlan(){
+  let el=document.getElementById('plan'); if(!el)return;
+
+  let ws = getWeekStart(TODAY, weekOffset);
+  let weekDays = getWeekDays(ws);
+  let weekLabel = formatWeekRange(ws);
+
+  // Build week strip
+  let dayPills = weekDays.map(d => {
+    let cls = 'week-day-pill';
+    if (d.isToday) cls += ' today';
+    if (d.key === selectedDateKey) cls += ' selected';
+    let dotCls = 'week-day-dot empty';
+    if (d.plan && d.plan.meals.some(m=>m.items.length>0)){
+      let planCal = tcPlan(d.plan);
+      let sday = S(d.plan);
+      dotCls = sday.remaining < 0 ? 'week-day-dot over' : 'week-day-dot';
+    }
+    return `<div class="${cls}" onclick="selectDay('${d.key}')">
+      <span class="week-dow">${d.dow}</span>
+      <span class="week-date-num">${d.dayNum}</span>
+      <span class="${dotCls}"></span>
+    </div>`;
+  }).join('');
+
+  // Selected day details
+  let selDate = parseDate(selectedDateKey);
+  let selPlan = mealPlans[selectedDateKey] || null;
+  let selIsToday = isToday(selectedDateKey);
+  let selIsPast = isPast(selectedDateKey);
+  let selIsFuture = isFuture(selectedDateKey);
+  let isReadonly = selIsPast; // past days are view-only
+
+  let dayDetailHTML = '';
+  if (selPlan){
+    let tot = tcPlan(selPlan), t = tgt(), s = S(selPlan);
+    let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let dayTitle = `${months[selDate.getMonth()]} ${selDate.getDate()}, ${selDate.getFullYear()}`;
+    let dowLabel = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][selDate.getDay()];
+
+    let mealsHTML = selPlan.meals.map(m => {
+      let c = mc(m);
+      if (isReadonly){
+        // View-only: no onclick, subtle styling
+        return `<div class="meal-card readonly" style="gap:10px">
+          <span class="ring-meal-icon">${MI[m.type]}</span>
+          <div class="meal-body">
+            <div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div>
+            <div class="meal-meta">${m.items.length} items</div>
+          </div>
+          <div class="meal-cal">${c}<small>kcal</small></div>
+        </div>`;
+      } else {
+        return `<div class="meal-card" style="gap:10px" onclick="openAdd('${m.type}')">
+          <span class="ring-meal-icon">${MI[m.type]}</span>
+          <div class="meal-body">
+            <div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div>
+            <div class="meal-meta">${m.items.length} items</div>
+          </div>
+          <div class="meal-cal">${c}<small>kcal</small></div>
+        </div>`;
+      }
+    }).join('');
+
+    dayDetailHTML = `
+      <div class="plan-day-header">
+        <div>
+          <div class="plan-day-title">${dowLabel}</div>
+          <div class="plan-day-sub">${dayTitle} · <b>${tot.toLocaleString()}</b> / ${t.toLocaleString()} kcal</div>
+        </div>
+        ${isReadonly ? '<span class="plan-readonly-badge">🔒 View only</span>' : (selIsToday ? '<span class="plan-readonly-badge" style="background:#DBEAFE;color:#1E40AF;border-color:#BFDBFE">Today</span>' : '<span class="plan-readonly-badge" style="background:#F0FDF4;color:#166534;border-color:#BBF7D0">Planning</span>')}
+      </div>
+      <div class="progress-wrap" style="margin-top:0">
+        <div class="progress-bar"><div class="progress-fill${s.remaining<0?' over':''}" style="width:${s.pct}%"></div></div>
+      </div>
+      <span class="badge ${s.badge}">${s.label}</span>
+      <span class="t-label">Meals</span>
+      ${mealsHTML}`;
+  } else {
+    // No meal plan for this day
+    let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let dayTitle = `${months[selDate.getMonth()]} ${selDate.getDate()}, ${selDate.getFullYear()}`;
+    let dowLabel = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][selDate.getDay()];
+
+    if (isReadonly){
+      dayDetailHTML = `
+        <div class="plan-day-header">
+          <div>
+            <div class="plan-day-title">${dowLabel}</div>
+            <div class="plan-day-sub">${dayTitle}</div>
+          </div>
+          <span class="plan-readonly-badge">🔒 View only</span>
+        </div>
+        <div class="plan-empty-state">
+          <div class="plan-empty-icon">📋</div>
+          <div class="plan-empty-title">No data for this day</div>
+          <div class="plan-empty-body">You didn't log any meals on this date.</div>
+        </div>`;
+    } else {
+      dayDetailHTML = `
+        <div class="plan-day-header">
+          <div>
+            <div class="plan-day-title">${dowLabel}</div>
+            <div class="plan-day-sub">${dayTitle}</div>
+          </div>
+          <span class="plan-readonly-badge" style="background:#F0FDF4;color:#166534;border-color:#BBF7D0">Planning</span>
+        </div>
+        <div class="plan-empty-state">
+          <div class="plan-empty-icon">📝</div>
+          <div class="plan-empty-title">No meal plan yet</div>
+          <div class="plan-empty-body">Tap any meal slot below to start planning this day.</div>
+        </div>
+        <span class="t-label">Meals</span>
+        ${MT.map(t => `<div class="meal-card" style="gap:10px" onclick="selectedDateKey='${selectedDateKey}';openAdd('${t}')"><span class="ring-meal-icon">${MI[t]}</span><div class="meal-body"><div class="meal-name">${t.charAt(0).toUpperCase()+t.slice(1)}</div><div class="meal-meta">0 items</div></div><div class="meal-cal">0<small>kcal</small></div></div>`).join('')}`;
+    }
+  }
+
+  el.innerHTML = `<div class="nav-header"><span class="nav-title">Plan</span></div>
+    <div class="screen-content compact">
+      <div class="week-nav-row">
+        <button class="week-nav-arrow" onclick="navigateWeek(-1)">←</button>
+        <span class="week-label-text">${weekLabel}</span>
+        <button class="week-nav-arrow" onclick="navigateWeek(1)">→</button>
+      </div>
+      <div class="week-strip">${dayPills}</div>
+      ${dayDetailHTML}
+    </div>`;
+  addConceptNav('plan');
 }
+
+// ============================================================
+// INSIGHTS VIEW
+// ============================================================
 function renderRingInsights(){
   let el=document.getElementById('insights'); if(!el)return;
-  let s=S(),prot=MP?MP.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.protein||0),0),0):0;
-  let carb=MP?MP.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.carbs||0),0),0):0;
-  let fatv=MP?MP.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.fat||0),0),0):0;
-  el.innerHTML=`<div class="nav-header"><span class="nav-title">Insights</span></div><div class="screen-content compact"><div class="card"><span class="t-label" style="display:block;margin-bottom:12px">Calories</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center"><div><div class="t-metric" style="color:var(--accent)">${tc().toLocaleString()}</div><span class="t-caption">Consumed</span></div><div><div class="t-metric">${tgt().toLocaleString()}</div><span class="t-caption">Target</span></div></div></div><div class="card-sm"><span class="t-label" style="display:block;margin-bottom:10px">Macros</span><div class="macro-row"><div class="macro-dot protein"></div><span class="macro-label">Protein</span><span class="macro-val">${prot}g</span></div><div class="macro-row"><div class="macro-dot carbs"></div><span class="macro-label">Carbs</span><span class="macro-val">${carb}g</span></div><div class="macro-row"><div class="macro-dot fat"></div><span class="macro-label">Fat</span><span class="macro-val">${fatv}g</span></div></div><span class="badge ${s.badge}">${s.label}</span></div>`;
+  let plan = todayPlan();
+  let tot = tcPlan(plan);
+  let s = plan ? S(plan) : {badge:'yellow',label:'No data yet'};
+  let prot=plan?plan.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.protein||0),0),0):0;
+  let carb=plan?plan.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.carbs||0),0),0):0;
+  let fatv=plan?plan.meals.reduce((s,m)=>s+m.items.reduce((ss,i)=>ss+(i.fat||0),0),0):0;
+  el.innerHTML=`<div class="nav-header"><span class="nav-title">Insights</span></div><div class="screen-content compact"><div class="card"><span class="t-label" style="display:block;margin-bottom:12px">Calories</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center"><div><div class="t-metric" style="color:var(--accent)">${tot.toLocaleString()}</div><span class="t-caption">Consumed</span></div><div><div class="t-metric">${tgt().toLocaleString()}</div><span class="t-caption">Target</span></div></div></div><div class="card-sm"><span class="t-label" style="display:block;margin-bottom:10px">Macros</span><div class="macro-row"><div class="macro-dot protein"></div><span class="macro-label">Protein</span><span class="macro-val">${prot}g</span></div><div class="macro-row"><div class="macro-dot carbs"></div><span class="macro-label">Carbs</span><span class="macro-val">${carb}g</span></div><div class="macro-row"><div class="macro-dot fat"></div><span class="macro-label">Fat</span><span class="macro-val">${fatv}g</span></div></div><span class="badge ${s.badge}">${s.label}</span></div>`;
   addConceptNav('insights');
 }
-
-// ---- HABIT STREAK ----
-function renderStreakToday(){
-  let el=document.getElementById('today'); if(!el)return;
-  if(!MP){ el.innerHTML=renderEmptyState(); return; }
-  let s=S(), tot=tc();
-  let heatmapHTML = weekDays.map(d=>`<div class="heatmap-dot ${d.actual>0&&d.plan>0?(d.actual<=d.plan?'hit':'miss'):''}"></div>`).join('');
-  let meals=MP.meals.map(m=>{let c=mc(m);return`<div class="streak-meal" onclick="openAdd('${m.type}')"><span style="font-size:22px">${MI[m.type]}</span><div class="meal-body"><div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div><div class="meal-meta">${m.items.length} item${m.items.length!==1?'s':''}</div></div><div class="meal-cal">${c}<small>kcal</small></div></div>`;}).join('');
-  el.innerHTML=`<div class="nav-header"><span class="nav-title">🔥 Streak</span></div><div class="screen-content compact">
-    <div class="streak-hero"><span class="streak-flame">🔥</span><div class="streak-count">${streakCount}</div><div class="streak-sub">day streak</div></div>
-    <div class="streak-checkin"><span class="t-caption">Today:</span><div class="streak-check-btn ${streakChecked?'checked':''}" onclick="toggleStreakCheck()" id="streakCheckBtn">✓</div><span class="t-caption">${streakChecked?'Done!':'Stay on target'}</span></div>
-    <div class="card-sm" style="text-align:center"><span class="t-label" style="display:block;margin-bottom:8px">This Week</span><div class="heatmap">${heatmapHTML}</div><div style="display:flex;justify-content:space-between;margin-top:6px;font-size:9px;color:var(--muted-fg);font-weight:600">${weekDays.map(d=>d.dow).join('')}</div></div>
-    <div class="card" style="text-align:center"><span class="t-caption" style="display:block;margin-bottom:4px">Today's Target</span><div class="t-hero" style="color:var(--accent);font-size:32px">${tgt().toLocaleString()}<span class="t-caption" style="display:block;font-weight:400">kcal</span></div><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill${s.remaining<0?' over':''}" style="width:${s.pct}%"></div></div></div><span class="t-caption" style="margin-top:6px">${tot.toLocaleString()} eaten · ${Math.abs(s.remaining).toLocaleString()} ${s.remaining>=0?'left':'over'}</span></div>
-    <span class="t-label">Log</span>${meals}
-  </div>`;
-  addConceptNav('today');
-}
-function toggleStreakCheck(){
-  streakChecked=!streakChecked;
-  let btn=document.getElementById('streakCheckBtn');
-  if(btn) btn.classList.toggle('checked', streakChecked);
-}
-function renderStreakCalendar(){
-  let el=document.getElementById('calendar'); if(!el)return;
-  let dots=weekDays.map(d=>`<div class="heatmap-dot ${d.actual>0&&d.plan>0?(d.actual<=d.plan?'hit':'miss'):''}"></div>`).join('');
-  el.innerHTML=`<div class="nav-header"><span class="nav-title">Calendar</span></div><div class="screen-content compact"><div class="card"><span class="t-label" style="display:block;margin-bottom:12px">June 2026</span><div class="heatmap" style="gap:5px">${dots}</div><div style="display:flex;justify-content:space-between;margin-top:6px;font-size:9px;color:var(--muted-fg);font-weight:600">${weekDays.map(d=>d.dow+' '+d.num).join(' ')}</div></div><div class="card-sm"><span class="t-label" style="display:block;margin-bottom:8px">Streak Stats</span><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center"><div><div class="t-metric" style="color:var(--accent)">${streakCount}</div><span class="t-caption">Streak</span></div><div><div class="t-metric">${weekDays.filter(d=>d.actual>0&&d.actual<=d.plan).length}</div><span class="t-caption">On Track</span></div><div><div class="t-metric" style="color:#DC2626">${weekDays.filter(d=>d.actual>0&&d.actual>d.plan).length}</div><span class="t-caption">Over</span></div></div></div><p class="disclaimer" style="margin-top:16px">A streak means you stayed within your daily target. Keep it going!</p></div>`;
-  addConceptNav('calendar');
-}
-
-// ---- WEEKLY PLANNER ----
-function renderWeeklyToday(){
-  let el=document.getElementById('today'); if(!el)return;
-  let s=S(), tot=tc();
-  let grid=weekDays.map(d=>{
-    let cls='week-day'; if(d.num===20) cls+=' today';
-    let badge='';
-    if(d.plan>0&&d.actual>0) badge=d.actual<=d.plan?`<div class="week-day-badge">✓</div>`:`<div class="week-day-badge over">+${d.actual-d.plan}</div>`;
-    else if(d.plan>0) badge=`<div class="week-day-badge">${d.plan}</div>`;
-    return `<div class="${cls}" onclick="openDayPlan(${d.num})"><div class="week-day-num">${d.num}</div><div class="week-day-dow">${d.dow}</div>${badge}</div>`;
-  }).join('');
-  let todayDay=weekDays.find(d=>d.num===20);
-  let meals=MP?MP.meals.map(m=>{let c=mc(m);return`<div class="week-meal-slot${m.items.length===0?' empty':''}" onclick="openAdd('${m.type}')"><span style="font-size:20px">${MI[m.type]}</span><div class="meal-body"><div class="meal-name">${m.type.charAt(0).toUpperCase()+m.type.slice(1)}</div><div class="meal-meta">${m.items.length?m.items.length+' items · '+c+' kcal':'Tap to plan'}</div></div></div>`;}).join(''):'';
-  el.innerHTML=`<div class="nav-header"><span class="nav-title">Meal Planner</span></div><div class="screen-content compact">
-    <div class="week-header"><span class="week-nav" onclick="">←</span><span class="week-label">June 16 – 22, 2026</span><span class="week-nav" onclick="">→</span></div>
-    <div class="week-grid">${grid}</div>
-    <div class="card"><span class="t-label" style="display:block;margin-bottom:10px">Today · ${todayDay?todayDay.dow+' '+todayDay.num:'Friday 20'}</span><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div class="t-hero" style="font-size:28px;color:var(--accent)">${tot.toLocaleString()}</div><div class="t-caption">/ ${tgt().toLocaleString()} kcal planned</div></div><div class="progress-wrap" style="margin-top:0"><div class="progress-bar"><div class="progress-fill${s.remaining<0?' over':''}" style="width:${s.pct}%"></div></div></div></div>
-    <span class="t-label">Today's Meals</span>${meals}
-  </div>`;
-  addConceptNav('today');
-}
-function openDayPlan(dayNum){ renderWeeklyToday(); }
 
 // ============================================================
 // ONBOARDING
@@ -534,9 +618,10 @@ function renderOnboarding(id){
   };
   return `<div class="screen screen-scroll active" id="${id}">${screens[id]||''}</div>`;
 }
+
 function renderCalResult(){
   let el=document.getElementById('calorie-result'); if(!el||!CT)return;
-  el.innerHTML=`<div class="nav-header"><button class="nav-back" onclick="onav('goal-setup')">←</button><span class="nav-title">Your Target</span></div><div class="screen-content center"><div class="cal-hero"><p class="t-caption" style="margin-bottom:12px">Your estimated daily target is</p><div class="cal-hero-num">${CT.target.toLocaleString()}</div><div class="cal-hero-unit">kcal / day</div></div><div class="cal-stat-row"><div class="cal-stat-box"><div class="sv">${CT.bmr.toLocaleString()}</div><div class="sl">BMR</div></div><div class="cal-stat-box"><div class="sv">${CT.maintenance.toLocaleString()}</div><div class="sl">Maintenance</div></div><div class="cal-stat-box"><div class="sv">${CT.target.toLocaleString()}</div><div class="sl">Target</div></div></div><p class="t-caption" style="margin-top:8px">Use this as a planning guide, not a strict rule.</p><div style="flex:1"></div><button class="btn btn-primary" onclick="crtPlan();renderToday();onav('today')">Create Meal Plan</button><button class="btn btn-secondary" onclick="onav('goal-setup')">Edit Profile</button><p class="disclaimer" style="margin-top:12px">This is an estimate for planning purposes only. Consult a qualified health professional for medical advice.</p></div>`;
+  el.innerHTML=`<div class="nav-header"><button class="nav-back" onclick="onav('goal-setup')">←</button><span class="nav-title">Your Target</span></div><div class="screen-content center"><div class="cal-hero"><p class="t-caption" style="margin-bottom:12px">Your estimated daily target is</p><div class="cal-hero-num">${CT.target.toLocaleString()}</div><div class="cal-hero-unit">kcal / day</div></div><div class="cal-stat-row"><div class="cal-stat-box"><div class="sv">${CT.bmr.toLocaleString()}</div><div class="sl">BMR</div></div><div class="cal-stat-box"><div class="sv">${CT.maintenance.toLocaleString()}</div><div class="sl">Maintenance</div></div><div class="cal-stat-box"><div class="sv">${CT.target.toLocaleString()}</div><div class="sl">Target</div></div></div><p class="t-caption" style="margin-top:8px">Use this as a planning guide, not a strict rule.</p><div style="flex:1"></div><button class="btn btn-primary" onclick="crtPlan();renderRingToday();onav('today')">Create Meal Plan</button><button class="btn btn-secondary" onclick="onav('goal-setup')">Edit Profile</button><p class="disclaimer" style="margin-top:12px">This is an estimate for planning purposes only. Consult a qualified health professional for medical advice.</p></div>`;
 }
 
 // ============================================================
@@ -546,63 +631,108 @@ function renderProfile(){
   let el=document.getElementById('profile'); if(!el)return;
   let al={sedentary:'Sedentary',lightlyActive:'Lightly Active',moderatelyActive:'Moderately Active',veryActive:'Very Active'};
   let gl={maintain:'Maintain weight',lose:'Lose weight slowly',gain:'Gain weight slowly'};
-  el.innerHTML=`<div class="nav-header"><span class="nav-title">Profile</span></div><div class="screen-content"><div class="card"><span class="t-label" style="display:block;margin-bottom:14px">Your Details</span><div class="profile-row"><span class="profile-row-lbl">Age</span><span class="profile-row-val">${P.age}</span></div><div class="profile-row"><span class="profile-row-lbl">Sex</span><span class="profile-row-val">${P.sex==='female'?'Female':'Male'}</span></div><div class="profile-row"><span class="profile-row-lbl">Height</span><span class="profile-row-val">${P.height} cm</span></div><div class="profile-row"><span class="profile-row-lbl">Weight</span><span class="profile-row-val">${P.weight} kg</span></div><div class="profile-row"><span class="profile-row-lbl">Activity</span><span class="profile-row-val">${al[P.activity]}</span></div><div class="profile-row"><span class="profile-row-lbl">Goal</span><span class="profile-row-val">${gl[P.goal]}</span></div></div>${CT?`<div class="card"><span class="t-label" style="display:block;margin-bottom:14px">Calorie Target</span><div style="display:flex;align-items:baseline;gap:8px"><span class="t-hero" style="color:var(--accent);font-size:32px">${CT.target.toLocaleString()}</span><span class="t-caption">kcal/day</span></div><div style="display:flex;gap:16px;margin-top:8px"><span class="t-caption">BMR <b>${CT.bmr.toLocaleString()}</b></span><span class="t-caption">Maintenance <b>${CT.maintenance.toLocaleString()}</b></span></div></div>`:''}<p class="disclaimer">This is an estimate for planning purposes only. Consult a qualified health professional for medical advice.</p><button class="btn btn-secondary" onclick="renderEditProfile();onav('profile-edit')">Edit Profile</button><button class="btn btn-secondary" onclick="calc();renderCalResult();renderProfile();onav('profile')">Recalculate Target</button><button class="btn btn-black" onclick="resetData()">Reset Data</button></div>`;
+  el.innerHTML=`<div class="nav-header"><span class="nav-title">Profile</span></div><div class="screen-content"><div class="card"><span class="t-label" style="display:block;margin-bottom:14px">Your Details</span><div class="profile-row"><span class="profile-row-lbl">Age</span><span class="profile-row-val">${P.age}</span></div><div class="profile-row"><span class="profile-row-lbl">Sex</span><span class="profile-row-val">${P.sex==='female'?'Female':'Male'}</span></div><div class="profile-row"><span class="profile-row-lbl">Height</span><span class="profile-row-val">${P.height} cm</span></div><div class="profile-row"><span class="profile-row-lbl">Weight</span><span class="profile-row-val">${P.weight} kg</span></div><div class="profile-row"><span class="profile-row-lbl">Activity</span><span class="profile-row-val">${al[P.activity]}</span></div><div class="profile-row"><span class="profile-row-lbl">Goal</span><span class="profile-row-val">${gl[P.goal]}</span></div></div>${CT?`<div class="card"><span class="t-label" style="display:block;margin-bottom:14px">Calorie Target</span><div style="display:flex;align-items:baseline;gap:8px"><span class="t-hero" style="color:var(--accent);font-size:32px">${CT.target.toLocaleString()}</span><span class="t-caption">kcal/day</span></div><div style="display:flex;gap:16px;margin-top:8px"><span class="t-caption">BMR <b>${CT.bmr.toLocaleString()}</b></span><span class="t-caption">Maintenance <b>${CT.maintenance.toLocaleString()}</b></span></div></div>`:''}<p class="disclaimer">This is an estimate for planning purposes only. Consult a qualified health professional for medical advice.</p><button class="btn btn-secondary" onclick="renderEditProfile();onav('profile-edit')">Edit Profile</button><button class="btn btn-secondary" onclick="calc();renderCalResult();renderProfile();onav('profile')">Recalculate Target</button><button class="btn btn-secondary" onclick="resetData()">Reset Data</button></div>`;
   addConceptNav('profile');
 }
+
 function renderEditProfile(){
   let el=document.getElementById('profile-edit'); if(!el)return;
-  el.innerHTML=`<div class="nav-header"><button class="nav-back" onclick="renderProfile();onav('profile')">←</button><span class="nav-title">Edit Profile</span></div><div class="screen-content compact"><div class="form-group"><span class="form-label">Age</span><div class="stepper"><button onclick="stp('age',-1)">−</button><span class="val" id="vae-age">${P.age}</span><button onclick="stp('age',1)">+</button></div></div><div class="form-group"><span class="form-label">Sex</span><div class="segmented" id="sg-sex-e"><button class="${P.sex==='female'?'active':''}" onclick="sel('sex','female',this)">Female</button><button class="${P.sex==='male'?'active':''}" onclick="sel('sex','male',this)">Male</button></div></div><div class="form-group"><span class="form-label">Height (cm)</span><div class="stepper"><button onclick="stp('height',-1)">−</button><span class="val" id="vae-height">${P.height}</span><button onclick="stp('height',1)">+</button></div></div><div class="form-group"><span class="form-label">Weight (kg)</span><div class="stepper"><button onclick="stp('weight',-1)">−</button><span class="val" id="vae-weight">${P.weight}</span><button onclick="stp('weight',1)">+</button></div></div><div class="form-group"><span class="form-label">Activity</span><div class="segmented" id="sg-activity-e" style="flex-wrap:wrap"><button class="${P.activity==='sedentary'?'active':''}" onclick="sel('activity','sedentary',this)">Sedentary</button><button class="${P.activity==='lightlyActive'?'active':''}" onclick="sel('activity','lightlyActive',this)">Lightly Active</button><button class="${P.activity==='moderatelyActive'?'active':''}" onclick="sel('activity','moderatelyActive',this)">Moderate</button><button class="${P.activity==='veryActive'?'active':''}" onclick="sel('activity','veryActive',this)">Very Active</button></div></div><div class="form-group"><span class="form-label">Goal</span><div class="segmented" id="sg-goal-e" style="flex-direction:column;gap:4px"><button class="${P.goal==='maintain'?'active':''}" onclick="sel('goal','maintain',this)">Maintain weight</button><button class="${P.goal==='lose'?'active':''}" onclick="sel('goal','lose',this)">Lose weight</button><button class="${P.goal==='gain'?'active':''}" onclick="sel('goal','gain',this)">Gain weight</button></div></div><div style="flex:1"></div><button class="btn btn-primary" onclick="saveEditProfile()">Save & Recalculate</button><button class="btn btn-secondary" onclick="renderProfile();onav('profile')">Cancel</button></div>`;
+  el.innerHTML=`<div class="nav-header"><button class="nav-back" onclick="renderProfile();onav('profile')">←</button><span class="nav-title">Edit Profile</span></div><div class="screen-content compact"><div class="form-group"><span class="form-label">Age</span><div class="stepper"><button onclick="stp('age',-1)">−</button><span class="val" id="vae-age">${P.age}</span><button onclick="stp('age',1)">+</button></div></div><div class="form-group"><span class="form-label">Sex</span><div class="segmented" id="sg-sex-e"><button class="${P.sex==='female'?'active':''}" onclick="sel('sex','female',this)">Female</button><button class="${P.sex==='male'?'active':''}" onclick="sel('sex','male',this)">Male</button></div></div><div class="form-group"><span class="form-label">Height (cm)</span><div class="stepper"><button onclick="stp('height',-1)">−</button><span class="val" id="vae-height">${P.height}</span><button onclick="stp('height',1)">+</button></div></div><div class="form-group"><span class="form-label">Weight (kg)</span><div class="stepper"><button onclick="stp('weight',-1)">−</button><span class="val" id="vae-weight">${P.weight}</span><button onclick="stp('weight',1)">+</button></div></div><div class="form-group"><span class="form-label">Activity</span><div class="segmented" id="sg-activity-e" style="flex-wrap:wrap"><button class="${P.activity==='sedentary'?'active':''}" onclick="sel('activity','sedentary',this)">Sedentary</button><button class="${P.activity==='lightlyActive'?'active':''}" onclick="sel('activity','lightlyActive',this)">Lightly Active</button><button class="${P.activity==='moderatelyActive'?'active':''}" onclick="sel('activity','moderatelyActive',this)">Moderate</button><button class="${P.activity==='veryActive'?'active':''}" onclick="sel('activity','veryActive',this)">Very Active</button></div></div><div class="form-group"><span class="form-label">Goal</span><div class="segmented" id="sg-goal-e" style="flex-direction:column;gap:4px"><button class="${P.goal==='maintain'?'active':''}" onclick="sel('goal','maintain',this)">Maintain weight</button><button class="${P.goal==='lose'?'active':''}" onclick="sel('goal','lose',this)">Lose weight</button><button class="${P.goal==='gain'?'active':''}" onclick="sel('goal','gain',this)">Gain weight</button></div></div><div style="flex:1"></div><button class="btn btn-primary" onclick="saveEditProfile()">Save</button><button class="btn btn-secondary" onclick="renderProfile();onav('profile')">Cancel</button></div>`;
 }
+
 function saveEditProfile(){P.age=parseInt(document.getElementById('vae-age')?.textContent)||P.age;P.height=parseInt(document.getElementById('vae-height')?.textContent)||P.height;P.weight=parseInt(document.getElementById('vae-weight')?.textContent)||P.weight;calc();renderProfile();onav('profile');}
-function resetData(){if(!confirm('Reset all data?'))return;P={age:30,sex:'female',height:170,weight:70,activity:'sedentary',goal:'maintain'};CT=null;MP=null;switchConcept(activeConcept,document.querySelector(`[data-concept="${activeConcept}"]`));}
-function renderEmptyState(){return`<div class="nav-header"><span class="nav-title">Today</span></div><div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No meal plan yet</div><div class="empty-body">Create one to start tracking your daily calories.</div><button class="btn btn-primary" style="width:auto;padding:14px 36px" onclick="crtPlan();renderToday();onav('today')">Create Meal Plan</button></div>`;}
+function resetData(){if(!confirm('Reset all data?'))return;P={age:30,sex:'female',height:170,weight:70,activity:'sedentary',goal:'maintain'};CT=null;mealPlans={};switchConcept('ring',document.querySelector('[data-concept="ring"]'));}
+function renderEmptyState(){return`<div class="nav-header"><span class="nav-title">Today</span></div><div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No meal plan yet</div><div class="empty-body">Create one to start tracking your daily calories.</div><button class="btn btn-primary" style="width:auto;padding:14px 36px" onclick="crtPlan();renderRingToday();onav('today')">Create Meal Plan</button></div>`;}
+
 function addConceptNav(activeTab){
   let phone=document.getElementById('phone');
-  phone.querySelectorAll('.nb-tabs,.ring-tabs,.streak-tabs,.week-tabs').forEach(e=>e.remove());
-  if(activeConcept==='neubrutalist') phone.insertAdjacentHTML('beforeend',`<div class="nb-tabs"><button class="nb-tab${activeTab==='today'?' active':''}" onclick="renderNbToday();onav('today')"><span class="nb-tab-icon">📊</span>Today</button><button class="nb-tab${activeTab==='mealplan'?' active':''}" onclick="renderNbMeals();onav('mealplan')"><span class="nb-tab-icon">🍽</span>Meals</button><button class="nb-tab${activeTab==='profile'?' active':''}" onclick="renderProfile();onav('profile')"><span class="nb-tab-icon">👤</span>Profile</button></div>`);
-  else if(activeConcept==='ring') phone.insertAdjacentHTML('beforeend',`<div class="ring-tabs"><button class="ring-tab${activeTab==='today'?' active':''}" onclick="renderRingToday();onav('today')"><span class="ring-tab-icon">⏺</span>Today</button><button class="ring-tab${activeTab==='diary'?' active':''}" onclick="renderRingDiary();onav('diary')"><span class="ring-tab-icon">📋</span>Diary</button><button class="ring-tab${activeTab==='insights'?' active':''}" onclick="renderRingInsights();onav('insights')"><span class="ring-tab-icon">📈</span>Insights</button><button class="ring-tab${activeTab==='profile'?' active':''}" onclick="renderProfile();onav('profile')"><span class="ring-tab-icon">⚙</span>Profile</button></div>`);
-  else if(activeConcept==='streak') phone.insertAdjacentHTML('beforeend',`<div class="streak-tabs"><button class="streak-tab${activeTab==='today'?' active':''}" onclick="renderStreakToday();onav('today')">📊 Today</button><button class="streak-tab${activeTab==='calendar'?' active':''}" onclick="renderStreakCalendar();onav('calendar')">📅 Calendar</button><button class="streak-tab${activeTab==='profile'?' active':''}" onclick="renderProfile();onav('profile')">⚙ Profile</button></div>`);
-  else if(activeConcept==='weekly') phone.insertAdjacentHTML('beforeend',`<div class="week-tabs"><button class="week-tab${activeTab==='today'?' active':''}" onclick="renderWeeklyToday();onav('today')">Week</button><button class="week-tab${activeTab==='profile'?' active':''}" onclick="renderProfile();onav('profile')">Profile</button></div>`);
+  phone.querySelectorAll('.ring-tabs').forEach(e=>e.remove());
+  phone.insertAdjacentHTML('beforeend',`<div class="ring-tabs">
+    <button class="ring-tab${activeTab==='today'?' active':''}" onclick="selectedDateKey=TODAY_KEY;renderRingToday();onav('today')"><span class="ring-tab-icon">⏺</span>Today</button>
+    <button class="ring-tab${activeTab==='plan'?' active':''}" onclick="renderRingPlan();onav('plan')"><span class="ring-tab-icon">📅</span>Plan</button>
+    <button class="ring-tab${activeTab==='insights'?' active':''}" onclick="renderRingInsights();onav('insights')"><span class="ring-tab-icon">📈</span>Insights</button>
+    <button class="ring-tab${activeTab==='profile'?' active':''}" onclick="renderProfile();onav('profile')"><span class="ring-tab-icon">⚙</span>Profile</button>
+  </div>`);
 }
 
 // ============================================================
 // CONCEPT SWITCHER
 // ============================================================
 function switchConcept(concept, el){
-  activeConcept=concept;
   document.querySelectorAll('.concept-option').forEach(c=>c.classList.remove('active'));
   if(el)el.classList.add('active');
   let phone=document.getElementById('phone');
-  phone.className='phone theme-'+concept;
+  phone.className='phone theme-ring';
   phone.innerHTML=`<div class="phone-status"><span>9:41</span><span style="display:flex;gap:6px">●●●●○ WiFi 🔋</span></div>`;
-  phone.insertAdjacentHTML('beforeend',`<div class="screen" id="welcome"></div><div class="screen screen-scroll" id="profile-setup"></div><div class="screen screen-scroll" id="goal-setup"></div><div class="screen screen-scroll" id="calorie-result"></div><div class="screen screen-scroll active" id="today"></div><div class="screen screen-scroll" id="mealplan"></div><div class="screen screen-scroll" id="diary"></div><div class="screen screen-scroll" id="insights"></div><div class="screen screen-scroll" id="calendar"></div><div class="screen screen-scroll" id="profile"></div><div class="screen screen-scroll" id="profile-edit"></div><div class="screen screen-scroll" id="add-food"></div>`);
-  renderToday(); currentScreen='today';
+  phone.insertAdjacentHTML('beforeend',`<div class="screen" id="welcome"></div>
+    <div class="screen screen-scroll" id="profile-setup"></div>
+    <div class="screen screen-scroll" id="goal-setup"></div>
+    <div class="screen screen-scroll" id="calorie-result"></div>
+    <div class="screen screen-scroll active" id="today"></div>
+    <div class="screen screen-scroll" id="plan"></div>
+    <div class="screen screen-scroll" id="insights"></div>
+    <div class="screen screen-scroll" id="profile"></div>
+    <div class="screen screen-scroll" id="profile-edit"></div>
+    <div class="screen screen-scroll" id="add-food"></div>`);
+  selectedDateKey = TODAY_KEY;
+  weekOffset = 0;
+  renderRingToday(); currentScreen='today';
   document.getElementById('welcome').innerHTML=renderOnboarding('welcome');
   document.getElementById('profile-setup').innerHTML=renderOnboarding('profile-setup');
   document.getElementById('goal-setup').innerHTML=renderOnboarding('goal-setup');
   if(CT)renderCalResult();
   document.getElementById('profile').innerHTML=''; document.getElementById('profile-edit').innerHTML='';
   renderProfile();
-  if(concept==='neubrutalist'){document.getElementById('mealplan').innerHTML=renderNbMeals();onav('today');}
 }
 
 // ============================================================
 // INIT + RESPONSIVE SCALE
 // ============================================================
 (function(){
-  calc(); crtPlan();
-  MP.meals[0].items.push({name:'Oatmeal with banana',calories:320,note:'With honey',protein:8,carbs:58,fat:6});
-  MP.meals[0].items.push({name:'Black coffee',calories:5,note:'No sugar',protein:0,carbs:0,fat:0});
-  MP.meals[1].items.push({name:'Grilled chicken breast',calories:350,note:'150g, no oil',protein:45,carbs:0,fat:8});
-  MP.meals[1].items.push({name:'Brown rice',calories:215,note:'1 cup',protein:5,carbs:45,fat:2});
-  MP.meals[1].items.push({name:'Steamed broccoli',calories:55,note:'',protein:4,carbs:11,fat:0});
-  MP.meals[2].items.push({name:'Greek yogurt',calories:130,note:'Plain, non-fat',protein:18,carbs:8,fat:0});
-  MP.meals[2].items.push({name:'Mixed berries',calories:70,note:'Handful',protein:1,carbs:17,fat:0});
-  MP.meals[3].items.push({name:'Salmon fillet',calories:367,note:'Pan-seared, olive oil',protein:40,carbs:0,fat:22});
-  MP.meals[3].items.push({name:'Quinoa',calories:222,note:'1 cup',protein:8,carbs:39,fat:4});
-  // Pre-fill week data for Weekly Planner
-  weekDays[2].actual=1734;
-  switchConcept('neubrutalist', document.querySelector('[data-concept="neubrutalist"]'));
+  calc();
+
+  // Create today's meal plan with demo data (Sunday June 21, 2026)
+  let todayKey = dateKey(TODAY);
+  mealPlans[todayKey] = {meals: MT.map(t=>({type:t,items:[]}))};
+  mealPlans[todayKey].meals[0].items.push({name:'Oatmeal with banana',calories:320,note:'With honey',protein:8,carbs:58,fat:6});
+  mealPlans[todayKey].meals[0].items.push({name:'Black coffee',calories:5,note:'No sugar',protein:0,carbs:0,fat:0});
+  mealPlans[todayKey].meals[1].items.push({name:'Grilled chicken breast',calories:350,note:'150g, no oil',protein:45,carbs:0,fat:8});
+  mealPlans[todayKey].meals[1].items.push({name:'Brown rice',calories:215,note:'1 cup',protein:5,carbs:45,fat:2});
+  mealPlans[todayKey].meals[1].items.push({name:'Steamed broccoli',calories:55,note:'',protein:4,carbs:11,fat:0});
+  mealPlans[todayKey].meals[2].items.push({name:'Greek yogurt',calories:130,note:'Plain, non-fat',protein:18,carbs:8,fat:0});
+  mealPlans[todayKey].meals[2].items.push({name:'Mixed berries',calories:70,note:'Handful',protein:1,carbs:17,fat:0});
+  mealPlans[todayKey].meals[3].items.push({name:'Salmon fillet',calories:367,note:'Pan-seared, olive oil',protein:40,carbs:0,fat:22});
+  mealPlans[todayKey].meals[3].items.push({name:'Quinoa',calories:222,note:'1 cup',protein:8,carbs:39,fat:4});
+
+  // Pre-fill some past days (view-only in Plan)
+  let wedKey = dateKey(new Date(2026,5,17)); // Wed June 17
+  mealPlans[wedKey] = {meals: MT.map(t=>({type:t,items:[]}))};
+  mealPlans[wedKey].meals[0].items.push({name:'Scrambled eggs',calories:280,note:'2 eggs',protein:20,carbs:2,fat:20});
+  mealPlans[wedKey].meals[0].items.push({name:'Whole wheat toast',calories:120,note:'1 slice',protein:4,carbs:22,fat:2});
+  mealPlans[wedKey].meals[1].items.push({name:'Tuna salad',calories:340,note:'With light mayo',protein:35,carbs:8,fat:18});
+  mealPlans[wedKey].meals[1].items.push({name:'Apple',calories:95,note:'',protein:0,carbs:25,fat:0});
+  mealPlans[wedKey].meals[2].items.push({name:'Protein bar',calories:210,note:'Chocolate',protein:20,carbs:25,fat:6});
+  mealPlans[wedKey].meals[3].items.push({name:'Beef stir-fry',calories:480,note:'With vegetables',protein:38,carbs:18,fat:26});
+
+  let thuKey = dateKey(new Date(2026,5,18)); // Thu June 18
+  mealPlans[thuKey] = {meals: MT.map(t=>({type:t,items:[]}))};
+  mealPlans[thuKey].meals[0].items.push({name:'Smoothie bowl',calories:350,note:'Banana, berries, granola',protein:12,carbs:60,fat:8});
+  mealPlans[thuKey].meals[1].items.push({name:'Chicken wrap',calories:420,note:'Whole wheat',protein:35,carbs:40,fat:14});
+  mealPlans[thuKey].meals[3].items.push({name:'Pasta bolognese',calories:550,note:'',protein:28,carbs:65,fat:18});
+
+  let friKey = dateKey(new Date(2026,5,19)); // Fri June 19
+  mealPlans[friKey] = {meals: MT.map(t=>({type:t,items:[]}))};
+  mealPlans[friKey].meals[0].items.push({name:'Avocado toast',calories:310,note:'',protein:8,carbs:30,fat:18});
+  mealPlans[friKey].meals[1].items.push({name:'Sushi rolls',calories:380,note:'Salmon avocado',protein:18,carbs:55,fat:10});
+  mealPlans[friKey].meals[3].items.push({name:'Pizza slice',calories:285,note:'Margherita',protein:12,carbs:32,fat:12});
+
+  // Pre-fill a future day (Mon June 22)
+  let monKey = dateKey(new Date(2026,5,22)); // Mon June 22
+  mealPlans[monKey] = {meals: MT.map(t=>({type:t,items:[]}))};
+  mealPlans[monKey].meals[0].items.push({name:'Overnight oats',calories:300,note:'Prep Sunday night',protein:10,carbs:50,fat:8});
+
+  switchConcept('ring', document.querySelector('[data-concept="ring"]'));
+
   const wrapper=document.querySelector('.phone-wrapper'), phoneEl=document.getElementById('phone');
   function rescale(){const w=wrapper.clientWidth, s=Math.min(w/375,1);phoneEl.style.transform=`scale(${s})`;phoneEl.style.width='375px';phoneEl.style.height='812px';wrapper.style.height=(812*s)+'px';}
   rescale(); new ResizeObserver(rescale).observe(wrapper); window.addEventListener('resize',rescale);

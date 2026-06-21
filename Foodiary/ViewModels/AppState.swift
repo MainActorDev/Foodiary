@@ -5,15 +5,44 @@ import Combine
 final class AppState: ObservableObject {
     @Published var userProfile: UserProfile?
     @Published var calorieTarget: CalorieTarget?
-    @Published var todayMealPlan: MealPlan?
     @Published var isLoading = true
+    
+    // Multi-date meal plan storage: keyed by "yyyy-MM-dd"
+    @Published private(set) var _mealPlans: [String: MealPlan] = [:]
+    
+    /// The date currently selected in the Plan tab
+    @Published var selectedPlanDate: Date = Date()
     
     var isOnboarded: Bool {
         userProfile != nil && calorieTarget != nil
     }
     
+    /// Today's meal plan (computed from multi-date storage)
+    var todayMealPlan: MealPlan? {
+        _mealPlans[MealPlan.dateKey(for: Date())]
+    }
+    
     var hasTodayMealPlan: Bool {
         todayMealPlan != nil
+    }
+    
+    /// The meal plan for the Plan tab's selected date
+    var planDateMealPlan: MealPlan? {
+        _mealPlans[MealPlan.dateKey(for: selectedPlanDate)]
+    }
+    
+    var hasPlanDateMealPlan: Bool {
+        planDateMealPlan != nil
+    }
+    
+    /// Whether the Plan tab's selected date is today
+    var isPlanDateToday: Bool {
+        Calendar.current.isDateInToday(selectedPlanDate)
+    }
+    
+    /// Whether the Plan tab's selected date is in the past
+    var isPlanDatePast: Bool {
+        selectedPlanDate < Calendar.current.startOfDay(for: Date())
     }
     
     // MARK: - Init
@@ -25,7 +54,10 @@ final class AppState: ObservableObject {
     private func loadFromStorage() {
         userProfile = StorageService.loadProfile()
         calorieTarget = StorageService.loadTarget()
-        todayMealPlan = StorageService.loadMealPlan(for: Date())
+        // Load today's meal plan into the dictionary
+        if let todayPlan = StorageService.loadMealPlan(for: Date()) {
+            _mealPlans[MealPlan.dateKey(for: Date())] = todayPlan
+        }
         isLoading = false
     }
     
@@ -54,45 +86,92 @@ final class AppState: ObservableObject {
         }
     }
     
-    // MARK: - Meal Plan
+    // MARK: - Meal Plan (date-aware)
     
-    func createTodayMealPlan() {
+    /// Load a meal plan for a specific date from disk
+    func loadMealPlan(for date: Date) {
+        let key = MealPlan.dateKey(for: date)
+        guard _mealPlans[key] == nil else { return }
+        if let plan = StorageService.loadMealPlan(for: date) {
+            _mealPlans[key] = plan
+        }
+    }
+    
+    /// Create a new empty meal plan for a specific date
+    func createMealPlan(for date: Date) {
+        let key = MealPlan.dateKey(for: date)
         let target = calorieTarget?.targetCalories ?? 2000
-        let plan = MealPlan(date: Date(), targetCalories: target)
-        todayMealPlan = plan
+        let plan = MealPlan(date: date, targetCalories: target)
+        _mealPlans[key] = plan
         try? StorageService.saveMealPlan(plan)
     }
     
-    func addFoodItem(_ item: FoodItem, toMealAt index: Int) {
-        guard var plan = todayMealPlan, index < plan.meals.count else { return }
+    /// Create today's meal plan (convenience)
+    func createTodayMealPlan() {
+        createMealPlan(for: Date())
+    }
+    
+    /// Add a food item to a meal in a specific date's plan
+    func addFoodItem(_ item: FoodItem, toMealAt index: Int, for date: Date) {
+        let key = MealPlan.dateKey(for: date)
+        guard var plan = _mealPlans[key], index < plan.meals.count else { return }
         var foodItem = item
         foodItem.mealId = plan.meals[index].id
         plan.meals[index].items.append(foodItem)
         plan.updatedAt = Date()
-        todayMealPlan = plan
+        _mealPlans[key] = plan
         try? StorageService.saveMealPlan(plan)
     }
     
-    func updateFoodItem(_ item: FoodItem, mealIndex: Int, itemIndex: Int) {
-        guard var plan = todayMealPlan,
+    /// Convenience: add to today's plan
+    func addFoodItem(_ item: FoodItem, toMealAt index: Int) {
+        addFoodItem(item, toMealAt: index, for: Date())
+    }
+    
+    /// Update a food item in a specific date's plan
+    func updateFoodItem(_ item: FoodItem, mealIndex: Int, itemIndex: Int, for date: Date) {
+        let key = MealPlan.dateKey(for: date)
+        guard var plan = _mealPlans[key],
               mealIndex < plan.meals.count,
               itemIndex < plan.meals[mealIndex].items.count else { return }
         var foodItem = item
         foodItem.updatedAt = Date()
         plan.meals[mealIndex].items[itemIndex] = foodItem
         plan.updatedAt = Date()
-        todayMealPlan = plan
+        _mealPlans[key] = plan
         try? StorageService.saveMealPlan(plan)
     }
     
-    func deleteFoodItem(mealIndex: Int, itemIndex: Int) {
-        guard var plan = todayMealPlan,
+    /// Convenience: update in today's plan
+    func updateFoodItem(_ item: FoodItem, mealIndex: Int, itemIndex: Int) {
+        updateFoodItem(item, mealIndex: mealIndex, itemIndex: itemIndex, for: Date())
+    }
+    
+    /// Delete a food item from a specific date's plan
+    func deleteFoodItem(mealIndex: Int, itemIndex: Int, for date: Date) {
+        let key = MealPlan.dateKey(for: date)
+        guard var plan = _mealPlans[key],
               mealIndex < plan.meals.count,
               itemIndex < plan.meals[mealIndex].items.count else { return }
         plan.meals[mealIndex].items.remove(at: itemIndex)
         plan.updatedAt = Date()
-        todayMealPlan = plan
+        _mealPlans[key] = plan
         try? StorageService.saveMealPlan(plan)
+    }
+    
+    /// Convenience: delete from today's plan
+    func deleteFoodItem(mealIndex: Int, itemIndex: Int) {
+        deleteFoodItem(mealIndex: mealIndex, itemIndex: itemIndex, for: Date())
+    }
+    
+    /// Pre-load a week's worth of meal plans (for Plan view week strip dots)
+    func loadMealPlansForWeek(containing date: Date) {
+        let calendar = Calendar.current
+        let weekStart = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date))!
+        for dayOffset in 0..<7 {
+            guard let day = calendar.date(byAdding: .day, value: dayOffset, to: weekStart) else { continue }
+            loadMealPlan(for: day)
+        }
     }
     
     // MARK: - Reset
@@ -100,11 +179,11 @@ final class AppState: ObservableObject {
     func resetAll() {
         userProfile = nil
         calorieTarget = nil
-        todayMealPlan = nil
+        _mealPlans = [:]
         try? StorageService.resetAll()
     }
     
-    // MARK: - Computed: Calories
+    // MARK: - Computed: Calories (uses today's plan for Today tab)
     
     var plannedCalories: Int {
         todayMealPlan?.totalCalories ?? 0
@@ -159,4 +238,37 @@ final class AppState: ObservableObject {
     }
     
     var statusMessage: String { localizedStatusMessage }
+    
+    // MARK: - Plan-specific computed properties
+    
+    /// Calories planned for the Plan tab's selected date
+    var planDateCalories: Int {
+        planDateMealPlan?.totalCalories ?? 0
+    }
+    
+    /// Remaining calories for the Plan tab's selected date
+    var planDateRemaining: Int {
+        targetCalories - planDateCalories
+    }
+    
+    /// Progress for the Plan tab's selected date
+    var planDateProgress: Double {
+        guard targetCalories > 0 else { return 0 }
+        return min(1.0, Double(planDateCalories) / Double(targetCalories))
+    }
+    
+    var isPlanDateOver: Bool { planDateRemaining < 0 }
+    
+    /// Status message for the Plan tab's selected date
+    var planDateStatusMessage: String {
+        if planDateCalories == 0 {
+            return L10n["status.no_food"]
+        } else if planDateRemaining == 0 && planDateCalories > 0 {
+            return L10n["status.exact_target"]
+        } else if isPlanDateOver {
+            return L10n["status.over_target", abs(planDateRemaining)]
+        } else {
+            return L10n["status.under_target", planDateRemaining]
+        }
+    }
 }

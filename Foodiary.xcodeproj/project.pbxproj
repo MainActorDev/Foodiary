@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		084769BCB29D4D3EFFB12D7B /* GoalSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF988877D3BF9A7ECB1649D /* GoalSetupView.swift */; };
+		0882D690FDD4F83D5951A3A4 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E188D24310928E8E621700C0 /* PlanView.swift */; };
 		10987AD934122A98FEB17C4F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D73AED0083ED6C9660EA4C1 /* ProfileView.swift */; };
 		170D9F648D11D648FCF11906 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9A3FD80A200A5800BB7F5 /* MealDetailView.swift */; };
 		2E59974DD2071F7CCA467126 /* AddFoodItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3152D915D822EFD2A49D41BB /* AddFoodItemView.swift */; };
@@ -74,6 +75,7 @@
 		CE8699095A53ECADDAB08686 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		DECAB31DA3AB690D37A173E5 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
 		E0770E187831561B62124D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E188D24310928E8E621700C0 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		E37D5B1FCB62C8FE1416B67E /* IntStepperField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntStepperField.swift; sourceTree = "<group>"; };
 		E6761A91D202CDDFE3A5D9A6 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		EA8F4B08608A6934C2BCB81A /* MealPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlan.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				E17C8B412CE316DD003E356C /* Components */,
 				0528C850D15E79A64C1F56FA /* MealPlan */,
 				28EF81BEAFD2BD03ADEC9C3E /* Onboarding */,
+				264EC0D2544FCF4533D8970E /* Plan */,
 				47B1DD8C4762489C69B498FD /* Profile */,
 				E2F52D2739FCAEA3C5E82C1C /* Today */,
 			);
@@ -119,6 +122,14 @@
 				1E808E69E845579CA9C49497 /* Info.plist */,
 			);
 			path = FoodiaryTests;
+			sourceTree = "<group>";
+		};
+		264EC0D2544FCF4533D8970E /* Plan */ = {
+			isa = PBXGroup;
+			children = (
+				E188D24310928E8E621700C0 /* PlanView.swift */,
+			);
+			path = Plan;
 			sourceTree = "<group>";
 		};
 		28EF81BEAFD2BD03ADEC9C3E /* Onboarding */ = {
@@ -373,6 +384,7 @@
 				170D9F648D11D648FCF11906 /* MealDetailView.swift in Sources */,
 				3FCDF467316D35E344CD033C /* MealPlan.swift in Sources */,
 				9A9353E798B7AE682E282F07 /* MealPlanView.swift in Sources */,
+				0882D690FDD4F83D5951A3A4 /* PlanView.swift in Sources */,
 				ED77721A6FE834A18B03668D /* ProfileSetupView.swift in Sources */,
 				10987AD934122A98FEB17C4F /* ProfileView.swift in Sources */,
 				872F89733FF0872A090CD1B9 /* StorageService.swift in Sources */,

@@ -1691,11 +1691,11 @@
         }
       }
     },
-    "nav.diary" : {
+    "nav.plan" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Diary" } },
-        "id" : { "stringUnit" : { "state" : "translated", "value" : "Diary" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Plan" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "Rencana" } }
       }
     },
     "nav.insights" : {
@@ -1705,11 +1705,11 @@
         "id" : { "stringUnit" : { "state" : "translated", "value" : "Wawasan" } }
       }
     },
-    "tab.diary" : {
+    "tab.plan" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "DIARY" } },
-        "id" : { "stringUnit" : { "state" : "translated", "value" : "DIARY" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "PLAN" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "RENCANA" } }
       }
     },
     "tab.insights" : {
@@ -1745,6 +1745,34 @@
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "TARGET" } },
         "id" : { "stringUnit" : { "state" : "translated", "value" : "TARGET" } }
+      }
+    },
+    "plan.empty.past.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No data for this day" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "Tidak ada data untuk hari ini" } }
+      }
+    },
+    "plan.empty.past.subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You didn't log any meals on this date." } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "Anda tidak mencatat makanan pada tanggal ini." } }
+      }
+    },
+    "plan.empty.future.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No meal plan yet" } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "Belum ada rencana makan" } }
+      }
+    },
+    "plan.empty.future.subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tap any meal slot below to start planning this day." } },
+        "id" : { "stringUnit" : { "state" : "translated", "value" : "Ketuk slot makanan di bawah untuk mulai merencanakan hari ini." } }
       }
     }
   },

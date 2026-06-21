@@ -35,30 +35,16 @@ struct MainTabView: View {
             }
             .tag(0)
             
-            // Tab 1: Diary (Meal Plan)
+            // Tab 1: Plan (week calendar + date-based meal planning)
             NavigationStack {
-                MealPlanView(
-                    state: state,
-                    onCreateMealPlan: { state.createTodayMealPlan() },
-                    onTapMeal: { index in
-                        selectedMealIndex = index
-                        showMealDetail = true
-                    }
-                )
-                .navigationTitle(L10n["nav.diary"])
-                .navigationBarTitleDisplayMode(.large)
-                .navigationDestination(isPresented: $showMealDetail) {
-                    MealDetailView(
-                        state: state,
-                        mealIndex: selectedMealIndex,
-                        isPresented: $showMealDetail
-                    )
-                }
-                .modifier(RingNavBarModifier())
+                PlanView(state: state)
+                    .navigationTitle(L10n["nav.plan"])
+                    .navigationBarTitleDisplayMode(.large)
+                    .modifier(RingNavBarModifier())
             }
             .tabItem {
-                Image(systemName: "list.clipboard.fill")
-                Text(L10n["tab.diary"])
+                Image(systemName: "calendar")
+                Text(L10n["tab.plan"])
             }
             .tag(1)
             
