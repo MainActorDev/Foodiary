@@ -32,6 +32,7 @@
 		A473CB0D16FE8B5C11DC1EF0 /* FoodSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33022C0AB4A08C274F5DB3B /* FoodSearchResult.swift */; };
 		A744467F82D91A6C91277949 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECAB31DA3AB690D37A173E5 /* FoodItem.swift */; };
 		A7F972D90CECAEC302B422B0 /* FatSecretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D6E985EE5F031AB9044D85 /* FatSecretOAuth.swift */; };
+		B01E46D4A29C2874342A1D19 /* StepperField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E85E4DBAD6F6BB26318945 /* StepperField.swift */; };
 		B0AC29E284D9EA795CE4563C /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6761A91D202CDDFE3A5D9A6 /* UserProfile.swift */; };
 		B81AC57B3B4BC29D9C03A65B /* PlusJakartaSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 541FBD984DF989F3B24A2246 /* PlusJakartaSans.ttf */; };
 		C09BD92CE7F988168E79FEB2 /* FoodDatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523AA95C0020B82D38A82B1 /* FoodDatabaseProvider.swift */; };
@@ -74,6 +75,7 @@
 		68E8D0D57D6AA990042EBC8C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		71198B62EAF32E193535C664 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		7508C6CFFF9A8E2EE764AC36 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		75E85E4DBAD6F6BB26318945 /* StepperField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperField.swift; sourceTree = "<group>"; };
 		7CE2F91A5D41DC3830830428 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		7CF988877D3BF9A7ECB1649D /* GoalSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSetupView.swift; sourceTree = "<group>"; };
 		8D3E2505397771156DF3FF00 /* FatSecretService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretService.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				7CF988877D3BF9A7ECB1649D /* GoalSetupView.swift */,
 				E37D5B1FCB62C8FE1416B67E /* IntStepperField.swift */,
 				A284417FB4BD0FF845C2605D /* ProfileSetupView.swift */,
+				75E85E4DBAD6F6BB26318945 /* StepperField.swift */,
 				71198B62EAF32E193535C664 /* WelcomeView.swift */,
 			);
 			path = Onboarding;
@@ -447,6 +450,7 @@
 				ED77721A6FE834A18B03668D /* ProfileSetupView.swift in Sources */,
 				10987AD934122A98FEB17C4F /* ProfileView.swift in Sources */,
 				1D50221E98FF70EC235EDF20 /* PulseTopbar.swift in Sources */,
+				B01E46D4A29C2874342A1D19 /* StepperField.swift in Sources */,
 				30046E44375424EEB7409E28 /* TodayDashboardView.swift in Sources */,
 				684C48A2A0AF2C7B58DA4759 /* USDAService.swift in Sources */,
 				B0AC29E284D9EA795CE4563C /* UserProfile.swift in Sources */,

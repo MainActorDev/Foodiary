@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcome Screen Options — Foodiary Pulse v2</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:Inter,sans-serif; background:#0b1024; color:#f8fafc; padding:32px 20px; }
+h2 { font-size:13px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; color:#a5b4fc; margin-bottom:12px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:24px; max-width:1400px; margin:0 auto; }
+.opt { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); border-radius:18px; padding:18px; }
+.phone { width:300px; height:580px; margin:0 auto; background:#f6f7ff; border-radius:34px; overflow:hidden; position:relative; display:flex; flex-direction:column; }
+.phone .status { height:36px; display:flex; justify-content:space-between; align-items:center; padding:0 24px; font-size:11px; font-weight:900; color:#15142a; }
+.phone .status i { display:block; width:16px; height:6px; border-radius:99px; background:#15142a; opacity:.3; }
+.phone .content { flex:1; display:flex; flex-direction:column; padding:20px; }
+.btn { border-radius:20px; padding:16px 28px; text-align:center; font-size:14px; font-weight:900; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; border:none; font-family:Inter,sans-serif; }
+.btn-primary { background:#2563eb; color:#fff; box-shadow:0 4px 0 #1d4ed8; }
+.btn-dark { background:#15142a; color:#fff; box-shadow:0 4px 0 rgba(0,0,0,.3); }
+.btn-white { background:#fff; color:#15142a; border:2px solid #15142a; box-shadow:4px 4px 0 #15142a; }
+.disclaimer { font-size:10px; color:#6b6880; text-align:center; font-style:italic; line-height:1.5; }
+.title { font-family:'Space Grotesk',Inter,sans-serif; font-weight:700; letter-spacing:-.04em; }
+.tagline { font-size:13px; color:#6b6880; line-height:1.5; }
+
+/* A — Soft gradient hero style */
+.a .phone { background:linear-gradient(180deg, #dbeafe 0%, #bfdbfe 50%, #f6f7ff 100%); }
+.a .hero-icon { width:88px; height:88px; border-radius:24px; background:#fff; display:grid; place-items:center; font-size:42px; margin:0 auto; box-shadow:0 20px 40px rgba(37,99,235,.12); }
+.a .title { font-size:32px; text-align:center; color:#15142a; margin-top:18px; }
+.a .tagline { text-align:center; margin-top:8px; }
+
+/* B — Card-centric */
+.b .card { background:#fff; border-radius:30px; padding:32px 24px; border:2px solid rgba(21,20,42,.08); margin-top:40px; text-align:center; }
+.b .card .icon { font-size:48px; margin-bottom:14px; }
+.b .card .title { font-size:28px; color:#15142a; margin-bottom:6px; }
+.b .card .tagline { margin-bottom:20px; }
+
+/* C — Split layout */
+.c .visual { flex:1.2; background:linear-gradient(135deg, #2563eb, #06b6d4); display:grid; place-items:center; position:relative; overflow:hidden; }
+.c .visual::after { content:''; position:absolute; width:200px; height:200px; border-radius:99px; background:rgba(255,255,255,.1); bottom:-40px; right:-40px; }
+.c .visual .emoji { font-size:80px; filter:drop-shadow(0 12px 24px rgba(0,0,0,.15)); }
+.c .info { flex:1; padding:24px 20px; }
+.c .title { font-size:30px; color:#15142a; margin-bottom:6px; }
+.c .tagline { margin-bottom:20px; }
+
+/* D — Bold minimal */
+.d .content { justify-content:center; align-items:center; text-align:center; }
+.d .emoji { font-size:72px; margin-bottom:16px; }
+.d .overline { font-size:10px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; color:#2563eb; margin-bottom:8px; }
+.d .title { font-size:38px; color:#15142a; margin-bottom:10px; }
+.d .tagline { max-width:220px; margin-bottom:28px; }
+
+/* E — Neubrutalist */
+.e .phone { background:#fff; }
+.e .hero-block { flex:1; background:linear-gradient(135deg, #2563eb, #1d4ed8); margin:14px; border-radius:24px; border:3px solid #15142a; box-shadow:8px 8px 0 #15142a; display:grid; place-items:center; }
+.e .hero-block .emoji { font-size:60px; }
+.e .info { padding:0 20px 20px; }
+.e .title { font-size:28px; color:#15142a; margin-bottom:4px; }
+.e .tagline { color:#6b6880; margin-bottom:18px; }
+
+/* F — Layered glass */
+.f .phone { background:linear-gradient(180deg, #eff6ff, #f6f7ff); }
+.f .glass-layer { width:160px; height:160px; border-radius:40px; background:rgba(255,255,255,.7); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,.8); box-shadow:0 20px 50px rgba(37,99,235,.1); display:grid; place-items:center; font-size:56px; margin:0 auto; transform:rotate(-3deg); }
+.f .glass-layer2 { width:120px; height:120px; border-radius:30px; background:rgba(255,255,255,.5); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.6); position:absolute; top:30px; right:70px; transform:rotate(6deg); }
+</style>
+</head>
+<body>
+<div class="grid">
+
+  <!-- A: Soft gradient hero -->
+  <div class="opt"><h2>A — Soft gradient hero</h2>
+    <div class="phone a">
+      <div class="content" style="justify-content:center;text-align:center;gap:0;">
+        <div class="hero-icon">🥗</div>
+        <div class="title">Foodiary</div>
+        <p class="tagline">Your daily food planning companion.<br>Simple, private, local-first.</p>
+        <div style="margin-top:28px"><button class="btn btn-primary" style="width:100%">Get Started</button></div>
+        <p class="disclaimer" style="margin-top:16px">This is a planning tool, not medical advice.<br>Estimates based on Mifflin‑St Jeor.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- B: Card-centric -->
+  <div class="opt"><h2>B — Card-centric</h2>
+    <div class="phone b">
+      <div class="content" style="justify-content:center;">
+        <div class="card">
+          <div class="icon">🥗</div>
+          <div class="title">Foodiary</div>
+          <p class="tagline">Your daily food planning companion. Simple, private, local‑first.</p>
+          <button class="btn btn-primary" style="width:100%">Get Started</button>
+        </div>
+        <p class="disclaimer" style="margin-top:18px">This is a planning tool, not medical advice.<br>Estimates based on Mifflin‑St Jeor.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- C: Split layout -->
+  <div class="opt"><h2>C — Split visual + text</h2>
+    <div class="phone c" style="overflow:hidden;">
+      <div class="visual"><span class="emoji">🥗</span></div>
+      <div class="info">
+        <div class="title">Foodiary</div>
+        <p class="tagline">Your daily food planning companion. Simple, private, local‑first.</p>
+        <button class="btn btn-primary" style="width:100%">Get Started</button>
+      </div>
+      <p class="disclaimer" style="padding:0 20px 16px">Planning tool, not medical advice.</p>
+    </div>
+  </div>
+
+  <!-- D: Bold minimal -->
+  <div class="opt"><h2>D — Bold minimal</h2>
+    <div class="phone d">
+      <div class="content">
+        <div class="emoji">🥗</div>
+        <div class="overline">Planning Cockpit</div>
+        <div class="title">Foodiary</div>
+        <p class="tagline">Your daily food planning companion. Simple, private, local‑first.</p>
+        <button class="btn btn-dark" style="width:100%">Get Started</button>
+        <p class="disclaimer" style="margin-top:14px">Planning tool, not medical advice.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- E: Neubrutalist -->
+  <div class="opt"><h2>E — Neubrutalist bold</h2>
+    <div class="phone e">
+      <div class="hero-block"><span class="emoji">🥗</span></div>
+      <div class="info">
+        <div class="title">Foodiary</div>
+        <p class="tagline">Your daily food planning companion. Simple, private, local‑first.</p>
+        <button class="btn btn-white" style="width:100%">GET STARTED</button>
+        <p class="disclaimer" style="margin-top:10px">Planning tool, not medical advice.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- F: Layered glass -->
+  <div class="opt"><h2>F — Layered glass</h2>
+    <div class="phone f">
+      <div class="content" style="justify-content:center;text-align:center;position:relative;overflow:hidden;">
+        <div class="glass-layer2" style="position:absolute;top:20px;right:40px;"></div>
+        <div class="glass-layer" style="position:relative;z-index:1;">🥗</div>
+        <div class="title" style="margin-top:32px;position:relative;z-index:1;">Foodiary</div>
+        <p class="tagline" style="position:relative;z-index:1;">Your daily food planning companion.<br>Simple, private, local‑first.</p>
+        <div style="margin-top:32px;position:relative;z-index:1;"><button class="btn btn-primary" style="width:100%">Get Started</button></div>
+        <p class="disclaimer" style="margin-top:16px;position:relative;z-index:1;">This is a planning tool, not medical advice.<br>Estimates based on Mifflin‑St Jeor.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
