@@ -30,6 +30,9 @@ targets:
         script: |
           echo "No SwiftLint configured"
         basedOnDependencyAnalysis: false
+    configFiles:
+      Debug: Configuration/Debug.xcconfig
+      Release: Configuration/Release.xcconfig
 
   FoodiaryTests:
     type: bundle.unit-test

@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foodiary Pulse v2 — UI/UX Direction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #070b1a;
+      --page-text: #f8fafc;
+      --page-muted: #aab6d3;
+      --page-line: rgba(255,255,255,.13);
+      --glass: rgba(255,255,255,.075);
+      --glass-strong: rgba(255,255,255,.12);
+      --violet: #7c3aed;
+      --violet-2: #a78bfa;
+      --cyan: #06b6d4;
+      --mint: #10b981;
+      --amber: #f59e0b;
+      --ink: #111827;
+      --phone-bg: #f6f7ff;
+      --phone-surface: #ffffff;
+      --phone-soft: #eef0ff;
+      --phone-soft-2: #e6fbf3;
+      --phone-text: #15142a;
+      --phone-muted: #6b6880;
+      --phone-line: rgba(21,20,42,.10);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --shadow: 0 22px 70px rgba(0,0,0,.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--page-text);
+      background:
+        radial-gradient(circle at 8% 10%, rgba(124,58,237,.34), transparent 30vw),
+        radial-gradient(circle at 88% 14%, rgba(6,182,212,.20), transparent 27vw),
+        radial-gradient(circle at 70% 96%, rgba(16,185,129,.18), transparent 34vw),
+        linear-gradient(180deg, #070b1a 0%, #0b1024 100%);
+      padding: clamp(14px, 3vw, 34px);
+    }
+
+    button { font: inherit; border: 0; cursor: pointer; }
+    svg { display: block; }
+
+    .page {
+      width: min(1320px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(330px, 1.05fr) minmax(320px, 530px);
+      gap: clamp(18px, 4vw, 52px);
+      align-items: start;
+    }
+
+    .left {
+      position: sticky;
+      top: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .badge {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--page-line);
+      background: var(--glass);
+      color: #dbeafe;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(14px);
+    }
+
+    .badge::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--violet), var(--mint));
+      box-shadow: 0 0 0 5px rgba(124,58,237,.16);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: .89;
+      letter-spacing: -.07em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #c4b5fd 32%, #67e8f9 66%, #86efac 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 720px;
+      color: var(--page-muted);
+      font-size: clamp(15px, 1.55vw, 18px);
+      line-height: 1.72;
+    }
+
+    .panel {
+      border: 1px solid var(--page-line);
+      background: linear-gradient(180deg, var(--glass-strong), var(--glass));
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .panel.pad { padding: 18px; }
+
+    .panel-title {
+      margin: 0;
+      color: #dbeafe;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .missing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .missing {
+      min-height: 112px;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.075);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .missing b {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .missing span {
+      display: block;
+      color: var(--page-muted);
+      font-size: 12px;
+      line-height: 1.48;
+    }
+
+    .spine {
+      display: grid;
+      gap: 11px;
+      margin-top: 14px;
+    }
+
+    .spine-row {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .spine-num {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      color: #fff;
+      font-weight: 900;
+      font-size: 13px;
+      box-shadow: 0 10px 24px rgba(124,58,237,.28);
+    }
+
+    .spine-row b { display: block; font-size: 14px; margin-bottom: 4px; }
+    .spine-row span { display: block; color: var(--page-muted); font-size: 12px; line-height: 1.45; }
+
+    .recommendation {
+      padding: 18px;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(16,185,129,.18), transparent 34%),
+        linear-gradient(135deg, rgba(124,58,237,.22), rgba(255,255,255,.075));
+      border-color: rgba(167,139,250,.30);
+    }
+
+    .recommendation h2 {
+      margin: 8px 0 8px;
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .recommendation p {
+      margin: 0;
+      color: #dbeafe;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .right {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+    }
+
+    .preview-header {
+      width: min(100%, 440px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--page-muted);
+      font-size: 12px;
+    }
+
+    .screen-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      width: min(100%, 500px);
+      padding: 8px;
+      border-radius: 999px;
+      border: 1px solid var(--page-line);
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .screen-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      color: var(--page-muted);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 900;
+      transition: color .16s ease, background .16s ease, transform .16s ease;
+    }
+
+    .screen-tab:hover { transform: translateY(-1px); }
+    .screen-tab.active { background: #fff; color: #111827; }
+    .screen-tab svg { width: 15px; height: 15px; stroke-width: 2.4; }
+
+    .phone-wrap {
+      width: clamp(292px, 86vw, 402px);
+      position: relative;
+    }
+
+    .phone {
+      width: 402px;
+      height: 872px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      overflow: hidden;
+      border: 10px solid #050815;
+      border-radius: 46px;
+      background: var(--phone-bg);
+      box-shadow: 0 36px 100px rgba(0,0,0,.48), inset 0 0 0 1px rgba(255,255,255,.14);
+      color: var(--phone-text);
+      transform-origin: top left;
+    }
+
+    .status {
+      height: 43px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 28px;
+      color: var(--phone-text);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .status-icons { display: flex; align-items: center; gap: 5px; opacity: .75; }
+    .status-icons i { display: block; height: 8px; border-radius: 999px; background: var(--phone-text); }
+    .status-icons i:first-child { width: 20px; }
+    .status-icons i:last-child { width: 24px; }
+
+    .app {
+      height: calc(100% - 43px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 20px 196px;
+      scrollbar-width: none;
+    }
+    .scroll::-webkit-scrollbar { display: none; }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0 18px;
+    }
+
+    .overline {
+      margin: 0 0 5px;
+      color: var(--phone-muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      margin: 0;
+      font-family: "Space Grotesk", Inter, sans-serif;
+      color: var(--phone-text);
+      font-size: 31px;
+      line-height: 1;
+      letter-spacing: -.055em;
+    }
+
+    .icon-btn {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 45px;
+      color: var(--phone-text);
+      background: var(--phone-surface);
+      border: 1px solid var(--phone-line);
+      border-radius: 17px;
+      box-shadow: 0 12px 28px rgba(20,20,60,.07);
+    }
+    .icon-btn svg { width: 20px; height: 20px; stroke-width: 2.35; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 19px;
+      border-radius: 30px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 16% 0%, rgba(255,255,255,.30), transparent 28%),
+        linear-gradient(135deg, #6d28d9 0%, #2563eb 44%, #06b6d4 72%, #10b981 100%);
+      box-shadow: 0 26px 52px rgba(77,54,210,.28);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -74px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+    }
+
+    .hero-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .hero-label {
+      margin: 0;
+      color: rgba(255,255,255,.72);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .hero-number {
+      margin: 12px 0 0;
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-size: 66px;
+      line-height: .82;
+      letter-spacing: -.08em;
+    }
+
+    .hero-unit {
+      margin: 4px 0 0;
+      color: rgba(255,255,255,.78);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      backdrop-filter: blur(12px);
+      white-space: nowrap;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      margin: 16px 0 0;
+      color: rgba(255,255,255,.84);
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 270px;
+    }
+
+    .segments {
+      position: relative;
+      z-index: 1;
+      height: 14px;
+      display: grid;
+      grid-template-columns: 34% 24% 16% 26%;
+      gap: 4px;
+      margin-top: 17px;
+    }
+    .segments i { border-radius: 999px; background: rgba(255,255,255,.95); }
+    .segments i:nth-child(2) { opacity: .72; }
+    .segments i:nth-child(3) { opacity: .44; }
+    .segments i:nth-child(4) { opacity: .21; }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .metric {
+      padding: 13px;
+      border-radius: 20px;
+      background: var(--phone-surface);
+      border: 1px solid var(--phone-line);
+      box-shadow: 0 10px 24px rgba(20,20,60,.045);
+    }
+    .metric b { display: block; font-size: 20px; letter-spacing: -.045em; }
+    .metric span { display: block; margin-top: 3px; color: var(--phone-muted); font-size: 10px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+
+    .action-strip {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 13px;
+      border-radius: 22px;
+      background: #15142a;
+      color: #fff;
+    }
+    .action-strip b { display: block; font-size: 14px; margin-bottom: 3px; }
+    .action-strip span { display: block; color: rgba(255,255,255,.64); font-size: 12px; line-height: 1.3; }
+    .action-strip button { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 15px; background: #fff; color: #15142a; }
+    .action-strip svg { width: 20px; height: 20px; stroke-width: 2.5; }
+
+    .section {
+      margin-top: 18px;
+      display: grid;
+      gap: 11px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .section-title {
+      margin: 0;
+      color: var(--phone-text);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .section-link {
+      color: var(--violet);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .meal {
+      display: grid;
+      grid-template-columns: 50px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+      border-radius: 22px;
+      background: var(--phone-surface);
+      border: 1px solid var(--phone-line);
+      box-shadow: 0 10px 22px rgba(20,20,60,.04);
+    }
+
+    .meal-icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: #6d28d9;
+      background: var(--phone-soft);
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", emoji;
+      font-size: 28px;
+      line-height: 1;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.62);
+    }
+    .meal-icon.breakfast { background: #fff0e6; }
+    .meal-icon.lunch { background: #e8f1ff; }
+    .meal-icon.snack { background: #fff4d6; }
+    .meal-icon.dinner { background: #eee9ff; }
+    .meal-icon .emoji {
+      display: block;
+      transform: translateY(-1px) scale(1.04);
+      filter: drop-shadow(0 3px 5px rgba(21,20,42,.14));
+    }
+    .meal-icon svg { width: 20px; height: 20px; stroke-width: 2.25; }
+
+    .meal b { display: block; color: var(--phone-text); font-size: 14px; line-height: 1.1; }
+    .meal span { display: block; margin-top: 4px; color: var(--phone-muted); font-size: 12px; }
+    .meal-kcal { font-size: 14px; font-weight: 900; letter-spacing: -.03em; color: var(--phone-text); }
+
+    .week-card,
+    .white-card {
+      padding: 16px;
+      border-radius: 26px;
+      background: var(--phone-surface);
+      border: 1px solid var(--phone-line);
+      box-shadow: 0 14px 30px rgba(20,20,60,.055);
+    }
+
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .day {
+      min-height: 68px;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 3px;
+      padding: 8px 3px;
+      border-radius: 17px;
+      background: var(--phone-soft);
+      color: var(--phone-muted);
+      border: 1px solid transparent;
+    }
+    .day.active { background: #15142a; color: #fff; }
+    .day.empty { background: #fff7ed; color: #b45309; }
+    .day.future { background: var(--phone-soft-2); color: #047857; }
+    .day span { font-size: 9px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+    .day b { font-size: 16px; }
+    .day i { width: 5px; height: 5px; border-radius: 999px; background: currentColor; opacity: .62; }
+
+    .day-summary {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .day-metric {
+      padding: 14px;
+      border-radius: 20px;
+      background: var(--phone-soft);
+    }
+    .day-metric b { display: block; font-size: 24px; letter-spacing: -.05em; }
+    .day-metric span { display: block; color: var(--phone-muted); margin-top: 3px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .05em; }
+
+    .search-card {
+      padding: 16px;
+      border-radius: 28px;
+      background: var(--phone-surface);
+      border: 1px solid var(--phone-line);
+      box-shadow: 0 16px 34px rgba(20,20,60,.06);
+    }
+
+    .search-box {
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 20px;
+      background: var(--phone-soft);
+      color: var(--phone-muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .search-box svg { width: 20px; height: 20px; stroke-width: 2.3; color: #6d28d9; }
+    .source-pill { padding: 6px 8px; border-radius: 999px; background: #fff; color: #6d28d9; font-size: 10px; font-weight: 900; }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .food-card {
+      text-align: left;
+      padding: 13px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--phone-line);
+      color: var(--phone-text);
+    }
+    .food-card b { display: block; font-size: 13px; line-height: 1.15; }
+    .food-card span { display: block; margin-top: 5px; color: var(--phone-muted); font-size: 11px; line-height: 1.35; }
+
+    .serving-card {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 22px;
+      background: #15142a;
+      color: white;
+    }
+    .serving-card b { display: block; font-size: 14px; }
+    .serving-card span { display: block; color: rgba(255,255,255,.65); font-size: 12px; margin-top: 3px; }
+    .serving-stepper { display: flex; align-items: center; gap: 8px; font-weight: 900; }
+    .serving-stepper i { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 11px; background: rgba(255,255,255,.12); font-style: normal; }
+
+    .chart-card { padding: 16px; border-radius: 26px; background: var(--phone-surface); border: 1px solid var(--phone-line); box-shadow: 0 14px 30px rgba(20,20,60,.055); }
+
+    .mini-chart {
+      height: 124px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      align-items: end;
+      gap: 9px;
+      margin-top: 16px;
+      padding-bottom: 4px;
+    }
+    .bar-wrap { display: grid; justify-items: center; gap: 7px; }
+    .bar { width: 100%; max-width: 24px; border-radius: 999px; background: linear-gradient(180deg, #7c3aed, #06b6d4); }
+    .bar-wrap span { color: var(--phone-muted); font-size: 9px; font-weight: 900; text-transform: uppercase; }
+
+    .insight-list { display: grid; gap: 10px; margin-top: 12px; }
+    .insight { padding: 13px; border-radius: 20px; background: var(--phone-soft); }
+    .insight b { display: block; font-size: 13px; margin-bottom: 4px; }
+    .insight span { display: block; color: var(--phone-muted); font-size: 12px; line-height: 1.4; }
+
+    .profile-head { display: grid; grid-template-columns: 58px 1fr; gap: 14px; align-items: center; }
+    .avatar { width: 58px; height: 58px; display: grid; place-items: center; border-radius: 21px; color: white; font-weight: 900; background: linear-gradient(135deg, #7c3aed, #06b6d4); box-shadow: 0 18px 32px rgba(124,58,237,.22); }
+    .profile-head h3 { margin: 0; font-size: 18px; letter-spacing: -.03em; }
+    .profile-head p { margin: 4px 0 0; color: var(--phone-muted); font-size: 12px; line-height: 1.35; }
+
+    .target-box { margin-top: 16px; padding: 16px; border-radius: 22px; background: var(--phone-soft); }
+    .target-box b { display: block; font-family: "Space Grotesk", Inter, sans-serif; font-size: 46px; line-height: .9; letter-spacing: -.07em; }
+    .target-box span { display: block; margin-top: 5px; color: var(--phone-muted); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .05em; }
+
+    .rows { margin-top: 12px; display: grid; }
+    .row { display: flex; justify-content: space-between; gap: 18px; padding: 13px 0; border-top: 1px solid var(--phone-line); color: var(--phone-muted); font-size: 13px; }
+    .row strong { color: var(--phone-text); text-align: right; }
+
+    .disclaimer { margin: 13px 2px 0; color: var(--phone-muted); font-size: 11px; line-height: 1.48; text-align: center; font-style: italic; }
+
+    .nav {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      height: 76px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 3px;
+      padding: 8px;
+      border-radius: 29px;
+      background: rgba(255,255,255,.90);
+      border: 1px solid var(--phone-line);
+      box-shadow: 0 22px 54px rgba(20,20,60,.14);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-btn {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 4px;
+      border-radius: 20px;
+      background: transparent;
+      color: #85829a;
+      transition: background .16s ease, color .16s ease;
+    }
+    .nav-btn.active { color: #fff; background: #15142a; }
+    .nav-btn svg { width: 18px; height: 18px; stroke-width: 2.35; }
+    .nav-btn span { font-size: 9px; font-weight: 900; letter-spacing: -.02em; }
+
+    .footer-note {
+      grid-column: 1 / -1;
+      color: var(--page-muted);
+      border-top: 1px solid var(--page-line);
+      padding-top: 16px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1020px) {
+      .page { grid-template-columns: 1fr; }
+      .left { position: static; }
+      .right { padding-top: 8px; }
+    }
+
+    @media (max-width: 620px) {
+      body { padding: 12px; }
+      .missing-grid { grid-template-columns: 1fr; }
+      .panel.pad, .recommendation { padding: 15px; border-radius: 22px; }
+      .screen-tabs { border-radius: 24px; }
+      .screen-tab { padding: 8px 10px; font-size: 11px; }
+      .preview-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="left" aria-label="Pulse v2 proposal">
+      <div class="badge">Pulse v2 Direction</div>
+      <h1>From dashboard skin to <span class="gradient-text">planning cockpit.</span></h1>
+      <p class="lead">You were right: Pulse had the right direction, but it was missing the deeper UX spine. This version makes Pulse feel like a complete Foodiary product experience: daily budget, smart food entry, week readiness, neutral insights, and estimate context.</p>
+
+      <article class="panel pad">
+        <p class="panel-title">What was missing before</p>
+        <div class="missing-grid">
+          <div class="missing"><b>Product identity</b><span>Pulse needs to be more than purple cards. It should feel like a daily food planning command center.</span></div>
+          <div class="missing"><b>Decision loop</b><span>The user should always know current estimate, next action, and what changed after adding food.</span></div>
+          <div class="missing"><b>Search-first entry</b><span>FatSecret + custom food source needs a first-class search, recent, favorites, and serving flow.</span></div>
+          <div class="missing"><b>Week readiness</b><span>The Plan screen should reveal prepared, empty, future, and read-only days at a glance.</span></div>
+          <div class="missing"><b>Useful insights</b><span>Insights should explain planning patterns in neutral language, not just show decorative charts.</span></div>
+          <div class="missing"><b>Trust context</b><span>Profile should explain the estimated target clearly without making the app feel medical.</span></div>
+        </div>
+      </article>
+
+      <article class="panel pad">
+        <p class="panel-title">Pulse v2 UX spine</p>
+        <div class="spine">
+          <div class="spine-row"><div class="spine-num">01</div><div><b>Today is the command center</b><span>Remaining estimate, progress, macros, meal timeline, and one obvious next action.</span></div></div>
+          <div class="spine-row"><div class="spine-num">02</div><div><b>Add Food is search-first</b><span>Recent foods, provider trust, servings, and manual fallback live in one predictable flow.</span></div></div>
+          <div class="spine-row"><div class="spine-num">03</div><div><b>Plan is week readiness</b><span>Each day communicates whether it is planned, empty, today, future, or read-only.</span></div></div>
+          <div class="spine-row"><div class="spine-num">04</div><div><b>Insights are neutral observations</b><span>Pattern review, no shame language, no medical or nutrition claims.</span></div></div>
+        </div>
+      </article>
+
+      <article class="panel recommendation">
+        <p class="panel-title">Recommendation</p>
+        <h2>Move forward with Pulse v2.</h2>
+        <p>This is now a clearer design direction: energetic but still clean, data-forward but not overwhelming, and much closer to Foodiary’s actual product shape.</p>
+      </article>
+    </section>
+
+    <section class="right" aria-label="Interactive Pulse v2 phone preview">
+      <div class="preview-header"><span>Interactive web proposal</span><span>No SwiftUI code changed</span></div>
+      <div class="screen-tabs" role="tablist" aria-label="Preview screens">
+        <button class="screen-tab active" data-screen="today" type="button"></button>
+        <button class="screen-tab" data-screen="plan" type="button"></button>
+        <button class="screen-tab" data-screen="add" type="button"></button>
+        <button class="screen-tab" data-screen="insights" type="button"></button>
+        <button class="screen-tab" data-screen="profile" type="button"></button>
+      </div>
+      <div class="phone-wrap"><div class="phone" id="phone" aria-label="Pulse v2 Foodiary phone mockup"></div></div>
+    </section>
+
+    <footer class="footer-note">Language remains neutral and planning-oriented: estimated target, planned, remaining, above estimate, readiness. This proposal avoids shame framing and avoids medical/nutrition claims.</footer>
+  </main>
+
+  <script>
+    const icons = {
+      target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 7v5l3 2"/></svg>',
+      calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+      plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>',
+      chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5M4 19h16"/><path d="m7 15 3-4 4 2 4-7"/></svg>',
+      user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>',
+      bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
+      search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+      bowl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16a8 8 0 0 1-16 0Z"/><path d="M7 12c0-3 2-5 5-5s5 2 5 5"/></svg>',
+      fork: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3v8M10 3v8M8 3v18M14 3v18M14 8h4a3 3 0 0 0 0-6h-4"/></svg>',
+      cup: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 8h12v7a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V8Z"/><path d="M17 10h1a3 3 0 0 1 0 6h-1"/><path d="M7 4h8"/></svg>',
+      bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m13 2-9 12h8l-1 8 9-12h-8l1-8Z"/></svg>',
+      sliders: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg>'
+    };
+
+    const screens = [
+      ['today', 'Today', 'target'],
+      ['plan', 'Plan', 'calendar'],
+      ['add', 'Add Food', 'plus'],
+      ['insights', 'Insights', 'chart'],
+      ['profile', 'Profile', 'user']
+    ];
+
+    const meals = [
+      ['Breakfast', '2 items · done', '430 kcal', '🍳', 'breakfast'],
+      ['Lunch', '3 items · planned', '720 kcal', '🍱', 'lunch'],
+      ['Snack', '1 item · flexible', '180 kcal', '🍌', 'snack'],
+      ['Dinner', 'Tap to refine', '520 kcal', '🍽️', 'dinner']
+    ];
+
+    let active = 'today';
+    const phone = document.getElementById('phone');
+    const wrap = document.querySelector('.phone-wrap');
+
+    function resizePhone() {
+      const scale = Math.min(wrap.clientWidth / 402, 1);
+      phone.style.transform = `scale(${scale})`;
+      wrap.style.height = `${872 * scale}px`;
+    }
+    new ResizeObserver(resizePhone).observe(wrap);
+    window.addEventListener('resize', resizePhone);
+
+    function status() {
+      return `<div class="status"><span>9:41</span><span class="status-icons"><i></i><i></i></span></div>`;
+    }
+
+    function topbar(title, overline, icon = 'bell') {
+      return `<div class="topbar"><div><p class="overline">${overline}</p><h2 class="title">${title}</h2></div><button class="icon-btn" type="button" aria-label="Action">${icons[icon]}</button></div>`;
+    }
+
+    function nav() {
+      return `<nav class="nav" aria-label="Pulse v2 bottom navigation">${screens.map(([id, label, icon]) => `<button class="nav-btn ${active === id ? 'active' : ''}" data-nav="${id}" type="button" aria-label="${label}">${icons[icon]}<span>${label.replace(' Food','')}</span></button>`).join('')}</nav>`;
+    }
+
+    function mealList() {
+      return meals.map(([name, meta, kcal, emoji, tone]) => `<article class="meal"><div class="meal-icon ${tone}" aria-hidden="true"><span class="emoji">${emoji}</span></div><div><b>${name}</b><span>${meta}</span></div><div class="meal-kcal">${kcal}</div></article>`).join('');
+    }
+
+    function today() {
+      return `${topbar('Today', 'Planning cockpit')}
+        <section class="hero">
+          <div class="hero-row"><div><p class="hero-label">Remaining estimate</p><div class="hero-number">420</div><p class="hero-unit">kcal available today</p></div><span class="hero-chip">${icons.bolt} 82% used</span></div>
+          <p class="hero-copy">1,850 kcal planned against a 2,270 kcal estimate. Dinner is the next adjustable slot.</p>
+          <div class="segments"><i></i><i></i><i></i><i></i></div>
+        </section>
+        <div class="metric-grid"><div class="metric"><b>82g</b><span>Protein</span></div><div class="metric"><b>226g</b><span>Carbs</span></div><div class="metric"><b>61g</b><span>Fat</span></div></div>
+        <div class="action-strip"><div><b>Next best action</b><span>Add or refine dinner before the plan is complete.</span></div><button type="button" data-jump="add" aria-label="Add food">${icons.plus}</button></div>
+        <section class="section"><div class="section-head"><p class="section-title">Meal timeline</p><span class="section-link">4 slots</span></div>${mealList()}</section>`;
+    }
+
+    function plan() {
+      const days = [['Mon','22','active'],['Tue','23','future'],['Wed','24','future'],['Thu','25','empty'],['Fri','26','future'],['Sat','27','empty'],['Sun','28','future']];
+      return `${topbar('Plan', 'Week readiness', 'plus')}
+        <section class="week-card"><p class="section-title">Jun 22 – 28</p><div class="week-grid">${days.map(([d,n,state]) => `<button class="day ${state}" type="button"><span>${d}</span><b>${n}</b><i></i></button>`).join('')}</div></section>
+        <div class="day-summary"><div class="day-metric"><b>5/7</b><span>Days planned</span></div><div class="day-metric"><b>2</b><span>Open days</span></div></div>
+        <section class="white-card section"><div class="section-head"><p class="section-title">Monday plan</p><span class="section-link">1,850 / 2,270</span></div><div class="segments" style="margin-top:2px"><i></i><i></i><i></i><i></i></div><p class="hero-copy" style="color:var(--phone-muted);margin:0;max-width:none">This day is planned and still has room for adjustment.</p></section>
+        <section class="section"><div class="section-head"><p class="section-title">Meal slots</p><span class="section-link">Edit</span></div>${mealList()}</section>`;
+    }
+
+    function addFood() {
+      const foods = [['Chicken breast','FatSecret · 165 kcal / 100g'],['Steamed rice','Recent · 130 kcal / 100g'],['Greek yogurt','Favorite · 97 kcal'],['Banana','Recent · 105 kcal']];
+      return `${topbar('Add food', 'Search-first entry', 'sliders')}
+        <section class="search-card"><p class="section-title">Find food</p><div class="search-box">${icons.search}<span>Chicken breast, rice, yogurt...</span><span class="source-pill">2 sources</span></div><div class="food-grid">${foods.map(([name, meta]) => `<button class="food-card" type="button"><b>${name}</b><span>${meta}</span></button>`).join('')}</div><div class="serving-card"><div><b>Selected: Chicken breast</b><span>100g serving · 165 kcal</span></div><div class="serving-stepper"><i>−</i>1x<i>+</i></div></div></section>
+        <section class="white-card" style="margin-top:14px"><p class="section-title">Manual fallback</p><div class="rows"><div class="row"><span>Name</span><strong>Required</strong></div><div class="row"><span>Calories</span><strong>kcal</strong></div><div class="row"><span>Note</span><strong>Optional</strong></div></div></section>`;
+    }
+
+    function insights() {
+      const bars = [['M',72],['T',58],['W',80],['T',66],['F',92],['S',44],['S',70]];
+      return `${topbar('Insights', 'Neutral patterns', 'chart')}
+        <section class="chart-card"><p class="section-title">Planned calories this week</p><div class="mini-chart">${bars.map(([d,h]) => `<div class="bar-wrap"><div class="bar" style="height:${h}px"></div><span>${d}</span></div>`).join('')}</div></section>
+        <div class="metric-grid"><div class="metric"><b>5</b><span>Logged days</span></div><div class="metric"><b>1.9k</b><span>Avg kcal</span></div><div class="metric"><b>420</b><span>Avg room</span></div></div>
+        <section class="section"><div class="section-head"><p class="section-title">Observations</p><span class="section-link">Neutral</span></div><div class="insight-list"><div class="insight"><b>Lunch is your largest planned meal.</b><span>It represents about 34% of planned calories this week.</span></div><div class="insight"><b>Two future days are still open.</b><span>Plan empty slots when you are ready; no action is required now.</span></div><div class="insight"><b>Protein entries are consistent.</b><span>Most planned days include at least one protein item.</span></div></div></section>`;
+    }
+
+    function profile() {
+      return `${topbar('Profile', 'Estimate context', 'user')}
+        <section class="white-card"><div class="profile-head"><div class="avatar">FD</div><div><h3>Your planning estimate</h3><p>Based on profile details and selected planning preference.</p></div></div><div class="target-box"><b>2,270</b><span>kcal per day estimate</span></div><div class="rows"><div class="row"><span>Activity</span><strong>Lightly active</strong></div><div class="row"><span>Preference</span><strong>Maintain</strong></div><div class="row"><span>BMR</span><strong>1,560 kcal</strong></div><div class="row"><span>Maintenance</span><strong>2,270 kcal</strong></div></div></section>
+        <p class="disclaimer">This is an estimate for planning purposes only and should not be treated as medical or nutrition advice.</p>`;
+    }
+
+    function content() {
+      if (active === 'plan') return plan();
+      if (active === 'add') return addFood();
+      if (active === 'insights') return insights();
+      if (active === 'profile') return profile();
+      return today();
+    }
+
+    function render() {
+      phone.innerHTML = `${status()}<div class="app"><div class="scroll">${content()}</div>${nav()}</div>`;
+      phone.querySelectorAll('[data-nav]').forEach(btn => btn.addEventListener('click', () => setScreen(btn.dataset.nav)));
+      phone.querySelectorAll('[data-jump]').forEach(btn => btn.addEventListener('click', () => setScreen(btn.dataset.jump)));
+    }
+
+    function setScreen(id) {
+      active = id;
+      syncTabs();
+      render();
+    }
+
+    function syncTabs() {
+      document.querySelectorAll('[data-screen]').forEach(btn => btn.classList.toggle('active', btn.dataset.screen === active));
+    }
+
+    function initTabs() {
+      document.querySelectorAll('[data-screen]').forEach(btn => {
+        const item = screens.find(([id]) => id === btn.dataset.screen);
+        btn.innerHTML = `${icons[item[2]]}<span>${item[1]}</span>`;
+        btn.addEventListener('click', () => setScreen(btn.dataset.screen));
+      });
+    }
+
+    initTabs();
+    render();
+    resizePhone();
+  </script>
+</body>
+</html>

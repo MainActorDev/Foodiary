@@ -24,8 +24,7 @@ struct FoodiaryApp: App {
         
         // Global nav bar styling
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(FoodiaryDesign.background)
+        appearance.configureWithTransparentBackground()
         appearance.shadowColor = .clear
         
         let titleFont: UIFont = {
@@ -45,22 +44,22 @@ struct FoodiaryApp: App {
         
         appearance.titleTextAttributes = [
             .font: titleFont,
-            .foregroundColor: UIColor(FoodiaryDesign.black)
+            .foregroundColor: UIColor(FoodiaryDesign.pulseInk)
         ]
         appearance.largeTitleTextAttributes = [
             .font: largeTitleFont,
-            .foregroundColor: UIColor(FoodiaryDesign.black)
+            .foregroundColor: UIColor(FoodiaryDesign.pulseInk)
         ]
         
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().tintColor = UIColor(FoodiaryDesign.black)
+        UINavigationBar.appearance().tintColor = UIColor(FoodiaryDesign.pulseInk)
         
         // Tab bar styling
         let tabAppearance = UITabBarAppearance()
         tabAppearance.configureWithOpaqueBackground()
-        tabAppearance.backgroundColor = UIColor(FoodiaryDesign.white)
-        tabAppearance.shadowColor = UIColor(FoodiaryDesign.black)
+        tabAppearance.backgroundColor = UIColor(FoodiaryDesign.pulseBackground)
+        tabAppearance.shadowColor = UIColor(FoodiaryDesign.pulseBorder)
         UITabBar.appearance().standardAppearance = tabAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabAppearance
     }

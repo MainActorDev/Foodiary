@@ -5,20 +5,20 @@ struct GoalSetupView: View {
     @Binding var goal: UserProfile.Goal
     var onBack: () -> Void
     var onCalculate: () -> Void
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
                 // Progress dots
                 HStack(spacing: 8) {
-                    Circle().fill(FoodiaryDesign.muted).frame(width: 10, height: 10).overlay(Circle().stroke(FoodiaryDesign.black, lineWidth: 2))
-                    Circle().fill(FoodiaryDesign.coral).frame(width: 28, height: 10)
-                    Circle().fill(FoodiaryDesign.muted).frame(width: 10, height: 10).overlay(Circle().stroke(FoodiaryDesign.black, lineWidth: 2))
+                    Circle().fill(FoodiaryDesign.pulsePrimary.opacity(0.4)).frame(width: 10, height: 10)
+                    Circle().fill(FoodiaryDesign.pulsePrimary).frame(width: 28, height: 10)
+                    Circle().fill(FoodiaryDesign.pulseSurfaceSoft).frame(width: 10, height: 10)
                 }
-                
+
                 // Activity Level
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(L10n["label.activity_level"]).sectionLabel()
+                    Text(L10n["label.activity_level"]).pulseSectionLabel()
                     VStack(spacing: 2) {
                         ForEach(UserProfile.ActivityLevel.allCases, id: \.self) { option in
                             Button(action: { activityLevel = option }) {
@@ -28,14 +28,14 @@ struct GoalSetupView: View {
                         }
                     }
                     .padding(3)
-                    .background(FoodiaryDesign.muted)
+                    .background(FoodiaryDesign.pulseSurfaceSoft)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.black, lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.pulseBorder, lineWidth: 1))
                 }
-                
+
                 // Goal
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(L10n["label.goal"]).sectionLabel()
+                    Text(L10n["label.goal"]).pulseSectionLabel()
                     VStack(spacing: 3) {
                         ForEach(UserProfile.Goal.allCases, id: \.self) { option in
                             Button(action: { goal = option }) {
@@ -45,25 +45,25 @@ struct GoalSetupView: View {
                         }
                     }
                     .padding(3)
-                    .background(FoodiaryDesign.muted)
+                    .background(FoodiaryDesign.pulseSurfaceSoft)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.black, lineWidth: 3))
-                    
+                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(FoodiaryDesign.pulseBorder, lineWidth: 1))
+
                     Text(L10n["onboarding.goal.note"])
-                        .font(.system(size: 12))
-                        .foregroundColor(FoodiaryDesign.mutedFg)
+                        .font(FoodiaryTypography.pulseCaption)
+                        .foregroundColor(FoodiaryDesign.pulseMuted)
                 }
-                
+
                 Spacer(minLength: 24)
-                
+
                 Button(action: onCalculate) {
                     Text(L10n["action.calculate_target"])
                 }
-                .buttonStyle(NBButtonStyle())
+                .buttonStyle(PulsePrimaryButtonStyle())
             }
             .padding(20)
         }
-        .background(FoodiaryDesign.background)
+        .background(FoodiaryDesign.pulseBackground)
         .navigationTitle("Your Goal")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
@@ -74,7 +74,7 @@ struct GoalSetupView: View {
                         .font(.system(size: 16, weight: .bold))
                         .frame(width: 32, height: 32)
                 }
-                .buttonStyle(NBStepperButtonStyle())
+                .buttonStyle(PulseIconButtonStyle(fgColor: FoodiaryDesign.pulseMuted))
             }
         }
     }

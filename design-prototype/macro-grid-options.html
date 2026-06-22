@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Macro Grid Options v2</title>
+<style>
+* { box-sizing:border-box; margin:0; }
+body { font-family:Inter,sans-serif; background:#0b1024; color:#f8fafc; padding:24px; }
+h2 { font-size:14px; font-weight:700; margin-bottom:10px; color:#a5b4fc; letter-spacing:.04em; text-transform:uppercase; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:24px; max-width:1100px; margin:0 auto; }
+.option { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); border-radius:18px; padding:18px; }
+.phone { width:310px; margin:0 auto; background:#f6f7ff; border-radius:28px; padding:12px; }
+.row { display:flex; gap:10px; margin-top:14px; }
+.val { font-family:'Space Grotesk',Inter,sans-serif; font-weight:700; letter-spacing:-.04em; }
+.lbl { font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:.06em; }
+
+/* F — Glass pills */
+.f .pill { flex:1; padding:14px 12px; border-radius:20px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+.f .pill:nth-child(1) { background:rgba(37,99,235,.12); }
+.f .pill:nth-child(2) { background:rgba(245,158,11,.12); }
+.f .pill:nth-child(3) { background:rgba(239,68,68,.12); }
+.f .val { font-size:24px; }
+.f .lbl { margin-top:2px; }
+
+/* G — Split progress bar */
+.g .bar-wrap { margin-top:14px; }
+.g .bar { height:32px; border-radius:16px; display:flex; overflow:hidden; }
+.g .bar-seg { display:grid; place-items:center; font-size:13px; font-weight:900; color:#fff; }
+.g .bar-seg:nth-child(1) { flex:28; background:#2563eb; }
+.g .bar-seg:nth-child(2) { flex:71; background:#f59e0b; }
+.g .bar-seg:nth-child(3) { flex:21; background:#ef4444; }
+.g .legend { display:flex; gap:12px; margin-top:8px; font-size:11px; color:#6b6880; font-weight:700; }
+.g .leg { display:flex; align-items:center; gap:5px; }
+.g .leg i { width:8px; height:8px; border-radius:99px; display:block; }
+.g .leg:nth-child(1) i { background:#2563eb; }
+.g .leg:nth-child(2) i { background:#f59e0b; }
+.g .leg:nth-child(3) i { background:#ef4444; }
+
+/* H — Gradient capsules */
+.h .cap { flex:1; padding:16px 10px; border-radius:24px; text-align:center; color:#fff; position:relative; overflow:hidden; }
+.h .cap:nth-child(1) { background:linear-gradient(135deg,#2563eb,#1d4ed8); }
+.h .cap:nth-child(2) { background:linear-gradient(135deg,#f59e0b,#d97706); }
+.h .cap:nth-child(3) { background:linear-gradient(135deg,#ef4444,#dc2626); }
+.h .val { font-size:26px; }
+.h .lbl { color:rgba(255,255,255,.8); margin-top:2px; }
+.h .cap::after { content:''; position:absolute; width:50px; height:50px; border-radius:99px; background:rgba(255,255,255,.12); top:-10px; right:-10px; }
+
+/* I — Bento grid */
+.i .bento { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px; }
+.i .bento :first-child { grid-column:1/-1; }
+.i .cell { padding:14px; border-radius:16px; background:#fff; border:1px solid rgba(21,20,42,.08); }
+.i .cell .head { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+.i .cell .dot { width:10px; height:10px; border-radius:99px; }
+.i .cell:nth-child(1) .dot { background:#2563eb; }
+.i .cell:nth-child(2) .dot { background:#f59e0b; }
+.i .cell:nth-child(3) .dot { background:#ef4444; }
+.i .val { font-size:22px; color:#15142a; }
+.i .lbl { color:#6b6880; }
+
+/* J — Inline stat row */
+.j .inline { display:flex; align-items:center; gap:6px; margin-top:14px; padding:12px 14px; background:#fff; border-radius:18px; border:1px solid rgba(21,20,42,.10); font-size:13px; font-weight:700; color:#15142a; }
+.j .inline i { width:7px; height:7px; border-radius:99px; display:inline-block; margin-right:2px; }
+.j .inline i:nth-child(1) { background:#2563eb; }
+.j .inline i:nth-child(3) { background:#f59e0b; }
+.j .inline i:nth-child(5) { background:#ef4444; }
+.j .sep { color:#c8c6d0; }
+
+/* K — Ring trio */
+.k .rings { display:flex; gap:14px; justify-content:center; margin-top:14px; }
+.k .ring { width:70px; height:70px; border-radius:99px; display:grid; place-items:center; position:relative; }
+.k .ring svg { position:absolute; width:100%; height:100%; transform:rotate(-90deg); }
+.k .ring circle { fill:none; stroke-width:6; }
+.k .ring .bg { stroke:rgba(0,0,0,.06); }
+.k .ring:nth-child(1) .fg { stroke:#2563eb; stroke-dasharray:176; stroke-dashoffset:100; }
+.k .ring:nth-child(2) .fg { stroke:#f59e0b; stroke-dasharray:176; stroke-dashoffset:60; }
+.k .ring:nth-child(3) .fg { stroke:#ef4444; stroke-dasharray:176; stroke-dashoffset:130; }
+.k .inner { text-align:center; z-index:1; }
+.k .inner .v { font-size:15px; font-weight:900; color:#15142a; }
+.k .inner .l { font-size:9px; font-weight:900; color:#6b6880; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="option"><h2>F — Glass morphism pills</h2><div class="phone f"><div class="row"><div class="pill"><span class="val">28g</span><span class="lbl">Protein</span></div><div class="pill"><span class="val">71g</span><span class="lbl">Carbs</span></div><div class="pill"><span class="val">21g</span><span class="lbl">Fat</span></div></div></div></div>
+  <div class="option"><h2>G — Split progress bar</h2><div class="phone g"><div class="bar-wrap"><div class="bar"><div class="bar-seg">28</div><div class="bar-seg">71</div><div class="bar-seg">21</div></div><div class="legend"><div class="leg"><i></i>Protein</div><div class="leg"><i></i>Carbs</div><div class="leg"><i></i>Fat</div></div></div></div>
+  <div class="option"><h2>H — Gradient capsules</h2><div class="phone h"><div class="row"><div class="cap"><span class="val">28g</span><span class="lbl">Protein</span></div><div class="cap"><span class="val">71g</span><span class="lbl">Carbs</span></div><div class="cap"><span class="val">21g</span><span class="lbl">Fat</span></div></div></div></div>
+  <div class="option"><h2>I — Bento grid</h2><div class="phone i"><div class="bento"><div class="cell"><div class="head"><span class="dot"></span><span class="lbl">Protein</span></div><span class="val">28g</span></div><div class="cell"><div class="head"><span class="dot"></span><span class="lbl">Carbs</span></div><span class="val">71g</span></div><div class="cell"><div class="head"><span class="dot"></span><span class="lbl">Fat</span></div><span class="val">21g</span></div></div></div></div>
+  <div class="option"><h2>J — Inline stat row</h2><div class="phone j"><div class="inline"><i></i>Protein 28g <span class="sep">·</span> <i></i>Carbs 71g <span class="sep">·</span> <i></i>Fat 21g</div></div></div>
+  <div class="option"><h2>K — Mini ring trio</h2><div class="phone k"><div class="rings"><div class="ring"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="fg" cx="32" cy="32" r="28"/></svg><div class="inner"><span class="v">28</span><span class="l">Pro</span></div></div><div class="ring"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="fg" cx="32" cy="32" r="28"/></svg><div class="inner"><span class="v">71</span><span class="l">Crb</span></div></div><div class="ring"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="fg" cx="32" cy="32" r="28"/></svg><div class="inner"><span class="v">21</span><span class="l">Fat</span></div></div></div></div>
+</div>
+</body>
+</html>

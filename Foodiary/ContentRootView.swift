@@ -67,7 +67,7 @@ struct ContentRootView: View {
                             }
                         }
                     }
-                    .tint(FoodiaryDesign.coral)
+                    .tint(FoodiaryDesign.pulsePrimary)
                 }
             } else {
                 VStack {
@@ -75,10 +75,10 @@ struct ContentRootView: View {
                         .font(.system(size: 64))
                     Text(L10n["app.name"])
                         .font(FoodiaryTypography.display)
-                        .foregroundColor(FoodiaryDesign.black)
+                        .foregroundColor(FoodiaryDesign.pulseInk)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(FoodiaryDesign.background)
+                .background(FoodiaryDesign.pulseBackground)
             }
         }
         .onAppear {

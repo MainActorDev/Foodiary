@@ -5,25 +5,25 @@ struct CalorieResultView: View {
     var onBack: () -> Void
     var onCreateMealPlan: () -> Void
     var onEditProfile: () -> Void
-    
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            
+
             Text(L10n["onboarding.result.title"])
-                .font(FoodiaryTypography.bodySm)
-                .foregroundColor(FoodiaryDesign.mutedFg)
+                .font(FoodiaryTypography.pulseCaption)
+                .foregroundColor(FoodiaryDesign.pulseMuted)
                 .padding(.bottom, 8)
-            
+
             Text("\(target.targetCalories)")
-                .font(.system(size: 56, weight: .bold, design: .rounded))
-                .foregroundColor(FoodiaryDesign.coral)
-            
+                .font(FoodiaryTypography.pulseDisplay)
+                .foregroundColor(FoodiaryDesign.pulsePrimary)
+
             Text(L10n["unit.kcal_per_day"])
-                .font(FoodiaryTypography.title)
-                .foregroundColor(FoodiaryDesign.black)
+                .font(FoodiaryTypography.pulseTitle)
+                .foregroundColor(FoodiaryDesign.pulseInk)
                 .padding(.bottom, 24)
-            
+
             // Stat cards
             HStack(spacing: 12) {
                 StatCard(value: "\(target.bmr)", label: L10n["label.bmr"])
@@ -31,38 +31,38 @@ struct CalorieResultView: View {
                 StatCard(value: "\(target.targetCalories)", label: L10n["label.target"])
             }
             .padding(.horizontal, 20)
-            
+
             Text(L10n["onboarding.result.note"])
-                .font(FoodiaryTypography.bodySm)
-                .foregroundColor(FoodiaryDesign.mutedFg)
+                .font(FoodiaryTypography.pulseCaption)
+                .foregroundColor(FoodiaryDesign.pulseMuted)
                 .padding(.top, 16)
-            
+
             Spacer()
-            
+
             Button(action: onCreateMealPlan) {
                 Text(L10n["action.create_meal_plan"])
             }
-            .buttonStyle(NBButtonStyle())
+            .buttonStyle(PulsePrimaryButtonStyle())
             .padding(.horizontal, 20)
             .padding(.bottom, 12)
-            
+
             Button(action: onEditProfile) {
                 Text(L10n["action.edit_profile"])
             }
-            .buttonStyle(NBSecondaryButtonStyle())
+            .buttonStyle(PulseSecondaryButtonStyle())
             .padding(.horizontal, 20)
             .padding(.bottom, 24)
-            
+
             Text(L10n["disclaimer.full"])
                 .font(.system(size: 11))
-                .foregroundColor(FoodiaryDesign.mutedFg)
+                .foregroundColor(FoodiaryDesign.pulseMuted)
                 .multilineTextAlignment(.center)
                 .italic()
                 .padding(.horizontal, 32)
                 .padding(.bottom, 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(FoodiaryDesign.background)
+        .background(FoodiaryDesign.pulseBackground)
         .navigationTitle("Your Target")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
@@ -73,7 +73,7 @@ struct CalorieResultView: View {
                         .font(.system(size: 16, weight: .bold))
                         .frame(width: 32, height: 32)
                 }
-                .buttonStyle(NBStepperButtonStyle())
+                .buttonStyle(PulseIconButtonStyle(fgColor: FoodiaryDesign.pulseMuted))
             }
         }
     }
@@ -82,29 +82,27 @@ struct CalorieResultView: View {
 struct StatCard: View {
     let value: String
     let label: String
-    
+
     var body: some View {
         VStack(spacing: 4) {
             Text(value)
-                .font(FoodiaryTypography.bodyBold)
-                .foregroundColor(FoodiaryDesign.black)
+                .font(FoodiaryTypography.pulseBodyBold)
+                .foregroundColor(FoodiaryDesign.pulseInk)
             Text(label)
-                .font(FoodiaryTypography.label)
-                .foregroundColor(FoodiaryDesign.mutedFg)
+                .font(FoodiaryTypography.pulseLabel)
+                .foregroundColor(FoodiaryDesign.pulseMuted)
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 12)
         .frame(maxWidth: .infinity)
         .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(FoodiaryDesign.black)
-                    .offset(x: 2, y: 2)
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(FoodiaryDesign.white)
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(FoodiaryDesign.black, lineWidth: 2)
-            }
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .fill(FoodiaryDesign.pulseSurface)
+                .shadow(color: FoodiaryDesign.pulsePrimaryDark.opacity(0.06), radius: 8, x: 0, y: 4)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .stroke(FoodiaryDesign.pulseBorder, lineWidth: 1)
         )
     }
 }

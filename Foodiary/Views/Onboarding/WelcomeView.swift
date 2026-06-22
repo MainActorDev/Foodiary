@@ -2,44 +2,44 @@ import SwiftUI
 
 struct WelcomeView: View {
     var onGetStarted: () -> Void
-    
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            
+
             Text("🥗")
                 .font(.system(size: 64))
                 .padding(.bottom, 12)
-            
+
             Text(L10n["app.name"])
-                .font(FoodiaryTypography.display)
-                .foregroundColor(FoodiaryDesign.black)
+                .font(FoodiaryTypography.pulseTitle)
+                .foregroundColor(FoodiaryDesign.pulseInk)
                 .padding(.bottom, 8)
-            
+
             Text(L10n["onboarding.welcome.tagline"])
-                .font(FoodiaryTypography.body)
-                .foregroundColor(FoodiaryDesign.mutedFg)
+                .font(FoodiaryTypography.pulseBody)
+                .foregroundColor(FoodiaryDesign.pulseMuted)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
-            
+
             Spacer()
-            
+
             Button(action: onGetStarted) {
                 Text(L10n["onboarding.welcome.get_started"])
             }
-            .buttonStyle(NBButtonStyle())
+            .buttonStyle(PulsePrimaryButtonStyle())
             .padding(.horizontal, 60)
             .padding(.bottom, 32)
-            
+
             Text(L10n["onboarding.welcome.disclaimer"])
                 .font(.system(size: 11))
-                .foregroundColor(FoodiaryDesign.mutedFg)
+                .foregroundColor(FoodiaryDesign.pulseMuted)
                 .multilineTextAlignment(.center)
                 .italic()
                 .padding(.horizontal, 40)
                 .padding(.bottom, 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(FoodiaryDesign.background)
+        .background(FoodiaryDesign.pulseBackground)
     }
 }

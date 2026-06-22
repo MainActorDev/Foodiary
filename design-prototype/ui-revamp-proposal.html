@@ -1,0 +1,1332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foodiary UI/UX Revamp Proposal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #0c1222;
+      --page-card: rgba(255,255,255,.08);
+      --page-card-strong: rgba(255,255,255,.13);
+      --page-text: #f8fafc;
+      --page-muted: #aeb8cc;
+      --page-line: rgba(255,255,255,.14);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --shadow-page: 0 30px 90px rgba(0,0,0,.42);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--page-text);
+      background:
+        radial-gradient(circle at top left, rgba(255,107,95,.22), transparent 34vw),
+        radial-gradient(circle at 85% 8%, rgba(124,58,237,.28), transparent 30vw),
+        radial-gradient(circle at 70% 95%, rgba(16,185,129,.18), transparent 36vw),
+        var(--page-bg);
+      padding: clamp(16px, 3vw, 34px);
+    }
+
+    button {
+      font: inherit;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .page {
+      width: min(1240px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr) minmax(320px, 520px);
+      gap: clamp(18px, 4vw, 48px);
+      align-items: start;
+    }
+
+    .proposal-panel {
+      position: sticky;
+      top: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--page-line);
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      color: #dbeafe;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #10b981;
+      box-shadow: 0 0 0 5px rgba(16,185,129,.14);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(36px, 6.5vw, 78px);
+      line-height: .93;
+      letter-spacing: -.06em;
+    }
+
+    .headline-accent {
+      background: linear-gradient(135deg, #fff 12%, #fed7aa 42%, #a7f3d0 88%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 660px;
+      color: var(--page-muted);
+      font-size: clamp(15px, 1.7vw, 18px);
+      line-height: 1.7;
+    }
+
+    .context-card,
+    .concept-card,
+    .recommend-card {
+      border: 1px solid var(--page-line);
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.07));
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 70px rgba(0,0,0,.20);
+      backdrop-filter: blur(18px);
+    }
+
+    .context-card { padding: 18px; }
+
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .context-item {
+      padding: 13px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .context-item b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .context-item span {
+      color: var(--page-muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .panel-label {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .concept-switcher {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .concept-option {
+      min-height: 54px;
+      padding: 10px;
+      border-radius: 18px;
+      color: #cbd5e1;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+      text-align: left;
+    }
+
+    .concept-option:hover { transform: translateY(-1px); }
+
+    .concept-option.active {
+      color: #0f172a;
+      background: #fff;
+      border-color: #fff;
+    }
+
+    .concept-option strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .concept-option span {
+      display: block;
+      font-size: 11px;
+      opacity: .72;
+      line-height: 1.25;
+    }
+
+    .concept-card { padding: 18px; }
+
+    .concept-card h2 {
+      margin: 8px 0 6px;
+      font-size: 26px;
+      letter-spacing: -.04em;
+    }
+
+    .concept-card p {
+      margin: 0;
+      color: var(--page-muted);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .principle-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .principle {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0 0;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+
+    .check {
+      display: grid;
+      place-items: center;
+      flex: 0 0 22px;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(16,185,129,.16);
+      color: #86efac;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .principle b { display: block; font-size: 13px; }
+    .principle span { display: block; color: var(--page-muted); font-size: 12px; line-height: 1.45; margin-top: 2px; }
+
+    .recommend-card {
+      padding: 18px;
+      border-color: rgba(167,243,208,.28);
+      background: linear-gradient(135deg, rgba(16,185,129,.18), rgba(255,255,255,.08));
+    }
+
+    .recommend-card h3 {
+      margin: 8px 0 6px;
+      font-size: 18px;
+    }
+
+    .recommend-card p {
+      margin: 0;
+      color: #d1fae5;
+      line-height: 1.65;
+      font-size: 13px;
+    }
+
+    .preview-zone {
+      display: grid;
+      justify-items: center;
+      gap: 16px;
+    }
+
+    .preview-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: min(100%, 430px);
+      color: var(--page-muted);
+      font-size: 12px;
+    }
+
+    .screen-switcher {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 8px;
+      border: 1px solid var(--page-line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .screen-option {
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--page-muted);
+      font-size: 12px;
+      font-weight: 800;
+      transition: background .18s ease, color .18s ease;
+    }
+
+    .screen-option.active {
+      background: #fff;
+      color: #0f172a;
+    }
+
+    .phone-wrapper {
+      width: clamp(286px, 86vw, 390px);
+      position: relative;
+    }
+
+    .phone {
+      width: 390px;
+      height: 844px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      border-radius: 44px;
+      border: 10px solid #070b14;
+      box-shadow: var(--shadow-page), inset 0 0 0 1px rgba(255,255,255,.16);
+      transform-origin: top left;
+      background: var(--app-bg);
+      color: var(--app-text);
+      transition: background .24s ease, color .24s ease;
+    }
+
+    .phone.aura {
+      --font-main: "Plus Jakarta Sans", Inter, sans-serif;
+      --font-display: "Plus Jakarta Sans", Inter, sans-serif;
+      --app-bg: #fff8ef;
+      --app-card: rgba(255,255,255,.86);
+      --app-card-solid: #ffffff;
+      --app-text: #27221f;
+      --app-muted: #81746b;
+      --app-line: rgba(39,34,31,.09);
+      --app-soft: #fff0e8;
+      --app-soft-2: #e9f8f1;
+      --app-accent: #ff6b5f;
+      --app-accent-2: #5aa785;
+      --app-warning: #f59e0b;
+      --app-danger: #d94646;
+      --hero-gradient: linear-gradient(135deg, #ff806f 0%, #ffb38a 48%, #6abf9a 100%);
+      --nav-bg: rgba(255,255,255,.84);
+      --tab-active: #27221f;
+      --tab-muted: #9a8f87;
+    }
+
+    .phone.pulse {
+      --font-main: Inter, system-ui, sans-serif;
+      --font-display: Inter, system-ui, sans-serif;
+      --app-bg: #f7f7ff;
+      --app-card: rgba(255,255,255,.92);
+      --app-card-solid: #ffffff;
+      --app-text: #171326;
+      --app-muted: #6b647b;
+      --app-line: rgba(23,19,38,.10);
+      --app-soft: #eee9ff;
+      --app-soft-2: #dcfce7;
+      --app-accent: #7c3aed;
+      --app-accent-2: #10b981;
+      --app-warning: #f59e0b;
+      --app-danger: #ef4444;
+      --hero-gradient: linear-gradient(135deg, #7c3aed 0%, #06b6d4 56%, #10b981 100%);
+      --nav-bg: rgba(255,255,255,.88);
+      --tab-active: #7c3aed;
+      --tab-muted: #8a829b;
+    }
+
+    .phone.zenith {
+      --font-main: Inter, system-ui, sans-serif;
+      --font-display: Fraunces, Georgia, serif;
+      --app-bg: #fbfaf7;
+      --app-card: transparent;
+      --app-card-solid: #ffffff;
+      --app-text: #151515;
+      --app-muted: #77736b;
+      --app-line: rgba(21,21,21,.10);
+      --app-soft: #f1f0eb;
+      --app-soft-2: #e7f5ec;
+      --app-accent: #0f8a58;
+      --app-accent-2: #0f8a58;
+      --app-warning: #b7791f;
+      --app-danger: #b42318;
+      --hero-gradient: linear-gradient(135deg, #151515 0%, #2f2f2f 62%, #0f8a58 100%);
+      --nav-bg: rgba(251,250,247,.88);
+      --tab-active: #151515;
+      --tab-muted: #8b877f;
+    }
+
+    .phone * { font-family: var(--font-main); }
+
+    .status-bar {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--app-text);
+    }
+
+    .status-icons {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      opacity: .86;
+    }
+
+    .pill-signal, .pill-battery {
+      height: 8px;
+      border-radius: 999px;
+      background: var(--app-text);
+      opacity: .75;
+    }
+    .pill-signal { width: 20px; }
+    .pill-battery { width: 24px; }
+
+    .app-content {
+      height: calc(100% - 42px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 22px 164px;
+      scrollbar-width: none;
+    }
+    .scroll-area::-webkit-scrollbar { display: none; }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0 18px;
+    }
+
+    .app-title-wrap { min-width: 0; }
+
+    .app-overline {
+      margin: 0 0 5px;
+      color: var(--app-muted);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .app-title {
+      margin: 0;
+      font-family: var(--font-display) !important;
+      color: var(--app-text);
+      font-size: 30px;
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+
+    .zenith .app-title { font-size: 34px; letter-spacing: -.02em; }
+
+    .icon-button {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--app-card-solid);
+      color: var(--app-text);
+      box-shadow: 0 10px 24px rgba(0,0,0,.06);
+      border: 1px solid var(--app-line);
+    }
+
+    .zenith .icon-button {
+      border-radius: 999px;
+      box-shadow: none;
+      background: var(--app-soft);
+    }
+
+    .icon-button svg { width: 20px; height: 20px; stroke-width: 2.2; }
+
+    .card {
+      background: var(--app-card);
+      border: 1px solid var(--app-line);
+      border-radius: 28px;
+      box-shadow: 0 18px 44px rgba(43,30,20,.07);
+      backdrop-filter: blur(14px);
+    }
+
+    .pulse .card { border-radius: 24px; box-shadow: 0 16px 36px rgba(29,21,54,.08); }
+    .zenith .card { border-radius: 0; border: 0; border-top: 1px solid var(--app-line); box-shadow: none; background: transparent; }
+
+    .section-label {
+      margin: 0;
+      color: var(--app-muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .hero-card { padding: 20px; }
+
+    .aura .hero-card {
+      background:
+        radial-gradient(circle at 82% 12%, rgba(255,107,95,.20), transparent 36%),
+        radial-gradient(circle at 10% 90%, rgba(90,167,133,.18), transparent 35%),
+        rgba(255,255,255,.74);
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .date-chip, .mini-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 999px;
+      padding: 8px 11px;
+      background: var(--app-soft);
+      color: var(--app-text);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .mini-chip {
+      background: var(--app-soft-2);
+      color: var(--app-accent-2);
+      padding: 7px 10px;
+    }
+
+    .ring-hero {
+      display: grid;
+      grid-template-columns: 144px 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .ring {
+      width: 144px;
+      height: 144px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--app-accent-2) 0 68%, rgba(39,34,31,.08) 68% 100%);
+      position: relative;
+      box-shadow: 0 18px 40px rgba(255,107,95,.18);
+    }
+
+    .ring::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: inherit;
+      background: var(--app-card-solid);
+    }
+
+    .ring-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .ring-inner b {
+      display: block;
+      font-size: 31px;
+      letter-spacing: -.06em;
+    }
+
+    .ring-inner span {
+      display: block;
+      margin-top: 2px;
+      color: var(--app-muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .hero-copy h3,
+    .budget-hero h3,
+    .editorial-hero h3 {
+      margin: 0;
+      font-family: var(--font-display) !important;
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: -.04em;
+    }
+
+    .hero-copy p,
+    .budget-hero p,
+    .editorial-hero p {
+      margin: 8px 0 0;
+      color: var(--app-muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .summary-tile {
+      padding: 14px;
+      border-radius: 20px;
+      background: var(--app-card-solid);
+      border: 1px solid var(--app-line);
+    }
+
+    .zenith .summary-tile {
+      padding: 14px 0;
+      border-radius: 0;
+      border: 0;
+      border-top: 1px solid var(--app-line);
+      background: transparent;
+    }
+
+    .summary-tile b {
+      display: block;
+      font-size: 24px;
+      letter-spacing: -.04em;
+    }
+
+    .summary-tile span {
+      display: block;
+      margin-top: 3px;
+      color: var(--app-muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .section-stack { display: grid; gap: 12px; margin-top: 18px; }
+
+    .meal-card {
+      display: grid;
+      grid-template-columns: 46px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 22px;
+      background: var(--app-card-solid);
+      border: 1px solid var(--app-line);
+      box-shadow: 0 10px 24px rgba(0,0,0,.04);
+    }
+
+    .pulse .meal-card { border-radius: 18px; }
+
+    .zenith .meal-card {
+      grid-template-columns: 32px 1fr auto;
+      padding: 16px 0;
+      border-radius: 0;
+      border: 0;
+      border-top: 1px solid var(--app-line);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .meal-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--app-soft);
+      color: var(--app-accent);
+    }
+
+    .zenith .meal-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--app-text);
+      color: var(--app-bg);
+    }
+
+    .meal-icon svg { width: 20px; height: 20px; stroke-width: 2.1; }
+    .zenith .meal-icon svg { width: 14px; height: 14px; }
+
+    .meal-copy b {
+      display: block;
+      color: var(--app-text);
+      font-size: 14px;
+      line-height: 1.1;
+    }
+
+    .meal-copy span {
+      display: block;
+      margin-top: 4px;
+      color: var(--app-muted);
+      font-size: 12px;
+    }
+
+    .meal-kcal {
+      color: var(--app-text);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .budget-hero {
+      padding: 20px;
+      background: var(--hero-gradient);
+      color: #fff;
+      border: 0;
+      box-shadow: 0 22px 48px rgba(124,58,237,.24);
+    }
+
+    .budget-hero p { color: rgba(255,255,255,.78); }
+
+    .budget-number {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      margin: 18px 0 16px;
+    }
+
+    .budget-number b {
+      font-size: 58px;
+      line-height: .82;
+      letter-spacing: -.08em;
+    }
+
+    .budget-number span {
+      margin-bottom: 5px;
+      font-size: 13px;
+      font-weight: 800;
+      opacity: .8;
+    }
+
+    .segment-bar {
+      height: 14px;
+      display: grid;
+      grid-template-columns: 36% 24% 18% 22%;
+      gap: 4px;
+    }
+
+    .segment-bar i {
+      display: block;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+    }
+    .segment-bar i:nth-child(2) { opacity: .78; }
+    .segment-bar i:nth-child(3) { opacity: .52; }
+    .segment-bar i:nth-child(4) { opacity: .25; }
+
+    .macro-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .macro-tile {
+      padding: 13px;
+      border-radius: 18px;
+      background: var(--app-card-solid);
+      border: 1px solid var(--app-line);
+    }
+
+    .macro-tile b { display: block; font-size: 18px; letter-spacing: -.04em; }
+    .macro-tile span { display: block; margin-top: 3px; color: var(--app-muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+
+    .editorial-hero { padding: 22px 0 8px; }
+
+    .editorial-number {
+      margin: 14px 0 4px;
+      font-family: var(--font-display) !important;
+      font-size: 78px;
+      line-height: .88;
+      letter-spacing: -.06em;
+    }
+
+    .editorial-line {
+      width: 100%;
+      height: 1px;
+      background: var(--app-line);
+      margin: 22px 0 0;
+    }
+
+    .week-card { padding: 16px; }
+
+    .week-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .day-pill {
+      min-width: 0;
+      min-height: 62px;
+      display: grid;
+      place-items: center;
+      gap: 2px;
+      padding: 8px 4px;
+      border-radius: 17px;
+      color: var(--app-muted);
+      background: var(--app-soft);
+      border: 1px solid transparent;
+    }
+
+    .pulse .day-pill { border-radius: 15px; }
+    .zenith .day-pill { border-radius: 999px; background: transparent; border-color: var(--app-line); }
+
+    .day-pill.active {
+      background: var(--app-text);
+      color: var(--app-bg);
+      border-color: var(--app-text);
+    }
+
+    .pulse .day-pill.active { background: var(--app-accent); border-color: var(--app-accent); color: #fff; }
+    .aura .day-pill.active { background: var(--hero-gradient); border-color: transparent; color: #fff; }
+
+    .day-pill span:first-child {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .day-pill b { font-size: 16px; }
+
+    .day-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: .5;
+    }
+
+    .day-plan-card { padding: 18px; margin-top: 14px; }
+
+    .plan-total {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .plan-total b {
+      font-size: 38px;
+      letter-spacing: -.06em;
+    }
+
+    .plan-total span {
+      color: var(--app-muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .progress-line {
+      height: 10px;
+      border-radius: 999px;
+      background: var(--app-soft);
+      overflow: hidden;
+    }
+
+    .progress-line i {
+      display: block;
+      width: 73%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--hero-gradient);
+    }
+
+    .profile-hero { padding: 20px; }
+
+    .avatar-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      background: var(--hero-gradient);
+      color: white;
+      font-size: 19px;
+      font-weight: 900;
+      box-shadow: 0 18px 36px rgba(0,0,0,.10);
+    }
+
+    .zenith .avatar { border-radius: 999px; box-shadow: none; background: var(--app-text); }
+
+    .avatar-row h3 { margin: 0; font-size: 18px; letter-spacing: -.03em; }
+    .avatar-row p { margin: 4px 0 0; color: var(--app-muted); font-size: 12px; }
+
+    .profile-metric {
+      padding: 18px;
+      border-radius: 22px;
+      background: var(--app-soft);
+    }
+
+    .zenith .profile-metric { padding: 18px 0; border-radius: 0; background: transparent; border-top: 1px solid var(--app-line); }
+
+    .profile-metric b {
+      display: block;
+      font-family: var(--font-display) !important;
+      font-size: 44px;
+      letter-spacing: -.06em;
+    }
+
+    .profile-metric span { color: var(--app-muted); font-size: 12px; font-weight: 800; }
+
+    .setting-list { margin-top: 14px; display: grid; }
+
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+      border-top: 1px solid var(--app-line);
+      font-size: 14px;
+    }
+
+    .setting-row span:first-child { color: var(--app-muted); }
+    .setting-row span:last-child { color: var(--app-text); font-weight: 800; text-align: right; }
+
+    .disclaimer {
+      margin: 14px 0 0;
+      color: var(--app-muted);
+      font-size: 11px;
+      line-height: 1.5;
+      text-align: center;
+      font-style: italic;
+    }
+
+    .add-food-card { padding: 18px; }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      background: var(--app-card-solid);
+      border: 1px solid var(--app-line);
+      color: var(--app-muted);
+      font-size: 13px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .quick-card {
+      padding: 14px;
+      border-radius: 18px;
+      background: var(--app-card-solid);
+      border: 1px solid var(--app-line);
+    }
+
+    .quick-card b { display: block; font-size: 13px; }
+    .quick-card span { display: block; margin-top: 4px; color: var(--app-muted); font-size: 12px; }
+
+    .bottom-nav {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      height: 74px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      padding: 8px;
+      border-radius: 28px;
+      background: var(--nav-bg);
+      border: 1px solid var(--app-line);
+      box-shadow: 0 22px 50px rgba(0,0,0,.12);
+      backdrop-filter: blur(18px);
+    }
+
+    .zenith .bottom-nav { border-radius: 999px; box-shadow: none; }
+
+    .nav-item {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 4px;
+      border-radius: 20px;
+      color: var(--tab-muted);
+      background: transparent;
+      transition: background .18s ease, color .18s ease;
+    }
+
+    .nav-item.active {
+      color: var(--tab-active);
+      background: var(--app-soft);
+    }
+
+    .pulse .nav-item.active { background: #eee9ff; }
+    .zenith .nav-item.active { background: var(--app-text); color: var(--app-bg); }
+
+    .nav-item svg { width: 19px; height: 19px; stroke-width: 2.2; }
+    .nav-item span { font-size: 10px; font-weight: 900; letter-spacing: -.02em; }
+
+    .proposal-footer {
+      grid-column: 1 / -1;
+      margin-top: 8px;
+      padding: 16px 0 0;
+      color: var(--page-muted);
+      font-size: 12px;
+      line-height: 1.6;
+      border-top: 1px solid var(--page-line);
+    }
+
+    @media (max-width: 980px) {
+      .page { grid-template-columns: 1fr; }
+      .proposal-panel { position: static; }
+      h1 { max-width: 760px; }
+      .preview-zone { padding-top: 8px; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .context-grid { grid-template-columns: 1fr; }
+      .concept-switcher { grid-template-columns: 1fr; }
+      .proposal-panel { gap: 14px; }
+      .context-card, .concept-card, .recommend-card { padding: 15px; border-radius: 20px; }
+      .screen-switcher { border-radius: 22px; }
+      .screen-option { padding: 8px 11px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="proposal-panel" aria-label="Design proposal">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> Foodiary UI/UX Revamp</div>
+      <h1>Clean, modern, planning-first <span class="headline-accent">calorie tracking.</span></h1>
+      <p class="lead">A web-based design direction proposal for Foodiary before any SwiftUI implementation. The goal is to move from the current clinical ring UI into a calmer, more polished daily planning experience.</p>
+
+      <article class="context-card">
+        <p class="panel-label">Current app read</p>
+        <div class="context-grid">
+          <div class="context-item"><b>Today</b><span>Progress ring, planned/remaining tiles, macros, meal cards.</span></div>
+          <div class="context-item"><b>Plan</b><span>Week strip calendar, selected day detail, future meal planning.</span></div>
+          <div class="context-item"><b>Insights</b><span>Macro and calorie summary, currently lightweight.</span></div>
+          <div class="context-item"><b>Profile</b><span>Estimated target, BMR, maintenance, disclaimer, reset/edit.</span></div>
+        </div>
+      </article>
+
+      <article class="concept-card">
+        <p class="panel-label">Choose a direction</p>
+        <div class="concept-switcher" role="tablist" aria-label="Design directions">
+          <button class="concept-option active" data-concept="aura" type="button"><strong>Aura</strong><span>Warm, soft, friendly</span></button>
+          <button class="concept-option" data-concept="pulse" type="button"><strong>Pulse</strong><span>Energetic, data-forward</span></button>
+          <button class="concept-option" data-concept="zenith" type="button"><strong>Zenith</strong><span>Premium, editorial</span></button>
+        </div>
+        <h2 id="concept-name">Aura</h2>
+        <p id="concept-summary">Warm modern wellness. Keeps the calorie ring mental model but makes the app feel friendlier, softer, and less clinical.</p>
+        <div class="principle-list" id="principles"></div>
+      </article>
+
+      <article class="recommend-card">
+        <p class="panel-label">Recommendation</p>
+        <h3>Use Aura as the base direction.</h3>
+        <p>It preserves the current ring hero so the UX does not feel reset, but it replaces the blue clinical tone with a warmer and more premium planning experience. Borrow Zenith’s whitespace discipline to keep it clean.</p>
+      </article>
+    </section>
+
+    <section class="preview-zone" aria-label="Interactive phone preview">
+      <div class="preview-label">
+        <span>Interactive iPhone-size web preview</span>
+        <span>No app code changed</span>
+      </div>
+      <div class="screen-switcher" role="tablist" aria-label="Preview screens">
+        <button class="screen-option active" data-screen="today" type="button">Today</button>
+        <button class="screen-option" data-screen="plan" type="button">Plan</button>
+        <button class="screen-option" data-screen="add" type="button">Add Food</button>
+        <button class="screen-option" data-screen="profile" type="button">Profile</button>
+      </div>
+      <div class="phone-wrapper">
+        <div class="phone aura" id="phone" aria-label="Foodiary phone mockup"></div>
+      </div>
+    </section>
+
+    <footer class="proposal-footer">
+      This is a direction proposal, not implementation. Language stays neutral: estimated target, remaining, above estimate, planning. Calorie information remains framed as an estimate for planning purposes only.
+    </footer>
+  </main>
+
+  <script>
+    const icons = {
+      bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
+      target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>',
+      calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+      plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>',
+      user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>',
+      bowl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16a8 8 0 0 1-16 0Z"/><path d="M7 12c0-3 2-5 5-5s5 2 5 5"/></svg>',
+      fork: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3v8M10 3v8M8 3v18M14 3v18M14 8h4a3 3 0 0 0 0-6h-4"/></svg>',
+      cup: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 8h12v7a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V8Z"/><path d="M17 10h1a3 3 0 0 1 0 6h-1"/><path d="M7 4h8"/></svg>',
+      search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+      chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5M4 19h16"/><path d="m7 15 3-4 4 2 4-7"/></svg>',
+      flame: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22c4 0 7-3 7-7 0-3-2-5-4-8-.5 3-2 4-3 5 0-3-2-5-4-7 0 5-3 6-3 10 0 4 3 7 7 7Z"/></svg>'
+    };
+
+    const conceptText = {
+      aura: {
+        name: 'Aura',
+        summary: 'Warm modern wellness. Keeps the calorie ring mental model but makes the app feel friendlier, softer, and less clinical.',
+        principles: [
+          ['Hero', 'Soft gradient progress ring with encouraging neutral status.'],
+          ['Navigation', 'Classic iOS bottom tabs; larger rounded touch zones.'],
+          ['Best for', 'Most balanced direction: modern, friendly, and practical.']
+        ]
+      },
+      pulse: {
+        name: 'Pulse',
+        summary: 'Energetic and data-forward. Calories become a daily energy budget with stronger macro and planning visibility.',
+        principles: [
+          ['Hero', 'Large remaining number plus segmented budget bar.'],
+          ['Navigation', 'Dashboard-like tabs with clearer data density.'],
+          ['Best for', 'Users who want a more active, quantified planning tool.']
+        ]
+      },
+      zenith: {
+        name: 'Zenith',
+        summary: 'Premium editorial minimalism. Big typography, whitespace, and almost no decorative chrome.',
+        principles: [
+          ['Hero', 'Huge typographic metric with calm written guidance.'],
+          ['Navigation', 'Minimal pill navigation; content is mostly text and rhythm.'],
+          ['Best for', 'A mature, clean, high-trust product identity.']
+        ]
+      }
+    };
+
+    const meals = [
+      ['Breakfast', '2 items', '430 kcal', 'bowl'],
+      ['Lunch', '3 items', '720 kcal', 'fork'],
+      ['Snack', '1 item', '180 kcal', 'cup'],
+      ['Dinner', 'Planned', '520 kcal', 'bowl']
+    ];
+
+    const quickFoods = [
+      ['Chicken breast', '165 kcal / 100g'],
+      ['Steamed rice', '130 kcal / 100g'],
+      ['Greek yogurt', '97 kcal / serving'],
+      ['Banana', '105 kcal / item']
+    ];
+
+    let activeConcept = 'aura';
+    let activeScreen = 'today';
+
+    const phone = document.getElementById('phone');
+    const wrapper = document.querySelector('.phone-wrapper');
+
+    function rescalePhone() {
+      const scale = Math.min(wrapper.clientWidth / 390, 1);
+      phone.style.transform = `scale(${scale})`;
+      wrapper.style.height = `${844 * scale}px`;
+    }
+
+    new ResizeObserver(rescalePhone).observe(wrapper);
+    window.addEventListener('resize', rescalePhone);
+
+    function statusBar() {
+      return `<div class="status-bar"><span>9:41</span><div class="status-icons"><span class="pill-signal"></span><span class="pill-battery"></span></div></div>`;
+    }
+
+    function header(title, overline = 'Foodiary', rightIcon = 'bell') {
+      return `<div class="app-header"><div class="app-title-wrap"><p class="app-overline">${overline}</p><h2 class="app-title">${title}</h2></div><button class="icon-button" type="button" aria-label="Action">${icons[rightIcon]}</button></div>`;
+    }
+
+    function nav() {
+      const items = [
+        ['today', 'Today', 'target'],
+        ['plan', 'Plan', 'calendar'],
+        ['add', 'Add', 'plus'],
+        ['profile', 'Profile', 'user']
+      ];
+      return `<nav class="bottom-nav" aria-label="Preview bottom navigation">${items.map(([id, label, icon]) => `<button class="nav-item ${activeScreen === id ? 'active' : ''}" data-nav="${id}" type="button" aria-label="${label}">${icons[icon]}<span>${label}</span></button>`).join('')}</nav>`;
+    }
+
+    function mealCards() {
+      return meals.map(([name, meta, kcal, icon]) => `<article class="meal-card"><div class="meal-icon">${icons[icon]}</div><div class="meal-copy"><b>${name}</b><span>${meta}</span></div><div class="meal-kcal">${kcal}</div></article>`).join('');
+    }
+
+    function todayAura() {
+      return `${header('Today', 'Mon, 22 Jun')}
+        <section class="card hero-card">
+          <div class="hero-top"><span class="date-chip">Estimated target</span><span class="mini-chip">420 kcal left</span></div>
+          <div class="ring-hero">
+            <div class="ring"><div class="ring-inner"><b>1,850</b><span>of 2,270</span></div></div>
+            <div class="hero-copy"><h3>You are within today’s plan.</h3><p>Meals are planned for the day. Dinner is still adjustable.</p></div>
+          </div>
+          <div class="summary-row"><div class="summary-tile"><b>82g</b><span>Protein</span></div><div class="summary-tile"><b>226g</b><span>Carbs</span></div></div>
+        </section>
+        <section class="section-stack"><p class="section-label">Meals</p>${mealCards()}</section>`;
+    }
+
+    function todayPulse() {
+      return `${header('Daily budget', 'Today')}
+        <section class="card budget-hero">
+          <h3>420 kcal available</h3><p>1,850 kcal planned against a 2,270 kcal estimate.</p>
+          <div class="budget-number"><b>82%</b><span>used</span></div>
+          <div class="segment-bar"><i></i><i></i><i></i><i></i></div>
+        </section>
+        <div class="macro-grid"><div class="macro-tile"><b>82g</b><span>Protein</span></div><div class="macro-tile"><b>226g</b><span>Carbs</span></div><div class="macro-tile"><b>61g</b><span>Fat</span></div></div>
+        <section class="section-stack"><p class="section-label">Meal timeline</p>${mealCards()}</section>`;
+    }
+
+    function todayZenith() {
+      return `${header('Today', 'Estimated plan')}
+        <section class="editorial-hero">
+          <p class="section-label">Remaining</p>
+          <div class="editorial-number">420</div>
+          <div class="hero-copy"><h3>kcal available in today’s estimate.</h3><p>1,850 kcal planned. This is for planning context only, not a medical recommendation.</p></div>
+          <div class="editorial-line"></div>
+        </section>
+        <div class="summary-row"><div class="summary-tile"><b>1,850</b><span>Planned</span></div><div class="summary-tile"><b>2,270</b><span>Estimate</span></div></div>
+        <section class="section-stack"><p class="section-label">Meals</p>${mealCards()}</section>`;
+    }
+
+    function planScreen() {
+      const days = [['Mon','22',true],['Tue','23',false],['Wed','24',false],['Thu','25',false],['Fri','26',false],['Sat','27',false],['Sun','28',false]];
+      return `${header('Plan', 'Week of Jun 22', 'plus')}
+        <section class="card week-card">
+          <p class="section-label">This week</p>
+          <div class="week-row">${days.map(([d,n,a]) => `<button class="day-pill ${a ? 'active' : ''}" type="button"><span>${d}</span><b>${n}</b><span class="day-dot"></span></button>`).join('')}</div>
+        </section>
+        <section class="card day-plan-card">
+          <p class="section-label">Monday plan</p>
+          <div class="plan-total"><b>1,850</b><span>/ 2,270 kcal</span></div>
+          <div class="progress-line"><i></i></div>
+        </section>
+        <section class="section-stack"><p class="section-label">Meal slots</p>${mealCards()}</section>`;
+    }
+
+    function addFoodScreen() {
+      return `${header('Add food', 'Lunch', 'search')}
+        <section class="card add-food-card">
+          <p class="section-label">Search first</p>
+          <div class="search-box">${icons.search}<span>Chicken breast, rice, yogurt...</span></div>
+          <div class="quick-grid">${quickFoods.map(([name, meta]) => `<button class="quick-card" type="button"><b>${name}</b><span>${meta}</span></button>`).join('')}</div>
+        </section>
+        <section class="card add-food-card" style="margin-top:14px">
+          <p class="section-label">Manual fallback</p>
+          <div class="setting-list"><div class="setting-row"><span>Name</span><span>Required</span></div><div class="setting-row"><span>Calories</span><span>kcal</span></div><div class="setting-row"><span>Note</span><span>Optional</span></div></div>
+        </section>`;
+    }
+
+    function profileScreen() {
+      return `${header('Profile', 'Planning settings')}
+        <section class="card profile-hero">
+          <div class="avatar-row"><div class="avatar">FD</div><div><h3>Your estimate</h3><p>Based on profile and planning preference</p></div></div>
+          <div class="profile-metric"><b>2,270</b><span>kcal per day estimate</span></div>
+          <div class="setting-list"><div class="setting-row"><span>Activity</span><span>Lightly active</span></div><div class="setting-row"><span>Preference</span><span>Maintain</span></div><div class="setting-row"><span>BMR</span><span>1,560 kcal</span></div><div class="setting-row"><span>Maintenance</span><span>2,270 kcal</span></div></div>
+        </section>
+        <p class="disclaimer">This is an estimate for planning purposes only and should not be treated as medical or nutrition advice.</p>`;
+    }
+
+    function renderScreen() {
+      if (activeScreen === 'plan') return planScreen();
+      if (activeScreen === 'add') return addFoodScreen();
+      if (activeScreen === 'profile') return profileScreen();
+      if (activeConcept === 'pulse') return todayPulse();
+      if (activeConcept === 'zenith') return todayZenith();
+      return todayAura();
+    }
+
+    function renderPhone() {
+      phone.className = `phone ${activeConcept}`;
+      phone.innerHTML = `${statusBar()}<div class="app-content"><div class="scroll-area">${renderScreen()}</div>${nav()}</div>`;
+      phone.querySelectorAll('[data-nav]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeScreen = btn.dataset.nav;
+          syncScreenButtons();
+          renderPhone();
+        });
+      });
+    }
+
+    function renderConceptPanel() {
+      const c = conceptText[activeConcept];
+      document.getElementById('concept-name').textContent = c.name;
+      document.getElementById('concept-summary').textContent = c.summary;
+      document.getElementById('principles').innerHTML = c.principles.map(([title, body]) => `<div class="principle"><span class="check">✓</span><div><b>${title}</b><span>${body}</span></div></div>`).join('');
+    }
+
+    function syncConceptButtons() {
+      document.querySelectorAll('[data-concept]').forEach(btn => btn.classList.toggle('active', btn.dataset.concept === activeConcept));
+    }
+
+    function syncScreenButtons() {
+      document.querySelectorAll('[data-screen]').forEach(btn => btn.classList.toggle('active', btn.dataset.screen === activeScreen));
+    }
+
+    document.querySelectorAll('[data-concept]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeConcept = btn.dataset.concept;
+        syncConceptButtons();
+        renderConceptPanel();
+        renderPhone();
+      });
+    });
+
+    document.querySelectorAll('[data-screen]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeScreen = btn.dataset.screen;
+        syncScreenButtons();
+        renderPhone();
+      });
+    });
+
+    renderConceptPanel();
+    renderPhone();
+    rescalePhone();
+  </script>
+</body>
+</html>

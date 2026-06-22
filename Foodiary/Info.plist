@@ -43,5 +43,18 @@
     <array>
         <string>UIInterfaceOrientationPortrait</string>
     </array>
+    <!-- Primary: FatSecret -->
+    <key>FATSECRET_CONSUMER_KEY</key>
+    <string>$(FATSECRET_CONSUMER_KEY)</string>
+    <key>FATSECRET_CONSUMER_SECRET</key>
+    <string>$(FATSECRET_CONSUMER_SECRET)</string>
+    <!-- Fallback: Custom API (placeholder) -->
+    <key>CUSTOM_API_BASE_URL</key>
+    <string>$(CUSTOM_API_BASE_URL)</string>
+    <key>CUSTOM_API_TOKEN</key>
+    <string>$(CUSTOM_API_TOKEN)</string>
+    <!-- Deactivated: USDA (code preserved) -->
+    <key>USDA_API_KEY</key>
+    <string>$(USDA_API_KEY)</string>
 </dict>
 </plist>
