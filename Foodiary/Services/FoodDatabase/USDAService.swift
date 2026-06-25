@@ -114,3 +114,66 @@ struct USDAService: FoodDatabaseProvider {
         }
     }
 }
+
+// MARK: - Raw API Response Models
+
+extension FoodSearchResult {
+    /// Decodable wrapper for the USDA /foods/search endpoint.
+    struct USDASearchResponse: Decodable {
+        let totalHits: Int?
+        let foods: [USDAFood]?
+
+        struct USDAFood: Decodable {
+            let fdcId: Int
+            let description: String?
+            let brandOwner: String?
+            let servingSize: Double?
+            let servingSizeUnit: String?
+            let householdServingFullText: String?
+            let foodNutrients: [USDANutrient]?
+
+            struct USDANutrient: Decodable {
+                let nutrientName: String?
+                let value: Double?
+            }
+        }
+    }
+
+    /// Map a USDA food item into a unified FoodSearchResult.
+    static func fromUSDA(_ food: USDASearchResponse.USDAFood) -> FoodSearchResult {
+        let nutrients = food.foodNutrients ?? []
+        let nutrientMap = Dictionary(
+            uniqueKeysWithValues: nutrients.compactMap { n in
+                n.nutrientName.map { ($0, n.value ?? 0) }
+            }
+        )
+
+        let serving: String? = {
+            if let text = food.householdServingFullText, !text.isEmpty { return text }
+            guard let size = food.servingSize, let unit = food.servingSizeUnit else { return nil }
+            return "\(size.cleanFormatted) \(unit)"
+        }()
+
+        return FoodSearchResult(
+            id: compositeID(source: .usda, externalID: String(food.fdcId)),
+            name: food.description ?? "Unknown",
+            brand: food.brandOwner,
+            calories: Int(round(nutrientMap["Energy"] ?? 0)),
+            protein: Int(round(nutrientMap["Protein"] ?? 0)),
+            carbs: Int(round(nutrientMap["Carbohydrate, by difference"] ?? 0)),
+            fat: Int(round(nutrientMap["Total lipid (fat)"] ?? 0)),
+            servingDescription: serving,
+            source: .usda
+        )
+    }
+}
+
+// MARK: - Helpers
+
+private extension Double {
+    var cleanFormatted: String {
+        truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", self)
+            : String(self)
+    }
+}

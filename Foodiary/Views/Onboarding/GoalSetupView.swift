@@ -22,7 +22,7 @@ struct GoalSetupView: View {
                     VStack(spacing: 2) {
                         ForEach(UserProfile.ActivityLevel.allCases, id: \.self) { option in
                             Button(action: { activityLevel = option }) {
-                                Text(option.localizedDisplayName.uppercased())
+                                Text(option.displayName.uppercased())
                                     .nbSegment(isActive: activityLevel == option)
                             }
                         }
@@ -39,7 +39,7 @@ struct GoalSetupView: View {
                     VStack(spacing: 3) {
                         ForEach(UserProfile.Goal.allCases, id: \.self) { option in
                             Button(action: { goal = option }) {
-                                Text(option.localizedDisplayName.uppercased())
+                                Text(option.displayName.uppercased())
                                     .nbSegment(isActive: goal == option)
                             }
                         }

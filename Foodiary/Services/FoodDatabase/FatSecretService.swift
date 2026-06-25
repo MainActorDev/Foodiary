@@ -183,3 +183,110 @@ private extension String {
         return addingPercentEncoding(withAllowedCharacters: unreserved) ?? self
     }
 }
+
+// MARK: - Raw API Response Models (FatSecret)
+
+extension FoodSearchResult {
+    /// Decodable wrapper for FatSecret food.search response.
+    struct FatSecretSearchResponse: Decodable {
+        let foods: FoodsContainer?
+
+        struct FoodsContainer: Decodable {
+            let food: [FatSecretFoodSummary]?
+        }
+
+        struct FatSecretFoodSummary: Decodable {
+            let foodId: String?
+            let foodName: String?
+            let brandName: String?
+            let foodDescription: String?
+
+            enum CodingKeys: String, CodingKey {
+                case foodId = "food_id"
+                case foodName = "food_name"
+                case brandName = "brand_name"
+                case foodDescription = "food_description"
+            }
+        }
+    }
+
+    struct FatSecretGetResponse: Decodable {
+        let food: FatSecretFoodDetail?
+
+        struct FatSecretFoodDetail: Decodable {
+            let foodId: String?
+            let foodName: String?
+            let brandName: String?
+            let servings: ServingsContainer?
+
+            enum CodingKeys: String, CodingKey {
+                case foodId = "food_id"
+                case foodName = "food_name"
+                case brandName = "brand_name"
+                case servings
+            }
+        }
+
+        struct ServingsContainer: Decodable {
+            let serving: [FatSecretServing]?
+        }
+
+        struct FatSecretServing: Decodable {
+            let calories: String?
+            let protein: String?
+            let carbohydrate: String?
+            let fat: String?
+            let servingDescription: String?
+
+            enum CodingKeys: String, CodingKey {
+                case calories, protein, carbohydrate, fat
+                case servingDescription = "serving_description"
+            }
+        }
+    }
+
+    static func fromFatSecretSummary(
+        _ food: FatSecretSearchResponse.FatSecretFoodSummary,
+        withNutrients nutrients: FatSecretGetResponse.FatSecretServing? = nil
+    ) -> FoodSearchResult {
+        let parsed = nutrients ?? parseNutrientsFromDescription(food.foodDescription)
+        let calStr = parsed?.calories ?? "0"
+        let protStr = parsed?.protein ?? "0"
+        let carbStr = parsed?.carbohydrate ?? "0"
+        let fatStr = parsed?.fat ?? "0"
+        return FoodSearchResult(
+            id: compositeID(source: .fatsecret, externalID: food.foodId ?? ""),
+            name: food.foodName ?? "Unknown",
+            brand: food.brandName,
+            calories: Int(round(Double(calStr) ?? 0)),
+            protein: Int(round(Double(protStr) ?? 0)),
+            carbs: Int(round(Double(carbStr) ?? 0)),
+            fat: Int(round(Double(fatStr) ?? 0)),
+            servingDescription: parsed?.servingDescription ?? food.foodDescription,
+            source: .fatsecret
+        )
+    }
+
+    private static func parseNutrientsFromDescription(
+        _ description: String?
+    ) -> FatSecretGetResponse.FatSecretServing? {
+        guard let desc = description else { return nil }
+        var servingDesc: String?
+        if let dashRange = desc.range(of: " - ") {
+            servingDesc = String(desc[..<dashRange.lowerBound])
+        }
+        func extractValue(pattern: String) -> String? {
+            guard let match = desc.range(of: pattern, options: .regularExpression) else { return nil }
+            let matched = String(desc[match])
+            guard let valueMatch = matched.range(of: #"[\d.]+"#, options: .regularExpression) else { return nil }
+            return String(matched[valueMatch])
+        }
+        return FatSecretGetResponse.FatSecretServing(
+            calories: extractValue(pattern: #"Calories:\s*([\d.]+)\s*kcal"#),
+            protein: extractValue(pattern: #"Protein:\s*([\d.]+)\s*g"#),
+            carbohydrate: extractValue(pattern: #"Carbs:\s*([\d.]+)\s*g"#),
+            fat: extractValue(pattern: #"Fat:\s*([\d.]+)\s*g"#),
+            servingDescription: servingDesc
+        )
+    }
+}

@@ -70,7 +70,7 @@ struct AddFoodRouteView: View {
                         HStack(spacing: 14) {
                             PulseMealIconTile(mealType: mealType)
                             VStack(alignment: .leading, spacing: 3) {
-                                Text(mealType.localizedDisplayName)
+                                Text(mealType.displayName)
                                     .font(FoodiaryTypography.pulseHeadline)
                                     .foregroundColor(FoodiaryDesign.pulseInk)
                             }

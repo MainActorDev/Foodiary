@@ -5,15 +5,8 @@ struct ContentRootView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var state: AppState?
     @State private var onboardingPath = NavigationPath()
-    
-    // Onboarding form state
-    @State private var age = 30
-    @State private var sex: UserProfile.Sex = .female
-    @State private var heightCm: Double = 170
-    @State private var weightKg: Double = 70
-    @State private var activityLevel: UserProfile.ActivityLevel = .sedentary
-    @State private var goal: UserProfile.Goal = .maintain
-    
+    @State private var onboardingVM = OnboardingViewModel()
+
     var body: some View {
         Group {
             if let state = state {
@@ -22,48 +15,38 @@ struct ContentRootView: View {
                 } else {
                     NavigationStack(path: $onboardingPath) {
                         WelcomeView {
-                            onboardingPath.append("profile-setup")
+                            onboardingPath.append(OnboardingRoute.profileSetup)
                         }
-                        .navigationDestination(for: String.self) { destination in
+                        .navigationDestination(for: OnboardingRoute.self) { destination in
                             switch destination {
-                            case "profile-setup":
+                            case .profileSetup:
                                 ProfileSetupView(
-                                    age: $age,
-                                    sex: $sex,
-                                    heightCm: $heightCm,
-                                    weightKg: $weightKg,
+                                    age: $onboardingVM.age,
+                                    sex: $onboardingVM.sex,
+                                    heightCm: $onboardingVM.heightCm,
+                                    weightKg: $onboardingVM.weightKg,
                                     onBack: { onboardingPath.removeLast() },
-                                    onContinue: { onboardingPath.append("goal-setup") }
+                                    onContinue: { onboardingPath.append(OnboardingRoute.goalSetup) }
                                 )
-                            case "goal-setup":
+                            case .goalSetup:
                                 GoalSetupView(
-                                    activityLevel: $activityLevel,
-                                    goal: $goal,
+                                    activityLevel: $onboardingVM.activityLevel,
+                                    goal: $onboardingVM.goal,
                                     onBack: { onboardingPath.removeLast() },
-                                    onCalculate: { onboardingPath.append("result") }
+                                    onCalculate: { onboardingPath.append(OnboardingRoute.result) }
                                 )
-                            case "result":
+                            case .result:
                                 CalorieResultView(
-                                    target: CalorieCalculator.calculate(for: UserProfile(
-                                        age: age, sex: sex,
-                                        heightCm: heightCm, weightKg: weightKg,
-                                        activityLevel: activityLevel, goal: goal
-                                    )),
+                                    target: onboardingVM.calculatedTarget,
                                     onBack: { onboardingPath.removeLast() },
                                     onCreateMealPlan: {
-                                        let profile = UserProfile(
-                                            age: age, sex: sex,
-                                            heightCm: heightCm, weightKg: weightKg,
-                                            activityLevel: activityLevel, goal: goal
-                                        )
+                                        let profile = onboardingVM.currentProfile
                                         state.saveProfile(profile)
                                         state.calculateAndSaveTarget(for: profile)
                                         state.createTodayMealPlan()
                                     },
                                     onEditProfile: { onboardingPath.removeLast(2) }
                                 )
-                            default:
-                                EmptyView()
                             }
                         }
                     }
@@ -82,7 +65,8 @@ struct ContentRootView: View {
             }
         }
         .onAppear {
-            state = AppState(modelContext: modelContext)
+            let persistence = SwiftDataPersistenceService(context: modelContext)
+            state = AppState(persistence: persistence)
         }
     }
 }

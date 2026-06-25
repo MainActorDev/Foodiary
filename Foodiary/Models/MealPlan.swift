@@ -38,8 +38,6 @@ final class MealPlan {
     }
     
     static func dateKey(for date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
+        DateFormatter.dateKey.string(from: date)
     }
 }

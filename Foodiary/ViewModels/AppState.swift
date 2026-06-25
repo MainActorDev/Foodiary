@@ -1,231 +1,154 @@
 import SwiftUI
 import SwiftData
 
+/// Central coordinator — owns domain services and exposes
+/// computed properties for the UI layer.
+///
+/// Delegates all persistence to `ProfileService` and `MealPlanService`,
+/// which depend on `PersistenceService` (not concrete `ModelContext`).
+@MainActor
 @Observable
-final class AppState {
-    private var modelContext: ModelContext
-    
+final class AppState: TodayViewModel, PlanViewModel, ProfileViewModel, InsightsViewModel {
+    private let profileService: ProfileService
+    private let mealPlanService: MealPlanService
+
     var selectedPlanDate: Date = Date()
-    
+    var errorMessage: String?
+
     // Cached values to avoid repeated DB fetches in computed property chains
     private var _cachedProfile: UserProfile?
     private var _cachedTodayPlan: MealPlan?
     private var _cacheValidProfile = false
     private var _cacheValidToday = false
-    
-    init(modelContext: ModelContext) {
-        self.modelContext = modelContext
+
+    init(persistence: any PersistenceService) {
+        self.profileService = ProfileService(persistence: persistence)
+        self.mealPlanService = MealPlanService(persistence: persistence)
     }
-    
+
     // MARK: - Profile
-    
+
     var userProfile: UserProfile? {
         if _cacheValidProfile { return _cachedProfile }
-        var fetch = FetchDescriptor<UserProfile>()
-        fetch.fetchLimit = 1
-        _cachedProfile = try? modelContext.fetch(fetch).first
+        _cachedProfile = profileService.fetchProfile()
         _cacheValidProfile = true
         return _cachedProfile
     }
-    
+
     var calorieTarget: CalorieTarget? {
         userProfile?.calorieTarget
     }
-    
+
     var isOnboarded: Bool {
         userProfile != nil && calorieTarget != nil
     }
-    
+
     func saveProfile(_ profile: UserProfile) {
-        // Delete existing profile if found
-        if let existing = userProfile {
-            modelContext.delete(existing)
-        }
-        var p = profile
-        p.updatedAt = Date()
-        modelContext.insert(p)
-        do {
-            try modelContext.save()
-            invalidateCache()
-        } catch {
-            print("[AppState] Failed to save profile: \(error)")
-        }
+        profileService.saveProfile(profile)
+        invalidateCache()
     }
-    
+
     // MARK: - Calorie Target
-    
+
     func calculateAndSaveTarget(for profile: UserProfile) {
-        let target = CalorieCalculator.calculate(for: profile)
-        target.profile = profile
-        profile.calorieTarget = target
-        modelContext.insert(target)
-        do {
-            try modelContext.save()
-        } catch {
-            print("[AppState] Failed to save calorie target: \(error)")
-        }
+        profileService.calculateAndSaveTarget(for: profile)
     }
-    
+
     // MARK: - Meal Plan (date-aware)
-    
+
     var todayMealPlan: MealPlan? {
         if _cacheValidToday { return _cachedTodayPlan }
-        _cachedTodayPlan = mealPlan(for: Date())
+        _cachedTodayPlan = mealPlanService.mealPlan(for: Date())
         _cacheValidToday = true
         return _cachedTodayPlan
     }
-    
+
     var hasTodayMealPlan: Bool { todayMealPlan != nil }
-    
+
     var planDateMealPlan: MealPlan? {
-        mealPlan(for: selectedPlanDate)
+        mealPlanService.mealPlan(for: selectedPlanDate)
     }
-    
+
     var hasPlanDateMealPlan: Bool { planDateMealPlan != nil }
-    
+
     var isPlanDateToday: Bool {
         Calendar.current.isDateInToday(selectedPlanDate)
     }
-    
+
     var isPlanDatePast: Bool {
         selectedPlanDate < Calendar.current.startOfDay(for: Date())
     }
-    
+
     func mealPlanForDate(_ date: Date) -> MealPlan? {
-        mealPlan(for: date)
+        mealPlanService.mealPlan(for: date)
     }
-    
-    private func mealPlan(for date: Date) -> MealPlan? {
-        let startOfDay = Calendar.current.startOfDay(for: date)
-        guard let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) else {
-            return nil
-        }
-        var fetch = FetchDescriptor<MealPlan>(
-            predicate: #Predicate { plan in
-                plan.date >= startOfDay && plan.date < endOfDay
-            }
-        )
-        fetch.fetchLimit = 1
-        return try? modelContext.fetch(fetch).first
-    }
-    
+
     func createMealPlan(for date: Date) {
-        guard mealPlan(for: date) == nil else { return }
         let target = calorieTarget?.targetCalories ?? 2000
-        let plan = MealPlan(date: date, targetCalories: target)
-        modelContext.insert(plan)
-        do {
-            try modelContext.save()
-            invalidateCache()
-        } catch {
-            print("[AppState] Failed to create meal plan: \(error)")
-        }
+        mealPlanService.createMealPlan(for: date, targetCalories: target)
+        invalidateCache()
     }
-    
+
     func createTodayMealPlan() {
         createMealPlan(for: Date())
     }
-    
+
     func addFoodItem(_ item: FoodItem, toMealAt index: Int, for date: Date) {
-        guard let plan = mealPlan(for: date),
-              index < plan.meals.count else { return }
-        var foodItem = item
-        foodItem.meal = plan.meals[index]
-        plan.meals[index].items.append(foodItem)
-        plan.updatedAt = Date()
-        modelContext.insert(foodItem)
-        do {
-            try modelContext.save()
-            invalidateCache()
-        } catch {
-            print("[AppState] Failed to add food item: \(error)")
-        }
+        mealPlanService.addFoodItem(item, toMealAt: index, for: date)
+        invalidateCache()
     }
-    
+
     func addFoodItem(_ item: FoodItem, toMealAt index: Int) {
         addFoodItem(item, toMealAt: index, for: Date())
     }
-    
+
     func updateFoodItem(_ item: FoodItem, mealIndex: Int, itemIndex: Int, for date: Date) {
-        guard let plan = mealPlan(for: date),
-              mealIndex < plan.meals.count,
-              itemIndex < plan.meals[mealIndex].items.count else { return }
-        plan.meals[mealIndex].items[itemIndex] = item
-        plan.updatedAt = Date()
-        do {
-            try modelContext.save()
-        } catch {
-            print("[AppState] Failed to update food item: \(error)")
-        }
+        mealPlanService.updateFoodItem(item, mealIndex: mealIndex, itemIndex: itemIndex, for: date)
     }
-    
+
     func updateFoodItem(_ item: FoodItem, mealIndex: Int, itemIndex: Int) {
         updateFoodItem(item, mealIndex: mealIndex, itemIndex: itemIndex, for: Date())
     }
-    
+
     func deleteFoodItem(mealIndex: Int, itemIndex: Int, for date: Date) {
-        guard let plan = mealPlan(for: date),
-              mealIndex < plan.meals.count,
-              itemIndex < plan.meals[mealIndex].items.count else { return }
-        let item = plan.meals[mealIndex].items[itemIndex]
-        plan.meals[mealIndex].items.remove(at: itemIndex)
-        modelContext.delete(item)
-        plan.updatedAt = Date()
-        do {
-            try modelContext.save()
-            invalidateCache()
-        } catch {
-            print("[AppState] Failed to delete food item: \(error)")
-        }
+        mealPlanService.deleteFoodItem(mealIndex: mealIndex, itemIndex: itemIndex, for: date)
+        invalidateCache()
     }
-    
+
     func deleteFoodItem(mealIndex: Int, itemIndex: Int) {
         deleteFoodItem(mealIndex: mealIndex, itemIndex: itemIndex, for: Date())
     }
-    
+
     func loadMealPlansForWeek(containing date: Date) {
         // SwiftData fetches on demand — explicit pre-load not needed
     }
-    
+
     // MARK: - Plan helpers
-    
+
     func hasMealData(for date: Date) -> (hasPlan: Bool, totalCal: Int) {
-        guard let plan = mealPlan(for: date) else { return (false, 0) }
-        let hasItems = plan.meals.contains { !$0.items.isEmpty }
-        return (hasItems, plan.totalCalories)
+        mealPlanService.hasMealData(for: date)
     }
-    
-    /// Batch-check meal data for multiple dates (single fetch per date pattern)
+
     func mealDataForWeek(dates: [Date]) -> [(date: Date, hasData: Bool, totalCal: Int)] {
-        dates.map { date in
-            let (hasData, totalCal) = hasMealData(for: date)
-            return (date, hasData, totalCal)
-        }
+        mealPlanService.mealDataForWeek(dates: dates)
     }
-    
+
     // MARK: - Reset
-    
+
     func resetAll() {
-        if let profiles = try? modelContext.fetch(FetchDescriptor<UserProfile>()) {
-            for profile in profiles { modelContext.delete(profile) }
-        }
-        do {
-            try modelContext.save()
-            invalidateCache()
-        } catch {
-            print("[AppState] Failed to reset all data: \(error)")
-        }
+        profileService.deleteAllData()
+        invalidateCache()
     }
-    
+
     // MARK: - Cache invalidation
-    
+
     private func invalidateCache() {
         _cacheValidProfile = false
         _cacheValidToday = false
     }
-    
+
     // MARK: - Computed: Today
-    
+
     var plannedCalories: Int { todayMealPlan?.totalCalories ?? 0 }
     var targetCalories: Int { calorieTarget?.targetCalories ?? 2000 }
     var remainingCalories: Int { targetCalories - plannedCalories }
@@ -236,12 +159,12 @@ final class AppState {
         guard targetCalories > 0 else { return 0 }
         return min(1.0, Double(plannedCalories) / Double(targetCalories))
     }
-    
+
     var totalProtein: Int { todayMealPlan?.meals.reduce(0) { $0 + $1.items.reduce(0) { $0 + $1.protein } } ?? 0 }
     var totalCarbs: Int { todayMealPlan?.meals.reduce(0) { $0 + $1.items.reduce(0) { $0 + $1.carbs } } ?? 0 }
     var totalFat: Int { todayMealPlan?.meals.reduce(0) { $0 + $1.items.reduce(0) { $0 + $1.fat } } ?? 0 }
     var maxMacro: Int { max(max(totalProtein, totalCarbs), max(totalFat, 1)) }
-    
+
     var localizedStatusMessage: String {
         if plannedCalories == 0 { return L10n["status.no_food"] }
         else if isExactlyAtTarget { return L10n["status.exact_target"] }
@@ -249,9 +172,9 @@ final class AppState {
         else { return L10n["status.under_target", remainingCalories] }
     }
     var statusMessage: String { localizedStatusMessage }
-    
+
     // MARK: - Computed: Plan
-    
+
     var planDateCalories: Int { planDateMealPlan?.totalCalories ?? 0 }
     var planDateRemaining: Int { targetCalories - planDateCalories }
     var planDateProgress: Double {

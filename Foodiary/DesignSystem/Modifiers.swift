@@ -1,0 +1,177 @@
+import SwiftUI
+
+// MARK: - View Modifiers
+
+extension View {
+    /// Standard card with soft shadow + thin border
+    func ringCard(cornerRadius: CGFloat = 16) -> some View {
+        self
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(0.04), radius: 2, y: 1)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
+    }
+
+    /// Compact card
+    func ringCardCompact(cornerRadius: CGFloat = 14) -> some View {
+        self
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(0.03), radius: 1, y: 1)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
+    }
+
+    /// Colored card for meal icons
+    func ringCardColored(bg: Color, cornerRadius: CGFloat = 8) -> some View {
+        self
+            .padding(10)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(bg)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
+    }
+
+    /// Input field
+    func ringField(cornerRadius: CGFloat = 10) -> some View {
+        self
+            .padding(12)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(FoodiaryDesign.white)
+                    .shadow(color: .black.opacity(0.03), radius: 1, y: 1)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(FoodiaryDesign.border, lineWidth: 1.5)
+            )
+    }
+
+    /// Segmented control option
+    func ringSegment(isActive: Bool) -> some View {
+        self
+            .font(FoodiaryTypography.segment)
+            .foregroundColor(isActive ? FoodiaryDesign.black : FoodiaryDesign.mutedFg)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 10)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(isActive ? FoodiaryDesign.white : Color.clear)
+                    .shadow(color: isActive ? .black.opacity(0.06) : .clear, radius: 2, y: 1)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(isActive ? FoodiaryDesign.border : Color.clear, lineWidth: 1.5)
+            )
+    }
+
+    /// Pill badge
+    func ringBadge(bg: Color) -> some View {
+        self
+            .font(FoodiaryTypography.badge)
+            .foregroundColor(bg == FoodiaryDesign.secondaryLight ? Color(hex: "065F46") :
+                            bg == Color(hex: "FEE2E2") ? Color(hex: "991B1B") :
+                            bg == FoodiaryDesign.warningLight ? Color(hex: "92400E") : FoodiaryDesign.mutedFg)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 6)
+            .background(Capsule().fill(bg))
+            .overlay(Capsule().stroke(FoodiaryDesign.border, lineWidth: 1))
+    }
+
+    /// Section label (ALL CAPS)
+    func sectionLabel() -> some View {
+        self
+            .font(FoodiaryTypography.label)
+            .foregroundColor(FoodiaryDesign.black)
+            .textCase(.uppercase)
+    }
+
+    // MARK: Pulse v2 modifiers
+
+    func pulseCard(cornerRadius: CGFloat = 22, padding: CGFloat = 18) -> some View {
+        self
+            .padding(padding)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .fill(FoodiaryDesign.pulseSurface)
+                    .shadow(color: FoodiaryDesign.pulsePrimaryDark.opacity(0.055), radius: 30, x: 0, y: 14)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .stroke(FoodiaryDesign.pulseBorder, lineWidth: 1)
+            )
+    }
+
+    func pulseHeroCard(cornerRadius: CGFloat = 28, padding: CGFloat = 22) -> some View {
+        self
+            .padding(padding)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            colors: [FoodiaryDesign.pulsePrimaryDark, Color(hex: "2D2152")],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .shadow(color: FoodiaryDesign.pulsePrimary.opacity(0.22), radius: 24, x: 0, y: 14)
+            )
+    }
+
+    func pulseSoftPanel(cornerRadius: CGFloat = 18, padding: CGFloat = 16) -> some View {
+        self
+            .padding(padding)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .fill(FoodiaryDesign.pulseSurfaceSoft)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .stroke(FoodiaryDesign.pulseBorder.opacity(0.8), lineWidth: 1)
+            )
+    }
+
+    func pulseField(cornerRadius: CGFloat = 16) -> some View {
+        self
+            .padding(14)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .fill(FoodiaryDesign.pulseSurface)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .stroke(FoodiaryDesign.pulseBorder, lineWidth: 1)
+            )
+    }
+
+    func pulseBadge(bg: Color = FoodiaryDesign.pulseSurfaceSoft, fg: Color = FoodiaryDesign.pulseInk) -> some View {
+        self
+            .font(FoodiaryTypography.pulseLabel)
+            .foregroundColor(fg)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 7)
+            .background(Capsule().fill(bg))
+    }
+
+    func pulseSectionLabel() -> some View {
+        self
+            .font(FoodiaryTypography.pulseLabel)
+            .foregroundColor(FoodiaryDesign.pulseMuted)
+            .textCase(.uppercase)
+    }
+}

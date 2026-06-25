@@ -7,12 +7,12 @@
     "%@" : {
 
     },
-    "%@ · %@ / %@ kcal" : {
+    "%@ / %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ · %2$@ / %3$@ kcal"
+            "value" : "%1$@ / %2$@"
           }
         }
       }
@@ -30,6 +30,22 @@
     "%@ kcal" : {
 
     },
+    "%@ kcal planned against a %@ kcal estimate. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ kcal planned against a %2$@ kcal estimate. %3$@"
+          }
+        }
+      }
+    },
+    "%@ plan" : {
+
+    },
+    "%@ slots" : {
+
+    },
     "%@%@" : {
       "localizations" : {
         "en" : {
@@ -40,19 +56,16 @@
         }
       }
     },
+    "⚡ %@%% used" : {
+
+    },
     "📋" : {
-
-    },
-    "📝" : {
-
-    },
-    "🔒 VIEW ONLY" : {
 
     },
     "🥗" : {
 
     },
-    "0 %@" : {
+    "0 / %@" : {
 
     },
     "action.add_food" : {
@@ -446,6 +459,9 @@
         }
       }
     },
+    "Based on profile details and selected planning preference." : {
+
+    },
     "disclaimer.full" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -462,6 +478,9 @@
           }
         }
       }
+    },
+    "FD" : {
+
     },
     "food.item_count" : {
       "extractionState" : "manual",
@@ -503,6 +522,12 @@
           }
         }
       }
+    },
+    "kcal available today" : {
+
+    },
+    "KCAL PER DAY ESTIMATE" : {
+
     },
     "label.activity_level" : {
       "extractionState" : "manual",
@@ -997,6 +1022,12 @@
         }
       }
     },
+    "MEAL SLOTS" : {
+
+    },
+    "MEAL TIMELINE" : {
+
+    },
     "meal_detail.empty.subtitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1456,6 +1487,18 @@
         }
       }
     },
+    "Neutral" : {
+
+    },
+    "Next best action" : {
+
+    },
+    "No food was logged on this day." : {
+
+    },
+    "OBSERVATIONS" : {
+
+    },
     "onboarding.goal.note" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1663,7 +1706,7 @@
         }
       }
     },
-    "PLANNING" : {
+    "Planned calories this week" : {
 
     },
     "profile.bmr_prefix" : {
@@ -1733,6 +1776,12 @@
           }
         }
       }
+    },
+    "REMAINING ESTIMATE" : {
+
+    },
+    "SEX" : {
+
     },
     "status.exact_target" : {
       "extractionState" : "manual",
@@ -1887,7 +1936,7 @@
         }
       }
     },
-    "TODAY" : {
+    "This day is open — tap a meal slot to start planning." : {
 
     },
     "today.empty.subtitle" : {
@@ -2008,6 +2057,9 @@
           }
         }
       }
+    },
+    "Your planning estimate" : {
+
     }
   },
   "version" : "1.0"

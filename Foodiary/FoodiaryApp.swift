@@ -1,6 +1,5 @@
 import SwiftUI
 import SwiftData
-import CoreText
 
 @main
 struct FoodiaryApp: App {
@@ -27,27 +26,12 @@ struct FoodiaryApp: App {
         appearance.configureWithTransparentBackground()
         appearance.shadowColor = .clear
         
-        let titleFont: UIFont = {
-            let ctFont = CTFontCreateWithName("Space Grotesk" as CFString, 18, nil)
-            if let boldCT = CTFontCreateCopyWithSymbolicTraits(ctFont, 0, nil, .boldTrait, .boldTrait) {
-                return boldCT as UIFont
-            }
-            return UIFont.systemFont(ofSize: 18, weight: .bold)
-        }()
-        let largeTitleFont: UIFont = {
-            let ctFont = CTFontCreateWithName("Space Grotesk" as CFString, 28, nil)
-            if let boldCT = CTFontCreateCopyWithSymbolicTraits(ctFont, 0, nil, .boldTrait, .boldTrait) {
-                return boldCT as UIFont
-            }
-            return UIFont.systemFont(ofSize: 28, weight: .bold)
-        }()
-        
         appearance.titleTextAttributes = [
-            .font: titleFont,
+            .font: FontManager.titleFont(size: 18),
             .foregroundColor: UIColor(FoodiaryDesign.pulseInk)
         ]
         appearance.largeTitleTextAttributes = [
-            .font: largeTitleFont,
+            .font: FontManager.largeTitleFont(size: 28),
             .foregroundColor: UIColor(FoodiaryDesign.pulseInk)
         ]
         

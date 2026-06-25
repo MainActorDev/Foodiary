@@ -62,8 +62,8 @@ struct ProfileView: View {
                         // Detail rows
                         VStack(spacing: 0) {
                             if let profile = state.userProfile {
-                                detailRow(label: "Activity", value: profile.activityLevel.localizedDisplayName)
-                                detailRow(label: "Preference", value: profile.goal.localizedDisplayName)
+                                detailRow(label: "Activity", value: profile.activityLevel.displayName)
+                                detailRow(label: "Preference", value: profile.goal.displayName)
                             }
                             detailRow(label: "BMR", value: "\(target.bmr) kcal")
                             detailRow(label: "Maintenance", value: "\(target.maintenanceCalories) kcal")
@@ -161,7 +161,7 @@ struct ProfileEditView: View {
                     HStack(spacing: 2) {
                         ForEach(UserProfile.Sex.allCases, id: \.self) { option in
                             Button(action: { sex = option }) {
-                                Text(option.localizedDisplayName.uppercased())
+                                Text(option.displayName.uppercased())
                                     .nbSegment(isActive: sex == option)
                             }
                         }
@@ -184,7 +184,7 @@ struct ProfileEditView: View {
                     VStack(spacing: 2) {
                         ForEach(UserProfile.ActivityLevel.allCases, id: \.self) { option in
                             Button(action: { activityLevel = option }) {
-                                Text(option.localizedDisplayName.uppercased()).nbSegment(isActive: activityLevel == option)
+                                Text(option.displayName.uppercased()).nbSegment(isActive: activityLevel == option)
                             }
                         }
                     }
@@ -198,7 +198,7 @@ struct ProfileEditView: View {
                     VStack(spacing: 3) {
                         ForEach(UserProfile.Goal.allCases, id: \.self) { option in
                             Button(action: { goal = option }) {
-                                Text(option.localizedDisplayName.uppercased()).nbSegment(isActive: goal == option)
+                                Text(option.displayName.uppercased()).nbSegment(isActive: goal == option)
                             }
                         }
                     }
@@ -236,7 +236,7 @@ struct ProfileEditView: View {
     }
 
     private func saveEdits() {
-        var profile = state.userProfile ?? UserProfile()
+        let profile = state.userProfile ?? UserProfile()
         profile.age = age; profile.sex = sex
         profile.heightCm = heightCm; profile.weightKg = weightKg
         profile.activityLevel = activityLevel; profile.goal = goal

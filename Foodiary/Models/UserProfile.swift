@@ -31,26 +31,10 @@ final class UserProfile {
     
     enum Sex: String, Codable, CaseIterable {
         case male, female
-        var localizedDisplayName: String {
-            switch self {
-            case .male: return L10n["model.sex.male"]
-            case .female: return L10n["model.sex.female"]
-            }
-        }
-        var displayName: String { localizedDisplayName }
     }
     
     enum ActivityLevel: String, Codable, CaseIterable {
         case sedentary, lightlyActive, moderatelyActive, veryActive
-        var localizedDisplayName: String {
-            switch self {
-            case .sedentary: return L10n["model.activity.sedentary"]
-            case .lightlyActive: return L10n["model.activity.lightly_active"]
-            case .moderatelyActive: return L10n["model.activity.moderately_active"]
-            case .veryActive: return L10n["model.activity.very_active"]
-            }
-        }
-        var displayName: String { localizedDisplayName }
         var multiplier: Double {
             switch self {
             case .sedentary: return 1.2
@@ -63,14 +47,6 @@ final class UserProfile {
     
     enum Goal: String, Codable, CaseIterable {
         case maintain, lose, gain
-        var localizedDisplayName: String {
-            switch self {
-            case .maintain: return L10n["model.goal.maintain"]
-            case .lose: return L10n["model.goal.lose"]
-            case .gain: return L10n["model.goal.gain"]
-            }
-        }
-        var displayName: String { localizedDisplayName }
         var multiplier: Double {
             switch self {
             case .maintain: return 1.0
