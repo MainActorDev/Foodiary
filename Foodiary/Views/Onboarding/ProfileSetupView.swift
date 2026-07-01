@@ -5,6 +5,7 @@ struct ProfileSetupView: View {
     @Binding var sex: UserProfile.Sex
     @Binding var heightCm: Double
     @Binding var weightKg: Double
+    var initialField: Field
     var onBack: () -> Void
     var onContinue: () -> Void
 
@@ -13,12 +14,27 @@ struct ProfileSetupView: View {
     @State private var localWeight: Int
     @State private var localSex: UserProfile.Sex
 
-    @State private var activeField: Field = .age
+    @State private var activeField: Field
+
+    init(age: Binding<Int>, sex: Binding<UserProfile.Sex>, heightCm: Binding<Double>, weightKg: Binding<Double>, initialField: Field = .age, onBack: @escaping () -> Void, onContinue: @escaping () -> Void) {
+        self._age = age
+        self._sex = sex
+        self._heightCm = heightCm
+        self._weightKg = weightKg
+        self.initialField = initialField
+        self.onBack = onBack
+        self.onContinue = onContinue
+        _localAge = State(initialValue: age.wrappedValue > 0 ? age.wrappedValue : 25)
+        _localHeight = State(initialValue: heightCm.wrappedValue > 0 ? Int(heightCm.wrappedValue) : 170)
+        _localWeight = State(initialValue: weightKg.wrappedValue > 0 ? Int(weightKg.wrappedValue) : 70)
+        _localSex = State(initialValue: sex.wrappedValue)
+        _activeField = State(initialValue: initialField)
+    }
 
     enum Field: Int, CaseIterable {
         case age, height, weight, sex
-        var label: String { ["Age", "Height", "Weight", "Sex"][rawValue] }
-        var unit: String { ["years", "cm", "kg", ""][rawValue] }
+        var label: String { [L10n["label.age"], L10n["label.height_cm"], L10n["label.weight_kg"], L10n["label.sex"]][rawValue] }
+        var unit: String { [L10n["unit.years"], L10n["unit.cm"], L10n["unit.kg"], ""][rawValue] }
         var range: ClosedRange<Int> {
             switch self {
             case .age: return 1...100
@@ -30,35 +46,8 @@ struct ProfileSetupView: View {
         var next: Field? { Field(rawValue: rawValue + 1) }
     }
 
-    init(age: Binding<Int>, sex: Binding<UserProfile.Sex>, heightCm: Binding<Double>, weightKg: Binding<Double>, onBack: @escaping () -> Void, onContinue: @escaping () -> Void) {
-        self._age = age
-        self._sex = sex
-        self._heightCm = heightCm
-        self._weightKg = weightKg
-        self.onBack = onBack
-        self.onContinue = onContinue
-        _localAge = State(initialValue: age.wrappedValue > 0 ? age.wrappedValue : 25)
-        _localHeight = State(initialValue: heightCm.wrappedValue > 0 ? Int(heightCm.wrappedValue) : 170)
-        _localWeight = State(initialValue: weightKg.wrappedValue > 0 ? Int(weightKg.wrappedValue) : 70)
-        _localSex = State(initialValue: sex.wrappedValue)
-    }
-
     var body: some View {
         VStack(spacing: 0) {
-            // Top bar
-            HStack {
-                Button(action: onBack) {
-                    Image(systemName: "arrow.left")
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(width: 32, height: 32)
-                }
-                .buttonStyle(PulseIconButtonStyle(fgColor: FoodiaryDesign.pulseMuted))
-
-                Spacer()
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 12)
-
             // Progress bar
             HStack(spacing: 6) {
                 ForEach(Field.allCases, id: \.self) { field in
@@ -69,7 +58,7 @@ struct ProfileSetupView: View {
                 }
             }
             .padding(.horizontal, 20)
-            .padding(.top, 12)
+            .padding(.top, 4)
 
             Spacer()
 
@@ -113,7 +102,7 @@ struct ProfileSetupView: View {
 
                 Button(action: nextTapped) {
                     HStack(spacing: 8) {
-                        Text(activeField == .sex ? L10n["action.continue"] : "Next")
+                        Text(activeField == .sex ? L10n["action.continue"] : L10n["action.next"])
                         Image(systemName: activeField == .sex ? "checkmark" : "arrow.right")
                     }
                     .font(.system(size: 15, weight: .bold))
@@ -131,7 +120,19 @@ struct ProfileSetupView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(FoodiaryDesign.pulseBackground)
-        .toolbar(.hidden, for: .navigationBar)
+        .navigationTitle(L10n["onboarding.profile.title"])
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: onBack) {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(width: 32, height: 32)
+                }
+                .buttonStyle(PulseIconButtonStyle(fgColor: FoodiaryDesign.pulseMuted))
+            }
+        }
     }
 
     // MARK: - Next
@@ -156,7 +157,7 @@ struct ProfileSetupView: View {
         let value = currentValue
 
         return VStack(spacing: 12) {
-            Text(activeField.label.uppercased())
+            Text(activeField.label)
                 .font(.system(size: 14, weight: .black))
                 .foregroundColor(FoodiaryDesign.pulseMuted)
                 .tracking(3)
@@ -167,7 +168,7 @@ struct ProfileSetupView: View {
                 .contentTransition(.numericText())
                 .animation(.easeOut(duration: 0.08), value: value)
 
-            Text(activeField.unit.uppercased())
+            Text(activeField.unit)
                 .font(.system(size: 12, weight: .bold))
                 .foregroundColor(FoodiaryDesign.pulseMuted)
                 .tracking(3)
@@ -196,16 +197,21 @@ struct ProfileSetupView: View {
 
     private var sexDisplay: some View {
         VStack(spacing: 16) {
-            Text("SEX")
+            Text(L10n["label.sex"])
                 .font(.system(size: 14, weight: .black))
                 .foregroundColor(FoodiaryDesign.pulseMuted)
                 .tracking(3)
                 .padding(.bottom, 4)
 
+            Text(L10n["onboarding.profile.sex_note"])
+                .font(FoodiaryTypography.pulseCaption)
+                .foregroundColor(FoodiaryDesign.pulseMuted)
+                .padding(.bottom, 8)
+
             ForEach(UserProfile.Sex.allCases, id: \.self) { option in
                 Button(action: { withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) { localSex = option } }) {
                     HStack {
-                        Text(option == .female ? "Female" : "Male")
+                        Text(option.displayName)
                             .font(.system(size: 20, weight: .bold, design: .rounded))
                             .foregroundColor(localSex == option ? .white : FoodiaryDesign.pulseInk)
                         Spacer()
@@ -248,18 +254,14 @@ struct ProfileSetupView: View {
             let width = geo.size.width
             let tickCount = range.upperBound - range.lowerBound
 
-            // Offset so the CENTER of tick `value` sits exactly at screen center
-            // Tick i center = i * tickSpacing + tickSpacing/2 within the HStack
             let baseOffset = width / 2 - (CGFloat(value - range.lowerBound) * tickSpacing + tickSpacing / 2)
             let liveOffset = baseOffset + activeDrag
 
             ZStack {
-                // Ruler background bar
                 RoundedRectangle(cornerRadius: 8)
                     .fill(FoodiaryDesign.pulseSurfaceSoft)
                     .frame(height: 44)
 
-                // Tick marks strip
                 HStack(spacing: 0) {
                     ForEach(0...tickCount, id: \.self) { i in
                         let tickValue = range.lowerBound + i
@@ -286,13 +288,11 @@ struct ProfileSetupView: View {
                 .frame(width: width, alignment: .leading)
                 .clipped()
 
-                // Fixed center indicator
                 Rectangle()
                     .fill(FoodiaryDesign.pulsePrimary)
                     .frame(width: 4, height: 56)
                     .shadow(color: FoodiaryDesign.pulsePrimary.opacity(0.3), radius: 4)
 
-                // Fade edges
                 HStack {
                     LinearGradient(colors: [FoodiaryDesign.pulseBackground, .clear], startPoint: .leading, endPoint: .trailing)
                         .frame(width: 60)
@@ -319,18 +319,5 @@ struct ProfileSetupView: View {
             )
         }
         .frame(height: 90)
-    }
-}
-
-// MARK: - Triangle shape
-
-struct Triangle: Shape {
-    func path(in rect: CGRect) -> Path {
-        var p = Path()
-        p.move(to: CGPoint(x: rect.midX, y: rect.minY))
-        p.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
-        p.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-        p.closeSubpath()
-        return p
     }
 }

@@ -6,6 +6,7 @@ struct ContentRootView: View {
     @State private var state: AppState?
     @State private var onboardingPath = NavigationPath()
     @State private var onboardingVM = OnboardingViewModel()
+    @State private var profileSetupID = 0
 
     var body: some View {
         Group {
@@ -28,6 +29,7 @@ struct ContentRootView: View {
                                     onBack: { onboardingPath.removeLast() },
                                     onContinue: { onboardingPath.append(OnboardingRoute.goalSetup) }
                                 )
+                                .id(profileSetupID)
                             case .goalSetup:
                                 GoalSetupView(
                                     activityLevel: $onboardingVM.activityLevel,
@@ -46,7 +48,10 @@ struct ContentRootView: View {
                                         state.calculateAndSaveTarget(for: profile)
                                         state.createTodayMealPlan()
                                     },
-                                    onEditProfile: { onboardingPath.removeLast(2) }
+                                    onEditProfile: {
+                                        profileSetupID &+= 1
+                                        onboardingPath.removeLast(2)
+                                    }
                                 )
                             }
                         }

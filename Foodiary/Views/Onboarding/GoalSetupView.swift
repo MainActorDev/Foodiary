@@ -24,21 +24,7 @@ struct GoalSetupView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Back button
-            HStack {
-                Button(action: onBack) {
-                    Image(systemName: "arrow.left")
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(width: 32, height: 32)
-                }
-                .buttonStyle(PulseIconButtonStyle(fgColor: FoodiaryDesign.pulseMuted))
-
-                Spacer()
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 12)
-
-            // Segmented progress bar — 2 segments (matching Profile style)
+            // Progress bar
             HStack(spacing: 6) {
                 ForEach(Question.allCases, id: \.self) { question in
                     Capsule()
@@ -50,7 +36,7 @@ struct GoalSetupView: View {
                 }
             }
             .padding(.horizontal, 20)
-            .padding(.top, 12)
+            .padding(.top, 4)
 
             Spacer()
 
@@ -103,7 +89,19 @@ struct GoalSetupView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(FoodiaryDesign.pulseBackground)
-        .toolbar(.hidden, for: .navigationBar)
+        .navigationTitle(L10n["onboarding.goal.title"])
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: onBack) {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(width: 32, height: 32)
+                }
+                .buttonStyle(PulseIconButtonStyle(fgColor: FoodiaryDesign.pulseMuted))
+            }
+        }
     }
 
     // MARK: - Navigation
@@ -136,7 +134,7 @@ struct GoalSetupView: View {
                     .foregroundColor(FoodiaryDesign.pulseMuted)
                     .tracking(3)
 
-                Text("This sets your daily energy baseline")
+                Text(L10n["onboarding.activity.subtitle"])
                     .font(FoodiaryTypography.pulseCaption)
                     .foregroundColor(FoodiaryDesign.pulseMuted)
             }
@@ -169,7 +167,7 @@ struct GoalSetupView: View {
                     .foregroundColor(FoodiaryDesign.pulseMuted)
                     .tracking(3)
 
-                Text("Preference, not instruction")
+                Text(L10n["onboarding.goal.subtitle"])
                     .font(FoodiaryTypography.pulseCaption)
                     .foregroundColor(FoodiaryDesign.pulseMuted)
             }
@@ -206,7 +204,7 @@ struct GoalSetupView: View {
                     .foregroundColor(.white.opacity(0.55))
 
                 if goal != .maintain {
-                    Text(goal == .lose ? "−10% below maintenance" : "+10% above maintenance")
+                    Text(goal == .lose ? L10n["onboarding.result.lose_badge"] : L10n["onboarding.result.gain_badge"])
                         .font(.system(size: 11, weight: .bold))
                         .foregroundColor(goal == .lose ? Color(hex: "6EE7B7") : Color(hex: "FCD34D"))
                         .padding(.horizontal, 12)
@@ -253,10 +251,10 @@ private struct ActivityCard: View {
 
     private var description: String {
         switch option {
-        case .sedentary: return "Desk job · ×1.2"
-        case .lightlyActive: return "Some walking · ×1.375"
-        case .moderatelyActive: return "3–4×/week · ×1.55"
-        case .veryActive: return "Daily training · ×1.725"
+        case .sedentary: return L10n["model.activity.sedentary.desc"]
+        case .lightlyActive: return L10n["model.activity.lightly_active.desc"]
+        case .moderatelyActive: return L10n["model.activity.moderately_active.desc"]
+        case .veryActive: return L10n["model.activity.very_active.desc"]
         }
     }
 
@@ -325,9 +323,9 @@ private struct GoalCard: View {
 
     private var description: String {
         switch option {
-        case .lose: return "Plan slightly below maintenance"
-        case .maintain: return "Use the estimated maintenance target"
-        case .gain: return "Plan slightly above maintenance"
+        case .lose: return L10n["model.goal.lose.desc"]
+        case .maintain: return L10n["model.goal.maintain.desc"]
+        case .gain: return L10n["model.goal.gain.desc"]
         }
     }
 

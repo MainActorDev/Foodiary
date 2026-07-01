@@ -70,14 +70,11 @@ struct CalorieResultView: View {
                         isSurplus: isSurplus,
                         bmrLabel: "\(target.bmr)",
                         activityLabel: "+\(target.maintenanceCalories - target.bmr)",
-                        targetLabel: "\(target.targetCalories)",
-                        maintenanceLabel: "\(target.maintenanceCalories)",
                         animate: barAnimated
                     )
 
                     // Labels under bar
                     BalanceBarLabels(
-                        targetFraction: targetFraction,
                         targetLabel: "\(target.targetCalories)",
                         maintenanceLabel: "\(target.maintenanceCalories)"
                     )
@@ -150,7 +147,7 @@ struct CalorieResultView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(FoodiaryDesign.pulseBackground)
-        .navigationTitle("Your Target")
+        .navigationTitle(L10n["onboarding.result.title_nav"])
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -182,8 +179,6 @@ private struct EnergyBalanceBar: View {
     let isSurplus: Bool
     let bmrLabel: String
     let activityLabel: String
-    let targetLabel: String
-    let maintenanceLabel: String
     let animate: Bool
 
     var body: some View {
@@ -267,7 +262,6 @@ private struct EnergyBalanceBar: View {
 // MARK: - Balance Bar Labels (under the bar)
 
 private struct BalanceBarLabels: View {
-    let targetFraction: Double
     let targetLabel: String
     let maintenanceLabel: String
 
@@ -286,13 +280,13 @@ private struct BalanceBarLabels: View {
 
             Spacer(minLength: 0)
 
-            Text("Target \(targetLabel)")
+            Text("\(L10n["label.target.short"]) \(targetLabel)")
                 .font(.system(size: 10, weight: .bold))
                 .foregroundColor(FoodiaryDesign.pulseInk)
 
             Spacer(minLength: 0)
 
-            Text("Maint \(maintenanceLabel)")
+            Text("\(L10n["label.maintenance.short"]) \(maintenanceLabel)")
                 .font(.system(size: 10, weight: .regular))
                 .foregroundColor(FoodiaryDesign.pulseMuted)
         }
