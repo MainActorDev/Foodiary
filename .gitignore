@@ -33,5 +33,18 @@ Thumbs.db
 # Hermes
 .hermes/
 
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+fastlane/README.md
+build/
+DerivedData/
+
+# Bundle
+.bundle/
+vendor/bundle/
+
 # Design artifacts (keep tracked)
 # design-prototype/ is tracked

@@ -1,0 +1,202 @@
+default_platform(:ios)
+
+# ---------------------------------------------------------------------------
+# App Store Connect API Key
+# ---------------------------------------------------------------------------
+
+# Creates an API token from CI env vars. Used for TestFlight / App Store
+# uploads and for match certificate sync — no email/2FA needed.
+private_lane :asc_api_key do
+  api_key = app_store_connect_api_key(
+    key_id: ENV["ASC_API_KEY_ID"],
+    issuer_id: ENV["ASC_API_KEY_ISSUER_ID"],
+    key_contents: ENV["ASC_API_KEY_CONTENT"],
+    in_house: false
+  )
+  api_key
+end
+
+# ---------------------------------------------------------------------------
+# Shared lanes
+# ---------------------------------------------------------------------------
+
+desc "Regenerate Xcode project from project.yml"
+private_lane :regen_project do
+  sh("cd ../ && /opt/homebrew/bin/xcodegen --spec project.yml --project .")
+end
+
+# ---------------------------------------------------------------------------
+# Public lanes
+# ---------------------------------------------------------------------------
+
+# --- Test -----------------------------------------------------------------
+
+desc "Run unit tests on iOS Simulator"
+lane :test do
+  regen_project
+
+  run_tests(
+    project: "Foodiary.xcodeproj",
+    scheme: "Foodiary",
+    device: "iPhone 16 Pro",
+    clean: true
+  )
+end
+
+# --- Build ----------------------------------------------------------------
+
+desc "Build the app (Release config, no code signing in CI)"
+lane :build do |options|
+  regen_project
+
+  build_app(
+    project: "Foodiary.xcodeproj",
+    scheme: "Foodiary",
+    configuration: "Release",
+    clean: true,
+    # CI builds with match: full signing. Local-only without match: skip.
+    export_method: "app-store",
+    output_directory: "./build",
+    output_name: "Foodiary.ipa"
+  )
+end
+
+# --- Beta (TestFlight) ----------------------------------------------------
+
+desc "Build and upload to TestFlight"
+lane :beta do |options|
+  bump = options[:bump] || "patch"
+  api_key = asc_api_key
+
+  # 1. Increment build number so each upload is unique
+  increment_build_number(
+    build_number: latest_testflight_build_number(
+      initial_build_number: 1,
+      app_identifier: "com.foodiary.app",
+      api_key: api_key
+    ) + 1
+  )
+
+  # 2. Sync code signing via match
+  match(
+    type: "appstore",
+    readonly: is_ci,
+    app_identifier: "com.foodiary.app",
+    api_key: api_key
+  )
+
+  # 3. Build .ipa
+  build_app(
+    project: "Foodiary.xcodeproj",
+    scheme: "Foodiary",
+    configuration: "Release",
+    clean: true,
+    output_directory: "./build",
+    output_name: "Foodiary.ipa"
+  )
+
+  # 4. Upload to TestFlight
+  upload_to_testflight(
+    api_key: api_key,
+    skip_waiting_for_build_processing: true,
+    automatic_release: false
+  )
+end
+
+# --- Release (App Store) --------------------------------------------------
+
+desc "Build, upload to App Store Connect, and submit for review"
+lane :release do |options|
+  bump = options[:bump] || "patch"
+  api_key = asc_api_key
+
+  # 1. Bump the marketing version (patch/minor/major)
+  increment_version_number(
+    version_number: get_version_number(target: "Foodiary"),
+    bump_type: bump
+  )
+
+  # 2. Increment build number
+  increment_build_number(
+    build_number: latest_testflight_build_number(
+      initial_build_number: 1,
+      app_identifier: "com.foodiary.app",
+      api_key: api_key
+    ) + 1
+  )
+
+  # 3. Sync code signing
+  match(
+    type: "appstore",
+    readonly: is_ci,
+    app_identifier: "com.foodiary.app",
+    api_key: api_key
+  )
+
+  # 4. Build .ipa
+  build_app(
+    project: "Foodiary.xcodeproj",
+    scheme: "Foodiary",
+    configuration: "Release",
+    clean: true,
+    output_directory: "./build",
+    output_name: "Foodiary.ipa"
+  )
+
+  # 5. Upload & submit
+  upload_to_app_store(
+    api_key: api_key,
+    skip_waiting_for_build_processing: true,
+    submit_for_review: false,
+    automatic_release: false,
+    force: true, # skip HTML report verification
+    precheck_include_in_app_purchases: false
+  )
+end
+
+# ---------------------------------------------------------------------------
+# Code signing setup (one-time)
+# ---------------------------------------------------------------------------
+
+desc "Generate & store certificates in match repo"
+lane :match_init do |options|
+  UI.user_error!("Set MATCH_PASSWORD first") unless ENV["MATCH_PASSWORD"]
+  api_key = asc_api_key
+
+  match(
+    type: "appstore",
+    readonly: false,
+    app_identifier: "com.foodiary.app",
+    api_key: api_key
+  )
+end
+
+desc "Read-only sync of certificates (for CI or local)"
+lane :certs do
+  api_key = asc_api_key
+  match(
+    type: "appstore",
+    readonly: true,
+    app_identifier: "com.foodiary.app",
+    api_key: api_key
+  )
+end
+
+# ---------------------------------------------------------------------------
+# Cleanup
+# ---------------------------------------------------------------------------
+
+desc "Remove derived data and build artifacts"
+lane :clean do
+  sh("rm -rf ../build")
+  sh("rm -rf ~/Library/Developer/Xcode/DerivedData/Foodiary-*")
+  UI.success("Cleaned build artifacts")
+end
+
+# ---------------------------------------------------------------------------
+# Error reporting
+# ---------------------------------------------------------------------------
+
+error do |lane, _options|
+  UI.message("Lane '#{lane}' failed.")
+end

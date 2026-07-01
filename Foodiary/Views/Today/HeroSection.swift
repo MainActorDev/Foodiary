@@ -18,7 +18,7 @@ struct TodayHeroSection: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("REMAINING ESTIMATE")
+                    Text(L10n["today.hero.remaining_estimate"])
                         .font(.system(size: 11, weight: .black))
                         .foregroundColor(.white.opacity(0.72))
                         .tracking(1.0)
@@ -29,7 +29,7 @@ struct TodayHeroSection: View {
                         .tracking(-2)
                         .padding(.top, 12)
 
-                    Text("kcal available today")
+                    Text(L10n["today.hero.kcal_available"])
                         .font(.system(size: 13, weight: .bold))
                         .foregroundColor(.white.opacity(0.78))
                         .padding(.top, 4)
@@ -37,7 +37,7 @@ struct TodayHeroSection: View {
 
                 Spacer()
 
-                Text("⚡ \(Int(calorieProgress * 100))% used")
+                Text(L10n["today.hero.percent_used", Int(calorieProgress * 100)])
                     .font(.system(size: 12, weight: .black))
                     .foregroundColor(.white)
                     .padding(.horizontal, 10)
@@ -45,12 +45,17 @@ struct TodayHeroSection: View {
                     .background(Capsule().fill(.white.opacity(0.16)))
             }
 
-            Text("\(plannedCalories) kcal planned against a \(targetCalories) kcal estimate. \(suggestion)")
+            Text(L10n["today.hero.planned_summary", plannedCalories, targetCalories])
                 .font(.system(size: 13))
                 .foregroundColor(.white.opacity(0.84))
                 .lineSpacing(4)
                 .frame(maxWidth: 270, alignment: .leading)
                 .padding(.top, 16)
+
+            Text(suggestion)
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(.white.opacity(0.64))
+                .padding(.top, 6)
 
             HStack(spacing: 4) {
                 ForEach(Array(plan.meals.enumerated()), id: \.element.type.rawValue) { index, meal in
@@ -104,9 +109,9 @@ struct TodayHeroSection: View {
     private var suggestion: String {
         let empty = plan.meals.filter { $0.items.isEmpty }
         if let next = empty.first {
-            return "\(next.type.displayName) is the next adjustable slot."
+            return L10n["today.hero.suggestion_format", next.type.displayName]
         }
-        return "All meals have entries — adjust as needed."
+        return L10n["today.hero.suggestion_all_done"]
     }
 
     private func segmentOpacity(_ index: Int, meal: Meal) -> Double {

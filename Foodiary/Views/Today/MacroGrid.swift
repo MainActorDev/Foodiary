@@ -11,9 +11,9 @@ struct TodayMacroGrid: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            glassPill(value: "\(totalProtein)g", label: "Protein", tint: Color(hex: "2563EB"))
-            glassPill(value: "\(totalCarbs)g", label: "Carbs", tint: Color(hex: "F59E0B"))
-            glassPill(value: "\(totalFat)g", label: "Fat", tint: Color(hex: "EF4444"))
+            glassPill(value: "\(totalProtein)g", label: L10n["today.macro.protein"], tint: Color(hex: "2563EB"))
+            glassPill(value: "\(totalCarbs)g", label: L10n["today.macro.carbs"], tint: Color(hex: "F59E0B"))
+            glassPill(value: "\(totalFat)g", label: L10n["today.macro.fat"], tint: Color(hex: "EF4444"))
         }
     }
 

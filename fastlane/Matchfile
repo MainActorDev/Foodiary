@@ -1,0 +1,16 @@
+# Code signing certificates & provisioning profiles via match.
+#
+# SETUP REQUIRED:
+#   1. Create a PRIVATE git repo to store encrypted signing assets.
+#      e.g. MainActorDev/foodiary-certificates
+#   2. Generate a match password and store it securely:
+#        export MATCH_PASSWORD="your-strong-password"
+#   3. Set the repo URL below or via MATCH_REPO env var.
+#   4. Run: bundle exec fastlane match appstore
+#      (or `development` for dev signing)
+
+git_url(ENV["MATCH_REPO"] || "https://github.com/MainActorDev/foodiary-certificates")
+storage_mode("git")
+type("appstore") # default — overridden by lane-specific type param
+app_identifier("com.foodiary.app")
+username(ENV["APP_STORE_APPLE_ID"])

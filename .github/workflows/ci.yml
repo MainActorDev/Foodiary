@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+# Cancel superseded runs on the same ref
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: macos-15
+    timeout-minutes: 30
+
+    steps:
+      # --- Checkout --------------------------------------------------------
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # --- Ruby / Fastlane -------------------------------------------------
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true # caches Gemfile.lock automatically
+
+      - name: Install Fastlane
+        run: bundle install --jobs 4 --retry 3
+
+      # --- XcodeGen --------------------------------------------------------
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Regenerate Xcode project
+        run: xcodegen --spec project.yml --project .
+
+      # --- Tests -----------------------------------------------------------
+      - name: Run tests via Fastlane
+        env:
+          CI: "true"
+        run: bundle exec fastlane test
+
+      # --- Upload test artifacts -------------------------------------------
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            fastlane/test_output
+            build
+          retention-days: 7
+
+  beta:
+    name: Upload to TestFlight
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: macos-15
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Install Fastlane
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Build & upload to TestFlight
+        env:
+          CI: "true"
+          # App Store Connect API key (recommended over email/2FA for CI)
+          ASC_API_KEY_ISSUER_ID: ${{ secrets.ASC_API_KEY_ISSUER_ID }}
+          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_API_KEY_CONTENT: ${{ secrets.ASC_API_KEY_CONTENT }}
+          # Match (code signing)
+          MATCH_REPO: ${{ secrets.MATCH_REPO }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        run: bundle exec fastlane beta

@@ -16,10 +16,10 @@ struct TodayActionStrip: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
-                Text("Next best action").font(.system(size: 14, weight: .bold)).foregroundColor(.white)
+                Text(L10n["today.action.next_best"]).font(.system(size: 14, weight: .bold)).foregroundColor(.white)
                 Text(hasEmpty
-                     ? "Add or refine a meal before the plan is complete."
-                     : "All meals planned — review your estimates.")
+                     ? L10n["today.action.add_or_refine"]
+                     : L10n["today.action.all_planned"])
                     .font(.system(size: 12)).foregroundColor(.white.opacity(0.64))
             }
             Spacer()

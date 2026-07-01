@@ -11,12 +11,12 @@ struct TodayMealTimeline: View {
     var body: some View {
         VStack(spacing: 11) {
             HStack {
-                Text("MEAL TIMELINE")
+                Text(L10n["today.meal.timeline_title"])
                     .font(.system(size: 12, weight: .black))
                     .foregroundColor(FoodiaryDesign.pulseInk)
                     .tracking(1.0)
                 Spacer()
-                Text("\(plan.meals.count) slots")
+                Text(L10n["today.meal.slots", plan.meals.count])
                     .font(.system(size: 12, weight: .black))
                     .foregroundColor(FoodiaryDesign.pulsePrimary)
             }
@@ -49,7 +49,7 @@ struct TodayMealTimeline: View {
 
     private func subtitle(for meal: Meal) -> String {
         let count = meal.itemCount
-        if count == 0 { return "Tap to add food" }
-        return "\(count) \(count == 1 ? "item" : "items") · planned"
+        if count == 0 { return L10n["today.meal.tap_to_add"] }
+        return L10n["today.meal.items_planned", count]
     }
 }
