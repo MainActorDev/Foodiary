@@ -988,6 +988,74 @@
         }
       }
     },
+    "label.adjustment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ADJUSTMENT"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PENYESUAIAN"
+          }
+        }
+      }
+    },
+    "label.deficit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DEFICIT"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DEFISIT"
+          }
+        }
+      }
+    },
+    "label.surplus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SURPLUS"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SURPLUS"
+          }
+        }
+      }
+    },
+    "label.of_maintenance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OF MAINTENANCE"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DARI PEMELIHARAAN"
+          }
+        }
+      }
+    },
     "label.today_macros" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1546,6 +1614,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bantu kami menghitung target kalori harian estimasi Anda."
+          }
+        }
+      }
+    },
+    "onboarding.result.energy_balance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy balance"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neraca energi"
           }
         }
       }

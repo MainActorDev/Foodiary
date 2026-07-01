@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foodiary — Your Target Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B1120;
+    --surface: #131B2E;
+    --surface-2: #1A2440;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+    --line: rgba(255,255,255,.08);
+
+    /* App tokens — now blue */
+    --phone-bg: #F6F7FF;
+    --phone-surface: #FFFFFF;
+    --phone-soft: #EEF0FF;
+    --phone-text: #15142A;
+    --phone-muted: #6B6880;
+    --phone-line: rgba(21,20,42,.08);
+    --phone-border: #C8C6D0;
+    --phone-divider: #E8E6F0;
+
+    --primary: #4BB8FA;
+    --primary-light: #DEF0FF;
+    --primary-dark: #0B4F8C;
+    --primary-deep: #0A4070;
+    --mint: #10B981;
+    --mint-light: #D1FAE5;
+    --amber: #F59E0B;
+    --amber-light: #FEF3C7;
+    --danger: #EF4444;
+    --cyan: #06B6D4;
+
+    --font-display: 'Space Grotesk', Inter, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Page Layout ── */
+  .page-header {
+    padding: 40px 40px 0;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  .page-header p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 6px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    padding: 0 40px;
+    max-width: 1400px;
+    margin: 28px auto 0;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--line);
+  }
+  .tab {
+    padding: 10px 18px;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  .gallery {
+    display: flex;
+    gap: 32px;
+    padding: 36px 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+  }
+
+  /* ── Phone Frame ── */
+  .phone {
+    width: 375px;
+    min-width: 375px;
+    height: 812px;
+    background: var(--phone-bg);
+    border-radius: 44px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.08);
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp .4s ease both;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } }
+
+  /* ── Topbar ── */
+  .topbar {
+    padding: 14px 20px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--phone-bg);
+  }
+  .topbar .back {
+    width: 36px; height: 36px;
+    border-radius: 14px;
+    background: var(--phone-surface);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    cursor: pointer;
+  }
+  .topbar .back svg { width: 16px; height: 16px; stroke: var(--phone-muted); }
+  .topbar .titles { flex: 1; }
+  .topbar .titles h2 {
+    font-family: var(--font-display);
+    font-size: 16px; font-weight: 700; color: var(--phone-text);
+  }
+  .topbar .titles span {
+    font-size: 11px; color: var(--phone-muted); font-weight: 600;
+  }
+
+  /* ── Phone Body ── */
+  .phone-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-body::-webkit-scrollbar { display: none; }
+
+  /* ── Concept Label ── */
+  .concept-label {
+    padding: 0 20px 0;
+    margin-top: -4px;
+    margin-bottom: 4px;
+  }
+  .concept-label .name {
+    font-family: var(--font-display);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* ── Shared elements ── */
+  .btn-primary {
+    display: flex; align-items: center; justify-content: center;
+    padding: 15px;
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 700;
+    color: #fff;
+    background: var(--primary);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(75,184,250,.24);
+    cursor: pointer;
+    transition: transform .1s;
+  }
+  .btn-primary:active { transform: scale(.98); }
+
+  .btn-secondary {
+    display: flex; align-items: center; justify-content: center;
+    padding: 15px;
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 700;
+    color: var(--phone-text);
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: transform .1s;
+  }
+  .btn-secondary:active { transform: scale(.98); }
+
+  .disclaimer {
+    font-size: 11px;
+    color: var(--phone-muted);
+    text-align: center;
+    font-style: italic;
+    padding: 0 32px;
+    line-height: 1.5;
+  }
+
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--phone-muted);
+  }
+
+  .big-number {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--primary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .unit {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--phone-text);
+  }
+
+  /* ── Stat Card ── */
+  .stat-card {
+    padding: 12px;
+    border-radius: 14px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+    text-align: center;
+    flex: 1;
+  }
+  .stat-card .val {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 700;
+    color: var(--phone-text);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-card .lbl {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--phone-muted);
+    margin-top: 2px;
+  }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 0: Current (baseline)
+     ════════════════════════════════════════════ */
+  .c0 { padding: 0 20px; flex: 1; display: flex; flex-direction: column; }
+  .c0 .center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center; }
+  .c0 .stats { display: flex; gap: 10px; margin-top: 24px; }
+  .c0 .note { font-size: 12px; color: var(--phone-muted); margin-top: 16px; text-align: center; }
+  .c0 .actions { margin-top: auto; padding-bottom: 32px; display: flex; flex-direction: column; gap: 10px; }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 1: The Gauge
+     ════════════════════════════════════════════ */
+  .c1 { flex: 1; display: flex; flex-direction: column; }
+  .c1 .gauge-wrap {
+    padding: 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .c1 .gauge {
+    position: relative;
+    width: 260px;
+    height: 160px;
+    margin-top: 16px;
+  }
+  .c1 .gauge svg { width: 100%; height: 100%; }
+  .c1 .gauge-center {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    text-align: center;
+  }
+  .c1 .gauge-center .num {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--primary);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .c1 .gauge-center .lbl {
+    font-size: 12px;
+    color: var(--phone-muted);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .c1 .gauge-ticks {
+    display: flex;
+    justify-content: space-between;
+    width: 240px;
+    margin-top: 4px;
+  }
+  .c1 .gauge-ticks span {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--phone-muted);
+  }
+  .c1 .stats-row {
+    display: flex; gap: 10px;
+    padding: 0 20px;
+    margin-top: 28px;
+  }
+  .c1 .info {
+    padding: 20px;
+    margin-top: 16px;
+  }
+  .c1 .info-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--phone-divider);
+  }
+  .c1 .info-row:last-child { border-bottom: none; }
+  .c1 .info-row span { font-size: 13px; color: var(--phone-muted); }
+  .c1 .info-row b { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--phone-text); }
+  .c1 .actions { margin-top: auto; padding: 0 20px 32px; display: flex; flex-direction: column; gap: 10px; }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 2: Hero Reveal
+     ════════════════════════════════════════════ */
+  .c2 { flex: 1; display: flex; flex-direction: column; }
+  .c2 .hero {
+    margin: 16px 20px 0;
+    padding: 28px 22px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-deep) 100%);
+    box-shadow: 0 14px 40px rgba(75,184,250,.18);
+  }
+  .c2 .hero .eyebrow-w { color: rgba(255,255,255,.6); }
+  .c2 .hero .num {
+    font-family: var(--font-display);
+    font-size: 56px; font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #fff;
+    line-height: 1;
+    margin-top: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .c2 .hero .unit-w {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 600;
+    color: rgba(255,255,255,.7);
+    margin-top: 4px;
+  }
+  .c2 .hero .delta {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(16,185,129,.2);
+    margin-top: 16px;
+  }
+  .c2 .hero .delta .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--mint);
+  }
+  .c2 .hero .delta span {
+    font-family: var(--font-display);
+    font-size: 12px; font-weight: 700;
+    color: #6EE7B7;
+  }
+  .c2 .breakdown {
+    margin: 20px 20px 0;
+    padding: 20px;
+    border-radius: 20px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+  }
+  .c2 .breakdown .title {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--phone-muted);
+    margin-bottom: 14px;
+  }
+  .c2 .bar-track {
+    height: 36px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+  }
+  .c2 .bar-seg {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    color: #fff;
+  }
+  .c2 .bar-seg.bmr { background: var(--primary-dark); }
+  .c2 .bar-seg.activity { background: var(--primary); }
+  .c2 .bar-seg.adjust { background: var(--mint); }
+  .c2 .breakdown .legend {
+    display: flex; gap: 16px; margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .c2 .breakdown .legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: var(--phone-muted); font-weight: 600;
+  }
+  .c2 .breakdown .legend-item .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .c2 .actions { margin-top: auto; padding: 0 20px 32px; display: flex; flex-direction: column; gap: 10px; }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 3: Calculation Funnel
+     ════════════════════════════════════════════ */
+  .c3 { flex: 1; display: flex; flex-direction: column; padding: 0 20px; }
+  .c3 .funnel { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0; padding-top: 12px; }
+  .c3 .step {
+    opacity: 0;
+    animation: slideIn .4s ease forwards;
+  }
+  .c3 .step:nth-child(1) { animation-delay: .1s; }
+  .c3 .step:nth-child(2) { animation-delay: .2s; }
+  .c3 .step:nth-child(3) { animation-delay: .3s; }
+  .c3 .step:nth-child(4) { animation-delay: .4s; }
+  .c3 .step:nth-child(5) { animation-delay: .5s; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .c3 .step-card {
+    padding: 16px 18px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .c3 .step-card.base {
+    background: var(--primary-light);
+    border: 1px solid rgba(75,184,250,.2);
+  }
+  .c3 .step-card.mid {
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+  }
+  .c3 .step-card.target {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-deep) 100%);
+    box-shadow: 0 10px 30px rgba(75,184,250,.2);
+  }
+  .c3 .step-card .left { display: flex; align-items: center; gap: 12px; }
+  .c3 .step-card .icon-circle {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .c3 .step-card.base .icon-circle { background: rgba(75,184,250,.15); }
+  .c3 .step-card.mid .icon-circle { background: var(--phone-soft); }
+  .c3 .step-card .info .lbl {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .c3 .step-card.base .info .lbl { color: var(--primary-dark); }
+  .c3 .step-card.mid .info .lbl { color: var(--phone-muted); }
+  .c3 .step-card.target .info .lbl { color: rgba(255,255,255,.6); }
+  .c3 .step-card .info .sub {
+    font-size: 12px;
+    margin-top: 1px;
+  }
+  .c3 .step-card.base .info .sub { color: var(--phone-muted); }
+  .c3 .step-card.mid .info .sub { color: var(--phone-muted); }
+  .c3 .step-card.target .info .sub { color: rgba(255,255,255,.5); }
+  .c3 .step-card .val {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 800;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .c3 .step-card.base .val { color: var(--primary-dark); }
+  .c3 .step-card.mid .val { color: var(--phone-text); }
+  .c3 .step-card.target .val { color: #fff; font-size: 28px; }
+
+  .c3 .connector {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px;
+    padding: 6px 0;
+  }
+  .c3 .connector .op {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    color: var(--phone-muted);
+    background: var(--phone-bg);
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--phone-divider);
+  }
+  .c3 .connector .line {
+    width: 2px; height: 8px;
+    background: var(--phone-divider);
+  }
+  .c3 .actions { margin-top: auto; padding-bottom: 32px; display: flex; flex-direction: column; gap: 10px; }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 4: Ring Reveal
+     ════════════════════════════════════════════ */
+  .c4 { flex: 1; display: flex; flex-direction: column; }
+  .c4 .ring-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .c4 .ring {
+    position: relative;
+    width: 220px;
+    height: 220px;
+  }
+  .c4 .ring svg { transform: rotate(-90deg); }
+  .c4 .ring-center {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .c4 .ring-center .num {
+    font-family: var(--font-display);
+    font-size: 42px; font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--primary);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .c4 .ring-center .unit {
+    font-family: var(--font-display);
+    font-size: 13px; font-weight: 600;
+    color: var(--phone-muted);
+    margin-top: 2px;
+  }
+  .c4 .ring-eyebrow {
+    margin-bottom: 16px;
+  }
+  .c4 .stats-row {
+    display: flex; gap: 12px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
+  .c4 .actions { margin-top: auto; padding: 0 20px 32px; display: flex; flex-direction: column; gap: 10px; }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 5: Energy Balance Bar
+     ════════════════════════════════════════════ */
+  .c5 { flex: 1; display: flex; flex-direction: column; padding: 0 20px; }
+  .c5 .head { text-align: center; padding: 12px 0 8px; }
+  .c5 .head .num { font-size: 52px; }
+  .c5 .balance-card {
+    padding: 20px;
+    border-radius: 20px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+    margin-top: 16px;
+  }
+  .c5 .balance-card .title {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--phone-muted);
+    margin-bottom: 14px;
+  }
+  .c5 .balance-bar {
+    position: relative;
+    height: 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+  }
+  .c5 .balance-bar .seg {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 10px; font-weight: 700;
+    color: #fff;
+  }
+  .c5 .balance-bar .seg.bmr { background: var(--primary-dark); }
+  .c5 .balance-bar .seg.activity { background: var(--primary); }
+  .c5 .balance-bar .marker {
+    position: absolute;
+    top: -4px; bottom: -4px;
+    width: 3px;
+    background: var(--phone-text);
+    border-radius: 2px;
+  }
+  .c5 .balance-bar .marker::after {
+    content: '';
+    position: absolute;
+    top: -5px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--phone-text);
+  }
+  .c5 .balance-labels {
+    display: flex; justify-content: space-between;
+    margin-top: 8px;
+  }
+  .c5 .balance-labels span {
+    font-size: 10px; font-weight: 600;
+    color: var(--phone-muted);
+  }
+  .c5 .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .c5 .stat-tile {
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+  }
+  .c5 .stat-tile .accent-bar {
+    width: 26px; height: 4px;
+    border-radius: 2px;
+    margin-bottom: 8px;
+  }
+  .c5 .stat-tile .val {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 700;
+    color: var(--phone-text);
+    font-variant-numeric: tabular-nums;
+  }
+  .c5 .stat-tile .lbl {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--phone-muted);
+    margin-top: 2px;
+  }
+  .c5 .actions { margin-top: auto; padding-bottom: 32px; display: flex; flex-direction: column; gap: 10px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Foodiary — "Your Target" Redesign</h1>
+  <p>5 concepts · sample data: BMR 1,560 · Maintenance 2,444 · Target 2,200 kcal (lose)</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-c="0">Current</button>
+  <button class="tab" data-c="1">① Gauge</button>
+  <button class="tab" data-c="2">② Hero Reveal</button>
+  <button class="tab" data-c="3">③ Funnel</button>
+  <button class="tab" data-c="4">④ Ring Reveal</button>
+  <button class="tab" data-c="5">⑤ Balance Bar</button>
+  <button class="tab" data-c="all">Show All</button>
+</div>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+// SVG icons
+const backArrow = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>';
+const bolt = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>';
+
+function topbar(title, subtitle) {
+  return `<div class="topbar">
+    <div class="back">${backArrow}</div>
+    <div class="titles"><h2>${title}</h2><span>${subtitle}</span></div>
+  </div>`;
+}
+
+function actions(primary = 'Create meal plan', secondary = 'Edit profile') {
+  return `<div class="actions">
+    <button class="btn-primary">${primary}</button>
+    <button class="btn-secondary">${secondary}</button>
+    <p class="disclaimer">This is an estimate for planning purposes only and should not be treated as medical or nutrition advice.</p>
+  </div>`;
+}
+
+// ── Concept 0: Current ──
+function concept0() {
+  return `<div class="phone">
+    ${topbar('Your Target', 'Planning target')}
+    <div class="concept-label"><span class="name">Current — Baseline</span></div>
+    <div class="phone-body">
+      <div class="c0">
+        <div class="center">
+          <p class="eyebrow">Estimated daily target</p>
+          <div class="big-number" style="margin-top:8px">2,200</div>
+          <p class="unit" style="margin-top:4px">kcal / day</p>
+          <div class="stats">
+            <div class="stat-card"><div class="val">1,560</div><div class="lbl">BMR</div></div>
+            <div class="stat-card"><div class="val">2,444</div><div class="lbl">Maintain</div></div>
+            <div class="stat-card"><div class="val">2,200</div><div class="lbl">Target</div></div>
+          </div>
+          <p class="note">Based on your profile and planning preference.</p>
+        </div>
+        ${actions()}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Concept 1: Gauge ──
+function concept1() {
+  // Arc: semicircle gauge from 0 to 3000 kcal
+  // BMR tick at 1560/3000 = 52%, Target at 2200/3000 = 73.3%, Maint at 2444/3000 = 81.5%
+  const arcRadius = 110;
+  const cx = 130, cy = 140;
+  const startAngle = 180, endAngle = 360;
+  const totalRange = 3000;
+
+  function angleFor(kcal) {
+    return startAngle + (kcal / totalRange) * (endAngle - startAngle);
+  }
+
+  function pointAt(angle, r, offsetX = cx, offsetY = cy) {
+    const rad = (angle * Math.PI) / 180;
+    return [offsetX + r * Math.cos(rad), offsetY + r * Math.sin(rad)];
+  }
+
+  function arcPath(a1, a2, r) {
+    const [x1, y1] = pointAt(a1, r);
+    const [x2, y2] = pointAt(a2, r);
+    const large = a2 - a1 > 180 ? 1 : 0;
+    return `M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}`;
+  }
+
+  const targetAngle = angleFor(2200);
+  const bmrAngle = angleFor(1560);
+  const maintAngle = angleFor(2444);
+
+  return `<div class="phone">
+    ${topbar('Your Target', 'Planning target')}
+    <div class="concept-label"><span class="name">① The Gauge</span></div>
+    <div class="phone-body">
+      <div class="c1">
+        <div class="gauge-wrap">
+          <p class="eyebrow">Estimated daily target</p>
+          <div class="gauge">
+            <svg viewBox="0 0 260 160">
+              <defs>
+                <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#0B4F8C"/>
+                  <stop offset="100%" stop-color="#4BB8FA"/>
+                </linearGradient>
+              </defs>
+              <!-- Track -->
+              <path d="${arcPath(startAngle, endAngle, arcRadius)}" fill="none" stroke="#EEF0FF" stroke-width="14" stroke-linecap="round"/>
+              <!-- Fill to target -->
+              <path d="${arcPath(startAngle, targetAngle, arcRadius)}" fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round"/>
+              <!-- BMR tick -->
+              ${(() => {
+                const [x1,y1] = pointAt(bmrAngle, arcRadius - 12);
+                const [x2,y2] = pointAt(bmrAngle, arcRadius + 12);
+                return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#6B6880" stroke-width="2" stroke-dasharray="3,2"/>`;
+              })()}
+              <!-- Target dot -->
+              ${(() => {
+                const [px, py] = pointAt(targetAngle, arcRadius);
+                return `<circle cx="${px}" cy="${py}" r="8" fill="#fff" stroke="#4BB8FA" stroke-width="3"/>`;
+              })()}
+              <!-- Maintenance tick -->
+              ${(() => {
+                const [x1,y1] = pointAt(maintAngle, arcRadius - 8);
+                const [x2,y2] = pointAt(maintAngle, arcRadius + 8);
+                return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#10B981" stroke-width="2"/>`;
+              })()}
+            </svg>
+            <div class="gauge-center">
+              <div class="num">2,200</div>
+              <div class="lbl">kcal / day</div>
+            </div>
+          </div>
+          <div class="gauge-ticks">
+            <span>0</span>
+            <span style="margin-left:18%">BMR 1,560</span>
+            <span style="margin-left:4%">2,200</span>
+            <span>Maint 2,444</span>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card"><div class="val">1,560</div><div class="lbl">BMR</div></div>
+          <div class="stat-card"><div class="val">2,444</div><div class="lbl">Maintain</div></div>
+          <div class="stat-card"><div class="val">−244</div><div class="lbl">Adjust</div></div>
+        </div>
+
+        <div class="info">
+          <div class="info-row"><span>BMR (at rest)</span><b>1,560 kcal</b></div>
+          <div class="info-row"><span>Activity level</span><b>Moderately active</b></div>
+          <div class="info-row"><span>Planning preference</span><b>Reduce</b></div>
+        </div>
+
+        ${actions()}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Concept 2: Hero Reveal ──
+function concept2() {
+  return `<div class="phone">
+    ${topbar('Your Target', 'Planning target')}
+    <div class="concept-label"><span class="name">② Hero Reveal</span></div>
+    <div class="phone-body">
+      <div class="c2">
+        <div class="hero">
+          <p class="eyebrow eyebrow-w">Estimated daily target</p>
+          <div class="num">2,200</div>
+          <p class="unit-w">kcal per day estimate</p>
+          <div class="delta">
+            <div class="dot"></div>
+            <span>244 kcal below maintenance</span>
+          </div>
+        </div>
+
+        <div class="breakdown">
+          <p class="title">How we got there</p>
+          <div class="bar-track">
+            <div class="bar-seg bmr" style="width:64%">BMR 1,560</div>
+            <div class="bar-seg activity" style="width:36%">+884</div>
+          </div>
+          <div style="height:6px"></div>
+          <div class="bar-track" style="height:20px;border-radius:6px">
+            <div class="bar-seg" style="background:var(--phone-soft);color:var(--phone-muted);width:91%;font-size:10px">Maintain 2,444</div>
+            <div class="bar-seg adjust" style="width:9%">−244</div>
+          </div>
+          <div class="legend">
+            <div class="legend-item"><div class="dot" style="background:var(--primary-dark)"></div>Base metabolism</div>
+            <div class="legend-item"><div class="dot" style="background:var(--primary)"></div>Activity</div>
+            <div class="legend-item"><div class="dot" style="background:var(--mint)"></div>Goal adjustment</div>
+          </div>
+        </div>
+
+        ${actions()}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Concept 3: Calculation Funnel ──
+function concept3() {
+  return `<div class="phone">
+    ${topbar('Your Target', 'Planning target')}
+    <div class="concept-label"><span class="name">③ Calculation Funnel</span></div>
+    <div class="phone-body">
+      <div class="c3">
+        <div class="funnel">
+          <div class="step">
+            <div class="step-card base">
+              <div class="left">
+                <div class="icon-circle">🏠</div>
+                <div class="info">
+                  <div class="lbl">Base metabolism</div>
+                  <div class="sub">Mifflin-St Jeor equation</div>
+                </div>
+              </div>
+              <div class="val">1,560</div>
+            </div>
+          </div>
+          <div class="connector">
+            <div class="line"></div>
+            <div class="op">× 1.55 activity</div>
+            <div class="line"></div>
+          </div>
+          <div class="step">
+            <div class="step-card mid">
+              <div class="left">
+                <div class="icon-circle">🔥</div>
+                <div class="info">
+                  <div class="lbl">Maintenance</div>
+                  <div class="sub">Break-even at your activity</div>
+                </div>
+              </div>
+              <div class="val">2,444</div>
+            </div>
+          </div>
+          <div class="connector">
+            <div class="line"></div>
+            <div class="op">× 0.90 goal</div>
+            <div class="line"></div>
+          </div>
+          <div class="step">
+            <div class="step-card target">
+              <div class="left">
+                <div class="icon-circle" style="background:rgba(255,255,255,.15)">🎯</div>
+                <div class="info">
+                  <div class="lbl">Your target</div>
+                  <div class="sub">Planning estimate, rounded</div>
+                </div>
+              </div>
+              <div class="val">2,200</div>
+            </div>
+          </div>
+        </div>
+        ${actions()}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Concept 4: Ring Reveal ──
+function concept4() {
+  const radius = 92;
+  const circ = 2 * Math.PI * radius;
+  const progress = 2200 / 2444; // target/maintenance ratio
+  const dashOffset = circ * (1 - progress);
+
+  return `<div class="phone">
+    ${topbar('Your Target', 'Planning target')}
+    <div class="concept-label"><span class="name">④ Ring Reveal</span></div>
+    <div class="phone-body">
+      <div class="c4">
+        <div class="ring-wrap">
+          <p class="eyebrow ring-eyebrow">Your planning target</p>
+          <div class="ring">
+            <svg width="220" height="220" viewBox="0 0 220 220">
+              <defs>
+                <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#4BB8FA"/>
+                  <stop offset="100%" stop-color="#0B4F8C"/>
+                </linearGradient>
+              </defs>
+              <circle cx="110" cy="110" r="${radius}" fill="none" stroke="#EEF0FF" stroke-width="14"/>
+              <circle cx="110" cy="110" r="${radius}" fill="none" stroke="url(#ringGrad)" stroke-width="14"
+                stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${dashOffset}">
+                <animate attributeName="stroke-dashoffset" from="${circ}" to="${dashOffset}" dur="1.2s" fill="freeze" calcMode="spline" keySplines="0.34;0;0.2;1"/>
+              </circle>
+              <!-- BMR inner tick label -->
+              <text x="110" y="180" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" fill="#6B6880">
+                BMR 1,560 · Maint 2,444
+              </text>
+            </svg>
+            <div class="ring-center">
+              <div class="num">2,200</div>
+              <div class="unit">kcal / day</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card"><div class="val">1,560</div><div class="lbl">BMR</div></div>
+          <div class="stat-card"><div class="val">2,444</div><div class="lbl">Maintain</div></div>
+          <div class="stat-card"><div class="val">−244</div><div class="lbl">Adjust</div></div>
+        </div>
+
+        ${actions()}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Concept 5: Energy Balance Bar ──
+function concept5() {
+  // BMR 1560 = 64% of maintenance, activity 884 = 36%, deficit 244 from target
+  return `<div class="phone">
+    ${topbar('Your Target', 'Planning target')}
+    <div class="concept-label"><span class="name">⑤ Energy Balance Bar</span></div>
+    <div class="phone-body">
+      <div class="c5">
+        <div class="head">
+          <p class="eyebrow">Estimated daily target</p>
+          <div class="big-number" style="margin-top:6px">2,200</div>
+          <p class="unit" style="margin-top:2px">kcal / day</p>
+        </div>
+
+        <div class="balance-card">
+          <p class="title">Energy balance</p>
+          <div class="balance-bar">
+            <div class="seg bmr" style="width:64%">BMR 1,560</div>
+            <div class="seg activity" style="width:36%">+884</div>
+            <div class="marker" style="left:90%"></div>
+          </div>
+          <div class="balance-labels">
+            <span>0</span>
+            <span>BMR</span>
+            <span style="color:var(--phone-text);font-weight:700">Target 2,200</span>
+            <span>Maint 2,444</span>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-tile">
+            <div class="accent-bar" style="background:var(--primary-dark)"></div>
+            <div class="val">1,560</div>
+            <div class="lbl">BMR</div>
+          </div>
+          <div class="stat-tile">
+            <div class="accent-bar" style="background:var(--primary)"></div>
+            <div class="val">2,444</div>
+            <div class="lbl">Maintenance</div>
+          </div>
+          <div class="stat-tile">
+            <div class="accent-bar" style="background:var(--mint)"></div>
+            <div class="val">−244</div>
+            <div class="lbl">Deficit</div>
+          </div>
+          <div class="stat-tile">
+            <div class="accent-bar" style="background:var(--amber)"></div>
+            <div class="val">90%</div>
+            <div class="lbl">Of Maint.</div>
+          </div>
+        </div>
+
+        ${actions()}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Render ──
+const concepts = [concept0, concept1, concept2, concept3, concept4, concept5];
+
+function render(filter) {
+  const gallery = document.getElementById('gallery');
+  if (filter === 'all') {
+    gallery.innerHTML = concepts.map(fn => fn()).join('');
+  } else {
+    gallery.innerHTML = concepts[parseInt(filter)]();
+  }
+}
+
+// Tabs
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    render(tab.dataset.c);
+  });
+});
+
+// Default: show all
+document.querySelector('.tab[data-c="all"]').classList.add('active');
+document.querySelector('.tab[data-c="0"]').classList.remove('active');
+render('all');
+</script>
+</body>
+</html>
