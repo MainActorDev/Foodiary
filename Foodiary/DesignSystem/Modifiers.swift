@@ -124,7 +124,7 @@ extension View {
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                     .fill(
                         LinearGradient(
-                            colors: [FoodiaryDesign.pulsePrimaryDark, Color(hex: "2D2152")],
+                            colors: [FoodiaryDesign.pulsePrimaryDark, Color(hex: "0A4070")],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )

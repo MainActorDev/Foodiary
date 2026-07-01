@@ -9,9 +9,9 @@ enum FoodiaryDesign {
     static let pulseSurface = Color.white
     static let pulseSurfaceSoft = Color(hex: "EEF0FF")
     static let pulseSurfaceMint = Color(hex: "E6FBF3")
-    static let pulsePrimary = Color(hex: "7C3AED")
-    static let pulsePrimaryLight = Color(hex: "EDE9FE")
-    static let pulsePrimaryDark = Color(hex: "15142A")
+    static let pulsePrimary = Color(hex: "4BB8FA")
+    static let pulsePrimaryLight = Color(hex: "DEF0FF")
+    static let pulsePrimaryDark = Color(hex: "0B4F8C")
     static let pulseMint = Color(hex: "10B981")
     static let pulseMintLight = Color(hex: "D1FAE5")
     static let pulseCyan = Color(hex: "38BDF8")
