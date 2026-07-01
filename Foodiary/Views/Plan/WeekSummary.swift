@@ -8,8 +8,8 @@ struct WeekSummary: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            metricBox(value: "\(plannedDays)/\(totalDays)", label: "Days planned")
-            metricBox(value: "\(totalDays - plannedDays)", label: "Open days")
+            metricBox(value: "\(plannedDays)/\(totalDays)", label: L10n["plan.days_planned"])
+            metricBox(value: "\(totalDays - plannedDays)", label: L10n["plan.open_days"])
         }
     }
 

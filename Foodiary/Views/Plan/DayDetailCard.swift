@@ -26,7 +26,7 @@ struct DayDetailCard: View {
         VStack(spacing: 14) {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text("\(dayName) plan").font(.system(size: 13, weight: .bold)).foregroundColor(FoodiaryDesign.pulseInk)
+                    Text(L10n["plan.day_plan_format", dayName]).font(.system(size: 13, weight: .bold)).foregroundColor(FoodiaryDesign.pulseInk)
                     Spacer()
                     Text("\(plan.totalCalories) / \(targetCalories)").font(.system(size: 12, weight: .medium)).foregroundColor(FoodiaryDesign.pulseMuted)
                 }
@@ -35,7 +35,7 @@ struct DayDetailCard: View {
                         Capsule().fill(FoodiaryDesign.pulseMealAccent(for: meal.type)).frame(height: 8)
                     }
                 }
-                Text(isPast ? "This day is read-only." : "This day is planned and still has room for adjustment.")
+                Text(isPast ? L10n["plan.read_only"] : L10n["plan.planned_adjustable"])
                     .font(.system(size: 13)).foregroundColor(FoodiaryDesign.pulseMuted)
             }
             .padding(16)
@@ -45,7 +45,7 @@ struct DayDetailCard: View {
             // Meal slots
             VStack(spacing: 12) {
                 HStack {
-                    Text("MEAL SLOTS").font(.system(size: 13, weight: .bold)).foregroundColor(FoodiaryDesign.pulseInk)
+                    Text(L10n["MEAL SLOTS"]).font(.system(size: 13, weight: .bold)).foregroundColor(FoodiaryDesign.pulseInk)
                     Spacer()
                 }
                 ForEach(Array(plan.meals.enumerated()), id: \.element.id) { index, meal in
@@ -61,14 +61,14 @@ struct DayDetailCard: View {
         VStack(spacing: 14) {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text("\(dayName) plan").font(.system(size: 13, weight: .bold)).foregroundColor(FoodiaryDesign.pulseInk)
+                    Text(L10n["plan.day_plan_format", dayName]).font(.system(size: 13, weight: .bold)).foregroundColor(FoodiaryDesign.pulseInk)
                     Spacer()
                     Text("0 / \(targetCalories)").font(.system(size: 12, weight: .medium)).foregroundColor(FoodiaryDesign.pulseMuted)
                 }
                 if isPast {
-                    Text("No food was logged on this day.").font(.system(size: 13)).foregroundColor(FoodiaryDesign.pulseMuted)
+                    Text(L10n["No food was logged on this day."]).font(.system(size: 13)).foregroundColor(FoodiaryDesign.pulseMuted)
                 } else {
-                    Text("This day is open — tap a meal slot to start planning.").font(.system(size: 13)).foregroundColor(FoodiaryDesign.pulseMuted)
+                    Text(L10n["This day is open — tap a meal slot to start planning."])
                 }
             }
             .padding(16)
@@ -78,7 +78,7 @@ struct DayDetailCard: View {
             if !isPast {
                 VStack(spacing: 12) {
                     HStack {
-                        Text("MEAL SLOTS").font(.system(size: 13, weight: .bold)).foregroundColor(FoodiaryDesign.pulseInk)
+                        Text(L10n["MEAL SLOTS"]).font(.system(size: 13, weight: .bold)).foregroundColor(FoodiaryDesign.pulseInk)
                         Spacer()
                     }
                     ForEach(Meal.MealType.allCases, id: \.rawValue) { type in
@@ -104,10 +104,10 @@ struct MealSlotRow: View {
     private var type: Meal.MealType { meal?.type ?? mealType ?? .breakfast }
     private var calories: Int { meal?.totalCalories ?? 0 }
     private var subtitle: String {
-        guard let meal else { return "Tap to add food" }
+        guard let meal else { return L10n["today.meal.tap_to_add"] }
         let count = meal.itemCount
-        if count == 0 { return "Tap to add food" }
-        return "\(count) \(count == 1 ? "item" : "items") · planned"
+        if count == 0 { return L10n["today.meal.tap_to_add"] }
+        return L10n["today.meal.items_planned", count]
     }
 
     var body: some View {

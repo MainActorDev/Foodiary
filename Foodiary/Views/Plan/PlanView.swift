@@ -26,7 +26,7 @@ struct PlanView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 14) {
-                PulseTopbar(overline: "WEEK READINESS", title: L10n["nav.plan"], icon: .plus)
+                PulseTopbar(overline: L10n["plan.week_readiness"], title: L10n["nav.plan"], icon: .plus)
                 WeekCard(
                     weekOffset: $weekOffset,
                     selectedPlanDate: $state.selectedPlanDate,

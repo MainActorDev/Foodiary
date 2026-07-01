@@ -1125,7 +1125,21 @@
       }
     },
     "MEAL SLOTS" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MEAL SLOTS"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SLOT MAKAN"
+          }
+        }
+      }
     },
     "MEAL TIMELINE" : {
 
@@ -1596,7 +1610,21 @@
 
     },
     "No food was logged on this day." : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No food was logged on this day."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tidak ada makanan dicatat hari ini."
+          }
+        }
+      }
     },
     "OBSERVATIONS" : {
 
@@ -1987,6 +2015,108 @@
         }
       }
     },
+    "plan.days_planned" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Days planned"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hari direncanakan"
+          }
+        }
+      }
+    },
+    "plan.day_plan_format" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ plan"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rencana %1$@"
+          }
+        }
+      }
+    },
+    "plan.open_days" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open days"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hari kosong"
+          }
+        }
+      }
+    },
+    "plan.planned_adjustable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This day is planned and still has room for adjustment."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hari ini direncanakan dan masih bisa disesuaikan."
+          }
+        }
+      }
+    },
+    "plan.read_only" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This day is read-only."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hari ini hanya baca."
+          }
+        }
+      }
+    },
+    "plan.week_readiness" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WEEK READINESS"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KESIAPAN MINGGU"
+          }
+        }
+      }
+    },
     "tab.insights" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2073,7 +2203,21 @@
       }
     },
     "This day is open — tap a meal slot to start planning." : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This day is open — tap a meal slot to start planning."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hari ini terbuka — ketuk slot makan untuk mulai merencanakan."
+          }
+        }
+      }
     },
     "today.action.add_or_refine" : {
       "extractionState" : "manual",
