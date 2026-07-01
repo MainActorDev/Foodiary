@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foodiary — Your Goal Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B1120;
+    --surface: #131B2E;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+    --line: rgba(255,255,255,.08);
+    --phone-bg: #F6F7FF;
+    --phone-surface: #FFFFFF;
+    --phone-soft: #EEF0FF;
+    --phone-text: #15142A;
+    --phone-muted: #6B6880;
+    --phone-line: rgba(21,20,42,.08);
+    --phone-border: #C8C6D0;
+    --phone-divider: #E8E6F0;
+    --primary: #4BB8FA;
+    --primary-light: #DEF0FF;
+    --primary-dark: #0B4F8C;
+    --primary-deep: #0A4070;
+    --mint: #10B981;
+    --mint-light: #D1FAE5;
+    --amber: #F59E0B;
+    --amber-light: #FEF3C7;
+    --danger: #EF4444;
+    --cyan: #06B6D4;
+    --font-display: 'Space Grotesk', Inter, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page-header {
+    padding: 40px 40px 0;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  .page-header p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 6px;
+  }
+  .tabs {
+    display: flex;
+    gap: 4px;
+    padding: 0 40px;
+    max-width: 1400px;
+    margin: 28px auto 0;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--line);
+  }
+  .tab {
+    padding: 10px 18px;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+  .gallery {
+    display: flex;
+    gap: 32px;
+    padding: 36px 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+  }
+  .phone {
+    width: 375px;
+    min-width: 375px;
+    height: 812px;
+    background: var(--phone-bg);
+    border-radius: 44px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.08);
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp .4s ease both;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } }
+  .topbar {
+    padding: 14px 20px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .topbar .back {
+    width: 36px; height: 36px;
+    border-radius: 14px;
+    background: var(--phone-surface);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .topbar .back svg { width: 16px; height: 16px; stroke: var(--phone-muted); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .topbar .titles { flex: 1; }
+  .topbar .titles h2 {
+    font-family: var(--font-display);
+    font-size: 16px; font-weight: 700; color: var(--phone-text);
+  }
+  .topbar .titles span {
+    font-size: 11px; color: var(--phone-muted); font-weight: 600;
+  }
+  .concept-label {
+    padding: 0 20px;
+    margin-bottom: 4px;
+  }
+  .concept-label .name {
+    font-family: var(--font-display);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .phone-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-body::-webkit-scrollbar { display: none; }
+
+  /* Shared */
+  .progress-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px 0 8px;
+  }
+  .progress-dots .dot {
+    border-radius: 5px;
+  }
+  .progress-dots .dot.past { width: 10px; height: 10px; background: var(--primary); opacity: 0.4; }
+  .progress-dots .dot.active { width: 28px; height: 10px; background: var(--primary); }
+  .progress-dots .dot.future { width: 10px; height: 10px; background: var(--phone-soft); }
+
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--phone-muted);
+  }
+
+  .btn-primary {
+    display: flex; align-items: center; justify-content: center;
+    padding: 15px;
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 700;
+    color: #fff;
+    background: var(--primary);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(75,184,250,.24);
+    cursor: pointer;
+    transition: transform .1s;
+    width: 100%;
+  }
+  .btn-primary:active { transform: scale(.98); }
+
+  .section-label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--phone-muted);
+    margin-bottom: 10px;
+  }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 0: Current (baseline)
+     ════════════════════════════════════════════ */
+  .c0 { padding: 0 20px; flex: 1; display: flex; flex-direction: column; gap: 24px; }
+  .c0 .group { display: flex; flex-direction: column; gap: 8px; }
+  .c0 .seg-container {
+    padding: 3px;
+    background: var(--phone-soft);
+    border-radius: 12px;
+    border: 1px solid var(--phone-border);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .c0 .seg {
+    padding: 12px;
+    border-radius: 9px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    color: var(--phone-muted);
+    transition: all .15s;
+  }
+  .c0 .seg.active {
+    background: var(--phone-surface);
+    color: var(--phone-text);
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .c0 .note {
+    font-size: 12px;
+    color: var(--phone-muted);
+  }
+  .c0 .spacer { flex: 1; }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 1: Impact Preview
+     ════════════════════════════════════════════ */
+  .c1 { padding: 0 20px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
+  .c1 .activity-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+  }
+  .c1 .activity-chip {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 72px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .c1 .activity-chip.active {
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+  .c1 .activity-chip .emoji { font-size: 20px; }
+  .c1 .activity-chip .label {
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--phone-muted);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .c1 .activity-chip.active .label { color: #fff; }
+  .c1 .activity-chip .mult {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--primary-dark);
+  }
+  .c1 .activity-chip.active .mult { color: rgba(255,255,255,.8); }
+
+  .c1 .goal-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .c1 .goal-card {
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .c1 .goal-card.active {
+    border-color: var(--primary);
+    border-width: 2px;
+    box-shadow: 0 4px 16px rgba(75,184,250,.12);
+    padding: 15px;
+  }
+  .c1 .goal-card .icon-box {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .c1 .goal-card.maintain .icon-box { background: var(--phone-soft); }
+  .c1 .goal-card.lose .icon-box { background: var(--mint-light); }
+  .c1 .goal-card.gain .icon-box { background: var(--amber-light); }
+  .c1 .goal-card .info { flex: 1; }
+  .c1 .goal-card .info .title {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 700;
+    color: var(--phone-text);
+  }
+  .c1 .goal-card .info .desc {
+    font-size: 12px;
+    color: var(--phone-muted);
+    margin-top: 2px;
+  }
+  .c1 .goal-card .check {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--phone-border);
+    flex-shrink: 0;
+  }
+  .c1 .goal-card.active .check {
+    background: var(--primary);
+    border-color: var(--primary);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .c1 .goal-card.active .check::after {
+    content: '✓';
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .c1 .preview-card {
+    padding: 16px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .c1 .preview-card .left .lbl {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+  }
+  .c1 .preview-card .left .num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .c1 .preview-card .left .unit {
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+  }
+  .c1 .preview-card .right {
+    text-align: right;
+  }
+  .c1 .preview-card .right .delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(16,185,129,.2);
+  }
+  .c1 .preview-card .right .delta span {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    color: #6EE7B7;
+  }
+  .c1 .spacer { flex: 1; }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 2: Slider Studio
+     ════════════════════════════════════════════ */
+  .c2 { padding: 0 20px; flex: 1; display: flex; flex-direction: column; gap: 28px; }
+  .c2 .slider-card {
+    padding: 20px;
+    border-radius: 20px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+  }
+  .c2 .slider-card .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .c2 .slider-card .header .title {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 700;
+    color: var(--phone-text);
+  }
+  .c2 .slider-card .header .badge {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--primary-light);
+    font-family: var(--font-display);
+    font-size: 12px; font-weight: 700;
+    color: var(--primary-dark);
+  }
+  .c2 .slider-track {
+    position: relative;
+    height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .c2 .slider-rail {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--phone-soft);
+    position: relative;
+  }
+  .c2 .slider-fill {
+    position: absolute;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--primary);
+    left: 0;
+  }
+  .c2 .slider-thumb {
+    position: absolute;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--phone-surface);
+    border: 3px solid var(--primary);
+    box-shadow: 0 2px 8px rgba(75,184,250,.3);
+    transform: translateX(-50%);
+    top: 50%;
+    margin-top: -14px;
+    cursor: pointer;
+  }
+  .c2 .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .c2 .slider-labels span {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--phone-muted);
+  }
+  .c2 .slider-labels span.active {
+    color: var(--phone-text);
+    font-weight: 700;
+  }
+
+  .c2 .live-preview {
+    padding: 24px 20px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep));
+    text-align: center;
+  }
+  .c2 .live-preview .lbl {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+  }
+  .c2 .live-preview .num {
+    font-family: var(--font-display);
+    font-size: 48px; font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin: 6px 0 2px;
+  }
+  .c2 .live-preview .unit {
+    font-size: 13px;
+    color: rgba(255,255,255,.5);
+  }
+  .c2 .spacer { flex: 1; }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 3: Two-Question Card
+     ════════════════════════════════════════════ */
+  .c3 { flex: 1; display: flex; flex-direction: column; }
+  .c3 .question-card {
+    flex: 1;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .c3 .question-header {
+    text-align: center;
+    padding: 16px 0 20px;
+  }
+  .c3 .question-header .qnum {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+  }
+  .c3 .question-header .title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--phone-text);
+    letter-spacing: -0.02em;
+  }
+  .c3 .question-header .subtitle {
+    font-size: 13px;
+    color: var(--phone-muted);
+    margin-top: 4px;
+  }
+
+  .c3 .illustration-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    flex: 1;
+  }
+  .c3 .illustration-grid.single-col {
+    grid-template-columns: 1fr;
+  }
+  .c3 .option-card {
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all .15s;
+    position: relative;
+  }
+  .c3 .option-card.active {
+    border-color: var(--primary);
+    border-width: 2px;
+    box-shadow: 0 4px 16px rgba(75,184,250,.1);
+    padding: 15px;
+  }
+  .c3 .option-card .emoji {
+    font-size: 32px;
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--phone-soft);
+  }
+  .c3 .option-card.active .emoji {
+    background: var(--primary-light);
+  }
+  .c3 .option-card .name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--phone-text);
+  }
+  .c3 .option-card .meta {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--phone-muted);
+  }
+  .c3 .option-card .check {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .c3 .option-card.active .check { display: flex; }
+  .c3 .option-card .check::after {
+    content: '✓';
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .c3 .nav-row {
+    display: flex;
+    gap: 10px;
+    padding: 16px 20px 24px;
+  }
+  .c3 .nav-row .btn-back {
+    width: 48px;
+    border-radius: 16px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .c3 .nav-row .btn-back svg { width: 18px; height: 18px; stroke: var(--phone-muted); fill: none; stroke-width: 2.5; }
+
+  /* ════════════════════════════════════════════
+     CONCEPT 4: Compact Summary Footer
+     ════════════════════════════════════════════ */
+  .c4 { padding: 0 20px; flex: 1; display: flex; flex-direction: column; gap: 20px; }
+  .c4 .group { display: flex; flex-direction: column; gap: 8px; }
+  .c4 .rich-row {
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .c4 .rich-row.active {
+    border-color: var(--primary);
+    border-width: 2px;
+    box-shadow: 0 2px 12px rgba(75,184,250,.08);
+    padding: 13px 15px;
+  }
+  .c4 .rich-row .icon-circle {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: var(--phone-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .c4 .rich-row.active .icon-circle {
+    background: var(--primary-light);
+  }
+  .c4 .rich-row .info { flex: 1; }
+  .c4 .rich-row .info .name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--phone-text);
+  }
+  .c4 .rich-row .info .desc {
+    font-size: 11px;
+    color: var(--phone-muted);
+    margin-top: 1px;
+  }
+  .c4 .rich-row .tag {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .c4 .rich-row .tag.mult {
+    background: var(--phone-soft);
+    color: var(--phone-muted);
+  }
+  .c4 .rich-row .tag.effect-flat {
+    background: var(--phone-soft);
+    color: var(--phone-muted);
+  }
+  .c4 .rich-row .tag.effect-down {
+    background: var(--mint-light);
+    color: #065F46;
+  }
+  .c4 .rich-row .tag.effect-up {
+    background: var(--amber-light);
+    color: #92400E;
+  }
+  .c4 .rich-row.active .tag.mult {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+  }
+
+  .c4 .note {
+    font-size: 12px;
+    color: var(--phone-muted);
+  }
+  .c4 .spacer { flex: 1; }
+
+  .c4 .footer-preview {
+    padding: 16px 20px;
+    border-radius: 16px;
+    background: var(--phone-surface);
+    border: 1px solid var(--phone-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .c4 .footer-preview .left .lbl {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--phone-muted);
+  }
+  .c4 .footer-preview .left .num {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--phone-text);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .c4 .footer-preview .left .unit {
+    font-size: 11px;
+    color: var(--phone-muted);
+  }
+  .c4 .footer-preview .pulse-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--mint);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Foodiary — "Your Goal" Redesign</h1>
+  <p>4 concepts · activity level selection + goal preference · live target preview</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-c="0">Current</button>
+  <button class="tab" data-c="1">① Impact Preview</button>
+  <button class="tab" data-c="2">② Slider Studio</button>
+  <button class="tab" data-c="3">③ Two-Question</button>
+  <button class="tab" data-c="4">④ Summary Footer</button>
+  <button class="tab" data-c="all">Show All</button>
+</div>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+const backArrow = '<svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>';
+
+function topbar(title, subtitle) {
+  return `<div class="topbar">
+    <div class="back">${backArrow}</div>
+    <div class="titles"><h2>${title}</h2><span>${subtitle}</span></div>
+  </div>`;
+}
+
+function progressDots(active) {
+  let html = '<div class="progress-dots">';
+  for (let i = 0; i < 3; i++) {
+    if (i < active) html += '<div class="dot past"></div>';
+    else if (i === active) html += '<div class="dot active"></div>';
+    else html += '<div class="dot future"></div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+// ── Concept 0: Current ──
+function concept0() {
+  return `<div class="phone">
+    ${topbar('Your Goal', 'Planning setup')}
+    <div class="concept-label"><span class="name">Current — Baseline</span></div>
+    <div class="phone-body">
+      ${progressDots(1)}
+      <div class="c0">
+        <div class="group">
+          <div class="section-label">Tingkat Aktivitas</div>
+          <div class="seg-container">
+            <div class="seg active">KURANG AKTIF</div>
+            <div class="seg">SEDIKIT AKTIF</div>
+            <div class="seg">CUKUP AKTIF</div>
+            <div class="seg">SANGAT AKTIF</div>
+          </div>
+        </div>
+        <div class="group">
+          <div class="section-label">Tujuan</div>
+          <div class="seg-container">
+            <div class="seg active">PERTAHANKAN BERAT</div>
+            <div class="seg">TURUNKAN BERAT PERLAHAN</div>
+            <div class="seg">NAIKKAN BERAT PERLAHAN</div>
+          </div>
+          <div class="note">Ini menyesuaikan target harian Anda. Dapat diubah kapan saja.</div>
+        </div>
+        <div class="spacer"></div>
+        <button class="btn-primary">HITUNG TARGET SAYA</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Concept 1: Impact Preview ──
+function concept1() {
+  return `<div class="phone">
+    ${topbar('Your Goal', 'Planning setup')}
+    <div class="concept-label"><span class="name">① Impact Preview</span></div>
+    <div class="phone-body">
+      ${progressDots(1)}
+      <div class="c1">
+        <div>
+          <div class="section-label">Activity level</div>
+          <div class="activity-row">
+            <div class="activity-chip active">
+              <span class="emoji">🪑</span>
+              <span class="label">Sedentary</span>
+              <span class="mult">×1.2</span>
+            </div>
+            <div class="activity-chip">
+              <span class="emoji">🚶</span>
+              <span class="label">Light</span>
+              <span class="mult">×1.375</span>
+            </div>
+            <div class="activity-chip">
+              <span class="emoji">🏃</span>
+              <span class="label">Moderate</span>
+              <span class="mult">×1.55</span>
+            </div>
+            <div class="activity-chip">
+              <span class="emoji">🏋️</span>
+              <span class="label">Very Active</span>
+              <span class="mult">×1.725</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-label">Planning preference</div>
+          <div class="goal-cards">
+            <div class="goal-card lose active">
+              <div class="icon-box">📉</div>
+              <div class="info">
+                <div class="title">Lose weight slowly</div>
+                <div class="desc">Plan slightly below maintenance</div>
+              </div>
+              <div class="check"></div>
+            </div>
+            <div class="goal-card maintain">
+              <div class="icon-box">⚖️</div>
+              <div class="info">
+                <div class="title">Maintain weight</div>
+                <div class="desc">Use the estimated maintenance target</div>
+              </div>
+              <div class="check"></div>
+            </div>
+            <div class="goal-card gain">
+              <div class="icon-box">📈</div>
+              <div class="info">
+                <div class="title">Gain weight slowly</div>
+                <div class="desc">Plan slightly above maintenance</div>
+              </div>
+              <div class="check"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-card">
+          <div class="left">
+            <div class="lbl">Estimated target</div>
+            <div class="num">1,570</div>
+            <div class="unit">kcal / day</div>
+          </div>
+          <div class="right">
+            <div class="delta"><span>−10% below maintenance</span></div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+        <button class="btn-primary">HITUNG TARGET SAYA</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Concept 2: Slider Studio ──
+function concept2() {
+  return `<div class="phone">
+    ${topbar('Your Goal', 'Planning setup')}
+    <div class="concept-label"><span class="name">② Slider Studio</span></div>
+    <div class="phone-body">
+      ${progressDots(1)}
+      <div class="c2">
+        <div class="slider-card">
+          <div class="header">
+            <span class="title">🏃 Activity Level</span>
+            <span class="badge">×1.375</span>
+          </div>
+          <div class="slider-track">
+            <div class="slider-rail">
+              <div class="slider-fill" style="width: 30%"></div>
+            </div>
+            <div class="slider-thumb" style="left: 30%"></div>
+          </div>
+          <div class="slider-labels">
+            <span>Sedentary</span>
+            <span class="active">Light</span>
+            <span>Moderate</span>
+            <span>Very Active</span>
+          </div>
+        </div>
+
+        <div class="slider-card">
+          <div class="header">
+            <span class="title">🎯 Goal Preference</span>
+            <span class="badge" style="background:#D1FAE5;color:#065F46">−10%</span>
+          </div>
+          <div class="slider-track">
+            <div class="slider-rail">
+              <div class="slider-fill" style="width: 20%; background: var(--mint)"></div>
+            </div>
+            <div class="slider-thumb" style="left: 20%; border-color: var(--mint)"></div>
+          </div>
+          <div class="slider-labels">
+            <span class="active">Lose</span>
+            <span>Maintain</span>
+            <span>Gain</span>
+          </div>
+        </div>
+
+        <div class="live-preview">
+          <div class="lbl">Estimated daily target</div>
+          <div class="num">1,570</div>
+          <div class="unit">kcal per day · updates live</div>
+        </div>
+
+        <div class="spacer"></div>
+        <button class="btn-primary">HITUNG TARGET SAYA</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Concept 3: Two-Question Card ──
+function concept3() {
+  return `<div class="phone">
+    ${topbar('Your Goal', 'Planning setup')}
+    <div class="concept-label"><span class="name">③ Two-Question Card</span></div>
+    <div class="phone-body">
+      ${progressDots(1)}
+      <div class="c3">
+        <div class="question-card">
+          <div class="question-header">
+            <div class="qnum">1</div>
+            <div class="title">How active are you?</div>
+            <div class="subtitle">This sets your daily energy baseline</div>
+          </div>
+          <div class="illustration-grid">
+            <div class="option-card active">
+              <div class="check"></div>
+              <div class="emoji">🪑</div>
+              <div class="name">Sedentary</div>
+              <div class="meta">Desk job · ×1.2</div>
+            </div>
+            <div class="option-card">
+              <div class="emoji">🚶</div>
+              <div class="name">Light</div>
+              <div class="meta">Some walking · ×1.375</div>
+            </div>
+            <div class="option-card">
+              <div class="emoji">🏃</div>
+              <div class="name">Moderate</div>
+              <div class="meta">3-4×/week · ×1.55</div>
+            </div>
+            <div class="option-card">
+              <div class="emoji">🏋️</div>
+              <div class="name">Very Active</div>
+              <div class="meta">Daily training · ×1.725</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-row">
+          <div class="btn-back">${backArrow}</div>
+          <button class="btn-primary" style="flex:1">Continue →</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Concept 4: Compact Summary Footer ──
+function concept4() {
+  return `<div class="phone">
+    ${topbar('Your Goal', 'Planning setup')}
+    <div class="concept-label"><span class="name">④ Summary Footer</span></div>
+    <div class="phone-body">
+      ${progressDots(1)}
+      <div class="c4">
+        <div class="group">
+          <div class="section-label">Tingkat Aktivitas</div>
+          <div class="rich-row active">
+            <div class="icon-circle">🪑</div>
+            <div class="info">
+              <div class="name">Kurang Aktif</div>
+              <div class="desc">Desk job, little to no exercise</div>
+            </div>
+            <div class="tag mult">×1.2</div>
+          </div>
+          <div class="rich-row">
+            <div class="icon-circle">🚶</div>
+            <div class="info">
+              <div class="name">Sedikit Aktif</div>
+              <div class="desc">Light exercise 1-3 days/week</div>
+            </div>
+            <div class="tag mult">×1.375</div>
+          </div>
+          <div class="rich-row">
+            <div class="icon-circle">🏃</div>
+            <div class="info">
+              <div class="name">Cukup Aktif</div>
+              <div class="desc">Moderate exercise 3-5 days/week</div>
+            </div>
+            <div class="tag mult">×1.55</div>
+          </div>
+          <div class="rich-row">
+            <div class="icon-circle">🏋️</div>
+            <div class="info">
+              <div class="name">Sangat Aktif</div>
+              <div class="desc">Hard exercise 6-7 days/week</div>
+            </div>
+            <div class="tag mult">×1.725</div>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="section-label">Tujuan</div>
+          <div class="rich-row active">
+            <div class="icon-circle">📉</div>
+            <div class="info">
+              <div class="name">Turunkan Berat Perlahan</div>
+              <div class="desc">Plan slightly below maintenance</div>
+            </div>
+            <div class="tag effect-down">−10%</div>
+          </div>
+          <div class="rich-row">
+            <div class="icon-circle">⚖️</div>
+            <div class="info">
+              <div class="name">Pertahankan Berat</div>
+              <div class="desc">Use the estimated maintenance target</div>
+            </div>
+            <div class="tag effect-flat">0%</div>
+          </div>
+          <div class="rich-row">
+            <div class="icon-circle">📈</div>
+            <div class="info">
+              <div class="name">Naikkan Berat Perlahan</div>
+              <div class="desc">Plan slightly above maintenance</div>
+            </div>
+            <div class="tag effect-up">+10%</div>
+          </div>
+          <div class="note">Ini menyesuaikan target harian Anda. Dapat diubah kapan saja.</div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="footer-preview">
+          <div class="left">
+            <div class="lbl">Estimated target</div>
+            <div class="num">~1,570</div>
+            <div class="unit">kcal / day</div>
+          </div>
+          <div class="pulse-dot"></div>
+        </div>
+        <button class="btn-primary" style="margin-top:10px">HITUNG TARGET SAYA</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Render ──
+const concepts = [concept0, concept1, concept2, concept3, concept4];
+
+function render(filter) {
+  const gallery = document.getElementById('gallery');
+  if (filter === 'all') {
+    gallery.innerHTML = concepts.map(fn => fn()).join('');
+  } else {
+    gallery.innerHTML = concepts[parseInt(filter)]();
+  }
+}
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    render(tab.dataset.c);
+  });
+});
+
+render('all');
+</script>
+</body>
+</html>

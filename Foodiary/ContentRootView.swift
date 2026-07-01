@@ -32,6 +32,7 @@ struct ContentRootView: View {
                                 GoalSetupView(
                                     activityLevel: $onboardingVM.activityLevel,
                                     goal: $onboardingVM.goal,
+                                    bmr: onboardingVM.calculatedTarget.bmr,
                                     onBack: { onboardingPath.removeLast() },
                                     onCalculate: { onboardingPath.append(OnboardingRoute.result) }
                                 )
