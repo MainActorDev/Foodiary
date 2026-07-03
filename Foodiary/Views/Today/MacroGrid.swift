@@ -5,6 +5,7 @@ import SwiftUI
 /// Glass morphism pills showing protein, carbs, and fat totals.
 
 struct TodayMacroGrid: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     let totalProtein: Int
     let totalCarbs: Int
     let totalFat: Int

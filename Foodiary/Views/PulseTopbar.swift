@@ -9,13 +9,14 @@ struct PulseTopbar: View {
     var onIconTap: (() -> Void)?
 
     enum PulseTopbarIcon {
-        case bell, plus, chart, user
+        case bell, plus, chart, user, gear
         var systemName: String {
             switch self {
             case .bell: return "bell.fill"
             case .plus: return "plus"
             case .chart: return "chart.line.uptrend.xyaxis"
             case .user: return "person.fill"
+            case .gear: return "gearshape.fill"
             }
         }
     }

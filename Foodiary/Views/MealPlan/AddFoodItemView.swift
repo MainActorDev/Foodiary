@@ -5,6 +5,7 @@ import SwiftUI
 /// Thin state router — delegates to `SearchFoodView` or `ManualFoodFormView`.
 
 struct AddFoodItemView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     var onSave: (FoodItem) -> Void
     var onCancel: () -> Void
 

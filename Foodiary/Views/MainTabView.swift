@@ -5,6 +5,7 @@ struct MainTabView: View {
     @State private var selectedTab = 0
     @State private var showMealDetail = false
     @State private var selectedMealIndex = 0
+    @EnvironmentObject private var localeManager: LocaleManager
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -54,7 +55,6 @@ struct MainTabView: View {
             // Tab 3: Profile
             NavigationStack {
                 ProfileView(state: state)
-                    .toolbar(.hidden, for: .navigationBar)
             }
             .tabItem {
                 Image(systemName: "person.circle.fill")
@@ -67,4 +67,3 @@ struct MainTabView: View {
         .font(FoodiaryTypography.label)
     }
 }
-

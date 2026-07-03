@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ProfileSetupView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Binding var age: Int
     @Binding var sex: UserProfile.Sex
     @Binding var heightCm: Double

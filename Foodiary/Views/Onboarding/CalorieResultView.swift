@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct CalorieResultView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     let target: CalorieTarget
     var onBack: () -> Void
     var onCreateMealPlan: () -> Void

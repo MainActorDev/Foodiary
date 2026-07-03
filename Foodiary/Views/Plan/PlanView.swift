@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PlanView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Bindable var state: AppState
     @State private var weekOffset: Int = 0
     @State private var showMealDetail = false

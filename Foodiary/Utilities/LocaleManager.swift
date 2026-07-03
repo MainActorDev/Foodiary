@@ -1,73 +1,60 @@
 import Foundation
 
-// MARK: - Thread-safe language storage
+// MARK: - Supported Language
 
-/// Nonisolated storage for the current app language.
-/// Written by the main actor at bootstrap time, read by Bundle overrides on any thread.
-enum AppLanguage {
-    nonisolated(unsafe) static var current: String = "id"
+/// A language the app can display.
+///
+/// Add new entries here when a new `.lproj` is created — the Settings UI
+/// will pick them up automatically.
+struct SupportedLanguage: Identifiable, Hashable {
+    let code: String
+    let flag: String
 
-    static let defaultsKey = "app_locale_preference"
+    /// Native name — always shown in the language's own form,
+    /// not translated (matches iOS Settings → Language & Region).
+    let nativeName: String
+
+    var id: String { code }
 }
 
 // MARK: - Locale Manager
 
-/// Manages runtime language preference for the app.
+/// Manages runtime language preference.
 ///
-/// On first launch, defaults to Indonesian ("id") regardless of device locale.
-/// Call `LocaleManager.bootstrap()` from `FoodiaryApp.init()` before any views render.
+/// - `@Published var selectedLanguage` triggers SwiftUI re-renders
+///   when the user picks a different language in Settings.
+/// - `bootstrap()` must be called once from `FoodiaryApp.init()` before
+///   any view renders.
+/// - `L10n` reads the current language from `UserDefaults` directly on each
+///   lookup, so no `Bundle.main` class swizzling is needed.
 @MainActor
 final class LocaleManager: ObservableObject {
     @Published var selectedLanguage: String
 
     static let shared = LocaleManager()
 
+    /// Languages the app supports, displayed in Settings.
+    static let supportedLanguages: [SupportedLanguage] = [
+        SupportedLanguage(code: "id", flag: "🇮🇩", nativeName: "Bahasa Indonesia"),
+        SupportedLanguage(code: "en", flag: "🇬🇧", nativeName: "English"),
+    ]
+
     private init() {
-        if let stored = UserDefaults.standard.string(forKey: AppLanguage.defaultsKey), !stored.isEmpty {
-            selectedLanguage = stored
-        } else {
-            selectedLanguage = "id"
-        }
-        AppLanguage.current = selectedLanguage
+        selectedLanguage = UserDefaults.standard.string(forKey: L10n.defaultsKey) ?? L10n.defaultLanguage
     }
 
-    /// Must be called before any `String(localized:)` or `Text(L10n[...])` call.
+    /// One-time setup at app launch. Ensures a default is persisted.
     static func bootstrap() {
-        let lang = UserDefaults.standard.string(forKey: AppLanguage.defaultsKey) ?? "id"
-        UserDefaults.standard.set(lang, forKey: AppLanguage.defaultsKey)
-        UserDefaults.standard.set([lang], forKey: "AppleLanguages")
-        UserDefaults.standard.synchronize()
-
-        AppLanguage.current = lang
-
-        // Redirect Bundle.main's localizedString calls to our language-specific lproj.
-        object_setClass(Bundle.main, LocalizedBundle.self)
+        let lang = UserDefaults.standard.string(forKey: L10n.defaultsKey) ?? L10n.defaultLanguage
+        UserDefaults.standard.set(lang, forKey: L10n.defaultsKey)
     }
 
-    /// Switches language at runtime. Views need a re-render to pick up changes.
+    /// Switches app language at runtime. Views observing `LocaleManager`
+    /// will re-render and `L10n` will return newly-localized strings.
     func switchTo(_ language: String) {
         guard language != selectedLanguage else { return }
         selectedLanguage = language
-        AppLanguage.current = language
-        UserDefaults.standard.set(language, forKey: AppLanguage.defaultsKey)
-        UserDefaults.standard.set([language], forKey: "AppleLanguages")
-        UserDefaults.standard.synchronize()
-    }
-
-    func resetToDefault() {
-        switchTo("id")
-    }
-}
-
-// MARK: - Bundle subclass for runtime language override
-
-private final class LocalizedBundle: Bundle, @unchecked Sendable {
-    override func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
-        let lang = AppLanguage.current
-        guard let path = Bundle.main.path(forResource: lang, ofType: "lproj"),
-              let langBundle = Bundle(path: path) else {
-            return super.localizedString(forKey: key, value: value, table: tableName)
-        }
-        return langBundle.localizedString(forKey: key, value: value, table: tableName)
+        UserDefaults.standard.set(language, forKey: L10n.defaultsKey)
+        L10n.invalidateCache()
     }
 }

@@ -6,6 +6,7 @@ import SwiftUI
 /// Tapping a result immediately returns the FoodItem.
 
 struct SearchFoodView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Binding var searchQuery: String
     var searchResults: [FoodSearchResult]
     var isSearching: Bool

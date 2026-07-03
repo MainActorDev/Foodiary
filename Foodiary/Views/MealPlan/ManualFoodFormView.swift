@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: - Manual Food Form
 
 struct ManualFoodFormView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Binding var name: String
     @Binding var caloriesText: String
     @Binding var proteinText: String

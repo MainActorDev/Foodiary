@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     var onGetStarted: () -> Void
 
     private let foodEmojis = ["🥗", "🍳", "🍱", "🍌", "🍽️"]

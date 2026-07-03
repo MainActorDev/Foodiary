@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: - Day Detail Card
 
 struct DayDetailCard: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     let plan: MealPlan?
     let targetCalories: Int
     let isPast: Bool
@@ -96,6 +97,7 @@ struct DayDetailCard: View {
 // MARK: - Meal Slot Row
 
 struct MealSlotRow: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     var meal: Meal?
     var mealType: Meal.MealType?
     var isReadOnly: Bool = false

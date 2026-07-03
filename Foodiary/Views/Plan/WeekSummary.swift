@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: - Week Summary
 
 struct WeekSummary: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     let plannedDays: Int
     let totalDays: Int
 

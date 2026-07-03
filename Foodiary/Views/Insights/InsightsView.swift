@@ -5,6 +5,7 @@ import SwiftUI
 /// Extracted from MainTabView.swift — now in its own file.
 
 struct InsightsView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Bindable var state: AppState
 
     var body: some View {

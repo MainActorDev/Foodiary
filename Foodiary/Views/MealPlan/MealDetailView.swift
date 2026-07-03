@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct MealDetailView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Bindable var state: AppState
     let mealIndex: Int
     var date: Date = Date()
@@ -85,6 +86,7 @@ struct MealDetailView: View {
                 .navigationTitle(meal.type.displayName)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarBackButtonHidden(true)
+                .toolbar(.hidden, for: .tabBar)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: { isPresented = false }) {
@@ -125,6 +127,7 @@ struct MealDetailView: View {
 }
 
 struct FoodItemRowView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     let item: FoodItem
     var isReadOnly: Bool = false
     var onDelete: () -> Void

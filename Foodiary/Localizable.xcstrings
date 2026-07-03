@@ -1,521 +1,499 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "·" : {
-
-    },
-    "%@" : {
-
-    },
-    "%@ / %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ / %2$@"
+  "sourceLanguage": "en",
+  "strings": {
+    "·": {},
+    "%@": {},
+    "%@ / %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ / %2$@"
           }
         }
       }
     },
-    "%@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@"
+    "%@ %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ %2$@"
           }
         }
       }
     },
-    "%@ kcal" : {
-
-    },
-    "%@ kcal planned against a %@ kcal estimate. %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ kcal planned against a %2$@ kcal estimate. %3$@"
+    "%@ kcal": {},
+    "%@ kcal planned against a %@ kcal estimate. %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ kcal planned against a %2$@ kcal estimate. %3$@"
           }
         }
       }
     },
-    "%@ plan" : {
-
-    },
-    "%@ slots" : {
-
-    },
-    "%@%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@%2$@"
+    "%@ plan": {},
+    "%@ slots": {},
+    "%@%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@%2$@"
           }
         }
       }
     },
-    "⚡ %@%% used" : {
-
-    },
-    "📋" : {
-
-    },
-    "🥗" : {
-
-    },
-    "0 / %@" : {
-
-    },
-    "action.add_food" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ADD FOOD"
+    "⚡ %@%% used": {},
+    "📋": {},
+    "🥗": {},
+    "0 / %@": {},
+    "action.add_food": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ADD FOOD"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TAMBAH MAKANAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TAMBAH MAKANAN"
           }
         }
       }
     },
-    "action.calculate_target" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CALCULATE MY TARGET"
+    "action.calculate_target": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CALCULATE MY TARGET"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HITUNG TARGET SAYA"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HITUNG TARGET SAYA"
           }
         }
       }
     },
-    "action.cancel" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CANCEL"
+    "action.cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CANCEL"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BATAL"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BATAL"
           }
         }
       }
     },
-    "action.continue" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CONTINUE"
+    "action.continue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONTINUE"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "LANJUTKAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LANJUTKAN"
           }
         }
       }
     },
-    "action.create_meal_plan" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CREATE MEAL PLAN"
+    "action.create_meal_plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CREATE MEAL PLAN"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BUAT RENCANA MAKAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BUAT RENCANA MAKAN"
           }
         }
       }
     },
-    "action.edit_profile" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "EDIT PROFILE"
+    "action.edit_profile": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EDIT PROFILE"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "EDIT PROFIL"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EDIT PROFIL"
           }
         }
       }
     },
-    "action.recalculate_target" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "RECALCULATE TARGET"
+    "action.recalculate_target": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RECALCULATE TARGET"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HITUNG ULANG TARGET"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HITUNG ULANG TARGET"
           }
         }
       }
     },
-    "action.reset_data" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "RESET DATA"
+    "action.reset_data": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RESET DATA"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HAPUS DATA"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HAPUS DATA"
           }
         }
       }
     },
-    "action.save_food_item" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SAVE FOOD ITEM"
+    "action.save_food_item": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SAVE FOOD ITEM"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SIMPAN MAKANAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SIMPAN MAKANAN"
           }
         }
       }
     },
-    "action.save_recalculate" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SAVE & RECALCULATE"
+    "action.save_recalculate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SAVE & RECALCULATE"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SIMPAN & HITUNG ULANG"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SIMPAN & HITUNG ULANG"
           }
         }
       }
     },
-    "add_food.calories_error" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter a valid calorie amount."
+    "add_food.calories_error": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Please enter a valid calorie amount."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mohon masukkan jumlah kalori yang valid."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mohon masukkan jumlah kalori yang valid."
           }
         }
       }
     },
-    "add_food.calories_hint" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Whole number, 0 or greater."
+    "add_food.calories_hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whole number, 0 or greater."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Angka bulat, 0 atau lebih."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angka bulat, 0 atau lebih."
           }
         }
       }
     },
-    "add_food.manual_button" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add Manually"
+    "add_food.manual_button": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Manually"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tambah Manual"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambah Manual"
           }
         }
       }
     },
-    "add_food.name_error" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter a food name."
+    "add_food.name_error": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Please enter a food name."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mohon masukkan nama makanan."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mohon masukkan nama makanan."
           }
         }
       }
     },
-    "add_food.name_placeholder" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "e.g. Chicken breast"
+    "add_food.name_placeholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. Chicken breast"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "cth. Dada ayam"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cth. Dada ayam"
           }
         }
       }
     },
-    "add_food.no_results" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No foods found. Try a different search."
+    "add_food.no_results": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No foods found. Try a different search."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Makanan tidak ditemukan. Coba kata kunci lain."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Makanan tidak ditemukan. Coba kata kunci lain."
           }
         }
       }
     },
-    "add_food.note_placeholder" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "e.g. Grilled, no oil"
+    "add_food.note_placeholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. Grilled, no oil"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "cth. Panggang, tanpa minyak"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cth. Panggang, tanpa minyak"
           }
         }
       }
     },
-    "add_food.search_placeholder" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search foods..."
+    "add_food.search_placeholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search foods..."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cari makanan..."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cari makanan..."
           }
         }
       }
     },
-    "alert.cancel" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
+    "alert.cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Batal"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batal"
           }
         }
       }
     },
-    "alert.reset_confirm" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reset"
+    "alert.reset_confirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hapus"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus"
           }
         }
       }
     },
-    "alert.reset_message" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This will delete your profile, calorie target, and all meal plans. This cannot be undone."
+    "alert.reset_message": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This will delete your profile, calorie target, and all meal plans. This cannot be undone."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ini akan menghapus profil, target kalori, dan semua rencana makan Anda. Tindakan ini tidak dapat dibatalkan."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ini akan menghapus profil, target kalori, dan semua rencana makan Anda. Tindakan ini tidak dapat dibatalkan."
           }
         }
       }
     },
-    "alert.reset_title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reset All Data?"
+    "alert.reset_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset All Data?"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hapus Semua Data?"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus Semua Data?"
           }
         }
       }
     },
-    "app.name" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Foodiary"
+    "app.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foodiary"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Foodiary"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foodiary"
           }
         }
       }
     },
-    "Based on profile details and selected planning preference." : {
-
-    },
-    "disclaimer.full" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This is an estimate for planning purposes only. For medical conditions, eating disorders, pregnancy, athletic nutrition, or major weight changes, consult a qualified health professional."
+    "Based on profile details and selected planning preference.": {},
+    "disclaimer.full": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is an estimate for planning purposes only. For medical conditions, eating disorders, pregnancy, athletic nutrition, or major weight changes, consult a qualified health professional."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ini adalah estimasi untuk tujuan perencanaan saja. Untuk kondisi medis, gangguan makan, kehamilan, nutrisi atletik, atau perubahan berat badan signifikan, konsultasikan dengan tenaga kesehatan profesional."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ini adalah estimasi untuk tujuan perencanaan saja. Untuk kondisi medis, gangguan makan, kehamilan, nutrisi atletik, atau perubahan berat badan signifikan, konsultasikan dengan tenaga kesehatan profesional."
           }
         }
       }
     },
-    "FD" : {
-
-    },
-    "food.item_count" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld item"
+    "FD": {},
+    "food.item_count": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld item"
                 }
               },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld items"
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld items"
                 }
               }
             }
           }
         },
-        "id" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld item"
+        "id": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld item"
                 }
               },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld item"
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld item"
                 }
               }
             }
@@ -523,2402 +501,2827 @@
         }
       }
     },
-    "kcal available today" : {
-
+    "kcal available today": {},
+    "KCAL PER DAY ESTIMATE": {},
+    "label.activity_level": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ACTIVITY LEVEL"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TINGKAT AKTIVITAS"
+          }
+        }
+      }
+    },
+    "label.age": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AGE"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "USIA"
+          }
+        }
+      }
+    },
+    "label.biological_sex": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BIOLOGICAL SEX"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JENIS KELAMIN BIOLOGIS"
+          }
+        }
+      }
+    },
+    "label.bmr": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BMR"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BMR"
+          }
+        }
+      }
+    },
+    "label.calories": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CALORIES"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KALORI"
+          }
+        }
+      }
+    },
+    "label.consumed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONSUMED"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DIKONSUMSI"
+          }
+        }
+      }
+    },
+    "label.daily_target": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DAILY TARGET"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TARGET HARIAN"
+          }
+        }
+      }
+    },
+    "label.food_items": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FOOD ITEMS"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DAFTAR MAKANAN"
+          }
+        }
+      }
+    },
+    "label.food_name": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FOOD NAME"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NAMA MAKANAN"
+          }
+        }
+      }
+    },
+    "label.goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GOAL"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TUJUAN"
+          }
+        }
+      }
+    },
+    "label.height_cm": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HEIGHT (CM)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TINGGI (CM)"
+          }
+        }
+      }
+    },
+    "label.macronutrients": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MACRONUTRIENTS"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAKRONUTRIEN"
+          }
+        }
+      }
+    },
+    "label.maintenance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAINTENANCE"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PEMELIHARAAN"
+          }
+        }
+      }
+    },
+    "label.maintenance_long": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenance"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemeliharaan"
+          }
+        }
+      }
+    },
+    "label.manual_entry": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OR ENTER MANUALLY"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ATAU ISI MANUAL"
+          }
+        }
+      }
+    },
+    "label.meals": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MEALS"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAKANAN"
+          }
+        }
+      }
+    },
+    "label.note_optional": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOTE (OPTIONAL)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CATATAN (OPSIONAL)"
+          }
+        }
+      }
+    },
+    "label.over": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OVER"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BERLEBIH"
+          }
+        }
+      }
     },
-    "KCAL PER DAY ESTIMATE" : {
-
+    "label.planned": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PLANNED"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TERENCANA"
+          }
+        }
+      }
     },
-    "label.activity_level" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ACTIVITY LEVEL"
+    "label.profile_activity": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activity"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TINGKAT AKTIVITAS"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivitas"
           }
         }
       }
     },
-    "label.age" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AGE"
+    "label.profile_age": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Age"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "USIA"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usia"
           }
         }
       }
     },
-    "label.biological_sex" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BIOLOGICAL SEX"
+    "label.profile_goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JENIS KELAMIN BIOLOGIS"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tujuan"
           }
         }
       }
     },
-    "label.bmr" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BMR"
+    "label.profile_height": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Height"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BMR"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinggi"
           }
         }
       }
     },
-    "label.calories" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CALORIES"
+    "label.profile_sex": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sex"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KALORI"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jenis Kelamin"
           }
         }
       }
     },
-    "label.consumed" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CONSUMED"
+    "label.profile_weight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weight"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DIKONSUMSI"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berat"
           }
         }
       }
     },
-    "label.daily_target" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DAILY TARGET"
+    "label.remaining": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "REMAINING"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TARGET HARIAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TERSISA"
           }
         }
       }
     },
-    "label.food_items" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "FOOD ITEMS"
+    "label.target": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TARGET"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DAFTAR MAKANAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TARGET"
           }
         }
       }
     },
-    "label.food_name" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "FOOD NAME"
+    "label.adjustment": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ADJUSTMENT"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "NAMA MAKANAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PENYESUAIAN"
           }
         }
       }
     },
-    "label.goal" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GOAL"
+    "label.deficit": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DEFICIT"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TUJUAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DEFISIT"
           }
         }
       }
     },
-    "label.height_cm" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HEIGHT (CM)"
+    "label.surplus": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SURPLUS"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TINGGI (CM)"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SURPLUS"
           }
         }
       }
     },
-    "label.macronutrients" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MACRONUTRIENTS"
+    "label.of_maintenance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OF MAINTENANCE"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MAKRONUTRIEN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DARI PEMELIHARAAN"
           }
         }
       }
     },
-    "label.maintenance" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MAINTENANCE"
+    "label.target.short": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PEMELIHARAAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target"
           }
         }
       }
     },
-    "label.maintenance_long" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maintenance"
+    "label.maintenance.short": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maint"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pemeliharaan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pmlhrn"
           }
         }
       }
     },
-    "label.manual_entry" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OR ENTER MANUALLY"
+    "label.today_macros": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TODAY'S MACROS"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ATAU ISI MANUAL"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAKRO HARI INI"
           }
         }
       }
     },
-    "label.meals" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MEALS"
+    "label.weight_kg": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WEIGHT (KG)"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MAKANAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BERAT (KG)"
           }
         }
       }
     },
-    "label.note_optional" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "NOTE (OPTIONAL)"
+    "MEAL SLOTS": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MEAL SLOTS"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CATATAN (OPSIONAL)"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SLOT MAKAN"
           }
         }
       }
     },
-    "label.over" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OVER"
+    "MEAL TIMELINE": {},
+    "meal_detail.empty.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your first item."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BERLEBIH"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambahkan makanan pertama Anda."
           }
         }
       }
     },
-    "label.planned" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PLANNED"
+    "meal_detail.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No food added yet."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TERENCANA"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada makanan."
           }
         }
       }
     },
-    "label.profile_activity" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activity"
+    "meal_plan.empty.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create one to start adding food items."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktivitas"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buat rencana untuk mulai menambahkan makanan."
           }
         }
       }
     },
-    "label.profile_age" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Age"
+    "meal_plan.header": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TODAY'S MEALS"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usia"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAKANAN HARI INI"
           }
         }
       }
     },
-    "label.profile_goal" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Goal"
+    "model.activity.lightly_active": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lightly Active"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tujuan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sedikit Aktif"
           }
         }
       }
     },
-    "label.profile_height" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Height"
+    "model.activity.moderately_active": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moderately Active"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tinggi"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cukup Aktif"
           }
         }
       }
     },
-    "label.profile_sex" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sex"
+    "model.activity.sedentary": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sedentary"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jenis Kelamin"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurang Aktif"
           }
         }
       }
     },
-    "label.profile_weight" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weight"
+    "model.activity.very_active": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Very Active"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Berat"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sangat Aktif"
           }
         }
       }
     },
-    "label.remaining" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "REMAINING"
+    "model.goal.gain": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gain weight slowly"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TERSISA"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naikkan berat perlahan"
           }
         }
       }
     },
-    "label.target" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TARGET"
+    "model.goal.lose": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lose weight slowly"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TARGET"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turunkan berat perlahan"
           }
         }
       }
     },
-    "label.adjustment" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ADJUSTMENT"
+    "model.goal.maintain": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintain weight"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PENYESUAIAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pertahankan berat"
           }
         }
       }
     },
-    "label.deficit" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEFICIT"
+    "model.meal.breakfast": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breakfast"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEFISIT"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sarapan"
           }
         }
       }
     },
-    "label.surplus" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SURPLUS"
+    "model.meal.dinner": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dinner"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SURPLUS"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Makan Malam"
           }
         }
       }
     },
-    "label.of_maintenance" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OF MAINTENANCE"
+    "model.meal.lunch": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lunch"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DARI PEMELIHARAAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Makan Siang"
           }
         }
       }
     },
-    "label.target.short" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target"
+    "model.meal.snack": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snack"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camilan"
           }
         }
       }
     },
-    "label.maintenance.short" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maint"
+    "model.sex.female": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Female"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pmlhrn"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wanita"
           }
         }
       }
     },
-    "label.today_macros" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TODAY'S MACROS"
+    "model.sex.male": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Male"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MAKRO HARI INI"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pria"
           }
         }
       }
     },
-    "label.weight_kg" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "WEIGHT (KG)"
+    "nav.about_you": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About You"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BERAT (KG)"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tentang Anda"
           }
         }
       }
     },
-    "MEAL SLOTS" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MEAL SLOTS"
+    "nav.add_food": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Food"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SLOT MAKAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambah Makanan"
           }
         }
       }
     },
-    "MEAL TIMELINE" : {
-
+    "nav.edit_profile": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit Profile"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit Profil"
+          }
+        }
+      }
     },
-    "meal_detail.empty.subtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add your first item."
+    "nav.insights": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Insights"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tambahkan makanan pertama Anda."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wawasan"
           }
         }
       }
     },
-    "meal_detail.empty.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No food added yet."
+    "nav.meal_plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meal Plan"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Belum ada makanan."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rencana Makan"
           }
         }
       }
     },
-    "meal_plan.empty.subtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create one to start adding food items."
+    "nav.plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Buat rencana untuk mulai menambahkan makanan."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rencana"
           }
         }
       }
     },
-    "meal_plan.header" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TODAY'S MEALS"
+    "nav.profile": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profile"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MAKANAN HARI INI"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil"
           }
         }
       }
     },
-    "model.activity.lightly_active" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lightly Active"
+    "nav.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sedikit Aktif"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hari Ini"
           }
         }
       }
     },
-    "model.activity.moderately_active" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moderately Active"
+    "nav.your_goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Goal"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cukup Aktif"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tujuan Anda"
           }
         }
       }
     },
-    "model.activity.sedentary" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sedentary"
+    "nav.your_target": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Target"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kurang Aktif"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target Anda"
           }
         }
       }
     },
-    "model.activity.very_active" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Very Active"
+    "Neutral": {},
+    "Next best action": {},
+    "No food was logged on this day.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No food was logged on this day."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sangat Aktif"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada makanan dicatat hari ini."
           }
         }
       }
     },
-    "model.goal.gain" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain weight slowly"
+    "OBSERVATIONS": {},
+    "onboarding.goal.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This adjusts your daily target. Change it anytime."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Naikkan berat perlahan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ini menyesuaikan target harian Anda. Dapat diubah kapan saja."
           }
         }
       }
     },
-    "model.goal.lose" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lose weight slowly"
+    "onboarding.profile.sex_note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Used for the calorie estimation formula."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turunkan berat perlahan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Digunakan untuk rumus estimasi kalori."
           }
         }
       }
     },
-    "model.goal.maintain" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maintain weight"
+    "onboarding.profile.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help us calculate your estimated daily calorie target."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pertahankan berat"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bantu kami menghitung target kalori harian estimasi Anda."
           }
         }
       }
     },
-    "model.meal.breakfast" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Breakfast"
+    "onboarding.result.energy_balance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Energy balance"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sarapan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neraca energi"
           }
         }
       }
     },
-    "model.meal.dinner" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dinner"
+    "onboarding.result.title_nav": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Target"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Makan Malam"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target Anda"
           }
         }
       }
     },
-    "model.meal.lunch" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lunch"
+    "onboarding.result.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use this as a planning guide, not a strict rule."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Makan Siang"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gunakan ini sebagai panduan perencanaan, bukan aturan ketat."
           }
         }
       }
     },
-    "model.meal.snack" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Snack"
+    "onboarding.result.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your estimated daily target is"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Camilan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimasi target harian Anda adalah"
           }
         }
       }
     },
-    "model.sex.female" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Female"
+    "onboarding.welcome.disclaimer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This app gives calorie estimates only — not medical or nutrition advice."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wanita"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikasi ini hanya memberikan estimasi kalori — bukan saran medis atau nutrisi."
           }
         }
       }
     },
-    "model.sex.male" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Male"
+    "onboarding.welcome.get_started": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GET STARTED"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pria"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MULAI"
           }
         }
       }
     },
-    "nav.about_you" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About You"
+    "onboarding.welcome.tagline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan your meals around a simple daily calorie target."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tentang Anda"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rencanakan makanan Anda berdasarkan target kalori harian sederhana."
           }
         }
       }
     },
-    "nav.add_food" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add Food"
+    "Optional — enter grams for each macronutrient.": {},
+    "plan.empty.future.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap any meal slot below to start planning this day."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tambah Makanan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketuk slot makanan di bawah untuk mulai merencanakan hari ini."
           }
         }
       }
     },
-    "nav.edit_profile" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Profile"
+    "plan.empty.future.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No meal plan yet"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Profil"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada rencana makan"
           }
         }
       }
     },
-    "nav.insights" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Insights"
+    "plan.empty.past.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You didn't log any meals on this date."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wawasan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anda tidak mencatat makanan pada tanggal ini."
           }
         }
       }
     },
-    "nav.meal_plan" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meal Plan"
+    "plan.empty.past.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No data for this day"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rencana Makan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada data untuk hari ini"
           }
         }
       }
     },
-    "nav.plan" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plan"
+    "Planned calories this week": {},
+    "profile.bmr_prefix": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BMR "
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rencana"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BMR "
           }
         }
       }
     },
-    "nav.profile" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profile"
+    "profile.calorie_target": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CALORIE TARGET"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profil"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TARGET KALORI"
           }
         }
       }
     },
-    "nav.today" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Today"
+    "profile.maintenance_prefix": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenance "
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hari Ini"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemeliharaan "
           }
         }
       }
     },
-    "nav.your_goal" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your Goal"
+    "profile.your_details": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR DETAILS"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tujuan Anda"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DETAIL ANDA"
           }
         }
       }
     },
-    "nav.your_target" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your Target"
+    "REMAINING ESTIMATE": {},
+    "SEX": {},
+    "status.exact_target": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You are exactly at your target."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target Anda"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anda tepat di target."
           }
         }
       }
     },
-    "Neutral" : {
-
+    "status.no_food": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No food planned yet"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada makanan direncanakan"
+          }
+        }
+      }
     },
-    "Next best action" : {
-
+    "status.over_target": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kcal over your estimated target"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kkal di atas target estimasi"
+          }
+        }
+      }
     },
-    "No food was logged on this day." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No food was logged on this day."
+    "status.under_target": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kcal under target"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tidak ada makanan dicatat hari ini."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kkal di bawah target"
           }
         }
       }
     },
-    "OBSERVATIONS" : {
-
+    "plan.days_planned": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Days planned"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hari direncanakan"
+          }
+        }
+      }
     },
-    "onboarding.goal.note" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This adjusts your daily target. Change it anytime."
+    "plan.day_plan_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ plan"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ini menyesuaikan target harian Anda. Dapat diubah kapan saja."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rencana %1$@"
           }
         }
       }
     },
-    "onboarding.profile.sex_note" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Used for the calorie estimation formula."
+    "plan.open_days": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open days"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Digunakan untuk rumus estimasi kalori."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hari kosong"
           }
         }
       }
     },
-    "onboarding.profile.subtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Help us calculate your estimated daily calorie target."
+    "plan.planned_adjustable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This day is planned and still has room for adjustment."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bantu kami menghitung target kalori harian estimasi Anda."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hari ini direncanakan dan masih bisa disesuaikan."
           }
         }
       }
     },
-    "onboarding.result.energy_balance" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Energy balance"
+    "plan.read_only": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This day is read-only."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neraca energi"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hari ini hanya baca."
           }
         }
       }
     },
-    "onboarding.result.title_nav" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your Target"
+    "plan.week_readiness": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WEEK READINESS"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target Anda"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KESIAPAN MINGGU"
           }
         }
       }
     },
-    "onboarding.result.note" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use this as a planning guide, not a strict rule."
+    "tab.insights": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "INSIGHTS"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gunakan ini sebagai panduan perencanaan, bukan aturan ketat."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WAWASAN"
           }
         }
       }
     },
-    "onboarding.result.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your estimated daily target is"
+    "tab.meal_plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MEAL PLAN"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estimasi target harian Anda adalah"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RENCANA MAKAN"
           }
         }
       }
     },
-    "onboarding.welcome.disclaimer" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This app gives calorie estimates only — not medical or nutrition advice."
+    "tab.plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PLAN"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aplikasi ini hanya memberikan estimasi kalori — bukan saran medis atau nutrisi."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RENCANA"
           }
         }
       }
     },
-    "onboarding.welcome.get_started" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GET STARTED"
+    "tab.profile": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PROFILE"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MULAI"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PROFIL"
           }
         }
       }
     },
-    "onboarding.welcome.tagline" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plan your meals around a simple daily calorie target."
+    "tab.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TODAY"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rencanakan makanan Anda berdasarkan target kalori harian sederhana."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HARI INI"
           }
         }
       }
     },
-    "Optional — enter grams for each macronutrient." : {
-
+    "This day is open — tap a meal slot to start planning.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This day is open — tap a meal slot to start planning."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hari ini terbuka — ketuk slot makan untuk mulai merencanakan."
+          }
+        }
+      }
     },
-    "plan.empty.future.subtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap any meal slot below to start planning this day."
+    "today.action.add_or_refine": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add or refine a meal before the plan is complete."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ketuk slot makanan di bawah untuk mulai merencanakan hari ini."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambah atau sesuaikan makanan sebelum rencana lengkap."
           }
         }
       }
     },
-    "plan.empty.future.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No meal plan yet"
+    "today.action.all_planned": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All meals planned — review your estimates."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Belum ada rencana makan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua makanan direncanakan — tinjau estimasi Anda."
           }
         }
       }
     },
-    "plan.empty.past.subtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You didn't log any meals on this date."
+    "today.action.next_best": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next best action"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anda tidak mencatat makanan pada tanggal ini."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tindakan selanjutnya"
           }
         }
       }
     },
-    "plan.empty.past.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No data for this day"
+    "today.hero.kcal_available": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kcal available today"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tidak ada data untuk hari ini"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kkal tersedia hari ini"
           }
         }
       }
     },
-    "Planned calories this week" : {
-
+    "today.hero.percent_used": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⚡ %1$d%% used"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⚡ %1$d%% terpakai"
+          }
+        }
+      }
     },
-    "profile.bmr_prefix" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BMR "
+    "today.hero.planned_summary": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$d kcal planned against a %2$d kcal estimate."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BMR "
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$d kkal direncanakan dari estimasi %2$d kkal."
           }
         }
       }
     },
-    "profile.calorie_target" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CALORIE TARGET"
+    "today.hero.remaining_estimate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "REMAINING ESTIMATE"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TARGET KALORI"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SISA ESTIMASI"
           }
         }
       }
     },
-    "profile.maintenance_prefix" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maintenance "
+    "today.hero.suggestion_all_done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All meals have entries — adjust as needed."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pemeliharaan "
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua slot terisi — sesuaikan bila perlu."
           }
         }
       }
     },
-    "profile.your_details" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YOUR DETAILS"
+    "today.hero.suggestion_format": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ is the next adjustable slot."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DETAIL ANDA"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ adalah slot yang bisa disesuaikan berikutnya."
           }
         }
       }
     },
-    "REMAINING ESTIMATE" : {
-
+    "today.macro.carbs": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carbs"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karbo"
+          }
+        }
+      }
     },
-    "SEX" : {
-
+    "today.macro.fat": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fat"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lemak"
+          }
+        }
+      }
     },
-    "status.exact_target" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You are exactly at your target."
+    "today.macro.protein": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protein"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anda tepat di target."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protein"
           }
         }
       }
     },
-    "status.no_food" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No food planned yet"
+    "today.meal.items_planned": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$d items · planned"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Belum ada makanan direncanakan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$d item · direncanakan"
           }
         }
       }
     },
-    "status.over_target" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld kcal over your estimated target"
+    "today.meal.slots": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$d slots"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld kkal di atas target estimasi"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$d slot"
           }
         }
       }
     },
-    "status.under_target" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld kcal under target"
+    "today.meal.tap_to_add": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap to add food"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld kkal di bawah target"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketuk untuk tambah makanan"
           }
         }
       }
     },
-    "plan.days_planned" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Days planned"
+    "today.meal.timeline_title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MEAL TIMELINE"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hari direncanakan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LINI MASA MAKAN"
           }
         }
       }
     },
-    "plan.day_plan_format" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ plan"
+    "today.empty.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create one to start tracking your planned calories."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rencana %1$@"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buat rencana untuk mulai melacak kalori Anda."
           }
         }
       }
     },
-    "plan.open_days" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open days"
+    "today.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No meal plan for today"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hari kosong"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada rencana makan hari ini"
           }
         }
       }
     },
-    "plan.planned_adjustable" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This day is planned and still has room for adjustment."
+    "today.status.exact": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EXACTLY AT YOUR TARGET"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hari ini direncanakan dan masih bisa disesuaikan."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TEPAT DI TARGET"
           }
         }
       }
     },
-    "plan.read_only" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This day is read-only."
+    "today.status.no_food": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NO FOOD PLANNED YET"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hari ini hanya baca."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BELUM ADA MAKANAN"
           }
         }
       }
     },
-    "plan.week_readiness" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "WEEK READINESS"
+    "unit.kcal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kcal"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KESIAPAN MINGGU"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kkal"
           }
         }
       }
     },
-    "tab.insights" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "INSIGHTS"
+    "unit.kcal_per_day": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kcal / day"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "WAWASAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kkal / hari"
           }
         }
       }
     },
-    "tab.meal_plan" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MEAL PLAN"
+    "unit.kcal_per_day_compact": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kcal/day"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "RENCANA MAKAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kkal/hari"
           }
         }
       }
     },
-    "tab.plan" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PLAN"
+    "action.next": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "RENCANA"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lanjut"
           }
         }
       }
     },
-    "tab.profile" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PROFILE"
+    "label.sex": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SEX"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PROFIL"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JENIS KELAMIN"
           }
         }
       }
     },
-    "tab.today" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TODAY"
+    "model.activity.lightly_active.desc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some walking · ×1.375"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HARI INI"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beberapa jalan kaki · ×1.375"
           }
         }
       }
     },
-    "This day is open — tap a meal slot to start planning." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This day is open — tap a meal slot to start planning."
+    "model.activity.moderately_active.desc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3–4×/week · ×1.55"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hari ini terbuka — ketuk slot makan untuk mulai merencanakan."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3–4×/minggu · ×1.55"
           }
         }
       }
     },
-    "today.action.add_or_refine" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add or refine a meal before the plan is complete."
+    "model.activity.sedentary.desc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desk job · ×1.2"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tambah atau sesuaikan makanan sebelum rencana lengkap."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pekerjaan meja · ×1.2"
           }
         }
       }
     },
-    "today.action.all_planned" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All meals planned — review your estimates."
+    "model.activity.very_active.desc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daily training · ×1.725"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Semua makanan direncanakan — tinjau estimasi Anda."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Latihan harian · ×1.725"
           }
         }
       }
     },
-    "today.action.next_best" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next best action"
+    "model.goal.gain.desc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan slightly above maintenance"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tindakan selanjutnya"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rencanakan sedikit di atas pemeliharaan"
           }
         }
       }
     },
-    "today.hero.kcal_available" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kcal available today"
+    "model.goal.lose.desc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan slightly below maintenance"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kkal tersedia hari ini"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rencanakan sedikit di bawah pemeliharaan"
           }
         }
       }
     },
-    "today.hero.percent_used" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "⚡ %1$d%% used"
+    "model.goal.maintain.desc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use the estimated maintenance target"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "⚡ %1$d%% terpakai"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gunakan target pemeliharaan"
           }
         }
       }
     },
-    "today.hero.planned_summary" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$d kcal planned against a %2$d kcal estimate."
+    "onboarding.activity.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This sets your daily energy baseline"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$d kkal direncanakan dari estimasi %2$d kkal."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ini menentukan dasar energi harian Anda"
           }
         }
       }
     },
-    "today.hero.remaining_estimate" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "REMAINING ESTIMATE"
+    "onboarding.goal.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preference, not instruction"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SISA ESTIMASI"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferensi, bukan instruksi"
           }
         }
       }
     },
-    "today.hero.suggestion_all_done" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All meals have entries — adjust as needed."
+    "onboarding.goal.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Goal"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Semua slot terisi — sesuaikan bila perlu."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tujuan Anda"
           }
         }
       }
     },
-    "today.hero.suggestion_format" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ is the next adjustable slot."
+    "onboarding.profile.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Profile"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ adalah slot yang bisa disesuaikan berikutnya."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil Anda"
           }
         }
       }
     },
-    "today.macro.carbs" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Carbs"
+    "onboarding.result.gain_badge": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+10% above maintenance"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Karbo"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+10% di atas pemeliharaan"
           }
         }
       }
     },
-    "today.macro.fat" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fat"
+    "onboarding.result.lose_badge": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "−10% below maintenance"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lemak"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "−10% di bawah pemeliharaan"
           }
         }
       }
     },
-    "today.macro.protein" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protein"
+    "unit.cm": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CM"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protein"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CM"
           }
         }
       }
     },
-    "today.meal.items_planned" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$d items · planned"
+    "unit.kg": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KG"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$d item · direncanakan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KG"
           }
         }
       }
     },
-    "today.meal.slots" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$d slots"
+    "unit.years": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YEARS"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$d slot"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TAHUN"
           }
         }
       }
     },
-    "today.meal.tap_to_add" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap to add food"
+    "Your planning estimate": {},
+    "profile.overline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ESTIMATE CONTEXT"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ketuk untuk tambah makanan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KONTEKS ESTIMASI"
           }
         }
       }
     },
-    "today.meal.timeline_title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MEAL TIMELINE"
+    "profile.your_planning_estimate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your planning estimate"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "LINI MASA MAKAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimasi perencanaan Anda"
           }
         }
       }
     },
-    "today.empty.subtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create one to start tracking your planned calories."
+    "profile.based_on_details": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Based on profile details and selected planning preference."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Buat rencana untuk mulai melacak kalori Anda."
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berdasarkan detail profil dan preferensi perencanaan yang dipilih."
           }
         }
       }
     },
-    "today.empty.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No meal plan for today"
+    "profile.kcal_per_day": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KCAL PER DAY ESTIMATE"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Belum ada rencana makan hari ini"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ESTIMASI KALORI PER HARI"
           }
         }
       }
     },
-    "today.status.exact" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "EXACTLY AT YOUR TARGET"
+    "label.profile_preference": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preference"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TEPAT DI TARGET"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferensi"
           }
         }
       }
     },
-    "today.status.no_food" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "NO FOOD PLANNED YET"
+    "label.profile_maintenance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenance"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BELUM ADA MAKANAN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemeliharaan"
           }
         }
       }
     },
-    "unit.kcal" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kcal"
+    "nav.settings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kkal"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan"
           }
         }
       }
     },
-    "unit.kcal_per_day" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kcal / day"
+    "settings.overline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PREFERENCES"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kkal / hari"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PREFERENSI"
           }
         }
       }
     },
-    "unit.kcal_per_day_compact" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kcal/day"
+    "settings.appearance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appearance"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kkal/hari"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilan"
           }
         }
       }
     },
-    "action.next" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next"
+    "settings.appearance.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose how Foodiary looks on your device."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lanjut"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih tampilan Foodiary di perangkat Anda."
           }
         }
       }
     },
-    "label.sex" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SEX"
+    "settings.language": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JENIS KELAMIN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bahasa"
           }
         }
       }
     },
-    "model.activity.lightly_active.desc" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Some walking · ×1.375"
+    "settings.language.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App interface language."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beberapa jalan kaki · ×1.375"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bahasa antarmuka aplikasi."
           }
         }
       }
     },
-    "model.activity.moderately_active.desc" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3–4×/week · ×1.55"
+    "settings.data": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3–4×/minggu · ×1.55"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data"
           }
         }
       }
     },
-    "model.activity.sedentary.desc" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desk job · ×1.2"
+    "settings.data.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manage your locally stored data."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pekerjaan meja · ×1.2"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kelola data yang tersimpan secara lokal."
           }
         }
       }
     },
-    "model.activity.very_active.desc" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Daily training · ×1.725"
+    "settings.about": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Latihan harian · ×1.725"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tentang"
           }
         }
       }
     },
-    "model.goal.gain.desc" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plan slightly above maintenance"
+    "settings.about.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App information and version."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rencanakan sedikit di atas pemeliharaan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informasi aplikasi dan versi."
           }
         }
       }
     },
-    "model.goal.lose.desc" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plan slightly below maintenance"
+    "settings.theme.system": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Follow System"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rencanakan sedikit di bawah pemeliharaan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikuti Sistem"
           }
         }
       }
     },
-    "model.goal.maintain.desc" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use the estimated maintenance target"
+    "settings.theme.light": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gunakan target pemeliharaan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terang"
           }
         }
       }
     },
-    "onboarding.activity.subtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This sets your daily energy baseline"
+    "settings.theme.dark": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dark"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ini menentukan dasar energi harian Anda"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gelap"
           }
         }
       }
     },
-    "onboarding.goal.subtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preference, not instruction"
+    "settings.language.indonesian": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indonesian"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preferensi, bukan instruksi"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bahasa Indonesia"
           }
         }
       }
     },
-    "onboarding.goal.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your Goal"
+    "settings.language.english": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "English"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tujuan Anda"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bahasa Inggris"
           }
         }
       }
     },
-    "onboarding.profile.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your Profile"
+    "settings.version": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profil Anda"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi"
           }
         }
       }
     },
-    "onboarding.result.gain_badge" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+10% above maintenance"
+    "settings.data_management": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data Management"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+10% di atas pemeliharaan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manajemen Data"
           }
         }
       }
     },
-    "onboarding.result.lose_badge" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "−10% below maintenance"
+    "settings.reset_description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove all profiles, targets, and meal plans from this device."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "−10% di bawah pemeliharaan"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus semua profil, target, dan rencana makan dari perangkat ini."
           }
         }
       }
     },
-    "unit.cm" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CM"
+    "settings.notes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CM"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catatan"
           }
         }
       }
     },
-    "unit.kg" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KG"
+    "settings.notes.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorie estimates are for planning only. Not medical advice."
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KG"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimasi kalori hanya untuk perencanaan. Bukan saran medis."
           }
         }
       }
     },
-    "unit.years" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YEARS"
+    "settings.section.preferences": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferences"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TAHUN"
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferensi"
           }
         }
       }
     },
-    "Your planning estimate" : {
-
+    "settings.footer_text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorie estimates are for planning purposes only. Not medical or nutrition advice."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimasi kalori hanya untuk tujuan perencanaan. Bukan saran medis atau nutrisi."
+          }
+        }
+      }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

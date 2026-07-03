@@ -6,6 +6,7 @@ import SwiftUI
 /// contextual copy, and meal segments.
 
 struct TodayHeroSection: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     let remainingCalories: Int
     let calorieProgress: Double
     let plannedCalories: Int

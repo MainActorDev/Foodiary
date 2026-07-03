@@ -5,6 +5,7 @@ import SwiftUI
 /// Centered "+" action router: pick a meal type → open AddFoodItemView → save to today's plan.
 /// The centered button in MainTabView opens this view as a sheet.
 struct AddFoodRouteView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Bindable var state: AppState
     @Binding var isPresented: Bool
 

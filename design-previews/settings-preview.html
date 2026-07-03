@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foodiary — Settings Design Preview v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #F6F7FF;
+  --surface: #FFFFFF;
+  --surface-soft: #EEF0FF;
+  --primary: #4BB8FA;
+  --primary-dark: #0B4F8C;
+  --mint: #10B981;
+  --mint-light: #D1FAE5;
+  --amber: #F59E0B;
+  --cyan: #38BDF8;
+  --violet: #8B5CF6;
+  --danger: #EF4444;
+  --danger-soft: #FEE2E2;
+  --ink: #15142A;
+  --muted: #6B6880;
+  --border: rgba(21,20,42,0.08);
+  --divider: rgba(21,20,42,0.06);
+  --shadow: 0 2px 12px rgba(20,20,40,0.04);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #E8EAF6;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.phone-frame {
+  width: 390px;
+  background: var(--bg);
+  min-height: 844px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.content {
+  padding: 0 18px 40px;
+}
+
+/* Nav bar */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0 6px;
+  position: relative;
+}
+.nav-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.nav-back {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+}
+
+/* Section label */
+.section-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 24px 4px 10px;
+}
+
+/* Grouped card */
+.group-card {
+  background: var(--surface);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+/* Row */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  position: relative;
+}
+.row + .row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 58px;
+  right: 16px;
+  height: 1px;
+  background: var(--divider);
+}
+
+.row-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.row-icon.primary { background: rgba(75,184,250,0.12); color: var(--primary); }
+.row-icon.mint    { background: rgba(16,185,129,0.12); color: var(--mint); }
+.row-icon.amber   { background: rgba(245,158,11,0.12); color: var(--amber); }
+.row-icon.violet  { background: rgba(139,92,246,0.12); color: var(--violet); }
+.row-icon.danger  { background: var(--danger-soft); color: var(--danger); }
+
+.row-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  flex: 1;
+}
+
+.row-value {
+  font-size: 15px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.row-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.row-check.on {
+  background: var(--primary);
+  color: white;
+}
+.row-check.on.mint {
+  background: var(--mint);
+}
+.row-check svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Theme picker */
+.theme-picker {
+  display: flex;
+  gap: 0;
+  padding: 4px;
+  background: var(--surface-soft);
+  border-radius: 14px;
+  margin: 0 16px 16px;
+}
+.theme-picker button {
+  flex: 1;
+  padding: 10px 8px;
+  border-radius: 11px;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.theme-picker button .tp-icon { font-size: 18px; }
+.theme-picker button .tp-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.theme-picker button.active {
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgba(20,20,40,0.06);
+}
+.theme-picker button.active .tp-label {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Danger card */
+.danger-card {
+  background: var(--surface);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.danger-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--danger);
+}
+.danger-btn:active { background: var(--danger-soft); }
+
+/* Footer text */
+.footer-text {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+  padding: 20px 24px 0;
+}
+.footer-version {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  padding: 8px 0;
+  font-weight: 500;
+  font-family: 'SF Pro Rounded', 'Inter', sans-serif;
+}
+
+/* Preview toggle */
+.preview-bar {
+  display: flex;
+  gap: 8px;
+  padding: 12px 18px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.preview-bar button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+}
+.preview-bar button.active {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+}
+
+/* Language section */
+.lang-section {
+  margin-top: 12px;
+}
+
+/* Dark mode */
+.phone-frame.dark {
+  --bg: #0C0C14;
+  --surface: #1A1A2E;
+  --surface-soft: #222238;
+  --ink: #F0F0F5;
+  --muted: #7E7E96;
+  --border: rgba(255,255,255,0.06);
+  --divider: rgba(255,255,255,0.05);
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --danger-soft: rgba(239,68,68,0.12);
+}
+.phone-frame.dark .row-icon.primary { background: rgba(75,184,250,0.18); }
+.phone-frame.dark .row-icon.mint    { background: rgba(16,185,129,0.18); }
+.phone-frame.dark .row-icon.amber   { background: rgba(245,158,11,0.18); }
+.phone-frame.dark .row-icon.violet  { background: rgba(139,92,246,0.18); }
+.phone-frame.dark .row-icon.danger  { background: rgba(239,68,68,0.15); }
+.phone-frame.dark .theme-picker button.active { background: var(--surface-soft); }
+</style>
+</head>
+<body>
+
+<div class="phone-frame light" id="phone">
+
+  <!-- Preview toggle -->
+  <div class="preview-bar">
+    <button class="active" onclick="setTheme('light')">☀️ Light</button>
+    <button onclick="setTheme('dark')">🌙 Dark</button>
+  </div>
+
+  <!-- Nav bar -->
+  <div class="nav-bar">
+    <div class="nav-back">‹</div>
+    <div class="nav-title">Pengaturan</div>
+  </div>
+
+  <div class="content">
+
+    <!-- PREFERENCES -->
+    <div class="section-label">Preferensi</div>
+
+    <!-- Appearance: segmented picker -->
+    <div class="group-card" style="padding-bottom: 0;">
+      <div class="row">
+        <div class="row-icon primary">◑</div>
+        <span class="row-text">Tampilan</span>
+      </div>
+      <div class="theme-picker" id="themePicker">
+        <button class="active" onclick="pickTheme(this, 0)">
+          <span class="tp-icon">🌗</span>
+          <span class="tp-label">Otomatis</span>
+        </button>
+        <button onclick="pickTheme(this, 1)">
+          <span class="tp-icon">☀️</span>
+          <span class="tp-label">Terang</span>
+        </button>
+        <button onclick="pickTheme(this, 2)">
+          <span class="tp-icon">🌙</span>
+          <span class="tp-label">Gelap</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Language: checkmark rows -->
+    <div class="group-card lang-section">
+      <div class="row" onclick="pickLang(this)">
+        <div class="row-icon mint">🇮🇩</div>
+        <span class="row-text">Bahasa Indonesia</span>
+        <div class="row-check on mint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+      </div>
+      <div class="row" onclick="pickLang(this)">
+        <div class="row-icon mint">🇬🇧</div>
+        <span class="row-text">English</span>
+        <div class="row-check">
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="section-label">Tentang</div>
+    <div class="group-card">
+      <div class="row">
+        <div class="row-icon violet">ℹ︎</div>
+        <span class="row-text">Versi</span>
+        <span class="row-value">1.0 (1)</span>
+      </div>
+    </div>
+
+    <!-- DATA -->
+    <div class="section-label">Data</div>
+    <div class="danger-card">
+      <button class="danger-btn">
+        🗑  Hapus Semua Data
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-text">
+      Estimasi kalori hanya untuk tujuan perencanaan. Bukan saran medis atau nutrisi.
+    </div>
+    <div class="footer-version">Foodiary · v1.0</div>
+
+  </div>
+</div>
+
+<script>
+function setTheme(mode) {
+  const phone = document.getElementById('phone');
+  const btns = document.querySelectorAll('.preview-bar button');
+  btns.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  phone.className = 'phone-frame ' + mode;
+}
+
+function pickTheme(btn, idx) {
+  const siblings = btn.parentElement.querySelectorAll('button');
+  siblings.forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function pickLang(row) {
+  const card = row.parentElement;
+  card.querySelectorAll('.row').forEach(r => {
+    const check = r.querySelector('.row-check');
+    check.className = 'row-check';
+    check.innerHTML = '';
+  });
+  const check = row.querySelector('.row-check');
+  check.className = 'row-check on mint';
+  check.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+}
+</script>
+
+</body>
+</html>

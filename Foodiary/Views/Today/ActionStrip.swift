@@ -6,6 +6,7 @@ import SwiftUI
 /// and a floating "+" button.
 
 struct TodayActionStrip: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     let plan: MealPlan
     var onTapMeal: (Int) -> Void
 

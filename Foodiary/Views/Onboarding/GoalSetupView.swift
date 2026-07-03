@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct GoalSetupView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Binding var activityLevel: UserProfile.ActivityLevel
     @Binding var goal: UserProfile.Goal
     let bmr: Int

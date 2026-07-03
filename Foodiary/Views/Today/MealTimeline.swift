@@ -5,6 +5,7 @@ import SwiftUI
 /// Lists each meal slot with its emoji tile, name, subtitle, and calorie total.
 
 struct TodayMealTimeline: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     let plan: MealPlan
     var onTapMeal: (Int) -> Void
 

@@ -8,6 +8,9 @@ struct ContentRootView: View {
     @State private var onboardingVM = OnboardingViewModel()
     @State private var profileSetupID = 0
 
+    @ObservedObject private var themeManager = ThemeManager.shared
+    @ObservedObject private var localeManager = LocaleManager.shared
+
     var body: some View {
         Group {
             if let state = state {
@@ -70,6 +73,9 @@ struct ContentRootView: View {
                 .background(FoodiaryDesign.pulseBackground)
             }
         }
+        .preferredColorScheme(themeManager.selectedTheme.colorScheme)
+        .environmentObject(localeManager)
+        .environmentObject(themeManager)
         .onAppear {
             let persistence = SwiftDataPersistenceService(context: modelContext)
             state = AppState(persistence: persistence)

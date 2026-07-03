@@ -1,14 +1,18 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Bindable var state: AppState
     @State private var showEdit = false
-    @State private var showResetConfirm = false
+    @State private var showSettings = false
 
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                PulseTopbar(overline: "ESTIMATE CONTEXT", title: L10n["nav.profile"], icon: .user)
+                PulseTopbar(overline: L10n["profile.overline"], title: L10n["nav.profile"], icon: .gear) {
+                    showSettings = true
+                }
+
                 // Single unified card (prototype: .white-card)
                 VStack(spacing: 0) {
                     // Profile head: avatar + heading
@@ -31,12 +35,13 @@ struct ProfileView: View {
                             )
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Your planning estimate")
+                            Text(L10n["profile.your_planning_estimate"])
                                 .font(.system(size: 18, weight: .bold, design: .rounded))
                                 .foregroundColor(FoodiaryDesign.pulseInk)
-                            Text("Based on profile details and selected planning preference.")
+                            Text(L10n["profile.based_on_details"])
                                 .font(.system(size: 12))
                                 .foregroundColor(FoodiaryDesign.pulseMuted)
+                                .fixedSize(horizontal: false, vertical: true)
                         }
                     }
 
@@ -46,7 +51,7 @@ struct ProfileView: View {
                             Text("\(target.targetCalories)")
                                 .font(.system(size: 46, weight: .bold, design: .rounded))
                                 .foregroundColor(FoodiaryDesign.pulsePrimary)
-                            Text("KCAL PER DAY ESTIMATE")
+                            Text(L10n["profile.kcal_per_day"])
                                 .font(.system(size: 12, weight: .black))
                                 .foregroundColor(FoodiaryDesign.pulseMuted)
                                 .tracking(0.6)
@@ -62,11 +67,11 @@ struct ProfileView: View {
                         // Detail rows
                         VStack(spacing: 0) {
                             if let profile = state.userProfile {
-                                detailRow(label: "Activity", value: profile.activityLevel.displayName)
-                                detailRow(label: "Preference", value: profile.goal.displayName)
+                                detailRow(label: L10n["label.profile_activity"], value: profile.activityLevel.displayName)
+                                detailRow(label: L10n["label.profile_preference"], value: profile.goal.displayName)
                             }
-                            detailRow(label: "BMR", value: "\(target.bmr) kcal")
-                            detailRow(label: "Maintenance", value: "\(target.maintenanceCalories) kcal")
+                            detailRow(label: L10n["label.bmr"], value: "\(target.bmr) kcal")
+                            detailRow(label: L10n["label.profile_maintenance"], value: "\(target.maintenanceCalories) kcal")
                         }
                         .padding(.top, 12)
                     }
@@ -95,26 +100,19 @@ struct ProfileView: View {
                     Text(L10n["action.edit_profile"])
                 }
                 .buttonStyle(PulseSecondaryButtonStyle())
-
-                Button(action: { showResetConfirm = true }) {
-                    Text(L10n["action.reset_data"])
-                }
-                .buttonStyle(PulsePrimaryButtonStyle(bgColor: FoodiaryDesign.pulseDanger, fgColor: .white))
             }
             .padding(18)
         }
         .background(FoodiaryDesign.pulseBackground)
+        .toolbar(showSettings ? .visible : .hidden, for: .navigationBar)
         .sheet(isPresented: $showEdit) {
             NavigationStack {
                 ProfileEditView(state: state, isPresented: $showEdit)
                     .modifier(RingNavBarModifier())
             }
         }
-        .alert(L10n["alert.reset_title"], isPresented: $showResetConfirm) {
-            Button(L10n["alert.cancel"], role: .cancel) { }
-            Button(L10n["alert.reset_confirm"], role: .destructive) { state.resetAll() }
-        } message: {
-            Text(L10n["alert.reset_message"])
+        .navigationDestination(isPresented: $showSettings) {
+            SettingsView(state: state)
         }
     }
 
@@ -139,6 +137,7 @@ struct ProfileView: View {
 }
 
 struct ProfileEditView: View {
+    @EnvironmentObject private var localeManager: LocaleManager
     @Bindable var state: AppState
     @Binding var isPresented: Bool
 
