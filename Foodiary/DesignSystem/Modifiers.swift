@@ -182,25 +182,76 @@ extension View {
             .textCase(.uppercase)
     }
 
-    /// Hides system back button and installs a custom-styled one.
-    /// Handles both `.navigationBarBackButtonHidden` and the toolbar item.
-    func pulseBackButton(
-        icon: String = "arrow.left",
-        dismiss: DismissAction,
-        hideTabBar: Bool = false
-    ) -> some View {
-        self
-            .navigationBarBackButtonHidden(true)
-            .toolbar(hideTabBar ? .hidden : .automatic, for: .tabBar)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: { dismiss() }) {
-                        Image(systemName: icon)
-                            .font(.system(size: 16, weight: .bold))
-                            .frame(width: 32, height: 32)
+    /// Back button that adapts to the OS:
+    /// - **iOS 26+** (Liquid Glass): uses the system back button so it
+    ///   gets native glass treatment. No-op modifier.
+    /// - **iOS < 26**: hides the system button and installs a custom
+    ///   `PulseIconButtonStyle` back button.
+    func pulseBackButton() -> some View {
+        modifier(PulseBackButtonModifier())
+    }
+
+    /// Same as `pulseBackButton()` but with an explicit action, for cases
+    /// where the default `@Environment(\.dismiss)` pop isn't the right
+    /// behaviour (e.g. resetting a NavigationPath by multiple levels).
+    func pulseBackButton(action: @escaping () -> Void) -> some View {
+        modifier(PulseBackButtonModifier(customAction: action))
+    }
+}
+
+/// Backing modifier for `.pulseBackButton()`.
+/// Uses `@Environment(\.dismiss)` so callers don't need to pass it manually.
+private struct PulseBackButtonModifier: ViewModifier {
+    @Environment(\.dismiss) private var dismiss
+    var customAction: (() -> Void)? = nil
+
+    func body(content: Content) -> some View {
+        if #available(iOS 26, *) {
+            content
+        } else {
+            content
+                .navigationBarBackButtonHidden(true)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        PulseToolbarButton(icon: "arrow.left") {
+                            if let action = customAction { action() }
+                            else { dismiss() }
+                        }
                     }
-                    .buttonStyle(PulseIconButtonStyle(size: 36))
                 }
+        }
+    }
+}
+
+/// Reusable toolbar button that adapts to the OS:
+/// - **iOS 26+**: plain system button — gets native Liquid Glass treatment.
+/// - **iOS < 26**: custom `PulseIconButtonStyle` circle.
+///
+/// Use inside any `ToolbarItem { }`:
+/// ```swift
+/// ToolbarItem(placement: .topBarTrailing) {
+///     PulseToolbarButton(icon: "plus") { showAddFood = true }
+/// }
+/// ```
+struct PulseToolbarButton: View {
+    let icon: String
+    var fgColor: Color = FoodiaryDesign.pulseInk
+    var size: CGFloat = 36
+    let action: () -> Void
+
+    var body: some View {
+        if #available(iOS 26, *) {
+            Button(action: action) {
+                Image(systemName: icon)
+                    .foregroundStyle(fgColor)
             }
+        } else {
+            Button(action: action) {
+                Image(systemName: icon)
+                    .font(.system(size: 16, weight: .bold))
+                    .frame(width: 32, height: 32)
+            }
+            .buttonStyle(PulseIconButtonStyle(fgColor: fgColor, size: size))
+        }
     }
 }

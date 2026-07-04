@@ -151,17 +151,7 @@ struct CalorieResultView: View {
         .background(FoodiaryDesign.pulseBackground)
         .navigationTitle(L10n["onboarding.result.title_nav"])
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button(action: onBack) {
-                    Image(systemName: "arrow.left")
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(width: 32, height: 32)
-                }
-                .buttonStyle(PulseIconButtonStyle(fgColor: FoodiaryDesign.pulseMuted))
-            }
-        }
+        .pulseBackButton(action: onBack)
         .onAppear {
             // Trigger bar grow animation after a short delay
             withAnimation(.easeOut(duration: 1.0).delay(0.2)) {

@@ -5,7 +5,6 @@ struct SettingsView: View {
 
     @ObservedObject private var themeManager = ThemeManager.shared
     @EnvironmentObject private var localeManager: LocaleManager
-    @Environment(\.dismiss) private var dismiss
     @State private var showResetConfirm = false
 
     var body: some View {
@@ -83,7 +82,7 @@ struct SettingsView: View {
         .preferredColorScheme(themeManager.selectedTheme.colorScheme)
         .navigationTitle(L10n["nav.settings"])
         .navigationBarTitleDisplayMode(.inline)
-        .pulseBackButton(dismiss: dismiss)
+        .pulseBackButton()
         .alert(L10n["alert.reset_title"], isPresented: $showResetConfirm) {
             Button(L10n["alert.cancel"], role: .cancel) { }
             Button(L10n["alert.reset_confirm"], role: .destructive) {

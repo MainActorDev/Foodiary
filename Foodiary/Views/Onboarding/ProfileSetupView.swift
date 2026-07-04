@@ -123,17 +123,7 @@ struct ProfileSetupView: View {
         .background(FoodiaryDesign.pulseBackground)
         .navigationTitle(L10n["onboarding.profile.title"])
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button(action: onBack) {
-                    Image(systemName: "arrow.left")
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(width: 32, height: 32)
-                }
-                .buttonStyle(PulseIconButtonStyle(fgColor: FoodiaryDesign.pulseMuted))
-            }
-        }
+        .pulseBackButton(action: onBack)
     }
 
     // MARK: - Next

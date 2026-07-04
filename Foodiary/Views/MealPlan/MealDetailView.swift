@@ -85,23 +85,11 @@ struct MealDetailView: View {
                 .background(FoodiaryDesign.pulseBackground)
                 .navigationTitle(meal.type.displayName)
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationBarBackButtonHidden(true)
+                .pulseBackButton()
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(action: { isPresented = false }) {
-                            Image(systemName: "arrow.left")
-                                .font(.system(size: 16, weight: .bold))
-                                .frame(width: 32, height: 32)
-                        }
-                        .buttonStyle(PulseIconButtonStyle(size: 36))
-                    }
                     if !isReadOnly {
                         ToolbarItem(placement: .topBarTrailing) {
-                            Button(action: { showAddFood = true }) {
-                                Image(systemName: "plus")
-                                    .font(.system(size: 16, weight: .bold))
-                            }
-                            .buttonStyle(PulseIconButtonStyle(size: 36))
+                            PulseToolbarButton(icon: "plus") { showAddFood = true }
                         }
                     }
                 }

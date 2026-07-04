@@ -68,15 +68,13 @@ struct AddFoodItemView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                Button(action: {
+                PulseToolbarButton(
+                    icon: screenState == .manual ? "arrow.left" : "xmark",
+                    fgColor: FoodiaryDesign.pulseMuted
+                ) {
                     if screenState == .manual { screenState = .searching }
                     else { onCancel() }
-                }) {
-                    Image(systemName: screenState == .manual ? "arrow.left" : "xmark")
-                        .font(.system(size: 14, weight: .bold))
-                        .frame(width: 32, height: 32)
                 }
-                .buttonStyle(PulseIconButtonStyle(fgColor: FoodiaryDesign.pulseMuted, size: 36))
             }
         }
     }
