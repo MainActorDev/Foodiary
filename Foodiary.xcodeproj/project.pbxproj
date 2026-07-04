@@ -459,9 +459,7 @@
 				TargetAttributes = {
 					CCDC232848F25A91548B270B = {
 						DevelopmentTeam = 8RVDJVBA6Q;
-					};
-					F6AFD3124E8EFCC5AEFA894C = {
-						DevelopmentTeam = 8RVDJVBA6Q;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -648,7 +646,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 8RVDJVBA6Q;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -722,7 +719,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 8RVDJVBA6Q;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -756,7 +752,6 @@
 			baseConfigurationReference = 7CE2F91A5D41DC3830830428 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = Foodiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -765,6 +760,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app.local;
+				PRODUCT_NAME = Foodiary;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -775,7 +771,6 @@
 			baseConfigurationReference = 420B2F92E43E28AE40E47C9B /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = Foodiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -784,6 +779,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app.local;
+				PRODUCT_NAME = Foodiary;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

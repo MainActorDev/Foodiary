@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foodiary App Icon Concepts</title>
+  <style>
+    :root {
+      --bg: #f6f7ff;
+      --surface: #ffffff;
+      --ink: #15142a;
+      --muted: #6b6880;
+      --line: rgba(21,20,42,.10);
+      --primary: #4bb8fa;
+      --primary-dark: #0b4f8c;
+      --cyan: #06b6d4;
+      --mint: #10b981;
+      --amber: #f59e0b;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      background:
+        radial-gradient(circle at 8% -4%, rgba(75,184,250,.24), transparent 30%),
+        radial-gradient(circle at 94% 8%, rgba(16,185,129,.13), transparent 28%),
+        var(--bg);
+      color: var(--ink);
+    }
+
+    main {
+      width: min(1380px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 44px 0 64px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 28px;
+      align-items: flex-end;
+      margin-bottom: 30px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-weight: 900;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 68px);
+      letter-spacing: -.06em;
+      line-height: .92;
+      max-width: 780px;
+    }
+
+    .intro {
+      max-width: 440px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.76);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      box-shadow: 0 18px 48px rgba(20,20,60,.08);
+      padding: 18px;
+      backdrop-filter: blur(18px);
+    }
+
+    .card.recommended {
+      border-color: rgba(75,184,250,.48);
+      box-shadow: 0 22px 58px rgba(75,184,250,.16);
+    }
+
+    .icon-wrap {
+      display: grid;
+      place-items: center;
+      padding: 18px 0 16px;
+    }
+
+    .icon-preview {
+      width: 178px;
+      height: 178px;
+      border-radius: 38px;
+      box-shadow: 0 20px 44px rgba(11,79,140,.16), inset 0 1px 0 rgba(255,255,255,.35);
+      overflow: hidden;
+    }
+
+    .sizes {
+      display: flex;
+      align-items: flex-end;
+      gap: 13px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      background: rgba(246,247,255,.76);
+      border-radius: 20px;
+      margin: 0 0 16px;
+    }
+
+    .size-col {
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .size-64 { width: 64px; height: 64px; border-radius: 14px; overflow: hidden; }
+    .size-32 { width: 32px; height: 32px; border-radius: 8px; overflow: hidden; }
+    .size-16 { width: 16px; height: 16px; border-radius: 4px; overflow: hidden; }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 7px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -.03em;
+    }
+
+    .tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-weight: 900;
+      color: var(--primary-dark);
+      background: rgba(75,184,250,.13);
+      border: 1px solid rgba(75,184,250,.23);
+      padding: 7px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .desc {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .why {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding-left: 18px;
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .why li::marker { color: var(--primary); }
+
+    .footer-note {
+      margin-top: 24px;
+      padding: 18px 20px;
+      border-radius: 24px;
+      background: rgba(21,20,42,.92);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .footer-note p { margin: 0; color: rgba(255,255,255,.78); font-size: 13px; line-height: 1.5; }
+    .footer-note strong { color: white; }
+
+    @media (max-width: 1080px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      header { display: block; }
+      .intro { margin-top: 18px; }
+    }
+
+    @media (max-width: 720px) {
+      main { width: min(100vw - 24px, 560px); padding-top: 26px; }
+      .grid { grid-template-columns: 1fr; }
+      .footer-note { display: block; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <div class="eyebrow">Foodiary app icon brainstorm</div>
+      <h1>Calm food planning, not diet noise.</h1>
+    </div>
+    <p class="intro">Six icon directions built around Foodiary’s Pulse v2 language: sky-blue accent, deep ink, soft planning surfaces, four meal slots, and a neutral estimated-target metaphor.</p>
+  </header>
+
+  <section class="grid" id="grid"></section>
+
+  <section class="footer-note">
+    <p><strong>Recommendation:</strong> start with Planning Plate. It is the clearest at small sizes and connects food, daily meal structure, and calorie planning without looking medical.</p>
+    <p>Next step: pick one direction and refine 6–8 variations before replacing the production AppIcon asset.</p>
+  </section>
+</main>
+
+<script>
+const icons = [
+  {
+    name: 'Planning Plate',
+    tag: 'Recommended',
+    cls: 'recommended',
+    desc: 'A plate that also reads as a four-segment daily planning ring. The blue target dot gives it a Foodiary-specific calorie-planning cue.',
+    why: ['Food + planner + target in one glyph.', 'Legible at 16px because the silhouette is simple.', 'Matches the current blue Pulse accent without becoming a generic health icon.'],
+    svg: `
+<svg viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="url(#pp-bg)"/>
+  <circle cx="196" cy="138" r="220" fill="white" fill-opacity=".22"/>
+  <circle cx="834" cy="844" r="300" fill="#06B6D4" fill-opacity=".20"/>
+  <circle cx="512" cy="512" r="320" fill="#F6F7FF"/>
+  <circle cx="512" cy="512" r="232" fill="white"/>
+  <path d="M512 148a364 364 0 0 1 340 234l-104 44a250 250 0 0 0-236-166V148Z" fill="#4BB8FA"/>
+  <path d="M876 512a364 364 0 0 1-234 340l-44-104a250 250 0 0 0 166-236h112Z" fill="#10B981"/>
+  <path d="M512 876a364 364 0 0 1-340-234l104-44a250 250 0 0 0 236 166v112Z" fill="#F59E0B"/>
+  <path d="M148 512a364 364 0 0 1 234-340l44 104a250 250 0 0 0-166 236H148Z" fill="#06B6D4"/>
+  <circle cx="512" cy="512" r="176" fill="#F6F7FF" stroke="#15142A" stroke-opacity=".08" stroke-width="18"/>
+  <circle cx="692" cy="286" r="48" fill="#15142A"/>
+  <circle cx="692" cy="286" r="21" fill="#4BB8FA"/>
+  <defs><linearGradient id="pp-bg" x1="64" y1="40" x2="946" y2="948" gradientUnits="userSpaceOnUse"><stop stop-color="#15142A"/><stop offset=".54" stop-color="#0B4F8C"/><stop offset="1" stop-color="#4BB8FA"/></linearGradient></defs>
+</svg>`
+  },
+  {
+    name: 'Bento Timeline',
+    tag: 'Structured',
+    desc: 'Four rounded meal tiles arranged like a bento grid, with one continuous route line implying a day planned from breakfast to dinner.',
+    why: ['Strong “meal planner” read.', 'Four slots map directly to the app model.', 'Very scalable because it is built from bold geometric blocks.'],
+    svg: `
+<svg viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#F6F7FF"/>
+  <circle cx="820" cy="186" r="260" fill="#4BB8FA" fill-opacity=".22"/>
+  <circle cx="178" cy="850" r="260" fill="#10B981" fill-opacity=".13"/>
+  <rect x="190" y="190" width="644" height="644" rx="178" fill="#15142A"/>
+  <path d="M332 512h360" stroke="#4BB8FA" stroke-width="52" stroke-linecap="round"/>
+  <path d="M512 332v360" stroke="#4BB8FA" stroke-width="52" stroke-linecap="round"/>
+  <rect x="262" y="262" width="204" height="204" rx="72" fill="#F6F7FF"/>
+  <rect x="558" y="262" width="204" height="204" rx="72" fill="#E6FBF3"/>
+  <rect x="262" y="558" width="204" height="204" rx="72" fill="#FFF7ED"/>
+  <rect x="558" y="558" width="204" height="204" rx="72" fill="#FFFFFF"/>
+  <circle cx="364" cy="364" r="48" fill="#4BB8FA"/>
+  <circle cx="660" cy="364" r="48" fill="#10B981"/>
+  <circle cx="364" cy="660" r="48" fill="#F59E0B"/>
+  <circle cx="660" cy="660" r="48" fill="#06B6D4"/>
+</svg>`
+  },
+  {
+    name: 'Target Bowl',
+    tag: 'Warm',
+    desc: 'A soft bowl silhouette carries a clean progress arc. More food-forward than Planning Plate, with less analytics pressure.',
+    why: ['Friendly and calm without being childish.', 'The bowl shape is immediately food-related.', 'The arc keeps the planning/estimate language subtle.'],
+    svg: `
+<svg viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="url(#tb-bg)"/>
+  <circle cx="218" cy="180" r="260" fill="white" fill-opacity=".20"/>
+  <circle cx="760" cy="742" r="260" fill="#10B981" fill-opacity=".18"/>
+  <path d="M244 440c0 186 120 336 268 336s268-150 268-336H244Z" fill="#F6F7FF"/>
+  <path d="M286 440c28 72 114 124 226 124s198-52 226-124" stroke="#15142A" stroke-opacity=".12" stroke-width="28" stroke-linecap="round"/>
+  <path d="M314 404c46-72 118-112 198-112s152 40 198 112" stroke="#4BB8FA" stroke-width="52" stroke-linecap="round"/>
+  <circle cx="512" cy="403" r="54" fill="#15142A"/>
+  <circle cx="512" cy="403" r="22" fill="#4BB8FA"/>
+  <rect x="360" y="752" width="304" height="62" rx="31" fill="#15142A" fill-opacity=".18"/>
+  <defs><linearGradient id="tb-bg" x1="88" y1="72" x2="894" y2="942" gradientUnits="userSpaceOnUse"><stop stop-color="#15142A"/><stop offset=".62" stop-color="#0B4F8C"/><stop offset="1" stop-color="#4BB8FA"/></linearGradient></defs>
+</svg>`
+  },
+  {
+    name: 'Meal Orbit',
+    tag: 'Dynamic',
+    desc: 'Four meal moments orbit a central daily estimate. It feels active and modern, with a little more personality.',
+    why: ['Captures daily rhythm rather than a single meal.', 'Creates a distinctive silhouette at medium sizes.', 'Best if the brand wants motion and energy.'],
+    svg: `
+<svg viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#15142A"/>
+  <circle cx="512" cy="512" r="342" stroke="white" stroke-opacity=".12" stroke-width="34"/>
+  <circle cx="512" cy="512" r="214" fill="#F6F7FF"/>
+  <circle cx="512" cy="512" r="118" fill="#FFFFFF" stroke="#4BB8FA" stroke-width="34"/>
+  <circle cx="512" cy="188" r="96" fill="#4BB8FA"/>
+  <circle cx="826" cy="512" r="96" fill="#10B981"/>
+  <circle cx="512" cy="836" r="96" fill="#F59E0B"/>
+  <circle cx="198" cy="512" r="96" fill="#06B6D4"/>
+  <circle cx="512" cy="188" r="30" fill="#F6F7FF"/>
+  <circle cx="826" cy="512" r="30" fill="#F6F7FF"/>
+  <circle cx="512" cy="836" r="30" fill="#F6F7FF"/>
+  <circle cx="198" cy="512" r="30" fill="#F6F7FF"/>
+</svg>`
+  },
+  {
+    name: 'Diary Plate',
+    tag: 'Brand name',
+    desc: 'A diary/card stack with a circular plate cutout. It leans into “Foodiary” as food + diary, rather than pure calorie planning.',
+    why: ['Name-driven and ownable.', 'Good bridge between logging and planning.', 'Less generic than common plate/fork icons.'],
+    svg: `
+<svg viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#F6F7FF"/>
+  <circle cx="838" cy="184" r="270" fill="#4BB8FA" fill-opacity=".18"/>
+  <rect x="252" y="172" width="486" height="650" rx="112" fill="#0B4F8C" transform="rotate(7 252 172)"/>
+  <rect x="210" y="174" width="486" height="650" rx="112" fill="#15142A"/>
+  <circle cx="453" cy="470" r="156" fill="#F6F7FF"/>
+  <circle cx="453" cy="470" r="86" fill="#FFFFFF" stroke="#4BB8FA" stroke-width="28"/>
+  <rect x="346" y="666" width="214" height="36" rx="18" fill="#4BB8FA"/>
+  <rect x="384" y="724" width="138" height="28" rx="14" fill="white" fill-opacity=".42"/>
+</svg>`
+  },
+  {
+    name: 'Estimate Spark',
+    tag: 'Minimal',
+    desc: 'A simple target glyph with a small spark/check marker. Most abstract, most premium, least literal.',
+    why: ['Very clean in the App Store grid.', 'Works well for a sophisticated product feel.', 'Risk: may not read as food without app name nearby.'],
+    svg: `
+<svg viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="url(#es-bg)"/>
+  <circle cx="512" cy="512" r="310" fill="white" fill-opacity=".10"/>
+  <circle cx="512" cy="512" r="232" fill="#F6F7FF"/>
+  <circle cx="512" cy="512" r="142" fill="#FFFFFF"/>
+  <path d="M512 279a233 233 0 0 1 216 146" stroke="#4BB8FA" stroke-width="64" stroke-linecap="round"/>
+  <path d="M729 599a233 233 0 0 1-369 90" stroke="#10B981" stroke-width="64" stroke-linecap="round"/>
+  <path d="M320 379a233 233 0 0 1 91-73" stroke="#F59E0B" stroke-width="64" stroke-linecap="round"/>
+  <path d="M612 386l38 78 86 12-62 61 15 86-77-40-77 40 15-86-62-61 86-12 38-78Z" fill="#15142A"/>
+  <defs><linearGradient id="es-bg" x1="72" y1="58" x2="930" y2="936" gradientUnits="userSpaceOnUse"><stop stop-color="#0B4F8C"/><stop offset="1" stop-color="#4BB8FA"/></linearGradient></defs>
+</svg>`
+  }
+];
+
+const grid = document.getElementById('grid');
+for (const icon of icons) {
+  const card = document.createElement('article');
+  card.className = `card ${icon.cls || ''}`;
+  card.innerHTML = `
+    <div class="icon-wrap"><div class="icon-preview">${icon.svg}</div></div>
+    <div class="sizes">
+      <div class="size-col"><div class="size-64">${icon.svg}</div><span>64</span></div>
+      <div class="size-col"><div class="size-32">${icon.svg}</div><span>32</span></div>
+      <div class="size-col"><div class="size-16">${icon.svg}</div><span>16</span></div>
+    </div>
+    <div class="meta"><h2>${icon.name}</h2><span class="tag">${icon.tag}</span></div>
+    <p class="desc">${icon.desc}</p>
+    <ul class="why">${icon.why.map(item => `<li>${item}</li>`).join('')}</ul>
+  `;
+  grid.appendChild(card);
+}
+</script>
+</body>
+</html>

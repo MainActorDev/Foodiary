@@ -132,15 +132,15 @@ sorts by canonical `MealType.allCases` order (breakfast → lunch → snack → 
 - **XcodeGen**: `project.yml` → generates `Foodiary.xcodeproj`
 - **Deployment target**: iOS 18.0
 - **Swift version**: 6.0
-- **Development team**: `296RF6QMS7`
+- **Code signing**: Owned by `Configuration/Debug.xcconfig` and `Configuration/Release.xcconfig` (NOT `project.yml`). Current team: `8RVDJVBA6Q` (personal, free provisioning). To change, edit the xcconfig files — never put `DEVELOPMENT_TEAM` back in `project.yml`.
 - **Bundle ID**: `com.foodiary.app`
-- **Regenerate project after adding files**: `/opt/homebrew/bin/xcodegen --spec project.yml --project .`
+- **Regenerate project after adding files**: `./regenerate.sh` (clears stale DerivedData to prevent "multiple commands produce" errors)
 
 ## Build Commands
 
 ```bash
-# Regenerate project after adding/removing files
-xcodegen --spec project.yml --project .
+# Regenerate project after adding/removing files (also clears stale DerivedData)
+./regenerate.sh
 
 # Build for simulator
 xcodebuild -project Foodiary.xcodeproj -scheme Foodiary \
