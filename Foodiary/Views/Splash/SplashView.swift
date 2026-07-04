@@ -22,8 +22,8 @@ struct SplashView: View {
 
     // MARK: - Layout (matches logo size)
 
-    private let gaugeSize: CGFloat = 140
-    private let arcWidth: CGFloat = 12
+    private let gaugeSize: CGFloat = 90
+    private let arcWidth: CGFloat = 8
     private var needleHeight: CGFloat { gaugeSize / 2 - arcWidth - 2 }
 
     // MARK: - Body
@@ -58,8 +58,8 @@ struct SplashView: View {
             Image("SplashLogo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: gaugeSize, height: gaugeSize)
-                .cornerRadius(28)
+                .frame(width: 150, height: 150)
+                .cornerRadius(32)
                 .shadow(color: .black.opacity(0.12), radius: 16, y: 8)
 
             Text(L10n["app.name"])
