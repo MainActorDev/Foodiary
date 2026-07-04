@@ -22,6 +22,8 @@ struct MainTabView: View {
                 .navigationDestination(isPresented: $showMealDetail) {
                     MealDetailView(state: state, mealIndex: selectedMealIndex, isPresented: $showMealDetail)
                 }
+                .toolbar(showMealDetail ? .hidden : .visible, for: .tabBar)
+                .animation(.easeInOut(duration: 0.25), value: showMealDetail)
                 .toolbar(.hidden, for: .navigationBar)
             }
             .tabItem {

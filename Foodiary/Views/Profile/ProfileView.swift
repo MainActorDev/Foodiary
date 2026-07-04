@@ -90,6 +90,8 @@ struct ProfileView: View {
         }
         .background(FoodiaryDesign.pulseBackground)
         .toolbar(showSettings ? .visible : .hidden, for: .navigationBar)
+        .toolbar(showSettings ? .hidden : .visible, for: .tabBar)
+        .animation(.easeInOut(duration: 0.25), value: showSettings)
         .sheet(isPresented: $showEdit) {
             ProfileEditFlow(state: state, isPresented: $showEdit)
                 .environmentObject(localeManager)

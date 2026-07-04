@@ -59,7 +59,7 @@ struct TodayHeroSection: View {
                 .padding(.top, 6)
 
             HStack(spacing: 4) {
-                ForEach(Array(plan.meals.enumerated()), id: \.element.type.rawValue) { index, meal in
+                ForEach(Array(plan.sortedMeals.enumerated()), id: \.element.type.rawValue) { index, meal in
                     Button { onTapMeal(index) } label: {
                         Capsule()
                             .fill(.white.opacity(segmentOpacity(index, meal: meal)))
@@ -108,7 +108,7 @@ struct TodayHeroSection: View {
     }
 
     private var suggestion: String {
-        let empty = plan.meals.filter { $0.items.isEmpty }
+        let empty = plan.sortedMeals.filter { $0.items.isEmpty }
         if let next = empty.first {
             return L10n["today.hero.suggestion_format", next.type.displayName]
         }
@@ -116,7 +116,7 @@ struct TodayHeroSection: View {
     }
 
     private func segmentOpacity(_ index: Int, meal: Meal) -> Double {
-        let total = plan.meals.reduce(0) { $0 + $1.totalCalories }
+        let total = plan.sortedMeals.reduce(0) { $0 + $1.totalCalories }
         guard total > 0 else { return 0.21 }
         let ratio = Double(meal.totalCalories) / Double(max(total, 1))
         return 0.21 + ratio * 0.79

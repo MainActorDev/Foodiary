@@ -16,8 +16,8 @@ struct MealDetailView: View {
     }
 
     var meal: Meal? {
-        guard let plan = mealPlan, mealIndex < plan.meals.count else { return nil }
-        return plan.meals[mealIndex]
+        guard let plan = mealPlan, mealIndex < plan.sortedMeals.count else { return nil }
+        return plan.sortedMeals[mealIndex]
     }
 
     var isReadOnly: Bool {
@@ -86,7 +86,6 @@ struct MealDetailView: View {
                 .navigationTitle(meal.type.displayName)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarBackButtonHidden(true)
-                .toolbar(.hidden, for: .tabBar)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: { isPresented = false }) {

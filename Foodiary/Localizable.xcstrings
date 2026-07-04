@@ -2210,6 +2210,23 @@
         }
       }
     },
+    "today.action.choose_meal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a meal"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih waktu makan"
+          }
+        }
+      }
+    },
     "today.action.next_best": {
       "extractionState": "manual",
       "localizations": {

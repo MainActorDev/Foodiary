@@ -32,7 +32,7 @@ struct DayDetailCard: View {
                     Text("\(plan.totalCalories) / \(targetCalories)").font(.system(size: 12, weight: .medium)).foregroundColor(FoodiaryDesign.pulseMuted)
                 }
                 HStack(spacing: 6) {
-                    ForEach(plan.meals, id: \.type.rawValue) { meal in
+                    ForEach(plan.sortedMeals, id: \.type.rawValue) { meal in
                         Capsule().fill(FoodiaryDesign.pulseMealAccent(for: meal.type)).frame(height: 8)
                     }
                 }
@@ -48,7 +48,7 @@ struct DayDetailCard: View {
                     Text(L10n["MEAL SLOTS"]).font(.system(size: 13, weight: .bold)).foregroundColor(FoodiaryDesign.pulseInk)
                     Spacer()
                 }
-                ForEach(Array(plan.meals.enumerated()), id: \.element.id) { index, meal in
+                ForEach(Array(plan.sortedMeals.enumerated()), id: \.element.id) { index, meal in
                     MealSlotRow(meal: meal, isReadOnly: isPast, onTap: { onTapMeal(index) })
                 }
             }

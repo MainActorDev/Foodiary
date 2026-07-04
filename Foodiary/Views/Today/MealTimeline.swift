@@ -17,11 +17,11 @@ struct TodayMealTimeline: View {
                     .foregroundColor(FoodiaryDesign.pulseInk)
                     .tracking(1.0)
                 Spacer()
-                Text(L10n["today.meal.slots", plan.meals.count])
+                Text(L10n["today.meal.slots", plan.sortedMeals.count])
                     .font(.system(size: 12, weight: .black))
                     .foregroundColor(FoodiaryDesign.pulsePrimary)
             }
-            ForEach(Array(plan.meals.enumerated()), id: \.element.id) { index, meal in
+            ForEach(Array(plan.sortedMeals.enumerated()), id: \.element.id) { index, meal in
                 Button(action: { onTapMeal(index) }) {
                     HStack(spacing: 12) {
                         Text(meal.type.emoji)

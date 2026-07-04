@@ -16,6 +16,14 @@ final class MealPlan {
     var totalCalories: Int {
         meals.reduce(0) { $0 + $1.totalCalories }
     }
+
+    /// Meals sorted by canonical MealType order (breakfast → lunch → snack → dinner).
+    /// SwiftData @Relationship arrays have no guaranteed order after fetch.
+    @Transient
+    var sortedMeals: [Meal] {
+        let order = Meal.MealType.allCases.map(\.rawValue)
+        return meals.sorted { order.firstIndex(of: $0.typeRaw) ?? 99 < order.firstIndex(of: $1.typeRaw) ?? 99 }
+    }
     
     init(
         id: UUID = UUID(),

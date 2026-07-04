@@ -83,7 +83,7 @@ struct SettingsView: View {
         .preferredColorScheme(themeManager.selectedTheme.colorScheme)
         .navigationTitle(L10n["nav.settings"])
         .navigationBarTitleDisplayMode(.inline)
-        .pulseBackButton(dismiss: dismiss, hideTabBar: true)
+        .pulseBackButton(dismiss: dismiss)
         .alert(L10n["alert.reset_title"], isPresented: $showResetConfirm) {
             Button(L10n["alert.cancel"], role: .cancel) { }
             Button(L10n["alert.reset_confirm"], role: .destructive) {

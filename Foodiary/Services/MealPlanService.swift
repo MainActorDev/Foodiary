@@ -48,10 +48,11 @@ final class MealPlanService {
     /// Add a food item to a meal slot for a specific date.
     func addFoodItem(_ item: FoodItem, toMealAt index: Int, for date: Date) {
         guard let plan = mealPlan(for: date),
-              index < plan.meals.count else { return }
+              index < plan.sortedMeals.count else { return }
         let foodItem = item
-        foodItem.meal = plan.meals[index]
-        plan.meals[index].items.append(foodItem)
+        let meal = plan.sortedMeals[index]
+        foodItem.meal = meal
+        meal.items.append(foodItem)
         plan.updatedAt = Date()
         persistence.insert(foodItem)
         do {
@@ -64,9 +65,9 @@ final class MealPlanService {
     /// Update an existing food item within a meal for a specific date.
     func updateFoodItem(_ item: FoodItem, mealIndex: Int, itemIndex: Int, for date: Date) {
         guard let plan = mealPlan(for: date),
-              mealIndex < plan.meals.count,
-              itemIndex < plan.meals[mealIndex].items.count else { return }
-        plan.meals[mealIndex].items[itemIndex] = item
+              mealIndex < plan.sortedMeals.count,
+              itemIndex < plan.sortedMeals[mealIndex].items.count else { return }
+        plan.sortedMeals[mealIndex].items[itemIndex] = item
         plan.updatedAt = Date()
         do {
             try persistence.save()
@@ -78,10 +79,10 @@ final class MealPlanService {
     /// Delete a food item from a meal for a specific date.
     func deleteFoodItem(mealIndex: Int, itemIndex: Int, for date: Date) {
         guard let plan = mealPlan(for: date),
-              mealIndex < plan.meals.count,
-              itemIndex < plan.meals[mealIndex].items.count else { return }
-        let item = plan.meals[mealIndex].items[itemIndex]
-        plan.meals[mealIndex].items.remove(at: itemIndex)
+              mealIndex < plan.sortedMeals.count,
+              itemIndex < plan.sortedMeals[mealIndex].items.count else { return }
+        let item = plan.sortedMeals[mealIndex].items[itemIndex]
+        plan.sortedMeals[mealIndex].items.remove(at: itemIndex)
         persistence.delete(item)
         plan.updatedAt = Date()
         do {

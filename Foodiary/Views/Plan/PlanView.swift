@@ -55,7 +55,7 @@ struct PlanView: View {
                             state.createMealPlan(for: state.selectedPlanDate)
                         }
                         guard let plan = state.planDateMealPlan,
-                              let index = plan.meals.firstIndex(where: { $0.type == type }) else { return }
+                              let index = plan.sortedMeals.firstIndex(where: { $0.type == type }) else { return }
                         selectedMealIndex = index
                         showMealDetail = true
                     }
