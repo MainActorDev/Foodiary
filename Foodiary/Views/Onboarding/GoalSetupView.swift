@@ -283,7 +283,7 @@ private struct ActivityCard: View {
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .fill(isSelected ? FoodiaryDesign.pulseSurface : Color.white.opacity(0.6))
+                    .fill(FoodiaryDesign.pulseSurface)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
@@ -387,7 +387,7 @@ private struct GoalCard: View {
             .padding(16)
             .background(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .fill(isSelected ? FoodiaryDesign.pulseSurface : Color.white.opacity(0.6))
+                    .fill(FoodiaryDesign.pulseSurface)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)

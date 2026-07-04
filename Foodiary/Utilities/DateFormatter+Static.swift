@@ -41,10 +41,10 @@ extension DateFormatter {
         return f
     }()
 
-    /// Indonesian locale full date (SELASA, 23 JUNI 2026).
-    static let indonesianDate: DateFormatter = {
+    /// Full localized date (day, month, year) respecting the selected app language.
+    /// Locale is set dynamically so the output follows `LocaleManager`.
+    static let localizedFullDate: DateFormatter = {
         let f = DateFormatter()
-        f.locale = Locale(identifier: "id_ID")
         f.dateFormat = "EEEE, d MMMM yyyy"
         return f
     }()

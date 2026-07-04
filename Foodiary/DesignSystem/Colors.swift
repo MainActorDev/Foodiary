@@ -46,6 +46,9 @@ enum FoodiaryDesign {
     static let pulseInk = Color(UIColor { tc in
         tc.userInterfaceStyle == .dark ? UIColor(hex: "F4F4F8") : UIColor(hex: "15142A")
     })
+    /// Always-dark variant of pulseInk for inverted surfaces (action strip, etc.)
+    /// that must stay dark in both light and dark mode.
+    static let pulseInkFixed = Color(hex: "15142A")
     static let pulseMuted = Color(UIColor { tc in
         tc.userInterfaceStyle == .dark ? UIColor(hex: "8E8EA0") : UIColor(hex: "6B6880")
     })

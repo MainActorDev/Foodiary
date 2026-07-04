@@ -38,6 +38,8 @@ struct TodayDashboardView: View {
     // MARK: - Date
 
     private func todayDateString() -> String {
-        DateFormatter.indonesianDate.string(from: Date()).uppercased()
+        let formatter = DateFormatter.localizedFullDate
+        formatter.locale = Locale(identifier: localeManager.selectedLanguage)
+        return formatter.string(from: Date()).uppercased()
     }
 }
