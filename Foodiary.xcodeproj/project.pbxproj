@@ -28,6 +28,7 @@
 		3FCDF467316D35E344CD033C /* MealPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8F4B08608A6934C2BCB81A /* MealPlan.swift */; };
 		4384D8DEAA6D4BB97CB433F0 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15904B379FB5D1D3D56F0806 /* Components.swift */; };
 		4F301EA789E4DD1353049A1C /* CalorieCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97965CA10E71F0E7500FF2CE /* CalorieCalculator.swift */; };
+		581651236A5382C2DC2C5842 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F98221A93A15663A986FF3 /* SplashView.swift */; };
 		59BA012170CFBF9E38826FF4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71198B62EAF32E193535C664 /* WelcomeView.swift */; };
 		5D9312E636F57478F8BCCA0B /* MealPlanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B02BBC0AB3FA4E0019B3794 /* MealPlanService.swift */; };
 		5EB4D5AE6ED34671D9E9853B /* CustomAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B2DB05E0F6EDC7F26D20BD /* CustomAPIService.swift */; };
@@ -150,6 +151,7 @@
 		C4B2DB05E0F6EDC7F26D20BD /* CustomAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAPIService.swift; sourceTree = "<group>"; };
 		C5FF1AD6F76124A0F2CC103B /* ActionStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionStrip.swift; sourceTree = "<group>"; };
 		CB8F21E25AADD905B09142C3 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		D9F98221A93A15663A986FF3 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		DECAB31DA3AB690D37A173E5 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
 		E0770E187831561B62124D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E188D24310928E8E621700C0 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				264EC0D2544FCF4533D8970E /* Plan */,
 				47B1DD8C4762489C69B498FD /* Profile */,
 				5AEE1C4ADAC14A349000A73A /* Settings */,
+				2DE96EB5111BFD48DCD4ECE7 /* Splash */,
 				E2F52D2739FCAEA3C5E82C1C /* Today */,
 			);
 			path = Views;
@@ -263,6 +266,14 @@
 				1EB3A676F1D10329D051199F /* Typography.swift */,
 			);
 			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		2DE96EB5111BFD48DCD4ECE7 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				D9F98221A93A15663A986FF3 /* SplashView.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		2E4FD5690E0D773BE511DC8C /* Fonts */ = {
@@ -587,6 +598,7 @@
 				1D50221E98FF70EC235EDF20 /* PulseTopbar.swift in Sources */,
 				8E7BF7B7F4817BEA3D0F4ACF /* SearchFoodView.swift in Sources */,
 				88437AE40093F17B90561992 /* SettingsView.swift in Sources */,
+				581651236A5382C2DC2C5842 /* SplashView.swift in Sources */,
 				B01E46D4A29C2874342A1D19 /* StepperField.swift in Sources */,
 				8FF370C60962AD2AA96C854B /* ThemeManager.swift in Sources */,
 				30046E44375424EEB7409E28 /* TodayDashboardView.swift in Sources */,

@@ -7,13 +7,19 @@ struct ContentRootView: View {
     @State private var onboardingPath = NavigationPath()
     @State private var onboardingVM = OnboardingViewModel()
     @State private var profileSetupID = 0
+    @State private var hasFinishedSplash = false
 
     @ObservedObject private var themeManager = ThemeManager.shared
     @ObservedObject private var localeManager = LocaleManager.shared
 
     var body: some View {
         Group {
-            if let state = state {
+            if !hasFinishedSplash {
+                SplashView {
+                    hasFinishedSplash = true
+                }
+                .transition(.opacity)
+            } else if let state = state {
                 if state.isOnboarded {
                     MainTabView(state: state)
                 } else {
@@ -62,17 +68,12 @@ struct ContentRootView: View {
                     .tint(FoodiaryDesign.pulsePrimary)
                 }
             } else {
-                VStack {
-                    Text("🥗")
-                        .font(.system(size: 64))
-                    Text(L10n["app.name"])
-                        .font(FoodiaryTypography.display)
-                        .foregroundColor(FoodiaryDesign.pulseInk)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(FoodiaryDesign.pulseBackground)
+                // Should never be visible — splash covers until state loads.
+                // Kept as a defensive fallback.
+                FoodiaryDesign.pulseBackground.ignoresSafeArea()
             }
         }
+        .animation(.easeOut(duration: 0.3), value: hasFinishedSplash)
         .preferredColorScheme(themeManager.selectedTheme.colorScheme)
         .environmentObject(localeManager)
         .environmentObject(themeManager)
