@@ -46,5 +46,8 @@ DerivedData/
 .bundle/
 vendor/bundle/
 
+# Free-provisioning signing override (local only)
+Configuration/Personal.xcconfig
+
 # Design artifacts (keep tracked)
 # design-prototype/ is tracked

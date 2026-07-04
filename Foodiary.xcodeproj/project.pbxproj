@@ -107,7 +107,7 @@
 		3CFED327265A5E66ABEF9D26 /* CalorieTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieTarget.swift; sourceTree = "<group>"; };
 		420B2F92E43E28AE40E47C9B /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		44094C815B2396046A2B930E /* ContentRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRootView.swift; sourceTree = "<group>"; };
-		479C16726548B9A41310E072 /* Foodiary.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Foodiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		479C16726548B9A41310E072 /* Foodiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		489688E9938067E60B95E4EB /* DisplayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayExtensions.swift; sourceTree = "<group>"; };
 		5100815ABCB587273B37B6C5 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		51A8745A9AFFA58ABA4F34F4 /* DayDetailCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailCard.swift; sourceTree = "<group>"; };
@@ -457,11 +457,8 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
-					CCDC232848F25A91548B270B = {
-						DevelopmentTeam = 296RF6QMS7;
-					};
 					F6AFD3124E8EFCC5AEFA894C = {
-						DevelopmentTeam = 296RF6QMS7;
+						DevelopmentTeam = 8RVDJVBA6Q;
 					};
 				};
 			};
@@ -648,7 +645,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 296RF6QMS7;
+				DEVELOPMENT_TEAM = 8RVDJVBA6Q;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -722,7 +719,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 296RF6QMS7;
+				DEVELOPMENT_TEAM = 8RVDJVBA6Q;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -758,13 +755,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 296RF6QMS7;
 				INFOPLIST_FILE = Foodiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app.local;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -777,13 +775,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 296RF6QMS7;
 				INFOPLIST_FILE = Foodiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app.local;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

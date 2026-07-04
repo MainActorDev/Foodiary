@@ -26,7 +26,10 @@ struct RingNavBarModifier: ViewModifier {
         content
             .onAppear {
                 let appearance = UINavigationBarAppearance()
-                appearance.configureWithTransparentBackground()
+                // Opaque background — prevents iOS 26 Liquid Glass from
+                // wrapping toolbar buttons in a glass circle.
+                appearance.configureWithOpaqueBackground()
+                appearance.backgroundColor = UIColor(FoodiaryDesign.pulseBackground)
                 appearance.shadowColor = .clear
                 appearance.titleTextAttributes = [
                     .font: UIFont.systemFont(ofSize: 18, weight: .bold),

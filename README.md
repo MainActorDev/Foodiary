@@ -4,10 +4,9 @@
 
 Foodiary is a local-first iOS calorie tracker and daily meal planner. Set a personal calorie target, plan meals from breakfast to dinner, and track whether you're under, near, or over your estimated daily target. No accounts, no cloud, no complexity.
 
-![Platform](https://img.shields.io/badge/platform-iOS%2018%2B-coral)
-![Swift](https://img.shields.io/badge/swift-6.0-coral)
+![Platform](https://img.shields.io/badge/platform-iOS%2018%2B-4BB8FA)
+![Swift](https://img.shields.io/badge/swift-6.0-4BB8FA)
 ![License](https://img.shields.io/badge/license-MIT-black)
-[![Design](https://img.shields.io/badge/design-neubrutalist-FF6B4A)](DESIGN.md)
 
 ---
 
@@ -16,40 +15,40 @@ Foodiary is a local-first iOS calorie tracker and daily meal planner. Set a pers
 - **Personal calorie profile** — age, sex, height, weight, activity level, goal
 - **Mifflin-St Jeor BMR calculation** with activity multipliers and goal adjustments
 - **Daily meal planning** — 4 fixed slots: Breakfast, Lunch, Snack, Dinner
+- **Food search** — query FatSecret and USDA databases for nutritional info
 - **Manual food entry** — add name, calories, and optional notes
-- **Live calorie tracking** — planned vs remaining with progress bar
+- **Live calorie tracking** — planned vs remaining with progress visualization
+- **Macro tracking** — protein, carbs, fat breakdown
+- **Weekly plan view** — browse past and future meal plans
+- **Insights** — calorie trends and observations
+- **Dark mode** — full dynamic theming with Light / Dark / System toggle
+- **Bilingual** — Indonesian (default) and English with live language switching
 - **Neutral language** — never shames. "120 kcal over your estimated target", not "you failed"
-- **Local-first** — all data stored as JSON on device. No account, no internet required
-- **Edit & recalculate** — change your profile anytime, target updates automatically
+- **Local-first** — all data stored on device via SwiftData. No account, no internet required
+- **Edit & recalculate** — full onboarding-style profile edit flow, target updates automatically
 
 ## 🎨 Design
 
-Neubrutalist — bold, playful, Gen-Z aesthetic. Think hard black borders, chunky offset shadows, vibrant flat colors. No gradients, no blur, just confidence.
-
-| Color | Hex | Role |
-|-------|-----|------|
-| Coral | `#FF6B4A` | Primary buttons, targets, CTAs |
-| Mint | `#2DD4BF` | Under target, progress |
-| Yellow | `#FFD60A` | Attention states |
-| Cream | `#FAFAF5` | Background |
-
-Full design spec: [`DESIGN.md`](DESIGN.md)  
-Interactive prototype: [`design-prototype/index.html`](design-prototype/index.html)
+Pulse v2 — modern, clean, planning cockpit aesthetic. Soft shadows, gradient hero cards, dynamic dark mode colors, and rounded surfaces.
 
 ## 🏗 Architecture
 
 ```
 MVVM + Central AppState
-├── Models/          Codable structs
-├── Services/        CalorieCalculator (pure) + StorageService (JSON)
-├── ViewModels/      AppState (single source of truth)
-└── Views/           SwiftUI, 3-tab navigation
+├── Models/          SwiftData @Model classes
+├── Services/        CalorieCalculator, MealPlanService, FoodDatabase/
+├── ViewModels/      AppState + OnboardingViewModel
+├── DesignSystem/    Colors, Typography, ButtonStyles, Modifiers, Components
+├── Utilities/       L10n, LocaleManager, ThemeManager
+└── Views/           SwiftUI, 4-tab navigation
 ```
 
 - **Zero external dependencies** — Apple frameworks only
+- **SwiftData persistence** — `@Model` classes, `PersistenceService` protocol
 - **Stateless calculator** — fully testable pure functions
-- **Tab-based navigation** — Today | Meal Plan | Profile
+- **Tab-based navigation** — Today | Plan | Insights | Profile
 - **Onboarding flow** — Welcome → Profile → Goal → Result
+- **Full localization** — String Catalogs (`.xcstrings`), Indonesian + English
 
 ## 🚀 Quick Start
 
@@ -69,37 +68,43 @@ xcodebuild -project Foodiary.xcodeproj -scheme Foodiary \
 open Foodiary.xcodeproj
 ```
 
-**Requirements:** Xcode 26+, iOS 18.0+, [XcodeGen](https://github.com/yonaskolb/XcodeGen)
+**Requirements:** Xcode 16+, iOS 18.0+, [XcodeGen](https://github.com/yonaskolb/XcodeGen)
 
 ## 📱 Screens
 
 | Screen | Description |
 |--------|-------------|
 | Welcome | App intro + disclaimer |
-| Profile Setup | Age, sex, height, weight |
+| Profile Setup | Age, sex, height, weight (ruler-based input) |
 | Goal Setup | Activity level + goal selection |
-| Calorie Result | BMR, maintenance, target breakdown |
-| Today Dashboard | Target, planned/remaining, meal summaries |
-| Meal Plan | 4 meal slots with calorie totals |
-| Meal Detail | Food items with add/edit/delete |
-| Profile | View/edit details, recalculate, reset |
+| Calorie Result | BMR, maintenance, target breakdown with energy balance bar |
+| Today Dashboard | Hero card, macro grid, meal timeline, action strip |
+| Plan | Weekly calendar with day detail cards |
+| Insights | Calorie trends and observations |
+| Meal Detail | Food items with add/search/delete |
+| Profile | View details, edit profile (full flow), settings |
+| Settings | Theme (Light/Dark/System) + language (ID/EN) switching |
 
 ## 📂 Project Structure
 
 ```
 Foodiary/
-├── FoodiaryApp.swift              App entry point
-├── DesignSystem.swift             Neubrutalist tokens + modifiers
-├── Models/                        5 data models
-├── Services/                      Calculator + persistence
-├── ViewModels/                    AppState
+├── FoodiaryApp.swift              App entry point + SwiftData container
+├── ContentRootView.swift          Onboarding vs. main app routing
+├── Models/                        SwiftData @Model classes
+├── Services/                      Calculator, persistence, food database
+├── ViewModels/                    AppState + OnboardingViewModel
+├── DesignSystem/                  Pulse v2 tokens, styles, modifiers
+├── Utilities/                     L10n, LocaleManager, ThemeManager
 ├── Views/
 │   ├── Onboarding/                4 onboarding screens
-│   ├── Today/                     Dashboard
-│   ├── MealPlan/                  Meal management + add food
-│   ├── Profile/                   Profile + edit
-│   └── MainTabView.swift          3-tab navigation
-├── DESIGN.md                      Design token spec
+│   ├── Today/                     Dashboard, hero, macros, timeline, action strip
+│   ├── Plan/                      Weekly calendar
+│   ├── Insights/                  Trends
+│   ├── MealPlan/                  Meal detail + food search/add
+│   ├── Profile/                   Profile + ProfileEditFlow
+│   ├── Settings/                  Theme + language
+│   └── MainTabView.swift          4-tab navigation
 ├── AGENTS.md                      AI agent guidelines
 ├── FEATURES.md                    Feature inventory
 └── project.yml                    XcodeGen spec
@@ -109,15 +114,6 @@ Foodiary/
 
 See [`FEATURES.md`](FEATURES.md) for the full inventory.
 
-**MVP (shipped):** 51 features — profile, calorie calculation, meal planning, dashboard, design system, persistence.
-
-**Coming next:**
-- Unit tests
-- Inline food item editing
-- Proper error handling
-- Accessibility (VoiceOver, Dynamic Type)
-- Dark mode
-
 ## 🤖 For AI Agents
 
 If you're an AI coding agent working on this project, start with [`AGENTS.md`](AGENTS.md). It covers architecture, design system rules, common pitfalls, build commands, and mandatory language/tone guidelines.
@@ -125,7 +121,3 @@ If you're an AI coding agent working on this project, start with [`AGENTS.md`](A
 ## 📄 License
 
 MIT — free for personal use. This is a non-commercial app.
-
----
-
-Built with ❤️ and hard black borders.
