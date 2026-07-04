@@ -29,12 +29,12 @@ struct TodayActionStrip: View {
             } label: {
                 Image(systemName: "plus")
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(Color(hex: "15142A"))
+                    .foregroundColor(FoodiaryDesign.pulseInk)
                     .frame(width: 42, height: 42)
                     .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(.white))
             }
         }
         .padding(13)
-        .background(RoundedRectangle(cornerRadius: 22, style: .continuous).fill(Color(hex: "15142A")))
+        .background(RoundedRectangle(cornerRadius: 22, style: .continuous).fill(FoodiaryDesign.pulseInk))
     }
 }

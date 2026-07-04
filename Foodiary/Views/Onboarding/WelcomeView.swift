@@ -85,7 +85,7 @@ struct WelcomeView: View {
                 .font(.system(size: 48))
         }
         .frame(width: 140, height: 160)
-        .shadow(color: Color(hex: "141428").opacity(0.08), radius: 20, x: 0, y: 10)
+        .shadow(color: FoodiaryDesign.pulseShadow.opacity(0.08), radius: 20, x: 0, y: 10)
     }
 
     // MARK: - Fan layout

@@ -80,20 +80,10 @@ struct SettingsView: View {
             .padding(.bottom, 32)
         }
         .background(FoodiaryDesign.pulseBackground)
+        .preferredColorScheme(themeManager.selectedTheme.colorScheme)
         .navigationTitle(L10n["nav.settings"])
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .tabBar)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button(action: { dismiss() }) {
-                    Image(systemName: "arrow.left")
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(width: 32, height: 32)
-                }
-                .buttonStyle(PulseIconButtonStyle(size: 36))
-            }
-        }
+        .pulseBackButton(dismiss: dismiss, hideTabBar: true)
         .alert(L10n["alert.reset_title"], isPresented: $showResetConfirm) {
             Button(L10n["alert.cancel"], role: .cancel) { }
             Button(L10n["alert.reset_confirm"], role: .destructive) {
@@ -123,7 +113,7 @@ struct SettingsView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 12, style: .continuous)
                             .fill(isSelected ? FoodiaryDesign.pulseSurface : Color.clear)
-                            .shadow(color: isSelected ? Color(hex: "141428").opacity(0.06) : .clear, radius: 4, y: 2)
+                            .shadow(color: isSelected ? FoodiaryDesign.pulseShadow.opacity(0.06) : .clear, radius: 4, y: 2)
                     )
                 }
                 .buttonStyle(.plain)
@@ -172,9 +162,7 @@ struct SettingsView: View {
 
     private func sectionLabel(_ text: String) -> some View {
         Text(text.uppercased())
-            .font(.system(size: 11, weight: .heavy))
-            .foregroundColor(FoodiaryDesign.pulseMuted)
-            .tracking(0.8)
+            .pulseSectionLabel()
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 4)
             .padding(.top, 24)
@@ -193,7 +181,7 @@ struct SettingsView: View {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .stroke(FoodiaryDesign.pulseBorder.opacity(0.5), lineWidth: 1)
         )
-        .shadow(color: Color(hex: "141428").opacity(0.04), radius: 12, y: 4)
+        .shadow(color: FoodiaryDesign.pulseShadow.opacity(0.04), radius: 12, y: 4)
         .padding(.bottom, 2)
     }
 

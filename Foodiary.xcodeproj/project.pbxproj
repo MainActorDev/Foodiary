@@ -18,6 +18,7 @@
 		12A967EE4EF5D6BC5CF9258B /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744EC1B1002F238DE09241CE /* Deprecated.swift */; };
 		170D9F648D11D648FCF11906 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9A3FD80A200A5800BB7F5 /* MealDetailView.swift */; };
 		1D50221E98FF70EC235EDF20 /* PulseTopbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC07955A338C41A3A979FD3 /* PulseTopbar.swift */; };
+		237F35814E1245DF82D2D394 /* ProfileEditFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A39212AC13EFE990679E018 /* ProfileEditFlow.swift */; };
 		23AA974BB479B25B3234A4BC /* DisplayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489688E9938067E60B95E4EB /* DisplayExtensions.swift */; };
 		2D5253326EE940F119527C9C /* WeekCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD992E3931099150D0F0EADA /* WeekCard.swift */; };
 		2E59974DD2071F7CCA467126 /* AddFoodItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3152D915D822EFD2A49D41BB /* AddFoodItemView.swift */; };
@@ -95,6 +96,7 @@
 		0C036FD1728E41DD4E81252B /* FoodSearchResultRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchResultRow.swift; sourceTree = "<group>"; };
 		0DFE0B1EDD6D7410662958DC /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		15904B379FB5D1D3D56F0806 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		1A39212AC13EFE990679E018 /* ProfileEditFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditFlow.swift; sourceTree = "<group>"; };
 		1AF57B1E8648A2547565E99E /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		1E808E69E845579CA9C49497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1EB3A676F1D10329D051199F /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		47B1DD8C4762489C69B498FD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				1A39212AC13EFE990679E018 /* ProfileEditFlow.swift */,
 				9D73AED0083ED6C9660EA4C1 /* ProfileView.swift */,
 			);
 			path = Profile;
@@ -579,6 +582,7 @@
 				D18C4D4AC854A617879273EA /* OnboardingViewModel.swift in Sources */,
 				661410F12AA947BC299102C7 /* PersistenceService.swift in Sources */,
 				0882D690FDD4F83D5951A3A4 /* PlanView.swift in Sources */,
+				237F35814E1245DF82D2D394 /* ProfileEditFlow.swift in Sources */,
 				789E593C6F1EA0899007864F /* ProfileService.swift in Sources */,
 				ED77721A6FE834A18B03668D /* ProfileSetupView.swift in Sources */,
 				10987AD934122A98FEB17C4F /* ProfileView.swift in Sources */,

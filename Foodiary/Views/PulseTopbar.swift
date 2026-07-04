@@ -44,8 +44,8 @@ struct PulseTopbar: View {
                         .foregroundColor(FoodiaryDesign.pulseInk)
                         .frame(width: 45, height: 45)
                         .background(RoundedRectangle(cornerRadius: 17, style: .continuous).fill(FoodiaryDesign.pulseSurface))
-                        .overlay(RoundedRectangle(cornerRadius: 17, style: .continuous).stroke(Color(hex: "15142A").opacity(0.10), lineWidth: 1))
-                        .shadow(color: Color(hex: "141428").opacity(0.07), radius: 12, x: 0, y: 6)
+                        .overlay(RoundedRectangle(cornerRadius: 17, style: .continuous).stroke(FoodiaryDesign.pulseStroke.opacity(0.10), lineWidth: 1))
+                        .shadow(color: FoodiaryDesign.pulseShadow.opacity(0.07), radius: 12, x: 0, y: 6)
                 }
             }
         }

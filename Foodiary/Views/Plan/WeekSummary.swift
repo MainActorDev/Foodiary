@@ -17,7 +17,7 @@ struct WeekSummary: View {
     private func metricBox(value: String, label: String) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(value).font(.system(size: 24, weight: .bold, design: .rounded)).foregroundColor(FoodiaryDesign.pulseInk)
-            Text(label).font(.system(size: 11, weight: .black)).foregroundColor(FoodiaryDesign.pulseMuted).textCase(.uppercase).tracking(0.6)
+            Text(label).pulseSectionLabel()
         }
         .frame(maxWidth: .infinity, alignment: .leading).padding(14)
         .background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(FoodiaryDesign.pulseSurfaceSoft))

@@ -103,17 +103,23 @@ extension View {
 
     // MARK: Pulse v2 modifiers
 
-    func pulseCard(cornerRadius: CGFloat = 22, padding: CGFloat = 18) -> some View {
+    func pulseCard(
+        cornerRadius: CGFloat = 22,
+        padding: CGFloat = 18,
+        shadowRadius: CGFloat = 30,
+        shadowY: CGFloat = 14,
+        strokeOpacity: Double = 0.10
+    ) -> some View {
         self
             .padding(padding)
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                     .fill(FoodiaryDesign.pulseSurface)
-                    .shadow(color: FoodiaryDesign.pulsePrimaryDark.opacity(0.055), radius: 30, x: 0, y: 14)
+                    .shadow(color: FoodiaryDesign.pulseCardShadow, radius: shadowRadius, x: 0, y: shadowY)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .stroke(FoodiaryDesign.pulseBorder, lineWidth: 1)
+                    .stroke(FoodiaryDesign.pulseInk.opacity(strokeOpacity), lineWidth: 1)
             )
     }
 
@@ -168,10 +174,33 @@ extension View {
             .background(Capsule().fill(bg))
     }
 
-    func pulseSectionLabel() -> some View {
+    func pulseSectionLabel(size: CGFloat = 11, weight: Font.Weight = .heavy) -> some View {
         self
-            .font(FoodiaryTypography.pulseLabel)
+            .font(.system(size: size, weight: weight))
             .foregroundColor(FoodiaryDesign.pulseMuted)
+            .tracking(0.6)
             .textCase(.uppercase)
+    }
+
+    /// Hides system back button and installs a custom-styled one.
+    /// Handles both `.navigationBarBackButtonHidden` and the toolbar item.
+    func pulseBackButton(
+        icon: String = "arrow.left",
+        dismiss: DismissAction,
+        hideTabBar: Bool = false
+    ) -> some View {
+        self
+            .navigationBarBackButtonHidden(true)
+            .toolbar(hideTabBar ? .hidden : .automatic, for: .tabBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: { dismiss() }) {
+                        Image(systemName: icon)
+                            .font(.system(size: 16, weight: .bold))
+                            .frame(width: 32, height: 32)
+                    }
+                    .buttonStyle(PulseIconButtonStyle(size: 36))
+                }
+            }
     }
 }

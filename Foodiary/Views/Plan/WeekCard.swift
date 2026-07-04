@@ -53,13 +53,7 @@ struct WeekCard: View {
                 }
             }
         }
-        .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 26, style: .continuous)
-                .fill(FoodiaryDesign.pulseSurface)
-                .shadow(color: Color(hex: "141428").opacity(0.055), radius: 30, x: 0, y: 14)
-        )
-        .overlay(RoundedRectangle(cornerRadius: 26, style: .continuous).stroke(Color(hex: "15142A").opacity(0.10), lineWidth: 1))
+        .pulseCard(cornerRadius: 26, padding: 16)
     }
 
     private func weekStartFor(offset: Int) -> Date {

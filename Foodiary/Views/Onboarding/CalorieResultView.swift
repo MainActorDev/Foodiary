@@ -6,6 +6,7 @@ struct CalorieResultView: View {
     var onBack: () -> Void
     var onCreateMealPlan: () -> Void
     var onEditProfile: () -> Void
+    var primaryButtonTitle: String? = nil
 
     @State private var barAnimated = false
 
@@ -126,7 +127,7 @@ struct CalorieResultView: View {
                 // Buttons
                 VStack(spacing: 10) {
                     Button(action: onCreateMealPlan) {
-                        Text(L10n["action.create_meal_plan"])
+                        Text(primaryButtonTitle ?? L10n["action.create_meal_plan"])
                     }
                     .buttonStyle(PulsePrimaryButtonStyle())
 

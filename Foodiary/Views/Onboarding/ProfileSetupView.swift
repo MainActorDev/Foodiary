@@ -231,7 +231,7 @@ struct ProfileSetupView: View {
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 24, style: .continuous)
-                            .stroke(localSex == option ? Color.clear : Color(hex: "15142A").opacity(0.06), lineWidth: 1)
+                            .stroke(localSex == option ? Color.clear : FoodiaryDesign.pulseStroke.opacity(0.06), lineWidth: 1)
                     )
                     .scaleEffect(localSex == option ? 1.02 : 1.0)
                 }

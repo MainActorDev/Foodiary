@@ -71,6 +71,17 @@ enum FoodiaryDesign {
     static let pulseDayFutureFg = Color(hex: "047857")
     static let pulseDayActiveFg = Color.white
 
+    // Semantic helper tokens for shadows and strokes
+    // (replaces hardcoded Color(hex:) scattered across view files)
+    static var pulseShadow: Color { pulseInk }
+    static var pulseStroke: Color { pulseInk }
+    static var pulseCardShadow: Color { pulseInk.opacity(0.055) }
+    static var pulseCardStroke: Color { pulseInk.opacity(0.10) }
+    static var pulseAvatarGradient: LinearGradient {
+        LinearGradient(colors: [pulsePrimary, Color(hex: "06B6D4")],
+                       startPoint: .topLeading, endPoint: .bottomTrailing)
+    }
+
     // Legacy palette (non-adaptive — used only in old onboarding)
     static let accent = Color(hex: "2563EB")
     static let accentLight = Color(hex: "DBEAFE")

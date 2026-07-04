@@ -29,7 +29,7 @@ struct InsightsView: View {
                 ForEach(weekChartData, id: \.day) { item in
                     VStack(spacing: 7) {
                         RoundedRectangle(cornerRadius: 999)
-                            .fill(LinearGradient(colors: [FoodiaryDesign.pulsePrimary, Color(hex: "06B6D4")], startPoint: .top, endPoint: .bottom))
+                            .fill(LinearGradient(colors: [FoodiaryDesign.pulsePrimary, FoodiaryDesign.pulseCyan], startPoint: .top, endPoint: .bottom))
                             .frame(maxWidth: 24, maxHeight: 124).frame(height: item.height)
                         Text(item.day).font(.system(size: 9, weight: .black)).foregroundColor(FoodiaryDesign.pulseMuted).textCase(.uppercase)
                     }
@@ -37,8 +37,7 @@ struct InsightsView: View {
             }.frame(height: 140)
         }
         .padding(16)
-        .background(RoundedRectangle(cornerRadius: 26, style: .continuous).fill(FoodiaryDesign.pulseSurface).shadow(color: Color(hex: "141428").opacity(0.055), radius: 30, x: 0, y: 14))
-        .overlay(RoundedRectangle(cornerRadius: 26, style: .continuous).stroke(Color(hex: "15142A").opacity(0.10), lineWidth: 1))
+        .pulseCard(cornerRadius: 26, padding: 0)
     }
 
     private var weekChartData: [(day: String, height: CGFloat)] {
@@ -58,7 +57,7 @@ struct InsightsView: View {
     private func insightMetric(value: String, label: String) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(value).font(.system(size: 18, weight: .bold, design: .rounded)).foregroundColor(FoodiaryDesign.pulseInk)
-            Text(label).font(.system(size: 11, weight: .black)).foregroundColor(FoodiaryDesign.pulseMuted).textCase(.uppercase).tracking(0.6)
+            Text(label).pulseSectionLabel()
         }
         .frame(maxWidth: .infinity, alignment: .leading).padding(14)
         .background(RoundedRectangle(cornerRadius: 22, style: .continuous).fill(FoodiaryDesign.pulseSurfaceSoft))
