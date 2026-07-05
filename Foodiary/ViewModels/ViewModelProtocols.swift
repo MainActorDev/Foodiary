@@ -52,9 +52,6 @@ protocol ProfileViewModel: AnyObject {
 
 @MainActor
 protocol InsightsViewModel: AnyObject {
-    var plannedCalories: Int { get }
-    var remainingCalories: Int { get }
-    var totalProtein: Int { get }
-    var isOverTarget: Bool { get }
-    var todayMealPlan: MealPlan? { get }
+    var targetCalories: Int { get }
+    func insightsSummary(forDays days: Int) -> InsightsSummary
 }

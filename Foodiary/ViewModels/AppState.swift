@@ -11,6 +11,7 @@ import SwiftData
 final class AppState: TodayViewModel, PlanViewModel, ProfileViewModel, InsightsViewModel {
     private let profileService: ProfileService
     private let mealPlanService: MealPlanService
+    private let insightsService: InsightsService
 
     var selectedPlanDate: Date = Date()
     var errorMessage: String?
@@ -24,6 +25,7 @@ final class AppState: TodayViewModel, PlanViewModel, ProfileViewModel, InsightsV
     init(persistence: any PersistenceService) {
         self.profileService = ProfileService(persistence: persistence)
         self.mealPlanService = MealPlanService(persistence: persistence)
+        self.insightsService = InsightsService(persistence: persistence)
     }
 
     // MARK: - Profile
@@ -131,6 +133,12 @@ final class AppState: TodayViewModel, PlanViewModel, ProfileViewModel, InsightsV
 
     func mealDataForWeek(dates: [Date]) -> [(date: Date, hasData: Bool, totalCal: Int)] {
         mealPlanService.mealDataForWeek(dates: dates)
+    }
+
+    // MARK: - Insights
+
+    func insightsSummary(forDays days: Int) -> InsightsSummary {
+        insightsService.summary(forDays: days, targetCalories: targetCalories)
     }
 
     // MARK: - Reset

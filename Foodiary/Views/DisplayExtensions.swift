@@ -56,4 +56,14 @@ extension Meal.MealType {
         case .dinner: return "🍽️"
         }
     }
+
+    /// SF Symbol for the meal type — used in observation cards.
+    var sfSymbol: String {
+        switch self {
+        case .breakfast: return "sun.haze.fill"
+        case .lunch: return "sun.max.fill"
+        case .snack: return "leaf.fill"
+        case .dinner: return "moon.stars.fill"
+        }
+    }
 }
