@@ -69,6 +69,8 @@ struct DayDetailCard: View {
                     Text(L10n["No food was logged on this day."]).font(.system(size: 13)).foregroundColor(FoodiaryDesign.pulseMuted)
                 } else {
                     Text(L10n["This day is open — tap a meal slot to start planning."])
+                        .font(.system(size: 13))
+                        .foregroundColor(FoodiaryDesign.pulseMuted)
                 }
             }
             .padding(16)
