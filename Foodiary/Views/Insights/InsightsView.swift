@@ -24,7 +24,7 @@ struct InsightsView: View {
                 PulseTopbar(
                     overline: L10n["insights.overline"],
                     title: L10n["nav.insights"],
-                    icon: .chart
+                    icon: nil
                 )
 
                 rangePicker
