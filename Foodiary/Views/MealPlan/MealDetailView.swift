@@ -28,7 +28,8 @@ struct MealDetailView: View {
         let weekday = calendar.component(.weekday, from: Date())
         let mondayOffset = weekday == 1 ? -6 : 2 - weekday
         let thisMonday = calendar.date(byAdding: .day, value: mondayOffset, to: Date()) ?? Date()
-        return date < thisMonday
+        // Compare at day granularity — both dates carry time-of-day from different Date() calls
+        return calendar.compare(date, to: thisMonday, toGranularity: .day) == .orderedAscending
     }
 
     var body: some View {
