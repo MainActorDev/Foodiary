@@ -38,6 +38,15 @@ jobs:
       - name: Regenerate Xcode project
         run: xcodegen --spec project.yml --project .
 
+      # --- Cache DerivedData ------------------------------------------------
+      - name: Cache DerivedData
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Developer/Xcode/DerivedData
+          key: derived-data-${{ runner.os }}-${{ hashFiles('project.yml', 'Foodiary/**/*.swift', 'Foodiary/**/*.xcstrings', 'Foodiary/**/*.plist') }}
+          restore-keys: |
+            derived-data-${{ runner.os }}-
+
       # --- Tests -----------------------------------------------------------
       - name: Run tests via Fastlane
         env:
@@ -60,7 +69,7 @@ jobs:
     needs: build-and-test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: macos-15
-    timeout-minutes: 45
+    timeout-minutes: 60
 
     steps:
       - name: Checkout
@@ -76,6 +85,14 @@ jobs:
 
       - name: Install XcodeGen
         run: brew install xcodegen
+
+      - name: Cache DerivedData
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Developer/Xcode/DerivedData
+          key: derived-data-${{ runner.os }}-${{ hashFiles('project.yml', 'Foodiary/**/*.swift', 'Foodiary/**/*.xcstrings', 'Foodiary/**/*.plist') }}
+          restore-keys: |
+            derived-data-${{ runner.os }}-
 
       - name: Build & upload to TestFlight
         env:
