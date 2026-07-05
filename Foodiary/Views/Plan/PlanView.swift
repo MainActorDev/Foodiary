@@ -6,6 +6,7 @@ struct PlanView: View {
     @State private var weekOffset: Int = 0
     @State private var showMealDetail = false
     @State private var selectedMealIndex = 0
+    @State private var showMealTypePicker = false
 
     private var weekStart: Date { weekStartFor(offset: weekOffset) }
 
@@ -27,7 +28,12 @@ struct PlanView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 14) {
-                PulseTopbar(overline: L10n["plan.week_readiness"], title: L10n["nav.plan"], icon: .plus)
+                PulseTopbar(overline: L10n["plan.week_readiness"], title: L10n["nav.plan"], icon: .plus) {
+                    if state.planDateMealPlan == nil {
+                        state.createMealPlan(for: state.selectedPlanDate)
+                    }
+                    showMealTypePicker = true
+                }
                 WeekCard(
                     weekOffset: $weekOffset,
                     selectedPlanDate: $state.selectedPlanDate,
@@ -71,6 +77,20 @@ struct PlanView: View {
         }
         .navigationDestination(isPresented: $showMealDetail) {
             MealDetailView(state: state, mealIndex: selectedMealIndex, date: state.selectedPlanDate, isPresented: $showMealDetail)
+        }
+        .sheet(isPresented: $showMealTypePicker) {
+            if let plan = state.planDateMealPlan {
+                MealTypePickerSheet(
+                    meals: plan.sortedMeals,
+                    onSelect: { index in
+                        showMealTypePicker = false
+                        selectedMealIndex = index
+                        showMealDetail = true
+                    }
+                )
+                .presentationDetents([.height(440)])
+                .presentationDragIndicator(.visible)
+            }
         }
     }
 

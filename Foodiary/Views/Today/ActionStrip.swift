@@ -54,7 +54,7 @@ struct TodayActionStrip: View {
 
 // MARK: - Meal Type Picker Sheet
 
-private struct MealTypePickerSheet: View {
+struct MealTypePickerSheet: View {
     @EnvironmentObject private var localeManager: LocaleManager
     let meals: [Meal]
     let onSelect: (Int) -> Void
