@@ -3848,13 +3848,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Protein"
+            "value": "P"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Protein"
+            "value": "P"
           }
         }
       }
@@ -3865,13 +3865,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Karbo"
+            "value": "C"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Karbo"
+            "value": "C"
           }
         }
       }
@@ -3882,13 +3882,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lemak"
+            "value": "F"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lemak"
+            "value": "F"
           }
         }
       }

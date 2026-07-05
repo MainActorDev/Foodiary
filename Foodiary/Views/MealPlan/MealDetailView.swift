@@ -205,9 +205,11 @@ struct MealHeroHeader: View {
             if hasData {
                 Text("\(value)g \(label)")
                     .font(.system(size: 12, weight: .bold))
+                    .lineLimit(1)
             } else {
                 Text(label)
                     .font(.system(size: 12, weight: .bold))
+                    .lineLimit(1)
             }
         }
         .foregroundColor(.white)
