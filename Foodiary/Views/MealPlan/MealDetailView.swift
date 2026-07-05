@@ -21,7 +21,14 @@ struct MealDetailView: View {
     }
 
     var isReadOnly: Bool {
-        date < Calendar.current.startOfDay(for: Date())
+        // Read-only = before the start of the current week (this Monday).
+        // Days in the current week stay editable even if they've already passed;
+        // only previous weeks are read-only.
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: Date())
+        let mondayOffset = weekday == 1 ? -6 : 2 - weekday
+        let thisMonday = calendar.date(byAdding: .day, value: mondayOffset, to: Date()) ?? Date()
+        return date < thisMonday
     }
 
     var body: some View {
