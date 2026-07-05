@@ -2,7 +2,7 @@ import Testing
 import SwiftData
 @testable import Foodiary
 
-/// A lightweight in-memory PersistenceService for unit tests.
+@MainActor
 final class MockPersistence: PersistenceService {
     var models: [String: [Any]] = [:]
 
@@ -16,19 +16,18 @@ final class MockPersistence: PersistenceService {
         models[key, default: []].append(model)
     }
 
-    func delete<T: PersistentModel>(_ model: T) {
-        let key = String(describing: T.self)
-        models[key]?.removeAll { _ in true } // simplified
-    }
+    func delete<T: PersistentModel>(_ model: T) {}
 
     func save() throws {}
 }
 
+@MainActor
 struct FoodiaryTests {
-    @Test func appStateInitialization() async throws {
+    @Test func initialState() async throws {
         let persistence = MockPersistence()
         let state = AppState(persistence: persistence)
-        #expect(state.selectedLanguage == "id")
-        #expect(state.profile == nil)
+        #expect(state.isOnboarded == false)
+        #expect(state.userProfile == nil)
+        #expect(state.targetCalories == 2000)
     }
 }
