@@ -190,23 +190,6 @@
         }
       }
     },
-    "action.save_food_item": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SAVE FOOD ITEM"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SIMPAN MAKANAN"
-          }
-        }
-      }
-    },
     "action.save_recalculate": {
       "extractionState": "manual",
       "localizations": {
@@ -224,91 +207,6 @@
         }
       }
     },
-    "add_food.calories_error": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Please enter a valid calorie amount."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mohon masukkan jumlah kalori yang valid."
-          }
-        }
-      }
-    },
-    "add_food.calories_hint": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Whole number, 0 or greater."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Angka bulat, 0 atau lebih."
-          }
-        }
-      }
-    },
-    "add_food.manual_button": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add Manually"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tambah Manual"
-          }
-        }
-      }
-    },
-    "add_food.name_error": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Please enter a food name."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mohon masukkan nama makanan."
-          }
-        }
-      }
-    },
-    "add_food.name_placeholder": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "e.g. Chicken breast"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "cth. Dada ayam"
-          }
-        }
-      }
-    },
     "add_food.no_results": {
       "extractionState": "manual",
       "localizations": {
@@ -322,23 +220,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Makanan tidak ditemukan. Coba kata kunci lain."
-          }
-        }
-      }
-    },
-    "add_food.note_placeholder": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "e.g. Grilled, no oil"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "cth. Panggang, tanpa minyak"
           }
         }
       }
@@ -825,23 +706,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "MAKANAN"
-          }
-        }
-      }
-    },
-    "label.note_optional": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "NOTE (OPTIONAL)"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CATATAN (OPSIONAL)"
           }
         }
       }
@@ -3923,6 +3787,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mencatat lebih sering memperjelas pola Anda."
+          }
+        }
+      }
+    },
+    "add_food.add_button": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambah"
+          }
+        }
+      }
+    },
+    "add_food.search_prompt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search for foods to see calories and macros"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cari makanan untuk lihat kalori dan makro"
           }
         }
       }

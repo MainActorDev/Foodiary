@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Food — Design Concepts</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: -apple-system, 'Inter', sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e8;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  .subtitle { color: #888; font-size: 15px; margin-bottom: 40px; }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 10px 20px;
+    border-radius: 12px;
+    background: #1a1a28;
+    color: #8e8ea0;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab.active {
+    background: #4BB8FA;
+    color: white;
+  }
+  .tab:hover { border-color: #333; }
+
+  /* Gallery */
+  .gallery {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .gallery.hidden { display: none; }
+
+  /* Phone frame */
+  .phone {
+    width: 340px;
+    height: 720px;
+    background: var(--phone-bg);
+    border-radius: 44px;
+    overflow: hidden;
+    box-shadow: 0 0 0 12px #1a1a24, 0 40px 80px rgba(0,0,0,0.5);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+  }
+  .phone.dark {
+    --phone-bg: #0C0C14;
+    --phone-surface: #1A1A2E;
+    --phone-soft: #222238;
+    --phone-text: #F4F4F8;
+    --phone-muted: #8E8EA0;
+    --phone-border: #2A2A40;
+  }
+  .phone.light {
+    --phone-bg: #F6F7FF;
+    --phone-surface: #FFFFFF;
+    --phone-soft: #EEF0FF;
+    --phone-text: #15142A;
+    --phone-muted: #6B6880;
+    --phone-border: #C8C6D0;
+  }
+
+  /* Phone notch */
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: #000;
+    border-radius: 0 0 18px 18px;
+    z-index: 10;
+  }
+
+  /* Phone content */
+  .phone-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-top: 40px;
+  }
+
+  .phone-label {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #888;
+  }
+  .phone-label span { display: block; font-weight: 400; font-size: 12px; color: #555; margin-top: 4px; }
+
+  /* Theme switcher */
+  .theme-switcher {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .theme-btn {
+    padding: 6px 16px;
+    border-radius: 10px;
+    background: #1a1a28;
+    color: #8e8ea0;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #333;
+  }
+  .theme-btn.active { background: #4BB8FA; color: white; border-color: #4BB8FA; }
+
+  /* Shared tokens */
+  :root {
+    --primary: #4BB8FA;
+    --primary-light: #DEF0FF;
+    --primary-dark: #0B4F8C;
+    --mint: #10B981;
+    --amber: #F59E0B;
+    --danger: #EF4444;
+    --pink: #EC4899;
+  }
+
+  /* Nav bar */
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px 12px;
+  }
+  .nav-btn {
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    color: var(--phone-muted);
+    cursor: pointer;
+  }
+  .nav-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--phone-text);
+  }
+
+  /* Scrollable area */
+  .scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px 20px;
+  }
+
+  /* ============================================
+     CONCEPT 1: Unified Search + Quick Manual
+     ============================================ */
+
+  .c1-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--phone-surface);
+    border-radius: 16px;
+    padding: 14px 16px;
+    border: 1px solid var(--phone-border);
+  }
+  .c1-search-bar svg { color: var(--phone-muted); flex-shrink: 0; }
+  .c1-search-bar input {
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    color: var(--phone-text);
+    flex: 1;
+    outline: none;
+    font-family: inherit;
+  }
+  .c1-search-bar input::placeholder { color: var(--phone-muted); }
+
+  .c1-quick-add {
+    margin-top: 16px;
+    background: var(--phone-surface);
+    border-radius: 20px;
+    padding: 16px;
+    border: 1px solid var(--phone-border);
+  }
+  .c1-quick-add-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--phone-muted);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .c1-quick-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .c1-quick-input {
+    background: var(--phone-soft);
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1.5px solid transparent;
+    transition: border 0.2s;
+  }
+  .c1-quick-input:focus-within { border-color: var(--primary); }
+  .c1-quick-input input {
+    border: none; background: transparent; outline: none;
+    font-family: inherit; font-size: 14px; color: var(--phone-text);
+    width: 100%;
+  }
+  .c1-quick-input label {
+    font-size: 9px; font-weight: 700; color: var(--phone-muted);
+    text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px;
+  }
+  .c1-quick-add-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: var(--phone-text);
+    color: var(--phone-bg);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .c1-results { margin-top: 20px; }
+  .c1-results-label {
+    font-size: 11px; font-weight: 800; color: var(--phone-muted);
+    letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .c1-result-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px;
+    background: var(--phone-surface);
+    border-radius: 16px;
+    margin-bottom: 8px;
+    border: 1px solid var(--phone-border);
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  .c1-result-card:hover { transform: scale(1.01); }
+  .c1-result-info { flex: 1; }
+  .c1-result-name { font-size: 14px; font-weight: 700; color: var(--phone-text); margin-bottom: 2px; }
+  .c1-result-meta { font-size: 11px; color: var(--phone-muted); }
+  .c1-result-cal {
+    font-size: 15px; font-weight: 800; color: var(--primary);
+    text-align: right; white-space: nowrap;
+  }
+  .c1-result-cal span { display: block; font-size: 10px; color: var(--phone-muted); font-weight: 600; }
+  .c1-result-source {
+    font-size: 9px; font-weight: 700; color: white;
+    background: var(--mint); padding: 2px 6px; border-radius: 4px;
+    margin-left: 8px;
+  }
+
+  /* ============================================
+     CONCEPT 2: Card-based with Detail Preview
+     ============================================ */
+
+  .c2-search-bar {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--phone-surface);
+    border-radius: 16px;
+    padding: 14px 16px;
+    border: 1px solid var(--phone-border);
+    margin-bottom: 20px;
+  }
+  .c2-search-bar svg { color: var(--phone-muted); }
+  .c2-search-bar input {
+    border: none; background: transparent; font-size: 15px;
+    color: var(--phone-text); flex: 1; outline: none; font-family: inherit;
+  }
+  .c2-search-bar input::placeholder { color: var(--phone-muted); }
+
+  .c2-food-card {
+    background: var(--phone-surface);
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 12px;
+    border: 1px solid var(--phone-border);
+  }
+  .c2-food-name { font-size: 16px; font-weight: 800; color: var(--phone-text); margin-bottom: 4px; }
+  .c2-food-brand { font-size: 12px; color: var(--phone-muted); margin-bottom: 14px; }
+  .c2-macro-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+    margin-bottom: 14px;
+  }
+  .c2-macro {
+    text-align: center;
+    background: var(--phone-soft);
+    border-radius: 12px;
+    padding: 10px 4px;
+  }
+  .c2-macro-val { font-size: 16px; font-weight: 800; color: var(--phone-text); }
+  .c2-macro-label { font-size: 9px; font-weight: 700; color: var(--phone-muted); text-transform: uppercase; margin-top: 2px; }
+  .c2-macro.cal .c2-macro-val { color: var(--primary); }
+  .c2-add-row {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .c2-serving-pill {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--phone-soft);
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 12px; font-weight: 600;
+    color: var(--phone-text);
+    cursor: pointer;
+  }
+  .c2-add-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .c2-source-tag {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 2px 8px; border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .c2-source-tag.fatsecret { background: rgba(16,185,129,0.15); color: var(--mint); }
+
+  /* ============================================
+     CONCEPT 3: Segmented Tabs — Search / Manual
+     ============================================ */
+
+  .c3-segment-bar {
+    display: flex;
+    background: var(--phone-soft);
+    border-radius: 14px;
+    padding: 3px;
+    margin-bottom: 20px;
+  }
+  .c3-segment {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--phone-muted);
+    border-radius: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .c3-segment.active {
+    background: var(--phone-text);
+    color: var(--phone-bg);
+  }
+
+  .c3-manual-form {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .c3-field-group { display: flex; flex-direction: column; gap: 6px; }
+  .c3-field-label { font-size: 11px; font-weight: 800; color: var(--phone-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+  .c3-field {
+    background: var(--phone-surface);
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 1.5px solid transparent;
+  }
+  .c3-field input {
+    border: none; background: transparent; outline: none;
+    font-family: inherit; font-size: 15px; color: var(--phone-text); width: 100%;
+  }
+  .c3-field input::placeholder { color: var(--phone-muted); }
+  .c3-macro-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  }
+  .c3-macro-field {
+    background: var(--phone-surface);
+    border-radius: 14px;
+    padding: 12px;
+    border: 1.5px solid transparent;
+    text-align: center;
+  }
+  .c3-macro-field input {
+    border: none; background: transparent; outline: none;
+    font-family: inherit; font-size: 18px; font-weight: 700;
+    color: var(--phone-text); width: 100%; text-align: center;
+  }
+  .c3-macro-field label {
+    font-size: 10px; font-weight: 700; color: var(--phone-muted);
+    text-transform: uppercase; display: block; margin-bottom: 4px;
+  }
+  .c3-macro-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+  .c3-save-btn {
+    width: 100%; padding: 14px;
+    border-radius: 14px; border: none;
+    background: var(--primary); color: white;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    margin-top: 8px;
+  }
+
+  .c3-search-list {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .c3-search-result {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px;
+    background: var(--phone-surface);
+    border-radius: 16px;
+    border: 1px solid var(--phone-border);
+    cursor: pointer;
+  }
+  .c3-sr-info { flex: 1; }
+  .c3-sr-name { font-size: 14px; font-weight: 700; color: var(--phone-text); }
+  .c3-sr-meta { font-size: 11px; color: var(--phone-muted); margin-top: 2px; }
+  .c3-sr-macros {
+    display: flex; gap: 10px; margin-top: 6px;
+  }
+  .c3-sr-macro {
+    font-size: 10px; font-weight: 600; color: var(--phone-muted);
+  }
+  .c3-sr-macro b { color: var(--phone-text); }
+  .c3-sr-add {
+    width: 36px; height: 36px;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  /* Empty state */
+  .empty-state {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; flex: 1; gap: 12px; padding: 40px;
+  }
+  .empty-state svg { color: var(--phone-muted); opacity: 0.5; }
+  .empty-state-text { font-size: 14px; color: var(--phone-muted); text-align: center; }
+
+  /* Meal type indicator */
+  .meal-indicator {
+    display: flex; align-items: center; gap: 8px;
+    justify-content: center;
+    padding: 8px 16px;
+    background: var(--phone-soft);
+    border-radius: 12px;
+    margin: 0 20px 16px;
+    font-size: 13px; font-weight: 600;
+    color: var(--phone-text);
+  }
+  .meal-indicator-dot { width: 8px; height: 8px; border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<h1>Add Food — Design Concepts</h1>
+<p class="subtitle">Three directions for the revamped food search + manual entry flow. Tap tabs to compare.</p>
+
+<div class="theme-switcher">
+  <div class="theme-btn active" onclick="setTheme('dark')">Dark</div>
+  <div class="theme-btn" onclick="setTheme('light')">Light</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showConcept(1)">A — Unified Quick-Add</div>
+  <div class="tab" onclick="showConcept(2)">B — Rich Cards w/ Macros</div>
+  <div class="tab" onclick="showConcept(3)">C — Segmented Tabs</div>
+  <div class="tab" onclick="showConcept('all')">Show All</div>
+</div>
+
+<!-- CONCEPT 1: Unified Quick-Add -->
+<div class="gallery" id="concept-1">
+  <div>
+  <div class="phone dark" id="phone-1">
+    <div class="phone-content">
+      <div class="nav-bar">
+        <div class="nav-btn">✕</div>
+        <div class="nav-title">Add Food</div>
+        <div style="width: 32px;"></div>
+      </div>
+      <div class="meal-indicator">
+        <div class="meal-indicator-dot" style="background: var(--amber);"></div>
+        Adding to Breakfast
+      </div>
+      <div class="scroll-area">
+        <div class="c1-search-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" placeholder="Search 2.3M foods...">
+        </div>
+
+        <div class="c1-quick-add">
+          <div class="c1-quick-add-label">⚡ Quick Add — skip the search</div>
+          <div class="c1-quick-row">
+            <div class="c1-quick-input">
+              <label>Food Name</label>
+              <input type="text" placeholder="e.g. Banana">
+            </div>
+            <div class="c1-quick-input">
+              <label>Kcal</label>
+              <input type="text" placeholder="0">
+            </div>
+            <div class="c1-quick-input">
+              <label>Protein</label>
+              <input type="text" placeholder="0">
+            </div>
+            <div class="c1-quick-input">
+              <label>Carbs</label>
+              <input type="text" placeholder="0">
+            </div>
+          </div>
+          <button class="c1-quick-add-btn">Add to Breakfast</button>
+        </div>
+
+        <div class="c1-results">
+          <div class="c1-results-label">Search Results</div>
+          <div class="c1-result-card">
+            <div class="c1-result-info">
+              <div class="c1-result-name">Chicken Breast, Grilled</div>
+              <div class="c1-result-meta">100g · 31g protein</div>
+            </div>
+            <div class="c1-result-cal">165<span>kcal</span></div>
+            <div class="c1-result-source">FatSecret</div>
+          </div>
+          <div class="c1-result-card">
+            <div class="c1-result-info">
+              <div class="c1-result-name">Chicken Breast, Raw</div>
+              <div class="c1-result-meta">100g · 22g protein</div>
+            </div>
+            <div class="c1-result-cal">110<span>kcal</span></div>
+            <div class="c1-result-source">FatSecret</div>
+          </div>
+          <div class="c1-result-card">
+            <div class="c1-result-info">
+              <div class="c1-result-name">Chicken Soup, Home Recipe</div>
+              <div class="c1-result-meta">1 bowl (350g) · 12g protein</div>
+            </div>
+            <div class="c1-result-cal">180<span>kcal</span></div>
+            <div class="c1-result-source">Foodiary</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phone-label">Concept A — Unified Quick-Add<span>Search + inline manual in one screen. No tab switching.</span></div>
+  </div>
+</div>
+
+<!-- CONCEPT 2: Rich Cards -->
+<div class="gallery hidden" id="concept-2">
+  <div>
+  <div class="phone dark" id="phone-2">
+    <div class="phone-content">
+      <div class="nav-bar">
+        <div class="nav-btn">✕</div>
+        <div class="nav-title">Add Food</div>
+        <div style="width: 32px;"></div>
+      </div>
+      <div class="meal-indicator">
+        <div class="meal-indicator-dot" style="background: var(--amber);"></div>
+        Adding to Breakfast
+      </div>
+      <div class="scroll-area">
+        <div class="c2-search-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" placeholder="Search foods...">
+        </div>
+
+        <div class="c2-food-card">
+          <div class="c2-source-tag fatsecret">FatSecret</div>
+          <div class="c2-food-name">Chicken Breast, Grilled</div>
+          <div class="c2-food-brand">USDA · per 100g</div>
+          <div class="c2-macro-grid">
+            <div class="c2-macro cal">
+              <div class="c2-macro-val">165</div>
+              <div class="c2-macro-label">kcal</div>
+            </div>
+            <div class="c2-macro">
+              <div class="c2-macro-val">31g</div>
+              <div class="c2-macro-label">Protein</div>
+            </div>
+            <div class="c2-macro">
+              <div class="c2-macro-val">0g</div>
+              <div class="c2-macro-label">Carbs</div>
+            </div>
+            <div class="c2-macro">
+              <div class="c2-macro-val">3.6g</div>
+              <div class="c2-macro-label">Fat</div>
+            </div>
+          </div>
+          <div class="c2-add-row">
+            <div class="c2-serving-pill">100g ▾</div>
+            <button class="c2-add-btn">Add</button>
+          </div>
+        </div>
+
+        <div class="c2-food-card">
+          <div class="c2-source-tag fatsecret">FatSecret</div>
+          <div class="c2-food-name">Oatmeal with Banana</div>
+          <div class="c2-food-brand">Generic · 1 bowl (300g)</div>
+          <div class="c2-macro-grid">
+            <div class="c2-macro cal">
+              <div class="c2-macro-val">280</div>
+              <div class="c2-macro-label">kcal</div>
+            </div>
+            <div class="c2-macro">
+              <div class="c2-macro-val">8g</div>
+              <div class="c2-macro-label">Protein</div>
+            </div>
+            <div class="c2-macro">
+              <div class="c2-macro-val">52g</div>
+              <div class="c2-macro-label">Carbs</div>
+            </div>
+            <div class="c2-macro">
+              <div class="c2-macro-val">5g</div>
+              <div class="c2-macro-label">Fat</div>
+            </div>
+          </div>
+          <div class="c2-add-row">
+            <div class="c2-serving-pill">1 bowl ▾</div>
+            <button class="c2-add-btn">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phone-label">Concept B — Rich Cards<span>Full macro preview before adding. Serving selector. No separate manual tab.</span></div>
+  </div>
+</div>
+
+<!-- CONCEPT 3: Segmented Tabs -->
+<div class="gallery hidden" id="concept-3">
+  <div>
+  <div class="phone dark" id="phone-3">
+    <div class="phone-content">
+      <div class="nav-bar">
+        <div class="nav-btn">✕</div>
+        <div class="nav-title">Add Food</div>
+        <div style="width: 32px;"></div>
+      </div>
+      <div class="meal-indicator">
+        <div class="meal-indicator-dot" style="background: var(--amber);"></div>
+        Adding to Breakfast
+      </div>
+      <div class="scroll-area">
+        <div class="c3-segment-bar">
+          <div class="c3-segment active">🔍 Search</div>
+          <div class="c3-segment">✏️ Manual</div>
+        </div>
+
+        <div class="c3-search-list">
+          <div class="c3-search-result">
+            <div class="c3-sr-info">
+              <div class="c3-sr-name">Chicken Breast, Grilled</div>
+              <div class="c3-sr-meta">FatSecret · 100g</div>
+              <div class="c3-sr-macros">
+                <span class="c3-sr-macro"><b>165</b> kcal</span>
+                <span class="c3-sr-macro"><b>31g</b> P</span>
+                <span class="c3-sr-macro"><b>0g</b> C</span>
+                <span class="c3-sr-macro"><b>3.6g</b> F</span>
+              </div>
+            </div>
+            <div class="c3-sr-add">+</div>
+          </div>
+          <div class="c3-search-result">
+            <div class="c3-sr-info">
+              <div class="c3-sr-name">Oatmeal with Banana</div>
+              <div class="c3-sr-meta">Generic · 1 bowl (300g)</div>
+              <div class="c3-sr-macros">
+                <span class="c3-sr-macro"><b>280</b> kcal</span>
+                <span class="c3-sr-macro"><b>8g</b> P</span>
+                <span class="c3-sr-macro"><b>52g</b> C</span>
+                <span class="c3-sr-macro"><b>5g</b> F</span>
+              </div>
+            </div>
+            <div class="c3-sr-add">+</div>
+          </div>
+          <div class="c3-search-result">
+            <div class="c3-sr-info">
+              <div class="c3-sr-name">Greek Yogurt, Plain</div>
+              <div class="c3-sr-meta">FatSecret · 170g</div>
+              <div class="c3-sr-macros">
+                <span class="c3-sr-macro"><b>100</b> kcal</span>
+                <span class="c3-sr-macro"><b>17g</b> P</span>
+                <span class="c3-sr-macro"><b>6g</b> C</span>
+                <span class="c3-sr-macro"><b>0g</b> F</span>
+              </div>
+            </div>
+            <div class="c3-sr-add">+</div>
+          </div>
+        </div>
+
+        <!-- Manual form (shown when tab tapped) -->
+        <div style="margin-top: 20px; opacity: 0.4; border-top: 1px dashed var(--phone-border); padding-top: 20px;">
+          <div style="font-size: 11px; font-weight: 800; color: var(--phone-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px;">✏️ Manual Entry (preview)</div>
+          <div class="c3-manual-form">
+            <div class="c3-field-group">
+              <div class="c3-field-label">Food Name</div>
+              <div class="c3-field"><input type="text" placeholder="e.g. Homemade Salad"></div>
+            </div>
+            <div class="c3-field-group">
+              <div class="c3-field-label">Calories</div>
+              <div class="c3-field"><input type="text" placeholder="0"></div>
+            </div>
+            <div class="c3-field-group">
+              <div class="c3-field-label">Macros (optional)</div>
+              <div class="c3-macro-row">
+                <div class="c3-macro-field">
+                  <label><span class="c3-macro-dot" style="background: var(--primary);"></span>Protein</label>
+                  <input type="text" placeholder="0" style="font-size: 14px;">
+                </div>
+                <div class="c3-macro-field">
+                  <label><span class="c3-macro-dot" style="background: var(--mint);"></span>Carbs</label>
+                  <input type="text" placeholder="0" style="font-size: 14px;">
+                </div>
+                <div class="c3-macro-field">
+                  <label><span class="c3-macro-dot" style="background: var(--amber);"></span>Fat</label>
+                  <input type="text" placeholder="0" style="font-size: 14px;">
+                </div>
+              </div>
+            </div>
+            <button class="c3-save-btn">Add to Breakfast</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phone-label">Concept C — Segmented Tabs<span>Clean tab switch between search and manual. Search shows inline macros. Colored macro dots.</span></div>
+  </div>
+</div>
+
+<script>
+function showConcept(n) {
+  document.querySelectorAll('.gallery').forEach(g => g.classList.add('hidden'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+
+  if (n === 'all') {
+    document.querySelectorAll('.gallery').forEach(g => g.classList.remove('hidden'));
+    document.querySelectorAll('.tab')[3].classList.add('active');
+  } else {
+    document.getElementById('concept-' + n).classList.remove('hidden');
+    document.querySelectorAll('.tab')[n - 1].classList.add('active');
+  }
+}
+
+function setTheme(theme) {
+  document.querySelectorAll('.theme-btn').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.phone').forEach(p => {
+    p.classList.remove('dark', 'light');
+    p.classList.add(theme);
+  });
+}
+</script>
+
+</body>
+</html>
