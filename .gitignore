@@ -48,3 +48,4 @@ vendor/bundle/
 
 # Design artifacts (keep tracked)
 # design-prototype/ is tracked
+Gemfile.lock

@@ -27,9 +27,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: true # caches Gemfile.lock automatically
 
-      - name: Install Fastlane
+      - name: Install gems
         run: bundle install --jobs 4 --retry 3
 
       # --- XcodeGen --------------------------------------------------------
@@ -71,9 +70,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: true
 
-      - name: Install Fastlane
+      - name: Install gems
         run: bundle install --jobs 4 --retry 3
 
       - name: Install XcodeGen
