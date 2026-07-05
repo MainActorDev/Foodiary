@@ -126,6 +126,18 @@ enum FoodiaryDesign {
         case .dinner: return pulsePrimary
         }
     }
+
+    /// Gradient for the meal detail hero card, per meal type.
+    static func pulseMealHeroGradient(for mealType: Meal.MealType) -> LinearGradient {
+        let colors: [Color]
+        switch mealType {
+        case .breakfast: colors = [pulseAmber, Color(hex: "F97316")]
+        case .lunch: colors = [pulseMint, Color(hex: "059669")]
+        case .snack: colors = [Color(hex: "EC4899"), Color(hex: "DB2777")]
+        case .dinner: colors = [pulsePrimary, Color(hex: "3B82F6")]
+        }
+        return LinearGradient(colors: colors, startPoint: .topLeading, endPoint: .bottomTrailing)
+    }
 }
 
 // MARK: - UIColor hex convenience
