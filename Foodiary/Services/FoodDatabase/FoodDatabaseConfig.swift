@@ -12,7 +12,8 @@ import Foundation
 /// **FatSecret** — Primary source. Register at https://platform.fatsecret.com/register
 ///   Free Basic tier. Fill in Consumer Key + Secret from the developer dashboard.
 ///
-/// **Custom API** — Fallback source. Not yet built. Configure when ready.
+/// **Custom API** — Parallel provider (foodiary-api.anyapp.my).
+/// Runs alongside FatSecret via FoodSearchService.
 ///
 /// **USDA** — Deactivated per 2026-06-21 decision. Code preserved for reference.
 enum FoodDatabaseConfig {
@@ -36,7 +37,7 @@ enum FoodDatabaseConfig {
         !fatSecretConsumerKey.isEmpty && !fatSecretConsumerSecret.isEmpty
     }
 
-    // MARK: - Custom API (Fallback — not yet built)
+    // MARK: - Custom API (Parallel provider — foodiary-api.anyapp.my)
 
     /// Base URL for our own fallback food database API.
     /// Set in Configuration/*.xcconfig.
