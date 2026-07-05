@@ -61,6 +61,7 @@
 		B91C986F3CB7F7576E64AAE7 /* DateFormatter+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9D1CE61A70DD126F53DC2D /* DateFormatter+Static.swift */; };
 		BECF0667A8B1C47E2DD5FEEB /* ViewModelProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC57E9077135AF45393C6010 /* ViewModelProtocols.swift */; };
 		C09BD92CE7F988168E79FEB2 /* FoodDatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523AA95C0020B82D38A82B1 /* FoodDatabaseProvider.swift */; };
+		C21FE32E881C35029A28D564 /* WeekDateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15BDF9B63FA8B2F8DE717B1 /* WeekDateCalculator.swift */; };
 		D18C4D4AC854A617879273EA /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B4C4DA1E371402CB294E7A /* OnboardingViewModel.swift */; };
 		D31F0922197F1F76A6FD38DB /* FatSecretService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E2505397771156DF3FF00 /* FatSecretService.swift */; };
 		D4402849007210D1FF06EC30 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB3A676F1D10329D051199F /* Typography.swift */; };
@@ -166,6 +167,7 @@
 		E77458407A8F6C98D4399B40 /* ManualFoodFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualFoodFormView.swift; sourceTree = "<group>"; };
 		EA8F4B08608A6934C2BCB81A /* MealPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlan.swift; sourceTree = "<group>"; };
 		EBCC69A6C1EF93C608409FE0 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		F15BDF9B63FA8B2F8DE717B1 /* WeekDateCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDateCalculator.swift; sourceTree = "<group>"; };
 		F248D9EAAFCFE04348577114 /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
 		F4EFA77FD18C1FE568F4E6C5 /* AddFoodRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodRouteView.swift; sourceTree = "<group>"; };
 		F90B1F0303CF2F47CFF8C496 /* FoodDatabaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDatabaseConfig.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				A0C5C7A196774531FEDBF4B5 /* L10n.swift */,
 				6504E605B901025024F1BDA0 /* LocaleManager.swift */,
 				EBCC69A6C1EF93C608409FE0 /* ThemeManager.swift */,
+				F15BDF9B63FA8B2F8DE717B1 /* WeekDateCalculator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				B0AC29E284D9EA795CE4563C /* UserProfile.swift in Sources */,
 				BECF0667A8B1C47E2DD5FEEB /* ViewModelProtocols.swift in Sources */,
 				2D5253326EE940F119527C9C /* WeekCard.swift in Sources */,
+				C21FE32E881C35029A28D564 /* WeekDateCalculator.swift in Sources */,
 				0BB9F2A006C81A3929579BDA /* WeekSummary.swift in Sources */,
 				59BA012170CFBF9E38826FF4 /* WelcomeView.swift in Sources */,
 			);

@@ -8,11 +8,10 @@ struct PlanView: View {
     @State private var selectedMealIndex = 0
     @State private var showMealTypePicker = false
 
-    private var weekStart: Date { weekStartFor(offset: weekOffset) }
+    private var weekStart: Date { state.weekCalc.weekStart(offset: weekOffset) }
 
     private var weekDays: [Date] {
-        let calendar = Calendar.current
-        return (0..<7).compactMap { calendar.date(byAdding: .day, value: $0, to: weekStart) }
+        state.weekCalc.daysInWeek(offset: weekOffset)
     }
 
     private var weekLabel: String {
@@ -41,7 +40,8 @@ struct PlanView: View {
                     weekLabel: weekLabel,
                     weekDays: weekDays,
                     hasMealData: { state.hasMealData(for: $0) },
-                    targetCalories: state.targetCalories
+                    targetCalories: state.targetCalories,
+                    weekStartForOffset: { state.weekCalc.weekStart(offset: $0) }
                 )
                 WeekSummary(
                     plannedDays: weekDays.filter { state.hasMealData(for: $0).hasPlan }.count,
@@ -72,7 +72,7 @@ struct PlanView: View {
         .background(FoodiaryDesign.pulseBackground)
         .onAppear { state.loadMealPlansForWeek(containing: weekStart) }
         .onChange(of: weekOffset) { _, newOffset in
-            state.selectedPlanDate = weekStartFor(offset: newOffset)
+            state.selectedPlanDate = state.weekCalc.weekStart(offset: newOffset)
             state.loadMealPlansForWeek(containing: weekStart)
         }
         .navigationDestination(isPresented: $showMealDetail) {
@@ -92,15 +92,5 @@ struct PlanView: View {
                 .presentationDragIndicator(.visible)
             }
         }
-    }
-
-    private func weekStartFor(offset: Int) -> Date {
-        let calendar = Calendar.current
-        let today = Date()
-        let weekday = calendar.component(.weekday, from: today)
-        let mondayOffset = weekday == 1 ? -6 : 2 - weekday
-        guard let thisMonday = calendar.date(byAdding: .day, value: mondayOffset, to: today),
-              let result = calendar.date(byAdding: .day, value: offset * 7, to: thisMonday) else { return today }
-        return result
     }
 }

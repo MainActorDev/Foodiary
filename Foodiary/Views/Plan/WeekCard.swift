@@ -13,12 +13,13 @@ struct WeekCard: View {
     let weekDays: [Date]
     var hasMealData: (Date) -> (hasPlan: Bool, totalCal: Int)
     let targetCalories: Int
+    var weekStartForOffset: (Int) -> Date
 
     var body: some View {
         VStack(spacing: 14) {
             // Header row
             HStack(spacing: 8) {
-                Button(action: { weekOffset -= 1; selectedPlanDate = weekStartFor(offset: weekOffset) }) {
+                Button(action: { weekOffset -= 1; selectedPlanDate = weekStartForOffset(weekOffset) }) {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 13, weight: .bold))
                         .foregroundColor(FoodiaryDesign.pulseMuted)
@@ -31,7 +32,7 @@ struct WeekCard: View {
                     .foregroundColor(FoodiaryDesign.pulseInk)
                     .frame(maxWidth: .infinity)
 
-                Button(action: { weekOffset += 1; selectedPlanDate = weekStartFor(offset: weekOffset) }) {
+                Button(action: { weekOffset += 1; selectedPlanDate = weekStartForOffset(weekOffset) }) {
                     Image(systemName: "chevron.right")
                         .font(.system(size: 13, weight: .bold))
                         .foregroundColor(FoodiaryDesign.pulseMuted)
@@ -54,16 +55,6 @@ struct WeekCard: View {
             }
         }
         .pulseCard(cornerRadius: 26, padding: 16)
-    }
-
-    private func weekStartFor(offset: Int) -> Date {
-        let calendar = Calendar.current
-        let today = Date()
-        let weekday = calendar.component(.weekday, from: today)
-        let mondayOffset = weekday == 1 ? -6 : 2 - weekday
-        guard let thisMonday = calendar.date(byAdding: .day, value: mondayOffset, to: today),
-              let result = calendar.date(byAdding: .day, value: offset * 7, to: thisMonday) else { return today }
-        return result
     }
 }
 

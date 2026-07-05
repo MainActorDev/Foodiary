@@ -13,6 +13,9 @@ final class AppState: TodayViewModel, PlanViewModel, ProfileViewModel, InsightsV
     private let mealPlanService: MealPlanService
     private let insightsService: InsightsService
 
+    /// Exposed for PlanView / WeekCard week-navigation logic.
+    let weekCalc = WeekDateCalculator()
+
     var selectedPlanDate: Date = Date()
     var errorMessage: String?
 
@@ -78,15 +81,13 @@ final class AppState: TodayViewModel, PlanViewModel, ProfileViewModel, InsightsV
     }
 
     var isPlanDatePast: Bool {
-        // Past = before the start of the current week (this Monday).
-        // Days in the current week stay editable even if they've already passed;
-        // only previous weeks are read-only.
-        let calendar = Calendar.current
-        let weekday = calendar.component(.weekday, from: Date())
-        let mondayOffset = weekday == 1 ? -6 : 2 - weekday
-        let thisMonday = calendar.date(byAdding: .day, value: mondayOffset, to: Date()) ?? Date()
-        // Compare at day granularity — both dates carry time-of-day from different Date() calls
-        return calendar.compare(selectedPlanDate, to: thisMonday, toGranularity: .day) == .orderedAscending
+        weekCalc.isBeforeCurrentWeek(selectedPlanDate)
+    }
+
+    /// Whether the given date falls in a week before the current week.
+    /// Used by MealDetailView to gate add/delete operations.
+    func isDateInPreviousWeek(_ date: Date) -> Bool {
+        weekCalc.isBeforeCurrentWeek(date)
     }
 
     func mealPlanForDate(_ date: Date) -> MealPlan? {
