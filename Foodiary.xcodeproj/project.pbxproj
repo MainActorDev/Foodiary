@@ -48,6 +48,7 @@
 		94E2D0C65404F9027B4B2FC8 /* MealTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932E6B8A5936A51A3447768 /* MealTimeline.swift */; };
 		99A110DB758A131BBA563E81 /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248D9EAAFCFE04348577114 /* InsightsView.swift */; };
 		9A15C60A274BF587E939A9C2 /* MigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D50A01EAED0F408C56FB60 /* MigrationService.swift */; };
+		A2B4E3790F83CF93894EB54C /* FoodiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBEA6A86337B43D0BE3E4C /* FoodiaryTests.swift */; };
 		A36668516417CF3B693385A4 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7508C6CFFF9A8E2EE764AC36 /* Meal.swift */; };
 		A473CB0D16FE8B5C11DC1EF0 /* FoodSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33022C0AB4A08C274F5DB3B /* FoodSearchResult.swift */; };
 		A744467F82D91A6C91277949 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECAB31DA3AB690D37A173E5 /* FoodItem.swift */; };
@@ -113,6 +114,7 @@
 		5100815ABCB587273B37B6C5 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		51A8745A9AFFA58ABA4F34F4 /* DayDetailCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailCard.swift; sourceTree = "<group>"; };
 		541FBD984DF989F3B24A2246 /* PlusJakartaSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PlusJakartaSans.ttf; sourceTree = "<group>"; };
+		56BBEA6A86337B43D0BE3E4C /* FoodiaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodiaryTests.swift; sourceTree = "<group>"; };
 		58EE07E36DB84EC8E65052A7 /* FoodSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchService.swift; sourceTree = "<group>"; };
 		6504E605B901025024F1BDA0 /* LocaleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleManager.swift; sourceTree = "<group>"; };
 		655AA3E00C149154E86EB3C3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		20C79F8143D13AD987D3B245 /* FoodiaryTests */ = {
 			isa = PBXGroup;
 			children = (
+				56BBEA6A86337B43D0BE3E4C /* FoodiaryTests.swift */,
 				1E808E69E845579CA9C49497 /* Info.plist */,
 			);
 			path = FoodiaryTests;
@@ -542,6 +545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2B4E3790F83CF93894EB54C /* FoodiaryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
