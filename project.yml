@@ -26,6 +26,14 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.his.foodiary.app
         MARKETING_VERSION: "1.0"
         CURRENT_PROJECT_VERSION: "1"
+      configs:
+        Debug:
+          CODE_SIGN_IDENTITY: "Apple Development"
+          CODE_SIGN_STYLE: "Automatic"
+        Release:
+          CODE_SIGN_IDENTITY: "Apple Distribution"
+          CODE_SIGN_STYLE: "Manual"
+          PROVISIONING_PROFILE_SPECIFIER: "match AppStore com.his.foodiary.app 1783267134"
     preBuildScripts:
       - name: "SwiftLint (disabled)"
         script: |

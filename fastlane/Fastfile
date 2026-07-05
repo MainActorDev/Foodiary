@@ -93,7 +93,6 @@ lane :beta do |options|
     clean: true,
     export_method: "app-store",
     export_team_id: "SMSH6V2XQN",
-    xcodebuild_formatter: "xcbeautify",
     output_directory: "./build",
     output_name: "Foodiary.ipa"
   )
