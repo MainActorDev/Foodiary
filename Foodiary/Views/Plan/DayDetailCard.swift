@@ -31,11 +31,7 @@ struct DayDetailCard: View {
                     Spacer()
                     Text("\(plan.totalCalories) / \(targetCalories)").font(.system(size: 12, weight: .medium)).foregroundColor(FoodiaryDesign.pulseMuted)
                 }
-                HStack(spacing: 6) {
-                    ForEach(plan.sortedMeals, id: \.type.rawValue) { meal in
-                        Capsule().fill(FoodiaryDesign.pulseMealAccent(for: meal.type)).frame(height: 8)
-                    }
-                }
+                MealDistributionBar(meals: plan.sortedMeals, totalCalories: plan.totalCalories, targetCalories: targetCalories)
                 Text(isPast ? L10n["plan.read_only"] : L10n["plan.planned_adjustable"])
                     .font(.system(size: 13)).foregroundColor(FoodiaryDesign.pulseMuted)
             }
@@ -128,5 +124,61 @@ struct MealSlotRow: View {
         }
         .buttonStyle(.plain)
         .disabled(isReadOnly)
+    }
+}
+
+// MARK: - Meal Distribution Bar
+
+/// Proportional stacked bar showing each meal's calorie share of the day's total.
+/// Replaces the former decorative equal-width capsules.
+struct MealDistributionBar: View {
+    let meals: [Meal]
+    let totalCalories: Int
+    let targetCalories: Int
+
+    private var isOverTarget: Bool {
+        totalCalories > targetCalories && totalCalories > 0
+    }
+
+    var body: some View {
+        GeometryReader { geo in
+            let width = geo.size.width
+
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                    .fill(isOverTarget ? FoodiaryDesign.pulseDanger.opacity(0.12) : FoodiaryDesign.pulseSurfaceSoft)
+
+                if totalCalories > 0 {
+                    mealSegments(width: width)
+                }
+            }
+        }
+        .frame(height: 10)
+    }
+
+    @ViewBuilder
+    private func mealSegments(width: CGFloat) -> some View {
+        let maxScale = max(totalCalories, targetCalories)
+        let filledWidth = width * (CGFloat(totalCalories) / CGFloat(maxScale))
+
+        // Precompute segment widths and offsets
+        var xOffset: CGFloat = 0
+        let segments: [(meal: Meal, width: CGFloat, offset: CGFloat)] = meals.compactMap { meal in
+            let segmentWidth = filledWidth * (CGFloat(meal.totalCalories) / CGFloat(totalCalories))
+            let result = (meal, segmentWidth, xOffset)
+            xOffset += segmentWidth
+            return segmentWidth > 0 ? result : nil
+        }
+
+        ZStack(alignment: .leading) {
+            ForEach(segments, id: \.meal.type.rawValue) { seg in
+                Rectangle()
+                    .fill(FoodiaryDesign.pulseMealAccent(for: seg.meal.type))
+                    .frame(width: seg.width, height: 10)
+                    .offset(x: seg.offset)
+            }
+        }
+        .frame(width: filledWidth, height: 10, alignment: .leading)
+        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
     }
 }
