@@ -85,7 +85,7 @@ lane :beta do |options|
     api_key: api_key
   )
 
-  # 3. Build .ipa (no dSYMs in CI — cuts signing time by 60%+)
+  # 3. Build .ipa
   build_app(
     project: "Foodiary.xcodeproj",
     scheme: "Foodiary",
@@ -93,8 +93,7 @@ lane :beta do |options|
     clean: false,
     export_method: "app-store",
     export_team_id: "SMSH6V2XQN",
-    include_symbols: false,
-    xcargs: "DEBUG_INFORMATION_FORMAT=dwarf",
+    include_symbols: true,
     output_directory: "./build",
     output_name: "Foodiary.ipa"
   )
