@@ -5,7 +5,7 @@ CUSTOM_API_BASE_URL=https://foodiary-api.anyapp.my
 CUSTOM_API_TOKEN=0de67146d99696dae07cd8dea84bbaac2600361e18fccb57d9355aec41e330bf
 USDA_API_KEY=***
 
-// Code Signing (local device testing — free provisioning)
-DEVELOPMENT_TEAM=8RVDJVBA6Q
+// Code Signing
+DEVELOPMENT_TEAM=SMSH6V2XQN
 CODE_SIGN_IDENTITY=Apple Development
 CODE_SIGN_STYLE=Automatic

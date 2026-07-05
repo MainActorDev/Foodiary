@@ -9,8 +9,9 @@
 #   4. Run: bundle exec fastlane match appstore
 #      (or `development` for dev signing)
 
-git_url(ENV["MATCH_REPO"] || "https://github.com/MainActorDev/foodiary-certificates")
+git_url(ENV["MATCH_REPO"] || "https://github.com/MainActorDev/ios-certificates")
 storage_mode("git")
 type("appstore") # default — overridden by lane-specific type param
-app_identifier("com.foodiary.app")
+app_identifier("com.his.foodiary.app")
+force_legacy_encryption(true)
 username(ENV["APP_STORE_APPLE_ID"])

@@ -1,12 +1,12 @@
 # App metadata for Fastlane
-app_identifier("com.foodiary.app")
+app_identifier("com.his.foodiary.app")
 
 # Your Apple ID (email associated with App Store Connect).
 # Set via environment variable or hardcode after first run.
 apple_id(ENV["APP_STORE_APPLE_ID"])
 
 # Developer Portal Team ID (from project.yml → DEVELOPMENT_TEAM)
-team_id("296RF6QMS7")
+team_id("SMSH6V2XQN")
 
 # App Store Connect Team ID (may differ from Developer Portal team).
 # Find it at https://appstoreconnect.apple.com/access/users → your team.

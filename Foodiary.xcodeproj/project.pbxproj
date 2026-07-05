@@ -472,8 +472,11 @@
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					CCDC232848F25A91548B270B = {
-						DevelopmentTeam = 8RVDJVBA6Q;
+						DevelopmentTeam = SMSH6V2XQN;
 						ProvisioningStyle = Automatic;
+					};
+					F6AFD3124E8EFCC5AEFA894C = {
+						DevelopmentTeam = SMSH6V2XQN;
 					};
 				};
 			};
@@ -662,6 +665,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SMSH6V2XQN;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -693,7 +697,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.his.foodiary.app.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Foodiary.app/Foodiary";
@@ -735,6 +739,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SMSH6V2XQN;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -775,7 +780,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app.local;
+				PRODUCT_BUNDLE_IDENTIFIER = com.his.foodiary.app;
 				PRODUCT_NAME = Foodiary;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -794,7 +799,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app.local;
+				PRODUCT_BUNDLE_IDENTIFIER = com.his.foodiary.app;
 				PRODUCT_NAME = Foodiary;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -811,7 +816,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.foodiary.app.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.his.foodiary.app.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Foodiary.app/Foodiary";

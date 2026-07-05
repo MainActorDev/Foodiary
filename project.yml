@@ -9,6 +9,7 @@ options:
 
 settings:
   base:
+    DEVELOPMENT_TEAM: "SMSH6V2XQN"
     DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
     SWIFT_VERSION: "6.0"
 
@@ -22,7 +23,7 @@ targets:
       base:
         INFOPLIST_FILE: Foodiary/Info.plist
         PRODUCT_NAME: Foodiary
-        PRODUCT_BUNDLE_IDENTIFIER: com.foodiary.app.local
+        PRODUCT_BUNDLE_IDENTIFIER: com.his.foodiary.app
         MARKETING_VERSION: "1.0"
         CURRENT_PROJECT_VERSION: "1"
     preBuildScripts:
@@ -44,4 +45,4 @@ targets:
     settings:
       base:
         INFOPLIST_FILE: FoodiaryTests/Info.plist
-        PRODUCT_BUNDLE_IDENTIFIER: com.foodiary.app.tests
+        PRODUCT_BUNDLE_IDENTIFIER: com.his.foodiary.app.tests
