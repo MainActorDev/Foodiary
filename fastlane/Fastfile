@@ -77,13 +77,24 @@ lane :beta do |options|
     ) + 1
   )
 
-  # 2. Sync code signing via match
-  match(
-    type: "appstore",
-    readonly: is_ci,
-    app_identifier: "com.his.foodiary.app",
-    api_key: api_key
-  )
+  # 2. On CI, use a dedicated keychain so codesign never blocks on a GUI prompt
+  if is_ci
+    match(
+      type: "appstore",
+      readonly: true,
+      app_identifier: "com.his.foodiary.app",
+      api_key: api_key,
+      keychain_name: "ci.keychain",
+      keychain_password: "ci-keychain-password"
+    )
+  else
+    match(
+      type: "appstore",
+      readonly: true,
+      app_identifier: "com.his.foodiary.app",
+      api_key: api_key
+    )
+  end
 
   # 3. Build .ipa
   build_app(
