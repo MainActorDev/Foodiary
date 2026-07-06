@@ -24,7 +24,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>2</string>
 	<key>CUSTOM_API_BASE_URL</key>
 	<string>$(CUSTOM_API_BASE_URL)</string>
 	<key>CUSTOM_API_TOKEN</key>
@@ -54,6 +54,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>USDA_API_KEY</key>
 	<string>$(USDA_API_KEY)</string>
 </dict>
