@@ -26,7 +26,7 @@
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>CUSTOM_API_BASE_URL</key>
-	<string>$(CUSTOM_API_BASE_URL)</string>
+	<string>$(API_SCHEME)://$(API_HOST)</string>
 	<key>CUSTOM_API_TOKEN</key>
 	<string>$(CUSTOM_API_TOKEN)</string>
 	<key>FATSECRET_CONSUMER_KEY</key>

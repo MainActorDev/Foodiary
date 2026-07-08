@@ -1,8 +1,10 @@
 import Foundation
 
-/// Facade that queries multiple food database providers in parallel and merges results.
+/// Facade that queries the configured food database provider(s) and merges results.
 ///
-/// **Priority order:** FatSecret (primary) → Custom API (fallback) → USDA (deactivated).
+/// **Active provider:** Custom API (foodiary-api.anyapp.my) — sole source.
+/// **Detached:** FatSecret (code preserved, endpoint no longer called).
+/// **Deactivated:** USDA (code preserved).
 ///
 /// Usage:
 /// ```swift
@@ -21,8 +23,8 @@ enum FoodSearchService {
     /// Only configured providers are queried. To deactivate a provider,
     /// leave its credentials empty in xcconfig.
     private static let allProviders: [any FoodDatabaseProvider] = [
-        FatSecretService(),      // Primary — FatSecret Basic API
-        CustomAPIService(),      // Fallback — our own API (placeholder, no-op until built)
+        CustomAPIService(),      // Primary — our own API (foodiary-api.anyapp.my)
+        // FatSecretService(),  // Detached 2026-07-08 — code preserved at FoodDatabase/FatSecretService.swift
         // USDAService(),        // Deactivated — code preserved at FoodDatabase/USDAService.swift
     ]
 
@@ -31,7 +33,7 @@ enum FoodSearchService {
         allProviders.filter { provider in
             switch provider.source {
             case .fatsecret:
-                return FoodDatabaseConfig.isFatSecretConfigured
+                return false // Detached 2026-07-08 — code preserved, endpoint no longer queried
             case .custom:
                 return FoodDatabaseConfig.isCustomAPIConfigured
             case .usda:
@@ -56,7 +58,7 @@ enum FoodSearchService {
         let providers = activeProviders
 
         guard !providers.isEmpty else {
-            throw FoodDatabaseError.notConfigured(.fatsecret)
+            throw FoodDatabaseError.notConfigured(.custom)
         }
 
         // Query all providers in parallel
@@ -124,8 +126,8 @@ enum FoodSearchService {
     private static func mergeResults(
         _ providerResults: [(source: FoodDatabaseSource, results: [FoodSearchResult])]
     ) -> [FoodSearchResult] {
-        // Priority order: FatSecret → Custom → (inactive sources last)
-        let priorityOrder: [FoodDatabaseSource] = [.fatsecret, .custom, .usda, .openFoodFacts]
+        // Priority order: Custom (primary) → FatSecret → (inactive sources last)
+        let priorityOrder: [FoodDatabaseSource] = [.custom, .fatsecret, .usda, .openFoodFacts]
         let sorted = providerResults.sorted { a, b in
             let ap = priorityOrder.firstIndex(of: a.source) ?? 999
             let bp = priorityOrder.firstIndex(of: b.source) ?? 999
