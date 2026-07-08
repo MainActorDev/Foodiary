@@ -8,9 +8,8 @@ struct FoodResultCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            // Header: source badge + name + serving
+            // Header: name + serving
             VStack(alignment: .leading, spacing: 4) {
-                SourceBadge(source: result.source)
                 Text(result.name)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(FoodiaryDesign.pulseInk)
@@ -142,29 +141,5 @@ private struct MacroTile: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 10)
         .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(FoodiaryDesign.pulseSurfaceSoft))
-    }
-}
-
-// MARK: - Source Badge
-
-private struct SourceBadge: View {
-    let source: FoodDatabaseSource
-
-    private var color: Color {
-        switch source {
-        case .fatsecret: return FoodiaryDesign.pulseMint
-        case .custom: return FoodiaryDesign.pulsePrimary
-        case .usda: return FoodiaryDesign.pulseAmber
-        case .openFoodFacts: return Color(hex: "7C3AED")
-        }
-    }
-
-    var body: some View {
-        Text(source.sourceDisplayName)
-            .font(.system(size: 9, weight: .bold))
-            .foregroundColor(color)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 3)
-            .background(RoundedRectangle(cornerRadius: 6).fill(color.opacity(0.12)))
     }
 }
