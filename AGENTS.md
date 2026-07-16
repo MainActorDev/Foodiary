@@ -89,16 +89,22 @@ The app uses the **Pulse v2** design language — modern, clean, planning cockpi
 
 ## Calorie Calculation
 
-Uses **Mifflin-St Jeor** equation. All logic in `CalorieCalculator`:
+Uses **Harris-Benedict** equation. All logic in `CalorieCalculator`:
 
 ```
-Male:   BMR = 10 × weightKg + 6.25 × heightCm - 5 × age + 5
-Female: BMR = 10 × weightKg + 6.25 × heightCm - 5 × age - 161
+Male:   BMR = 66.5 + (13.7 × weightKg) + (5 × heightCm) - (6.8 × age)
+Female: BMR = 655 + (9.6 × weightKg) + (1.8 × heightCm) - (4.7 × age)
 ```
 
-Activity multipliers: Sedentary 1.2, Lightly Active 1.375, Moderately Active 1.55, Very Active 1.725
+Activity multipliers: Sedentary 1.2, Lightly Active 1.3, Active 1.7
 
 Goal adjustments: Maintain 1.0, Lose 0.90, Gain 1.10
+
+BMI = weightKg / (heightCm/100)² — WHO classification:
+- Underweight (< 18.5) → recommend gain
+- Normal (18.5–24.9) → recommend maintain
+- Overweight (25–29.9) → recommend lose
+- Obese (≥ 30) → recommend lose
 
 Final target rounded to nearest 10 kcal.
 

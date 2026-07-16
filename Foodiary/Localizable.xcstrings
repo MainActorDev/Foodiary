@@ -3892,6 +3892,227 @@
           }
         }
       }
+    },
+    "label.bmi": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BMI"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BMI"
+          }
+        }
+      }
+    },
+    "onboarding.bmi.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Body Mass Index"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indeks Massa Tubuh Anda"
+          }
+        }
+      }
+    },
+    "bmi.category.underweight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Underweight"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kekurangan Berat Badan"
+          }
+        }
+      }
+    },
+    "bmi.category.normal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        }
+      }
+    },
+    "bmi.category.overweight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overweight"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kelebihan Berat Badan"
+          }
+        }
+      }
+    },
+    "bmi.category.obese": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obese"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obesitas"
+          }
+        }
+      }
+    },
+    "onboarding.bmi.recommendation.gain": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your BMI indicates you are underweight. We recommend aiming to gain some weight."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BMI Anda menunjukkan berat badan kurang. Kami merekomendasikan untuk menaikkan berat badan."
+          }
+        }
+      }
+    },
+    "onboarding.bmi.recommendation.maintain": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your BMI is in the normal range. We recommend maintaining your current weight."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BMI Anda berada di rentang normal. Kami merekomendasikan untuk menjaga berat badan saat ini."
+          }
+        }
+      }
+    },
+    "onboarding.bmi.recommendation.lose": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your BMI indicates you are above the normal range. We recommend aiming to lose some weight."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BMI Anda berada di atas rentang normal. Kami merekomendasikan untuk menurunkan berat badan."
+          }
+        }
+      }
+    },
+    "action.follow_recommendation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Follow Recommendation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikuti Rekomendasi"
+          }
+        }
+      }
+    },
+    "action.choose_own_goal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I Have My Own Goal"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saya Punya Target Sendiri"
+          }
+        }
+      }
+    },
+    "model.activity.active": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktif"
+          }
+        }
+      }
+    },
+    "model.activity.active.desc": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exercise often or heavy physical work"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sering berolahraga atau pekerjaan fisik berat"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

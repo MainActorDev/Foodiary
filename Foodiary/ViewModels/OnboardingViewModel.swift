@@ -33,4 +33,14 @@ final class OnboardingViewModel {
     var calculatedTarget: CalorieTarget {
         CalorieCalculator.calculate(for: currentProfile)
     }
+
+    /// BMI for the current form state.
+    var bmi: Double {
+        CalorieCalculator.bmi(weightKg: currentProfile.weightKg, heightCm: currentProfile.heightCm)
+    }
+
+    /// Recommended goal based on BMI category.
+    var recommendedGoal: UserProfile.Goal {
+        CalorieCalculator.bmiRecommendation(for: currentProfile)
+    }
 }

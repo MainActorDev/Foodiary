@@ -61,6 +61,9 @@ struct ProfileView: View {
                         // Detail rows
                         VStack(spacing: 0) {
                             if let profile = state.userProfile {
+                                let userBmi = CalorieCalculator.bmi(weightKg: profile.weightKg, heightCm: profile.heightCm)
+                                let bmiCat = CalorieCalculator.bmiCategory(userBmi)
+                                bmiDetailRow(bmi: userBmi, category: bmiCat)
                                 detailRow(label: L10n["label.profile_activity"], value: profile.activityLevel.displayName)
                                 detailRow(label: L10n["label.profile_preference"], value: profile.goal.displayName)
                             }
@@ -119,5 +122,52 @@ struct ProfileView: View {
                 .foregroundColor(FoodiaryDesign.pulseStroke.opacity(0.10)),
             alignment: .top
         )
+    }
+
+    private func bmiDetailRow(bmi: Double, category: CalorieCalculator.BMICategory) -> some View {
+        HStack {
+            Text(L10n["label.bmi"])
+                .font(.system(size: 13))
+                .foregroundColor(FoodiaryDesign.pulseMuted)
+            Spacer()
+            Text(String(format: "%.1f", bmi))
+                .font(.system(size: 13, weight: .bold))
+                .foregroundColor(FoodiaryDesign.pulseInk)
+            Text(bmiCategoryDisplayName(category))
+                .font(.system(size: 11, weight: .bold))
+                .foregroundColor(bmiCategoryColor(category))
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(
+                    Capsule()
+                        .fill(bmiCategoryColor(category).opacity(0.12))
+                )
+                .padding(.leading, 6)
+        }
+        .padding(.vertical, 13)
+        .overlay(
+            Rectangle()
+                .frame(height: 1)
+                .foregroundColor(FoodiaryDesign.pulseStroke.opacity(0.10)),
+            alignment: .top
+        )
+    }
+
+    private func bmiCategoryDisplayName(_ category: CalorieCalculator.BMICategory) -> String {
+        switch category {
+        case .underweight: return L10n["bmi.category.underweight"]
+        case .normal: return L10n["bmi.category.normal"]
+        case .overweight: return L10n["bmi.category.overweight"]
+        case .obese: return L10n["bmi.category.obese"]
+        }
+    }
+
+    private func bmiCategoryColor(_ category: CalorieCalculator.BMICategory) -> Color {
+        switch category {
+        case .underweight: return Color(hex: "3B82F6")
+        case .normal: return FoodiaryDesign.pulseMint
+        case .overweight: return FoodiaryDesign.pulseAmber
+        case .obese: return FoodiaryDesign.pulseDanger
+        }
     }
 }

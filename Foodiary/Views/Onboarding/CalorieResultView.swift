@@ -3,6 +3,7 @@ import SwiftUI
 struct CalorieResultView: View {
     @EnvironmentObject private var localeManager: LocaleManager
     let target: CalorieTarget
+    let bmi: Double
     var onBack: () -> Void
     var onCreateMealPlan: () -> Void
     var onEditProfile: () -> Void
@@ -38,6 +39,10 @@ struct CalorieResultView: View {
         return Int((Double(target.targetCalories) / Double(target.maintenanceCalories)) * 100)
     }
 
+    private var bmiCategory: CalorieCalculator.BMICategory {
+        CalorieCalculator.bmiCategory(bmi)
+    }
+
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -56,6 +61,9 @@ struct CalorieResultView: View {
                         .foregroundColor(FoodiaryDesign.pulseInk)
                 }
                 .padding(.top, 8)
+
+                // BMI info card
+                BMICard(bmi: bmi, category: bmiCategory)
 
                 // Energy balance card
                 VStack(alignment: .leading, spacing: 10) {
@@ -158,6 +166,71 @@ struct CalorieResultView: View {
                 barAnimated = true
             }
         }
+    }
+}
+
+// MARK: - BMI Card
+
+private struct BMICard: View {
+    let bmi: Double
+    let category: CalorieCalculator.BMICategory
+
+    private var categoryLabel: String {
+        switch category {
+        case .underweight: return L10n["bmi.category.underweight"]
+        case .normal: return L10n["bmi.category.normal"]
+        case .overweight: return L10n["bmi.category.overweight"]
+        case .obese: return L10n["bmi.category.obese"]
+        }
+    }
+
+    private var categoryColor: Color {
+        switch category {
+        case .underweight: return Color(hex: "3B82F6")
+        case .normal: return FoodiaryDesign.pulseMint
+        case .overweight: return FoodiaryDesign.pulseAmber
+        case .obese: return FoodiaryDesign.pulseDanger
+        }
+    }
+
+    var body: some View {
+        HStack(spacing: 16) {
+            // Left: BMI value
+            VStack(alignment: .leading, spacing: 4) {
+                Text(L10n["label.bmi"])
+                    .font(.system(size: 10, weight: .black))
+                    .foregroundColor(FoodiaryDesign.pulseMuted)
+                    .tracking(1)
+                    .textCase(.uppercase)
+
+                Text(String(format: "%.1f", bmi))
+                    .font(.system(size: 32, weight: .heavy, design: .rounded).monospacedDigit())
+                    .foregroundColor(FoodiaryDesign.pulseInk)
+            }
+
+            Spacer()
+
+            // Right: category pill
+            Text(categoryLabel)
+                .font(.system(size: 13, weight: .bold))
+                .foregroundColor(categoryColor)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 7)
+                .background(
+                    Capsule()
+                        .fill(categoryColor.opacity(0.12))
+                )
+        }
+        .padding(18)
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(FoodiaryDesign.pulseSurface)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(FoodiaryDesign.pulseBorder, lineWidth: 1)
+        )
+        .padding(.horizontal, 20)
     }
 }
 

@@ -25,7 +25,7 @@ struct GoalSetupView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Progress bar
+            // Progress bar — 2 segments
             HStack(spacing: 6) {
                 ForEach(Question.allCases, id: \.self) { question in
                     Capsule()
@@ -56,7 +56,7 @@ struct GoalSetupView: View {
 
             Spacer()
 
-            // Navigation buttons (matching Profile page layout)
+            // Navigation buttons
             HStack(spacing: 12) {
                 if activeQuestion.rawValue > 0 {
                     Button(action: goBack) {
@@ -115,7 +115,7 @@ struct GoalSetupView: View {
         }
     }
 
-    // MARK: - Activity Level Display (2×2 grid)
+    // MARK: - Activity Level Display (3 cards in column)
 
     private var activityDisplay: some View {
         VStack(spacing: 16) {
@@ -131,7 +131,7 @@ struct GoalSetupView: View {
             }
             .padding(.bottom, 4)
 
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
+            VStack(spacing: 10) {
                 ForEach(UserProfile.ActivityLevel.allCases, id: \.self) { option in
                     ActivityCard(
                         option: option,
@@ -224,7 +224,7 @@ struct GoalSetupView: View {
     }
 }
 
-// MARK: - Activity Card (2×2 grid)
+// MARK: - Activity Card
 
 private struct ActivityCard: View {
     let option: UserProfile.ActivityLevel
@@ -235,42 +235,56 @@ private struct ActivityCard: View {
         switch option {
         case .sedentary: return "🪑"
         case .lightlyActive: return "🚶"
-        case .moderatelyActive: return "🏃"
-        case .veryActive: return "🏋️"
+        case .active: return "🏃"
         }
+    }
+
+    private var multiplierText: String {
+        String(format: "×%.1f", option.multiplier)
     }
 
     private var description: String {
         switch option {
         case .sedentary: return L10n["model.activity.sedentary.desc"]
         case .lightlyActive: return L10n["model.activity.lightly_active.desc"]
-        case .moderatelyActive: return L10n["model.activity.moderately_active.desc"]
-        case .veryActive: return L10n["model.activity.very_active.desc"]
+        case .active: return L10n["model.activity.active.desc"]
         }
     }
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 10) {
+            HStack(spacing: 14) {
                 Text(emoji)
-                    .font(.system(size: 32))
-                    .frame(width: 56, height: 56)
+                    .font(.system(size: 28))
+                    .frame(width: 48, height: 48)
                     .background(
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
                             .fill(isSelected ? FoodiaryDesign.pulsePrimaryLight : FoodiaryDesign.pulseSurfaceSoft)
                     )
 
-                Text(option.displayName)
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
-                    .foregroundColor(isSelected ? FoodiaryDesign.pulsePrimaryDark : FoodiaryDesign.pulseInk)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(option.displayName)
+                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                        .foregroundColor(isSelected ? FoodiaryDesign.pulsePrimaryDark : FoodiaryDesign.pulseInk)
 
-                Text(description)
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundColor(FoodiaryDesign.pulseMuted)
-                    .multilineTextAlignment(.center)
+                    Text(description)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(FoodiaryDesign.pulseMuted)
+                }
+
+                Spacer()
+
+                Text(multiplierText)
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(isSelected ? FoodiaryDesign.pulsePrimary : FoodiaryDesign.pulseMuted)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 6)
+                    .background(
+                        Capsule()
+                            .fill(isSelected ? FoodiaryDesign.pulsePrimaryLight : FoodiaryDesign.pulseSurfaceSoft)
+                    )
             }
             .padding(16)
-            .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .fill(FoodiaryDesign.pulseSurface)
@@ -282,14 +296,6 @@ private struct ActivityCard: View {
                         lineWidth: isSelected ? 2 : 1
                     )
             )
-            .overlay(alignment: .topTrailing) {
-                if isSelected {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 18))
-                        .foregroundColor(FoodiaryDesign.pulsePrimary)
-                        .offset(x: 6, y: -6)
-                }
-            }
             .scaleEffect(isSelected ? 1.03 : 1.0)
             .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
         }

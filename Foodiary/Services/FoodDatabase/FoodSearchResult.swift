@@ -60,7 +60,7 @@ struct FoodSearchResult: Identifiable, Hashable, Sendable {
             protein: protein,
             carbs: carbs,
             fat: fat,
-            note: sourceDisplayName
+            note: brand ?? ""
         )
     }
 }

@@ -1,10 +1,12 @@
 import Foundation
 
-/// Stateless calorie calculator using Mifflin-St Jeor equation.
+/// Stateless calorie calculator using Harris-Benedict equation.
 /// All methods are pure functions — no side effects, fully testable.
 enum CalorieCalculator {
     
-    /// Calculate Basal Metabolic Rate using Mifflin-St Jeor equation
+    // MARK: - BMR (Harris-Benedict)
+    
+    /// Calculate Basal Metabolic Rate using Harris-Benedict equation
     static func bmr(for profile: UserProfile) -> Int {
         let w = profile.weightKg
         let h = profile.heightCm
@@ -13,12 +15,16 @@ enum CalorieCalculator {
         let raw: Double
         switch profile.sex {
         case .male:
-            raw = 10 * w + 6.25 * h - 5 * a + 5
+            // Harris-Benedict: 66.5 + (13.7 × weight) + (5 × height) – (6.8 × age)
+            raw = 66.5 + (13.7 * w) + (5 * h) - (6.8 * a)
         case .female:
-            raw = 10 * w + 6.25 * h - 5 * a - 161
+            // Harris-Benedict: 655 + (9.6 × weight) + (1.8 × height) – (4.7 × age)
+            raw = 655 + (9.6 * w) + (1.8 * h) - (4.7 * a)
         }
         return Int(round(raw))
     }
+    
+    // MARK: - Maintenance & Target
     
     /// Apply activity level multiplier to BMR
     static func maintenanceCalories(bmr: Int, activityLevel: UserProfile.ActivityLevel) -> Int {
@@ -43,5 +49,44 @@ enum CalorieCalculator {
             maintenanceCalories: m,
             targetCalories: t
         )
+    }
+    
+    // MARK: - BMI
+    
+    /// Calculate Body Mass Index from weight (kg) and height (cm)
+    static func bmi(weightKg: Double, heightCm: Double) -> Double {
+        guard heightCm > 0 else { return 0 }
+        let heightM = heightCm / 100.0
+        return weightKg / (heightM * heightM)
+    }
+    
+    /// WHO BMI category
+    enum BMICategory: String, CaseIterable {
+        case underweight, normal, overweight, obese
+        
+        /// The weight goal recommendation for this BMI category
+        var recommendedGoal: UserProfile.Goal {
+            switch self {
+            case .underweight: return .gain
+            case .normal: return .maintain
+            case .overweight, .obese: return .lose
+            }
+        }
+    }
+    
+    /// Classify a BMI value into a WHO category
+    static func bmiCategory(_ bmi: Double) -> BMICategory {
+        switch bmi {
+        case ..<18.5: return .underweight
+        case 18.5..<25: return .normal
+        case 25..<30: return .overweight
+        default: return .obese
+        }
+    }
+    
+    /// Get the recommended goal based on user's BMI
+    static func bmiRecommendation(for profile: UserProfile) -> UserProfile.Goal {
+        let value = bmi(weightKg: profile.weightKg, heightCm: profile.heightCm)
+        return bmiCategory(value).recommendedGoal
     }
 }

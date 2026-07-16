@@ -50,6 +50,7 @@ struct ContentRootView: View {
                             case .result:
                                 CalorieResultView(
                                     target: onboardingVM.calculatedTarget,
+                                    bmi: onboardingVM.bmi,
                                     onBack: { onboardingPath.removeLast() },
                                     onCreateMealPlan: {
                                         let profile = onboardingVM.currentProfile
