@@ -239,6 +239,8 @@ private struct BMICard: View {
                 .stroke(FoodiaryDesign.pulseBorder, lineWidth: 1)
         )
         .padding(.horizontal, 20)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("\(L10n["label.bmi"]) \(String(format: "%.1f", bmi)) \(categoryLabel)")
     }
 }
 
@@ -267,6 +269,7 @@ private struct IdealWeightCard: View {
             Image(systemName: "scalemass")
                 .font(.system(size: 18))
                 .foregroundColor(FoodiaryDesign.pulseMuted.opacity(0.4))
+                .accessibilityHidden(true)
         }
         .padding(18)
         .background(
@@ -278,6 +281,8 @@ private struct IdealWeightCard: View {
                 .stroke(FoodiaryDesign.pulseBorder, lineWidth: 1)
         )
         .padding(.horizontal, 20)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("\(L10n["label.ideal_weight"]) \(String(format: "%.1f", minKg)) – \(String(format: "%.1f", maxKg)) kg")
     }
 }
 

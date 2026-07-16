@@ -8,12 +8,17 @@ struct FoodResultCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            // Header: name + serving
+            // Header: name + brand + serving
             VStack(alignment: .leading, spacing: 4) {
                 Text(result.name)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(FoodiaryDesign.pulseInk)
                     .lineLimit(2)
+                if let brand = result.brand, !brand.isEmpty {
+                    Text(brand)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(FoodiaryDesign.pulseMuted)
+                }
                 if let serving = result.servingDescription, !serving.isEmpty {
                     Text(serving)
                         .font(.system(size: 12))

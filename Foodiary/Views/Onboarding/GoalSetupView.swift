@@ -16,11 +16,11 @@ struct GoalSetupView: View {
     }
 
     private var estimatedMaintenance: Int {
-        Int(Double(bmr) * activityLevel.multiplier)
+        CalorieCalculator.maintenanceCalories(bmr: bmr, activityLevel: activityLevel)
     }
 
     private var estimatedTarget: Int {
-        Int(Double(estimatedMaintenance) * goal.multiplier)
+        CalorieCalculator.targetCalories(maintenance: estimatedMaintenance, goal: goal)
     }
 
     var body: some View {
