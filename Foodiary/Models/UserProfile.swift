@@ -34,12 +34,13 @@ final class UserProfile {
     }
     
     enum ActivityLevel: String, Codable, CaseIterable {
-        case sedentary, lightlyActive, active
+        case sedentary, lightlyActive, active, veryActive
         var multiplier: Double {
             switch self {
             case .sedentary: return 1.2
             case .lightlyActive: return 1.3
-            case .active: return 1.7
+            case .active: return 1.5
+            case .veryActive: return 1.7
             }
         }
     }

@@ -1124,13 +1124,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Some walking · ×1.375"
+            "value": "Some walking"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Beberapa jalan kaki · ×1.375"
+            "value": "Beberapa jalan kaki"
           }
         }
       }
@@ -1192,13 +1192,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Desk job · ×1.2"
+            "value": "Desk job"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pekerjaan meja · ×1.2"
+            "value": "Pekerjaan meja"
           }
         }
       }
@@ -1226,13 +1226,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Daily training · ×1.725"
+            "value": "Intense exercise or physical job daily"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Latihan harian · ×1.725"
+            "value": "Olahraga intens atau pekerjaan fisik setiap hari"
           }
         }
       }
@@ -4110,6 +4110,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sering berolahraga atau pekerjaan fisik berat"
+          }
+        }
+      }
+    },
+    "label.ideal_weight": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideal Weight Range"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rentang Berat Ideal"
           }
         }
       }

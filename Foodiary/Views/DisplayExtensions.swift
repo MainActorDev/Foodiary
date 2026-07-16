@@ -20,6 +20,7 @@ extension UserProfile.ActivityLevel {
         case .sedentary: return L10n["model.activity.sedentary"]
         case .lightlyActive: return L10n["model.activity.lightly_active"]
         case .active: return L10n["model.activity.active"]
+        case .veryActive: return L10n["model.activity.very_active"]
         }
     }
 }

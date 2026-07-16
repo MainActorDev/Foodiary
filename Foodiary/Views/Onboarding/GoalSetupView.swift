@@ -236,11 +236,8 @@ private struct ActivityCard: View {
         case .sedentary: return "🪑"
         case .lightlyActive: return "🚶"
         case .active: return "🏃"
+        case .veryActive: return "🏋️"
         }
-    }
-
-    private var multiplierText: String {
-        String(format: "×%.1f", option.multiplier)
     }
 
     private var description: String {
@@ -248,7 +245,12 @@ private struct ActivityCard: View {
         case .sedentary: return L10n["model.activity.sedentary.desc"]
         case .lightlyActive: return L10n["model.activity.lightly_active.desc"]
         case .active: return L10n["model.activity.active.desc"]
+        case .veryActive: return L10n["model.activity.very_active.desc"]
         }
+    }
+
+    private var multiplierText: String {
+        String(format: "×%.1f", option.multiplier)
     }
 
     var body: some View {

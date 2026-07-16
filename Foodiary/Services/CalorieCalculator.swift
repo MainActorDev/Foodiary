@@ -89,4 +89,18 @@ enum CalorieCalculator {
         let value = bmi(weightKg: profile.weightKg, heightCm: profile.heightCm)
         return bmiCategory(value).recommendedGoal
     }
+    
+    // MARK: - Ideal Weight Range
+    
+    /// Calculate the ideal body weight range based on height and normal BMI (18.5–24.9).
+    /// Returns (minKg, maxKg) rounded to 1 decimal place.
+    static func idealWeightRange(heightCm: Double) -> (minKg: Double, maxKg: Double) {
+        let heightM = heightCm / 100.0
+        let minWeight = 18.5 * heightM * heightM
+        let maxWeight = 24.9 * heightM * heightM
+        return (
+            minKg: (minWeight * 10).rounded() / 10,
+            maxKg: (maxWeight * 10).rounded() / 10
+        )
+    }
 }

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Detail — Design Concepts</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, 'Inter', sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e8;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  .subtitle { color: #888; font-size: 15px; margin-bottom: 40px; max-width: 600px; }
+
+  .theme-switcher { display: flex; gap: 8px; margin-bottom: 24px; }
+  .theme-btn {
+    padding: 6px 16px; border-radius: 10px;
+    background: #1a1a28; color: #8e8ea0;
+    font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid #333;
+  }
+  .theme-btn.active { background: #4BB8FA; color: white; border-color: #4BB8FA; }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+  .tab {
+    padding: 10px 20px; border-radius: 12px;
+    background: #1a1a28; color: #8e8ea0;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    border: 1px solid transparent; transition: all 0.2s;
+  }
+  .tab.active { background: #4BB8FA; color: white; }
+  .tab:hover { border-color: #333; }
+
+  .gallery { display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start; }
+  .gallery.hidden { display: none; }
+
+  .phone {
+    width: 340px; height: 720px;
+    background: var(--phone-bg);
+    border-radius: 44px; overflow: hidden;
+    box-shadow: 0 0 0 12px #1a1a24, 0 40px 80px rgba(0,0,0,0.5);
+    position: relative; display: flex; flex-direction: column;
+  }
+  .phone.dark {
+    --phone-bg: #0C0C14; --phone-surface: #1A1A2E; --phone-soft: #222238;
+    --phone-text: #F4F4F8; --phone-muted: #8E8EA0; --phone-border: #2A2A40;
+    --phone-divider: #1E1E34;
+  }
+  .phone.light {
+    --phone-bg: #F6F7FF; --phone-surface: #FFFFFF; --phone-soft: #EEF0FF;
+    --phone-text: #15142A; --phone-muted: #6B6880; --phone-border: #C8C6D0;
+    --phone-divider: #E8E6F0;
+  }
+  .phone::before {
+    content: ''; position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%); width: 120px; height: 28px;
+    background: #000; border-radius: 0 0 18px 18px; z-index: 10;
+  }
+
+  .phone-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; padding-top: 40px; }
+
+  .phone-label { text-align: center; margin-top: 16px; font-size: 14px; font-weight: 700; color: #888; }
+  .phone-label span { display: block; font-weight: 400; font-size: 12px; color: #555; margin-top: 4px; }
+
+  :root {
+    --primary: #4BB8FA; --primary-light: #DEF0FF; --primary-dark: #0B4F8C;
+    --mint: #10B981; --amber: #F59E0B; --danger: #EF4444; --pink: #EC4899;
+  }
+
+  .nav-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 20px 8px;
+  }
+  .nav-btn {
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--phone-muted); cursor: pointer;
+    background: var(--phone-soft); border-radius: 12px;
+  }
+  .nav-title { font-size: 16px; font-weight: 700; color: var(--phone-text); }
+
+  .scroll-area { flex: 1; overflow-y: auto; padding: 0 20px 24px; }
+
+  /* ============================================
+     SHARED — Meal Hero Header
+     ============================================ */
+  .meal-hero {
+    display: flex; flex-direction: column; gap: 16px;
+    padding: 24px 20px; margin-bottom: 20px;
+    border-radius: 28px; position: relative; overflow: hidden;
+  }
+  .meal-hero-breakfast {
+    background: linear-gradient(135deg, #F59E0B, #F97316);
+  }
+  .meal-hero-lunch {
+    background: linear-gradient(135deg, #10B981, #059669);
+  }
+  .meal-hero-dinner {
+    background: linear-gradient(135deg, #4BB8FA, #3B82F6);
+  }
+  .meal-hero-snack {
+    background: linear-gradient(135deg, #EC4899, #DB2777);
+  }
+  .meal-hero-top { display: flex; align-items: flex-start; justify-content: space-between; }
+  .meal-emoji { font-size: 44px; line-height: 1; }
+  .meal-cal-box { text-align: right; }
+  .meal-cal-num { font-size: 42px; font-weight: 900; color: white; font-family: 'Inter', system-ui, sans-serif; letter-spacing: -1.5px; }
+  .meal-cal-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.8px; }
+
+  .meal-hero-name { font-size: 20px; font-weight: 800; color: white; }
+
+  /* Macro pills inside hero */
+  .hero-macros { display: flex; gap: 8px; }
+  .hero-macro-pill {
+    display: flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 100px; padding: 5px 12px;
+    font-size: 12px; font-weight: 700; color: white;
+    backdrop-filter: blur(4px);
+  }
+  .hero-macro-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: 0.8; }
+
+  /* ============================================
+     CONCEPT A — Food List with Inline Macros
+     ============================================ */
+  .section-label {
+    font-size: 11px; font-weight: 800; color: var(--phone-muted);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 12px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .section-label .count { font-size: 12px; font-weight: 600; }
+
+  .food-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .food-item-card {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px;
+    background: var(--phone-surface);
+    border-radius: 18px;
+    border: 1px solid var(--phone-border);
+  }
+  .food-item-info { flex: 1; min-width: 0; }
+  .food-item-name { font-size: 15px; font-weight: 700; color: var(--phone-text); margin-bottom: 4px; }
+  .food-item-source { font-size: 11px; color: var(--phone-muted); }
+  .food-item-macros {
+    display: flex; gap: 10px; margin-top: 6px;
+  }
+  .food-item-macro {
+    font-size: 10px; font-weight: 600; color: var(--phone-muted);
+  }
+  .food-item-macro b { color: var(--phone-text); font-weight: 700; }
+  .food-item-cal {
+    font-size: 18px; font-weight: 800; color: var(--primary);
+    text-align: right; white-space: nowrap;
+  }
+  .food-item-cal span { display: block; font-size: 10px; color: var(--phone-muted); font-weight: 600; }
+  .food-item-delete {
+    width: 28px; height: 28px; border-radius: 10px;
+    background: rgba(239,68,68,0.1); color: var(--danger);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; cursor: pointer; flex-shrink: 0;
+  }
+
+  .add-btn {
+    width: 100%; padding: 14px;
+    border-radius: 16px; border: none;
+    background: var(--phone-text); color: var(--phone-bg);
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    margin-top: 16px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+
+  /* Empty state */
+  .empty-state {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 12px; padding: 40px 20px; text-align: center;
+  }
+  .empty-state-icon {
+    width: 64px; height: 64px; border-radius: 20px;
+    background: var(--phone-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; opacity: 0.5;
+  }
+  .empty-state-title { font-size: 15px; font-weight: 700; color: var(--phone-text); }
+  .empty-state-sub { font-size: 13px; color: var(--phone-muted); max-width: 220px; }
+
+  /* ============================================
+     CONCEPT B — Compact Swipeable Cards
+     ============================================ */
+  .compact-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+    background: var(--phone-surface);
+    border-radius: 16px;
+    border: 1px solid var(--phone-border);
+    margin-bottom: 8px;
+  }
+  .compact-emoji {
+    width: 44px; height: 44px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .compact-info { flex: 1; min-width: 0; }
+  .compact-name { font-size: 14px; font-weight: 700; color: var(--phone-text); }
+  .compact-meta { font-size: 11px; color: var(--phone-muted); margin-top: 2px; }
+  .compact-cal { font-size: 15px; font-weight: 800; color: var(--phone-text); }
+
+  /* ============================================
+     CONCEPT C — Full Card Items with Macros
+     ============================================ */
+  .full-card {
+    padding: 16px;
+    background: var(--phone-surface);
+    border-radius: 20px;
+    border: 1px solid var(--phone-border);
+    margin-bottom: 12px;
+  }
+  .full-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .full-card-name { font-size: 15px; font-weight: 700; color: var(--phone-text); }
+  .full-card-source { font-size: 11px; color: var(--phone-muted); margin-top: 2px; }
+  .full-card-cal { font-size: 16px; font-weight: 800; color: var(--primary); }
+  .full-card-macros {
+    display: flex; gap: 6px;
+  }
+  .full-macro {
+    flex: 1; text-align: center;
+    padding: 8px 4px; border-radius: 10px;
+    background: var(--phone-soft);
+  }
+  .full-macro-val { font-size: 14px; font-weight: 700; color: var(--phone-text); }
+  .full-macro-label { font-size: 9px; font-weight: 600; color: var(--phone-muted); text-transform: uppercase; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Meal Detail — Design Concepts</h1>
+<p class="subtitle">The page that lists foods added to a meal slot (breakfast, lunch, etc). Currently a sparse list with no macros or visual identity. Three redesign directions below.</p>
+
+<div class="theme-switcher">
+  <div class="theme-btn active" onclick="setTheme('dark')">Dark</div>
+  <div class="theme-btn" onclick="setTheme('light')">Light</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showConcept(1)">A — Hero + Inline Macros</div>
+  <div class="tab" onclick="showConcept(2)">B — Hero + Compact Rows</div>
+  <div class="tab" onclick="showConcept(3)">C — Hero + Full Cards</div>
+  <div class="tab" onclick="showConcept('all')">Show All</div>
+</div>
+
+<!-- CONCEPT A: Hero + Inline Macros -->
+<div class="gallery" id="concept-1">
+<div>
+<div class="phone dark" id="phone-1">
+  <div class="phone-content">
+    <div class="nav-bar">
+      <div class="nav-btn">←</div>
+      <div class="nav-title">Sarapan</div>
+      <div class="nav-btn">+</div>
+    </div>
+    <div class="scroll-area">
+      <!-- Hero -->
+      <div class="meal-hero meal-hero-breakfast">
+        <div class="meal-hero-top">
+          <div class="meal-emoji">🍳</div>
+          <div class="meal-cal-box">
+            <div class="meal-cal-num">390</div>
+            <div class="meal-cal-label">kkal</div>
+          </div>
+        </div>
+        <div class="meal-hero-name">Sarapan</div>
+        <div class="hero-macros">
+          <div class="hero-macro-pill"><div class="dot"></div>15g Protein</div>
+          <div class="hero-macro-pill"><div class="dot"></div>70g Karbo</div>
+          <div class="hero-macro-pill"><div class="dot"></div>3g Lemak</div>
+        </div>
+      </div>
+
+      <!-- Food list with inline macros -->
+      <div class="section-label">
+        <span>Daftar Makanan</span>
+        <span class="count">2 item</span>
+      </div>
+      <div class="food-list">
+        <div class="food-item-card">
+          <div class="food-item-info">
+            <div class="food-item-name">Nasi Putih</div>
+            <div class="food-item-source">FatSecret · 1 mangkok (150g)</div>
+            <div class="food-item-macros">
+              <span class="food-item-macro"><b>4g</b> P</span>
+              <span class="food-item-macro"><b>67g</b> C</span>
+              <span class="food-item-macro"><b>1g</b> F</span>
+            </div>
+          </div>
+          <div class="food-item-cal">260<span>kkal</span></div>
+          <div class="food-item-delete">✕</div>
+        </div>
+        <div class="food-item-card">
+          <div class="food-item-info">
+            <div class="food-item-name">Telur Dadar</div>
+            <div class="food-item-source">Foodiary · 1 buah</div>
+            <div class="food-item-macros">
+              <span class="food-item-macro"><b>11g</b> P</span>
+              <span class="food-item-macro"><b>3g</b> C</span>
+              <span class="food-item-macro"><b>2g</b> F</span>
+            </div>
+          </div>
+          <div class="food-item-cal">130<span>kkal</span></div>
+          <div class="food-item-delete">✕</div>
+        </div>
+      </div>
+
+      <button class="add-btn">+ Tambah Makanan</button>
+    </div>
+  </div>
+</div>
+<div class="phone-label">Concept A — Hero + Inline Macros<span>Meal-type hero with macro pills. Food rows show per-item macros inline. Delete button per item.</span></div>
+</div>
+
+<!-- Empty state variant -->
+<div>
+<div class="phone dark" id="phone-1b">
+  <div class="phone-content">
+    <div class="nav-bar">
+      <div class="nav-btn">←</div>
+      <div class="nav-title">Camilan</div>
+      <div class="nav-btn">+</div>
+    </div>
+    <div class="scroll-area">
+      <div class="meal-hero meal-hero-snack">
+        <div class="meal-hero-top">
+          <div class="meal-emoji">🍌</div>
+          <div class="meal-cal-box">
+            <div class="meal-cal-num">0</div>
+            <div class="meal-cal-label">kkal</div>
+          </div>
+        </div>
+        <div class="meal-hero-name">Camilan</div>
+        <div class="hero-macros">
+          <div class="hero-macro-pill"><div class="dot"></div>Belum ada data</div>
+        </div>
+      </div>
+
+      <div class="empty-state">
+        <div class="empty-state-icon">🍌</div>
+        <div class="empty-state-title">Slot ini masih kosong</div>
+        <div class="empty-state-sub">Tambahkan makanan untuk melihat ringkasan nutrisi camilan Anda.</div>
+      </div>
+
+      <button class="add-btn">+ Tambah Makanan</button>
+    </div>
+  </div>
+</div>
+<div class="phone-label">Concept A — Empty State<span>Same hero but zeroed. Friendly empty state with icon and prompt.</span></div>
+</div>
+</div>
+
+<!-- CONCEPT B: Hero + Compact Rows -->
+<div class="gallery hidden" id="concept-2">
+<div>
+<div class="phone dark" id="phone-2">
+  <div class="phone-content">
+    <div class="nav-bar">
+      <div class="nav-btn">←</div>
+      <div class="nav-title">Makan Siang</div>
+      <div class="nav-btn">+</div>
+    </div>
+    <div class="scroll-area">
+      <div class="meal-hero meal-hero-lunch">
+        <div class="meal-hero-top">
+          <div class="meal-emoji">🍱</div>
+          <div class="meal-cal-box">
+            <div class="meal-cal-num">406</div>
+            <div class="meal-cal-label">kkal</div>
+          </div>
+        </div>
+        <div class="meal-hero-name">Makan Siang</div>
+        <div class="hero-macros">
+          <div class="hero-macro-pill"><div class="dot"></div>12g Protein</div>
+          <div class="hero-macro-pill"><div class="dot"></div>55g Karbo</div>
+          <div class="hero-macro-pill"><div class="dot"></div>8g Lemak</div>
+        </div>
+      </div>
+
+      <div class="section-label">
+        <span>Daftar Makanan</span>
+        <span class="count">2 item</span>
+      </div>
+
+      <div class="compact-card">
+        <div class="compact-emoji" style="background: rgba(75,184,250,0.12);">🍚</div>
+        <div class="compact-info">
+          <div class="compact-name">Nasi Putih</div>
+          <div class="compact-meta">FatSecret · 260 kcal · 1 mangkok</div>
+        </div>
+        <div class="compact-cal">260</div>
+      </div>
+      <div class="compact-card">
+        <div class="compact-emoji" style="background: rgba(245,158,11,0.12);">🍗</div>
+        <div class="compact-info">
+          <div class="compact-name">Ayam Goreng</div>
+          <div class="compact-meta">Foodiary · 146 kcal · 1 potong</div>
+        </div>
+        <div class="compact-cal">146</div>
+      </div>
+
+      <button class="add-btn">+ Tambah Makanan</button>
+    </div>
+  </div>
+</div>
+<div class="phone-label">Concept B — Hero + Compact Rows<span>Same meal hero. Food rows are compact with emoji tile, name, source+cal in one line. Swipe to delete (no visible button).</span></div>
+</div>
+</div>
+
+<!-- CONCEPT C: Hero + Full Cards -->
+<div class="gallery hidden" id="concept-3">
+<div>
+<div class="phone dark" id="phone-3">
+  <div class="phone-content">
+    <div class="nav-bar">
+      <div class="nav-btn">←</div>
+      <div class="nav-title">Sarapan</div>
+      <div class="nav-btn">+</div>
+    </div>
+    <div class="scroll-area">
+      <div class="meal-hero meal-hero-breakfast">
+        <div class="meal-hero-top">
+          <div class="meal-emoji">🍳</div>
+          <div class="meal-cal-box">
+            <div class="meal-cal-num">390</div>
+            <div class="meal-cal-label">kkal</div>
+          </div>
+        </div>
+        <div class="meal-hero-name">Sarapan</div>
+        <div class="hero-macros">
+          <div class="hero-macro-pill"><div class="dot"></div>15g Protein</div>
+          <div class="hero-macro-pill"><div class="dot"></div>70g Karbo</div>
+          <div class="hero-macro-pill"><div class="dot"></div>3g Lemak</div>
+        </div>
+      </div>
+
+      <div class="section-label">
+        <span>Daftar Makanan</span>
+        <span class="count">2 item</span>
+      </div>
+
+      <div class="full-card">
+        <div class="full-card-top">
+          <div>
+            <div class="full-card-name">Nasi Putih</div>
+            <div class="full-card-source">FatSecret · 1 mangkok (150g)</div>
+          </div>
+          <div class="full-card-cal">260 kcal</div>
+        </div>
+        <div class="full-card-macros">
+          <div class="full-macro">
+            <div class="full-macro-val">4g</div>
+            <div class="full-macro-label">P</div>
+          </div>
+          <div class="full-macro">
+            <div class="full-macro-val">67g</div>
+            <div class="full-macro-label">C</div>
+          </div>
+          <div class="full-macro">
+            <div class="full-macro-val">1g</div>
+            <div class="full-macro-label">F</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-card">
+        <div class="full-card-top">
+          <div>
+            <div class="full-card-name">Telur Dadar</div>
+            <div class="full-card-source">Foodiary · 1 buah</div>
+          </div>
+          <div class="full-card-cal">130 kcal</div>
+        </div>
+        <div class="full-card-macros">
+          <div class="full-macro">
+            <div class="full-macro-val">11g</div>
+            <div class="full-macro-label">P</div>
+          </div>
+          <div class="full-macro">
+            <div class="full-macro-val">3g</div>
+            <div class="full-macro-label">C</div>
+          </div>
+          <div class="full-macro">
+            <div class="full-macro-val">2g</div>
+            <div class="full-macro-label">F</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="add-btn">+ Tambah Makanan</button>
+    </div>
+  </div>
+</div>
+<div class="phone-label">Concept C — Hero + Full Cards<span>Same hero. Each food is a full card with its own 3-column macro grid. Most detailed but tallest cards.</span></div>
+</div>
+</div>
+
+<script>
+function showConcept(n) {
+  document.querySelectorAll('.gallery').forEach(g => g.classList.add('hidden'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (n === 'all') {
+    document.querySelectorAll('.gallery').forEach(g => g.classList.remove('hidden'));
+    document.querySelectorAll('.tab')[3].classList.add('active');
+  } else {
+    document.getElementById('concept-' + n).classList.remove('hidden');
+    document.querySelectorAll('.tab')[n - 1].classList.add('active');
+  }
+}
+
+function setTheme(theme) {
+  document.querySelectorAll('.theme-btn').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.phone').forEach(p => {
+    p.classList.remove('dark', 'light');
+    p.classList.add(theme);
+  });
+}
+</script>
+
+</body>
+</html>

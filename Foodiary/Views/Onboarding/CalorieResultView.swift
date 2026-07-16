@@ -4,12 +4,17 @@ struct CalorieResultView: View {
     @EnvironmentObject private var localeManager: LocaleManager
     let target: CalorieTarget
     let bmi: Double
+    let heightCm: Double
     var onBack: () -> Void
     var onCreateMealPlan: () -> Void
     var onEditProfile: () -> Void
     var primaryButtonTitle: String? = nil
 
     @State private var barAnimated = false
+
+    private var idealWeight: (minKg: Double, maxKg: Double) {
+        CalorieCalculator.idealWeightRange(heightCm: heightCm)
+    }
 
     private var adjustment: Int { target.targetCalories - target.maintenanceCalories }
     private var isDeficit: Bool { adjustment < 0 }
@@ -64,6 +69,9 @@ struct CalorieResultView: View {
 
                 // BMI info card
                 BMICard(bmi: bmi, category: bmiCategory)
+
+                // Ideal weight range
+                IdealWeightCard(minKg: idealWeight.minKg, maxKg: idealWeight.maxKg)
 
                 // Energy balance card
                 VStack(alignment: .leading, spacing: 10) {
@@ -220,6 +228,45 @@ private struct BMICard: View {
                     Capsule()
                         .fill(categoryColor.opacity(0.12))
                 )
+        }
+        .padding(18)
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(FoodiaryDesign.pulseSurface)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(FoodiaryDesign.pulseBorder, lineWidth: 1)
+        )
+        .padding(.horizontal, 20)
+    }
+}
+
+// MARK: - Ideal Weight Card
+
+private struct IdealWeightCard: View {
+    let minKg: Double
+    let maxKg: Double
+
+    var body: some View {
+        HStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(L10n["label.ideal_weight"])
+                    .font(.system(size: 10, weight: .black))
+                    .foregroundColor(FoodiaryDesign.pulseMuted)
+                    .tracking(1)
+                    .textCase(.uppercase)
+
+                Text("\(String(format: "%.1f", minKg)) – \(String(format: "%.1f", maxKg)) kg")
+                    .font(.system(size: 15, weight: .bold, design: .rounded).monospacedDigit())
+                    .foregroundColor(FoodiaryDesign.pulseInk)
+            }
+
+            Spacer()
+
+            Image(systemName: "scalemass")
+                .font(.system(size: 18))
+                .foregroundColor(FoodiaryDesign.pulseMuted.opacity(0.4))
         }
         .padding(18)
         .background(

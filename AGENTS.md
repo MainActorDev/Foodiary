@@ -96,7 +96,7 @@ Male:   BMR = 66.5 + (13.7 × weightKg) + (5 × heightCm) - (6.8 × age)
 Female: BMR = 655 + (9.6 × weightKg) + (1.8 × heightCm) - (4.7 × age)
 ```
 
-Activity multipliers: Sedentary 1.2, Lightly Active 1.3, Active 1.7
+Activity multipliers: Sedentary 1.2, Lightly Active 1.3, Active 1.5, Very Active 1.7
 
 Goal adjustments: Maintain 1.0, Lose 0.90, Gain 1.10
 

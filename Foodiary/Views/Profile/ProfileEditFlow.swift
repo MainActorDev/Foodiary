@@ -37,6 +37,7 @@ struct ProfileEditFlow: View {
                     CalorieResultView(
                         target: editVM.calculatedTarget,
                         bmi: editVM.bmi,
+                        heightCm: editVM.heightCm,
                         onBack: { path.removeLast() },
                         onCreateMealPlan: {
                             let profile = editVM.currentProfile

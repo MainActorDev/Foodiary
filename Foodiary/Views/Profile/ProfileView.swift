@@ -63,7 +63,9 @@ struct ProfileView: View {
                             if let profile = state.userProfile {
                                 let userBmi = CalorieCalculator.bmi(weightKg: profile.weightKg, heightCm: profile.heightCm)
                                 let bmiCat = CalorieCalculator.bmiCategory(userBmi)
+                                let idealW = CalorieCalculator.idealWeightRange(heightCm: profile.heightCm)
                                 bmiDetailRow(bmi: userBmi, category: bmiCat)
+                                idealWeightRow(minKg: idealW.minKg, maxKg: idealW.maxKg)
                                 detailRow(label: L10n["label.profile_activity"], value: profile.activityLevel.displayName)
                                 detailRow(label: L10n["label.profile_preference"], value: profile.goal.displayName)
                             }
@@ -112,6 +114,25 @@ struct ProfileView: View {
                 .foregroundColor(FoodiaryDesign.pulseMuted)
             Spacer()
             Text(value)
+                .font(.system(size: 13, weight: .bold))
+                .foregroundColor(FoodiaryDesign.pulseInk)
+        }
+        .padding(.vertical, 13)
+        .overlay(
+            Rectangle()
+                .frame(height: 1)
+                .foregroundColor(FoodiaryDesign.pulseStroke.opacity(0.10)),
+            alignment: .top
+        )
+    }
+
+    private func idealWeightRow(minKg: Double, maxKg: Double) -> some View {
+        HStack {
+            Text(L10n["label.ideal_weight"])
+                .font(.system(size: 13))
+                .foregroundColor(FoodiaryDesign.pulseMuted)
+            Spacer()
+            Text("\(String(format: "%.1f", minKg)) – \(String(format: "%.1f", maxKg)) kg")
                 .font(.system(size: 13, weight: .bold))
                 .foregroundColor(FoodiaryDesign.pulseInk)
         }
