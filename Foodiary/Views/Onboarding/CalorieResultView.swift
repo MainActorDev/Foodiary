@@ -16,36 +16,44 @@ struct CalorieResultView: View {
         CalorieCalculator.idealWeightRange(heightCm: heightCm)
     }
 
-    private var adjustment: Int { target.targetCalories - target.maintenanceCalories }
+    private var adjustment: Double { target.targetCalories - target.maintenanceCalories }
     private var isDeficit: Bool { adjustment < 0 }
     private var isSurplus: Bool { adjustment > 0 }
-    private var absAdjustment: Int { abs(adjustment) }
+    private var absAdjustment: Double { abs(adjustment) }
 
-    private var maxValue: Int { max(target.maintenanceCalories, target.targetCalories) }
+    private var maxValue: Double { max(target.maintenanceCalories, target.targetCalories) }
 
     private var bmrFraction: Double {
         guard maxValue > 0 else { return 0 }
-        return Double(target.bmr) / Double(maxValue)
+        return target.bmr / maxValue
     }
     private var activityFraction: Double {
         guard maxValue > 0 else { return 0 }
-        return Double(target.maintenanceCalories - target.bmr) / Double(maxValue)
+        return (target.maintenanceCalories - target.bmr) / maxValue
     }
     private var adjustFraction: Double {
         guard maxValue > 0 else { return 0 }
-        return Double(absAdjustment) / Double(maxValue)
+        return absAdjustment / maxValue
     }
     private var targetFraction: Double {
         guard maxValue > 0 else { return 0 }
-        return Double(target.targetCalories) / Double(maxValue)
+        return target.targetCalories / maxValue
     }
     private var pctOfMaintenance: Int {
         guard target.maintenanceCalories > 0 else { return 0 }
-        return Int((Double(target.targetCalories) / Double(target.maintenanceCalories)) * 100)
+        return Int((target.targetCalories / target.maintenanceCalories) * 100)
     }
 
     private var bmiCategory: CalorieCalculator.BMICategory {
         CalorieCalculator.bmiCategory(bmi)
+    }
+
+    /// Format a Double calorie value: no decimals if whole, 1 decimal otherwise
+    private func fmt(_ value: Double) -> String {
+        let rounded = (value * 10).rounded() / 10
+        return rounded.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", rounded)
+            : String(format: "%.1f", rounded)
     }
 
     var body: some View {
@@ -57,7 +65,7 @@ struct CalorieResultView: View {
                         .font(FoodiaryTypography.pulseCaption)
                         .foregroundColor(FoodiaryDesign.pulseMuted)
 
-                    Text("\(target.targetCalories)")
+                    Text(fmt(target.targetCalories))
                         .font(.system(size: 52, weight: .heavy, design: .rounded).monospacedDigit())
                         .foregroundColor(FoodiaryDesign.pulsePrimary)
 
@@ -86,15 +94,15 @@ struct CalorieResultView: View {
                         adjustFraction: adjustFraction,
                         targetFraction: targetFraction,
                         isSurplus: isSurplus,
-                        bmrLabel: "\(target.bmr)",
-                        activityLabel: "+\(target.maintenanceCalories - target.bmr)",
+                        bmrLabel: fmt(target.bmr),
+                        activityLabel: "+\(fmt(target.maintenanceCalories - target.bmr))",
                         animate: barAnimated
                     )
 
                     // Labels under bar
                     BalanceBarLabels(
-                        targetLabel: "\(target.targetCalories)",
-                        maintenanceLabel: "\(target.maintenanceCalories)"
+                        targetLabel: fmt(target.targetCalories),
+                        maintenanceLabel: fmt(target.maintenanceCalories)
                     )
                 }
                 .padding(20)
@@ -111,17 +119,17 @@ struct CalorieResultView: View {
                 // Stat grid 2×2
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
                     BalanceStatTile(
-                        value: "\(target.bmr)",
+                        value: fmt(target.bmr),
                         label: L10n["label.bmr"],
                         accentColor: FoodiaryDesign.pulsePrimaryDark
                     )
                     BalanceStatTile(
-                        value: "\(target.maintenanceCalories)",
+                        value: fmt(target.maintenanceCalories),
                         label: L10n["label.maintenance"],
                         accentColor: FoodiaryDesign.pulsePrimary
                     )
                     BalanceStatTile(
-                        value: isSurplus ? "+\(absAdjustment)" : (isDeficit ? "−\(absAdjustment)" : "0"),
+                        value: isSurplus ? "+\(fmt(absAdjustment))" : (isDeficit ? "−\(fmt(absAdjustment))" : "0"),
                         label: isSurplus ? L10n["label.surplus"] : (isDeficit ? L10n["label.deficit"] : L10n["label.adjustment"]),
                         accentColor: isSurplus ? FoodiaryDesign.pulseAmber : (isDeficit ? FoodiaryDesign.pulseMint : FoodiaryDesign.pulseMuted)
                     )
@@ -169,7 +177,6 @@ struct CalorieResultView: View {
         .navigationBarTitleDisplayMode(.inline)
         .pulseBackButton(action: onBack)
         .onAppear {
-            // Trigger bar grow animation after a short delay
             withAnimation(.easeOut(duration: 1.0).delay(0.2)) {
                 barAnimated = true
             }
@@ -203,7 +210,6 @@ private struct BMICard: View {
 
     var body: some View {
         HStack(spacing: 16) {
-            // Left: BMI value
             VStack(alignment: .leading, spacing: 4) {
                 Text(L10n["label.bmi"])
                     .font(.system(size: 10, weight: .black))
@@ -218,7 +224,6 @@ private struct BMICard: View {
 
             Spacer()
 
-            // Right: category pill
             Text(categoryLabel)
                 .font(.system(size: 13, weight: .bold))
                 .foregroundColor(categoryColor)
@@ -307,26 +312,20 @@ private struct EnergyBalanceBar: View {
             let adjustW = width * adjustFraction * animatedScale
             let markerX = width * targetFraction * animatedScale
 
-            // Static positions for labels (non-animated so they stay put)
             let bmrCenter = width * bmrFraction * 0.5
             let activityCenter = width * bmrFraction + width * activityFraction * 0.5
 
-            // Bar container clips all segments to a single rounded rect
             let barRadius: CGFloat = 8
 
             ZStack(alignment: .topLeading) {
-                // Single bar container with overflow clipping — marker lives inside (matches HTML DOM)
                 ZStack(alignment: .leading) {
-                    // Track background
                     Rectangle()
                         .fill(FoodiaryDesign.pulseDivider)
 
-                    // BMR segment
                     Rectangle()
                         .fill(FoodiaryDesign.pulsePrimaryDark)
                         .frame(width: max(bmrW, 0))
 
-                    // Activity segment
                     if activityW > 0 {
                         Rectangle()
                             .fill(FoodiaryDesign.pulsePrimary)
@@ -334,7 +333,6 @@ private struct EnergyBalanceBar: View {
                             .offset(x: bmrW)
                     }
 
-                    // Adjustment segment (surplus only)
                     if isSurplus && adjustW > 0 {
                         Rectangle()
                             .fill(FoodiaryDesign.pulseAmber)
@@ -342,7 +340,6 @@ private struct EnergyBalanceBar: View {
                             .offset(x: bmrW + activityW)
                     }
 
-                    // Target marker — dark line through bar (matches HTML)
                     if markerX > 0 {
                         Rectangle()
                             .fill(FoodiaryDesign.pulseInk)
@@ -354,7 +351,6 @@ private struct EnergyBalanceBar: View {
                 .frame(width: width, height: 32)
                 .clipShape(RoundedRectangle(cornerRadius: barRadius, style: .continuous))
 
-                // In-bar labels (static position, appear after animation)
                 if animate && bmrW > 56 {
                     Text("BMR \(bmrLabel)")
                         .font(.system(size: 10, weight: .bold))
@@ -376,7 +372,7 @@ private struct EnergyBalanceBar: View {
     }
 }
 
-// MARK: - Balance Bar Labels (under the bar)
+// MARK: - Balance Bar Labels
 
 private struct BalanceBarLabels: View {
     let targetLabel: String

@@ -32,7 +32,7 @@ final class MealPlanService {
     }
 
     /// Create a new meal plan for a given day (no-op if one already exists).
-    func createMealPlan(for date: Date, targetCalories: Int) {
+    func createMealPlan(for date: Date, targetCalories: Double) {
         guard mealPlan(for: date) == nil else { return }
         let plan = MealPlan(date: date, targetCalories: targetCalories)
         persistence.insert(plan)

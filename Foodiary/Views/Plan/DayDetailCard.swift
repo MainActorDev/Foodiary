@@ -5,7 +5,7 @@ import SwiftUI
 struct DayDetailCard: View {
     @EnvironmentObject private var localeManager: LocaleManager
     let plan: MealPlan?
-    let targetCalories: Int
+    let targetCalories: Double
     let isPast: Bool
     let dayName: String
     var onTapMeal: (Int) -> Void
@@ -134,10 +134,10 @@ struct MealSlotRow: View {
 struct MealDistributionBar: View {
     let meals: [Meal]
     let totalCalories: Int
-    let targetCalories: Int
+    let targetCalories: Double
 
     private var isOverTarget: Bool {
-        totalCalories > targetCalories && totalCalories > 0
+        Double(totalCalories) > targetCalories && totalCalories > 0
     }
 
     var body: some View {
@@ -158,7 +158,7 @@ struct MealDistributionBar: View {
 
     @ViewBuilder
     private func mealSegments(width: CGFloat) -> some View {
-        let maxScale = max(totalCalories, targetCalories)
+        let maxScale = max(Double(totalCalories), targetCalories)
         let filledWidth = width * (CGFloat(totalCalories) / CGFloat(maxScale))
 
         // Precompute segment widths and offsets

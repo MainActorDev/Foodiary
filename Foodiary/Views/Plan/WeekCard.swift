@@ -12,7 +12,7 @@ struct WeekCard: View {
     let weekLabel: String
     let weekDays: [Date]
     var hasMealData: (Date) -> (hasPlan: Bool, totalCal: Int)
-    let targetCalories: Int
+    let targetCalories: Double
     var weekStartForOffset: (Int) -> Date
 
     var body: some View {
@@ -64,14 +64,14 @@ struct DayPill: View {
     let day: Date
     let isSelected: Bool
     var hasMealData: (Date) -> (hasPlan: Bool, totalCal: Int)
-    let targetCalories: Int
+    let targetCalories: Double
     var onSelect: () -> Void
 
     private var dayState: DayState {
         let isToday = Calendar.current.isDateInToday(day)
         let isPast = day < Calendar.current.startOfDay(for: Date())
         let (hasData, totalCal) = hasMealData(day)
-        let isOver = totalCal > targetCalories && hasData
+        let isOver = Double(totalCal) > targetCalories && hasData
 
         if isSelected { return .active }
         if isOver { return .over }

@@ -18,7 +18,7 @@ final class InsightsService {
     // MARK: - Public API
 
     /// Compute insights for the last `days` days (including today).
-    func summary(forDays days: Int, targetCalories: Int) -> InsightsSummary {
+    func summary(forDays days: Int, targetCalories: Double) -> InsightsSummary {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
         guard let startDate = calendar.date(byAdding: .day, value: -(days - 1), to: today) else {
@@ -37,7 +37,7 @@ final class InsightsService {
         let loggedDays = loggedEntries.count
         let totalCalories = loggedEntries.reduce(0) { $0 + $1.calories }
         let averageCalories = loggedDays > 0 ? totalCalories / loggedDays : 0
-        let averageRemaining = targetCalories - averageCalories
+        let averageRemaining = Int(targetCalories) - averageCalories
 
         let macroBreakdown = computeMacroBreakdown(from: plans, loggedDays: loggedDays)
         let mealTypeBreakdown = computeMealTypeBreakdown(plans: plans, totalDays: days)
@@ -93,7 +93,7 @@ final class InsightsService {
         from plans: [MealPlan],
         startDate: Date,
         endDate: Date,
-        targetCalories: Int
+        targetCalories: Double
     ) -> [DailyCalorieEntry] {
         let calendar = Calendar.current
 
@@ -204,10 +204,10 @@ final class InsightsService {
     // MARK: - Consistency
 
     /// Average closeness to target as a percentage (100 = exactly at target).
-    private func computeConsistency(loggedEntries: [DailyCalorieEntry], target: Int) -> Int {
+    private func computeConsistency(loggedEntries: [DailyCalorieEntry], target: Double) -> Int {
         guard !loggedEntries.isEmpty, target > 0 else { return 0 }
         let percents = loggedEntries.map { entry -> Double in
-            let diff = abs(entry.calories - target)
+            let diff = abs(Double(entry.calories) - target)
             return max(0, 1.0 - Double(diff) / Double(target))
         }
         let avg = percents.reduce(0, +) / Double(percents.count)
@@ -298,13 +298,13 @@ final class InsightsService {
 
     // MARK: - Empty state
 
-    private func emptySummary(days: Int, targetCalories: Int) -> InsightsSummary {
+    private func emptySummary(days: Int, targetCalories: Double) -> InsightsSummary {
         InsightsSummary(
             dailyEntries: [],
             loggedDays: 0,
             totalDaysInRange: days,
             averageCalories: 0,
-            averageRemaining: targetCalories,
+            averageRemaining: Int(targetCalories),
             targetCalories: targetCalories,
             macroBreakdown: MacroBreakdown(avgProtein: 0, avgCarbs: 0, avgFat: 0, totalGrams: 0),
             mealTypeBreakdown: [:],

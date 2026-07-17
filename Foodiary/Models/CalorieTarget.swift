@@ -4,9 +4,9 @@ import SwiftData
 @Model
 final class CalorieTarget {
     var id: UUID = UUID()
-    var bmr: Int = 0
-    var maintenanceCalories: Int = 0
-    var targetCalories: Int = 0
+    var bmr: Double = 0
+    var maintenanceCalories: Double = 0
+    var targetCalories: Double = 0
     var createdAt: Date = Date()
     var updatedAt: Date = Date()
     
@@ -14,9 +14,9 @@ final class CalorieTarget {
     
     init(
         id: UUID = UUID(),
-        bmr: Int,
-        maintenanceCalories: Int,
-        targetCalories: Int,
+        bmr: Double,
+        maintenanceCalories: Double,
+        targetCalories: Double,
         createdAt: Date = Date(),
         updatedAt: Date = Date()
     ) {

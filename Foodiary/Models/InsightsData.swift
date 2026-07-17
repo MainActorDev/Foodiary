@@ -8,7 +8,7 @@ struct InsightsSummary {
     let totalDaysInRange: Int
     let averageCalories: Int
     let averageRemaining: Int
-    let targetCalories: Int
+    let targetCalories: Double
     let macroBreakdown: MacroBreakdown
     let mealTypeBreakdown: [Meal.MealType: MealTypeAverage]
     let loggingStreak: Int
@@ -21,11 +21,11 @@ struct InsightsSummary {
 struct DailyCalorieEntry {
     let date: Date
     let calories: Int
-    let targetCalories: Int
+    let targetCalories: Double
     let isToday: Bool
     let hasFood: Bool
 
-    var isOverTarget: Bool { calories > targetCalories && hasFood }
+    var isOverTarget: Bool { Double(calories) > targetCalories && hasFood }
 }
 
 /// Aggregated macro averages across all logged days.

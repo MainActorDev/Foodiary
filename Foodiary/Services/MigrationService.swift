@@ -30,9 +30,9 @@ enum MigrationService {
             if let tData = try? Data(contentsOf: targetURL),
                let oldTarget = try? JSONDecoder().decode(OldCalorieTarget.self, from: tData) {
                 let target = CalorieTarget(
-                    bmr: oldTarget.bmr,
-                    maintenanceCalories: oldTarget.maintenanceCalories,
-                    targetCalories: oldTarget.targetCalories
+                    bmr: Double(oldTarget.bmr),
+                    maintenanceCalories: Double(oldTarget.maintenanceCalories),
+                    targetCalories: Double(oldTarget.targetCalories)
                 )
                 target.profile = profile
                 profile.calorieTarget = target
@@ -46,7 +46,7 @@ enum MigrationService {
             for file in files where file.lastPathComponent.hasPrefix("mealplan_") {
                 guard let data = try? Data(contentsOf: file),
                       let oldPlan = try? JSONDecoder().decode(OldMealPlan.self, from: data) else { continue }
-                let plan = MealPlan(date: oldPlan.date, targetCalories: oldPlan.targetCalories)
+                let plan = MealPlan(date: oldPlan.date, targetCalories: Double(oldPlan.targetCalories))
                 for oldMeal in oldPlan.meals {
                     let meal = Meal(type: Meal.MealType(rawValue: oldMeal.type) ?? .breakfast)
                     for oldItem in oldMeal.items {

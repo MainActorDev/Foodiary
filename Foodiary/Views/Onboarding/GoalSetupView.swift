@@ -4,7 +4,7 @@ struct GoalSetupView: View {
     @EnvironmentObject private var localeManager: LocaleManager
     @Binding var activityLevel: UserProfile.ActivityLevel
     @Binding var goal: UserProfile.Goal
-    let bmr: Int
+    let bmr: Double
     var onBack: () -> Void
     var onCalculate: () -> Void
 
@@ -15,11 +15,11 @@ struct GoalSetupView: View {
         var next: Question? { Question(rawValue: rawValue + 1) }
     }
 
-    private var estimatedMaintenance: Int {
-        CalorieCalculator.maintenanceCalories(bmr: bmr, activityLevel: activityLevel)
+    private var estimatedMaintenance: Double {
+        CalorieCalculator.maintenanceCalories(bmr: Double(bmr), activityLevel: activityLevel)
     }
 
-    private var estimatedTarget: Int {
+    private var estimatedTarget: Double {
         CalorieCalculator.targetCalories(maintenance: estimatedMaintenance, goal: goal)
     }
 

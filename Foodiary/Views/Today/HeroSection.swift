@@ -7,10 +7,10 @@ import SwiftUI
 
 struct TodayHeroSection: View {
     @EnvironmentObject private var localeManager: LocaleManager
-    let remainingCalories: Int
+    let remainingCalories: Double
     let calorieProgress: Double
     let plannedCalories: Int
-    let targetCalories: Int
+    let targetCalories: Double
     let plan: MealPlan
     let todayDateString: String
     var onTapMeal: (Int) -> Void
@@ -24,7 +24,7 @@ struct TodayHeroSection: View {
                         .foregroundColor(.white.opacity(0.72))
                         .tracking(1.0)
 
-                    Text("\(max(0, remainingCalories))")
+                    Text("\(Int(max(0, remainingCalories)))")
                         .font(.system(size: 66, weight: .heavy, design: .rounded))
                         .foregroundColor(.white)
                         .tracking(-2)
@@ -46,7 +46,7 @@ struct TodayHeroSection: View {
                     .background(Capsule().fill(.white.opacity(0.16)))
             }
 
-            Text(L10n["today.hero.planned_summary", plannedCalories, targetCalories])
+            Text(L10n["today.hero.planned_summary", plannedCalories, Int(targetCalories)])
                 .font(.system(size: 13))
                 .foregroundColor(.white.opacity(0.84))
                 .lineSpacing(4)

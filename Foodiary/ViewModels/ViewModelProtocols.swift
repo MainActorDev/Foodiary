@@ -10,8 +10,8 @@ protocol TodayViewModel: AnyObject {
     var hasTodayMealPlan: Bool { get }
     var todayMealPlan: MealPlan? { get }
     var plannedCalories: Int { get }
-    var targetCalories: Int { get }
-    var remainingCalories: Int { get }
+    var targetCalories: Double { get }
+    var remainingCalories: Double { get }
     var calorieProgress: Double { get }
     var totalProtein: Int { get }
     var totalCarbs: Int { get }
@@ -26,7 +26,7 @@ protocol PlanViewModel: AnyObject {
     var planDateMealPlan: MealPlan? { get }
     var isPlanDateToday: Bool { get }
     var isPlanDatePast: Bool { get }
-    var targetCalories: Int { get }
+    var targetCalories: Double { get }
     var hasTodayMealPlan: Bool { get }
     var hasPlanDateMealPlan: Bool { get }
 
@@ -52,6 +52,6 @@ protocol ProfileViewModel: AnyObject {
 
 @MainActor
 protocol InsightsViewModel: AnyObject {
-    var targetCalories: Int { get }
+    var targetCalories: Double { get }
     func insightsSummary(forDays days: Int) -> InsightsSummary
 }

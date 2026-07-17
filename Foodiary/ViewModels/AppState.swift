@@ -167,14 +167,14 @@ final class AppState: TodayViewModel, PlanViewModel, ProfileViewModel, InsightsV
     // MARK: - Computed: Today
 
     var plannedCalories: Int { todayMealPlan?.totalCalories ?? 0 }
-    var targetCalories: Int { calorieTarget?.targetCalories ?? 2000 }
-    var remainingCalories: Int { targetCalories - plannedCalories }
+    var targetCalories: Double { calorieTarget?.targetCalories ?? 2000 }
+    var remainingCalories: Double { targetCalories - Double(plannedCalories) }
     var isOverTarget: Bool { remainingCalories < 0 }
     var isExactlyAtTarget: Bool { remainingCalories == 0 && plannedCalories > 0 }
     var isUnderTarget: Bool { remainingCalories > 0 }
     var calorieProgress: Double {
         guard targetCalories > 0 else { return 0 }
-        return min(1.0, Double(plannedCalories) / Double(targetCalories))
+        return min(1.0, Double(plannedCalories) / targetCalories)
     }
 
     var totalProtein: Int { todayMealPlan?.meals.reduce(0) { $0 + $1.items.reduce(0) { $0 + $1.protein } } ?? 0 }
@@ -185,18 +185,18 @@ final class AppState: TodayViewModel, PlanViewModel, ProfileViewModel, InsightsV
     var localizedStatusMessage: String {
         if plannedCalories == 0 { return L10n["status.no_food"] }
         else if isExactlyAtTarget { return L10n["status.exact_target"] }
-        else if isOverTarget { return L10n["status.over_target", abs(remainingCalories)] }
-        else { return L10n["status.under_target", remainingCalories] }
+        else if isOverTarget { return L10n["status.over_target", Int(abs(remainingCalories))] }
+        else { return L10n["status.under_target", Int(remainingCalories)] }
     }
     var statusMessage: String { localizedStatusMessage }
 
     // MARK: - Computed: Plan
 
     var planDateCalories: Int { planDateMealPlan?.totalCalories ?? 0 }
-    var planDateRemaining: Int { targetCalories - planDateCalories }
+    var planDateRemaining: Double { targetCalories - Double(planDateCalories) }
     var planDateProgress: Double {
         guard targetCalories > 0 else { return 0 }
-        return min(1.0, Double(planDateCalories) / Double(targetCalories))
+        return min(1.0, Double(planDateCalories) / targetCalories)
     }
     var isPlanDateOver: Bool { planDateRemaining < 0 }
     var planDateStatusMessage: String {

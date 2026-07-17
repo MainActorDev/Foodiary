@@ -2,12 +2,14 @@ import Foundation
 
 /// Stateless calorie calculator using Harris-Benedict equation.
 /// All methods are pure functions — no side effects, fully testable.
+/// Values are returned as Double with at most 1 decimal place — no artificial rounding.
 enum CalorieCalculator {
     
     // MARK: - BMR (Harris-Benedict)
     
-    /// Calculate Basal Metabolic Rate using Harris-Benedict equation
-    static func bmr(for profile: UserProfile) -> Int {
+    /// Calculate Basal Metabolic Rate using Harris-Benedict equation.
+    /// Returns Double rounded to 1 decimal place.
+    static func bmr(for profile: UserProfile) -> Double {
         let w = profile.weightKg
         let h = profile.heightCm
         let a = Double(profile.age)
@@ -21,21 +23,23 @@ enum CalorieCalculator {
             // Harris-Benedict: 655 + (9.6 × weight) + (1.8 × height) – (4.7 × age)
             raw = 655 + (9.6 * w) + (1.8 * h) - (4.7 * a)
         }
-        return Int(round(raw))
+        return (raw * 10).rounded() / 10
     }
     
     // MARK: - Maintenance & Target
     
-    /// Apply activity level multiplier to BMR
-    static func maintenanceCalories(bmr: Int, activityLevel: UserProfile.ActivityLevel) -> Int {
-        Int(round(Double(bmr) * activityLevel.multiplier))
+    /// Apply activity level multiplier to BMR.
+    /// Returns Double rounded to 1 decimal place.
+    static func maintenanceCalories(bmr: Double, activityLevel: UserProfile.ActivityLevel) -> Double {
+        let raw = bmr * activityLevel.multiplier
+        return (raw * 10).rounded() / 10
     }
     
-    /// Apply goal adjustment to maintenance calories
-    static func targetCalories(maintenance: Int, goal: UserProfile.Goal) -> Int {
-        let raw = Double(maintenance) * goal.multiplier
-        // Round to nearest 10
-        return Int(round(raw / 10) * 10)
+    /// Apply goal adjustment to maintenance calories.
+    /// Returns Double rounded to 1 decimal place — no "nearest 10" rounding.
+    static func targetCalories(maintenance: Double, goal: UserProfile.Goal) -> Double {
+        let raw = maintenance * goal.multiplier
+        return (raw * 10).rounded() / 10
     }
     
     /// Full calculation: profile → calorie target

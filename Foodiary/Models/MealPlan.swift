@@ -5,7 +5,7 @@ import SwiftData
 final class MealPlan {
     var id: UUID = UUID()
     var date: Date = Date()
-    var targetCalories: Int = 2000
+    var targetCalories: Double = 2000
     var createdAt: Date = Date()
     var updatedAt: Date = Date()
     
@@ -28,7 +28,7 @@ final class MealPlan {
     init(
         id: UUID = UUID(),
         date: Date = Date(),
-        targetCalories: Int = 2000,
+        targetCalories: Double = 2000,
         meals: [Meal] = MealPlan.defaultMeals(),
         createdAt: Date = Date(),
         updatedAt: Date = Date()

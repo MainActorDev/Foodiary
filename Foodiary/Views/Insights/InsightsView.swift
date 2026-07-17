@@ -114,9 +114,9 @@ struct InsightsView: View {
 
     private var calorieBars: some View {
         let maxCal = max(
-            summary.dailyEntries.map(\.calories).max() ?? 0,
+            Double(summary.dailyEntries.map(\.calories).max() ?? 0),
             summary.targetCalories,
-            1
+            1.0
         )
 
         return VStack(alignment: .leading, spacing: 6) {
@@ -125,7 +125,7 @@ struct InsightsView: View {
         }
     }
 
-    private func chartArea(maxCal: Int) -> some View {
+    private func chartArea(maxCal: Double) -> some View {
         let formatter = dayLabelFormatter
 
         return GeometryReader { geo in
@@ -149,7 +149,7 @@ struct InsightsView: View {
         .frame(height: 130)
     }
 
-    private func barForEntry(_ entry: DailyCalorieEntry, maxHeight: CGFloat, maxCal: Int) -> some View {
+    private func barForEntry(_ entry: DailyCalorieEntry, maxHeight: CGFloat, maxCal: Double) -> some View {
         let heightRatio = maxCal > 0 ? CGFloat(entry.calories) / CGFloat(maxCal) : 0
         let barHeight = entry.hasFood ? max(4, maxHeight * heightRatio) : 3
         let barColor = entry.isOverTarget ? FoodiaryDesign.pulseAmber : FoodiaryDesign.pulsePrimary

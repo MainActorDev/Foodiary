@@ -42,7 +42,7 @@ struct ProfileView: View {
                     // Target box
                     if let target = state.calorieTarget {
                         VStack(alignment: .leading, spacing: 5) {
-                            Text("\(target.targetCalories)")
+                            Text("\(String(format: "%.1f", target.targetCalories))")
                                 .font(.system(size: 46, weight: .bold, design: .rounded))
                                 .foregroundColor(FoodiaryDesign.pulsePrimary)
                             Text(L10n["profile.kcal_per_day"])
@@ -69,8 +69,8 @@ struct ProfileView: View {
                                 detailRow(label: L10n["label.profile_activity"], value: profile.activityLevel.displayName)
                                 detailRow(label: L10n["label.profile_preference"], value: profile.goal.displayName)
                             }
-                            detailRow(label: L10n["label.bmr"], value: "\(target.bmr) kcal")
-                            detailRow(label: L10n["label.profile_maintenance"], value: "\(target.maintenanceCalories) kcal")
+                            detailRow(label: L10n["label.bmr"], value: "\(String(format: "%.1f", target.bmr)) kcal")
+                            detailRow(label: L10n["label.profile_maintenance"], value: "\(String(format: "%.1f", target.maintenanceCalories)) kcal")
                         }
                         .padding(.top, 12)
                     }
