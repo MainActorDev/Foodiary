@@ -23,6 +23,14 @@ struct GoalSetupView: View {
         CalorieCalculator.targetCalories(maintenance: estimatedMaintenance, goal: goal)
     }
 
+    /// Format a calorie value: no decimals if whole, 1 decimal otherwise
+    private func calorieFormat(_ value: Double) -> String {
+        let rounded = (value * 10).rounded() / 10
+        return rounded.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", rounded)
+            : String(format: "%.1f", rounded)
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             // Progress bar — 2 segments
@@ -186,7 +194,7 @@ struct GoalSetupView: View {
                     .textCase(.uppercase)
                     .tracking(0.5)
 
-                Text("~\(estimatedTarget)")
+                Text("~\(calorieFormat(estimatedTarget))")
                     .font(.system(size: 36, weight: .heavy, design: .rounded).monospacedDigit())
                     .foregroundColor(.white)
 
