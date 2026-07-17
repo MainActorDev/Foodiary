@@ -41,7 +41,7 @@ struct CalorieResultView: View {
     }
     private var pctOfMaintenance: Int {
         guard target.maintenanceCalories > 0 else { return 0 }
-        return Int((target.targetCalories / target.maintenanceCalories) * 100)
+        return Int(((target.targetCalories / target.maintenanceCalories) * 100).rounded())
     }
 
     private var bmiCategory: CalorieCalculator.BMICategory {
