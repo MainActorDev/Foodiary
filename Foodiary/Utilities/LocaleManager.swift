@@ -37,6 +37,7 @@ final class LocaleManager: ObservableObject {
     static let supportedLanguages: [SupportedLanguage] = [
         SupportedLanguage(code: "id", flag: "🇮🇩", nativeName: "Bahasa Indonesia"),
         SupportedLanguage(code: "en", flag: "🇬🇧", nativeName: "English"),
+        SupportedLanguage(code: "ru", flag: "🇷🇺", nativeName: "Русский"),
     ]
 
     private init() {
