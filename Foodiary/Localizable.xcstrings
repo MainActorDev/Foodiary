@@ -1461,6 +1461,12 @@
             "state": "translated",
             "value": "Sarapan"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завтрак"
+          }
         }
       }
     },
@@ -1477,6 +1483,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Makan Malam"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ужин"
           }
         }
       }
@@ -1495,6 +1507,12 @@
             "state": "translated",
             "value": "Makan Siang"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обед"
+          }
         }
       }
     },
@@ -1511,6 +1529,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Camilan"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перекус"
           }
         }
       }
@@ -1710,6 +1734,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hari Ini"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сегодня"
           }
         }
       }
@@ -3002,6 +3032,12 @@
             "state": "translated",
             "value": "Tambah atau sesuaikan makanan sebelum rencana lengkap."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Добавьте или скорректируйте приём пищи, прежде чем план будет завершён."
+          }
         }
       }
     },
@@ -3018,6 +3054,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Semua makanan direncanakan — tinjau estimasi Anda."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Все приёмы пищи запланированы — проверьте свои оценки."
           }
         }
       }
@@ -3036,6 +3078,12 @@
             "state": "translated",
             "value": "Pilih waktu makan"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выберите приём пищи"
+          }
         }
       }
     },
@@ -3052,6 +3100,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tindakan selanjutnya"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Следующее действие"
           }
         }
       }
@@ -3104,6 +3158,12 @@
             "state": "translated",
             "value": "kkal tersedia hari ini"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ккал доступно сегодня"
+          }
         }
       }
     },
@@ -3120,6 +3180,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "⚡ %1$d%% terpakai"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⚡ %1$d%% использовано"
           }
         }
       }
@@ -3138,6 +3204,12 @@
             "state": "translated",
             "value": "%1$d kkal direncanakan dari estimasi %2$d kkal."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$d ккал запланировано из оценки %2$d ккал."
+          }
         }
       }
     },
@@ -3154,6 +3226,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "SISA ESTIMASI"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ОСТАТОК ОЦЕНКИ"
           }
         }
       }
@@ -3172,6 +3250,12 @@
             "state": "translated",
             "value": "Semua slot terisi — sesuaikan bila perlu."
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Во все приёмы пищи добавлены продукты — корректируйте при необходимости."
+          }
         }
       }
     },
@@ -3188,6 +3272,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ adalah slot yang bisa disesuaikan berikutnya."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ — следующий приём пищи, который можно скорректировать."
           }
         }
       }
@@ -3206,6 +3296,12 @@
             "state": "translated",
             "value": "Karbo"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Углеводы"
+          }
         }
       }
     },
@@ -3222,6 +3318,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lemak"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Жиры"
           }
         }
       }
@@ -3240,6 +3342,12 @@
             "state": "translated",
             "value": "Protein"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Белки"
+          }
         }
       }
     },
@@ -3256,6 +3364,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$d item · direncanakan"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$d продукт. · запланировано"
           }
         }
       }
@@ -3274,6 +3388,12 @@
             "state": "translated",
             "value": "%1$d slot"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$d приёмов"
+          }
         }
       }
     },
@@ -3291,6 +3411,12 @@
             "state": "translated",
             "value": "Ketuk untuk tambah makanan"
           }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нажмите, чтобы добавить продукт"
+          }
         }
       }
     },
@@ -3307,6 +3433,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "LINI MASA MAKAN"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "РАСПИСАНИЕ ПРИЁМОВ ПИЩИ"
           }
         }
       }
