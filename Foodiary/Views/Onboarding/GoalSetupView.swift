@@ -92,6 +92,7 @@ struct GoalSetupView: View {
                             .fill(FoodiaryDesign.pulsePrimary)
                     )
                 }
+                .accessibilityIdentifier("goal_setup_next_button")
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 40)
@@ -310,6 +311,7 @@ private struct ActivityCard: View {
             .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("goal_setup_activity_\(option.rawValue)")
     }
 }
 
@@ -406,5 +408,6 @@ private struct GoalCard: View {
             .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("goal_setup_goal_\(option.rawValue)")
     }
 }
