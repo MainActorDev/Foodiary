@@ -115,6 +115,7 @@ struct ProfileSetupView: View {
                             .fill(FoodiaryDesign.pulsePrimary)
                     )
                 }
+                .accessibilityIdentifier("profile_setup_next_button")
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 40)
@@ -158,6 +159,7 @@ struct ProfileSetupView: View {
                 .foregroundColor(FoodiaryDesign.pulsePrimary)
                 .contentTransition(.numericText())
                 .animation(.easeOut(duration: 0.08), value: value)
+                .accessibilityIdentifier("profile_setup_value_label")
 
             Text(activeField.unit)
                 .font(.system(size: 12, weight: .bold))
@@ -226,6 +228,7 @@ struct ProfileSetupView: View {
                     .scaleEffect(localSex == option ? 1.02 : 1.0)
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("profile_setup_sex_option_\(option.rawValue)")
             }
         }
         .padding(.horizontal, 24)

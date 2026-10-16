@@ -53,6 +53,7 @@ struct WelcomeView: View {
                 Text(L10n["onboarding.welcome.get_started"])
             }
             .buttonStyle(PulsePrimaryButtonStyle())
+            .accessibilityIdentifier("welcome_get_started_button")
             .padding(.horizontal, 60)
             .padding(.bottom, 32)
 

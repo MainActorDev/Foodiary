@@ -29,6 +29,7 @@ struct MainTabView: View {
             .tabItem {
                 Image(systemName: "flame.fill")
                 Text(L10n["tab.today"])
+                    .accessibilityIdentifier("main_tab_today")
             }
             .tag(0)
 

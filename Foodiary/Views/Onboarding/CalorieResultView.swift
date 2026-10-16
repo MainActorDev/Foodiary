@@ -154,11 +154,13 @@ struct CalorieResultView: View {
                         Text(primaryButtonTitle ?? L10n["action.create_meal_plan"])
                     }
                     .buttonStyle(PulsePrimaryButtonStyle())
+                    .accessibilityIdentifier("calorie_result_create_meal_plan_button")
 
                     Button(action: onEditProfile) {
                         Text(L10n["action.edit_profile"])
                     }
                     .buttonStyle(PulseSecondaryButtonStyle())
+                    .accessibilityIdentifier("calorie_result_edit_profile_button")
                 }
                 .padding(.horizontal, 20)
 
