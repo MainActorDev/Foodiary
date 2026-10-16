@@ -64,6 +64,7 @@ struct CalorieResultView: View {
                     Text(L10n["onboarding.result.title"])
                         .font(FoodiaryTypography.pulseCaption)
                         .foregroundColor(FoodiaryDesign.pulseMuted)
+                        .accessibilityIdentifier("calorie_result_title")
 
                     Text(fmt(target.targetCalories))
                         .font(.system(size: 52, weight: .heavy, design: .rounded).monospacedDigit())
